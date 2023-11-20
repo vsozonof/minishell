@@ -6,7 +6,7 @@
 #    By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/09 23:22:06 by vsozonof          #+#    #+#              #
-#    Updated: 2023/11/20 09:36:47 by vsozonof         ###   ########.fr        #
+#    Updated: 2023/11/20 13:44:07 by vsozonof         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ SRCS_LIB = libft/libft.a \
 SRCS = main.c \
 	   parsing/init_struct.c \
 	   parsing/input_parser.c \
+	   parsing/get_input.c \
 	   signal/sig_handler.c \
 
 OBJS = $(SRCS:.c=.o)
@@ -35,12 +36,12 @@ RM = rm -f
 all: init $(NAME)
 
 $(NAME): $(OBJS)
-	@echo "$(RD)MINISHELL -\t$(WH)$(BL)Linking $(OR)($<)$(WH)\r"
+	@echo "\n$(RD)MINISHELL -\t$(WH)$(BL)Linking $(OR)($<)$(WH)\r"
 	@$(CC) -lreadline $(CFLAGS) $(OBJS) $(SRCS_LIB) -o $(NAME)
 	@echo "                                   \r\c"
 
 %.o: %.c
-	@echo "$(RD)MINISHELL -\t$(WH)$(BL)Compiling $(OR)($<)$(WH)\r"
+	@echo "$(RD)MINISHELL -\t$(WH)$(BL)Compiling $(OR)($<)$(WH)\c\r"
 	@$(CC) $(CFLAGS) -c -o $@ $<
 	@echo "                                   \r\c"
 

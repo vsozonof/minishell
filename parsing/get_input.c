@@ -1,31 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sig_handler.c                                      :+:      :+:    :+:   */
+/*   get_input.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/20 09:27:48 by vsozonof          #+#    #+#             */
-/*   Updated: 2023/11/20 13:53:04 by vsozonof         ###   ########.fr       */
+/*   Created: 2023/11/20 13:42:18 by vsozonof          #+#    #+#             */
+/*   Updated: 2023/11/20 13:47:46 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	handle_sigint(int signum)
+void	get_input(void)
 {
 	t_data	ptr;
-	char	*tmp;
 
-	(void)signum;
-	ptr.user = getenv("LOGNAME");
-	tmp = getenv("SESSION_MANAGER");
-	ptr.post = ft_substr(tmp, 6, 12);
-	ptr.w_d = getcwd(NULL, 0);
-	printf("\n%s@%s:%s $>", ptr.user, ptr.post, ptr.w_d);
-}
-
-void	handle_sigquit(int signum)
-{
-	(void)signum;
+	init_sbase(&ptr);
+	while (42)
+	{
+		printf("%s@%s:%s", ptr.user, ptr.post, ptr.w_d);
+		ptr.input = readline(" $> ");
+		if (ptr.input)
+		{
+			add_history(ptr.input);
+			input_parser(&ptr);
+		}
+		else
+			break ;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2023/11/20 09:53:23 by vsozonof         ###   ########.fr       */
+/*   Updated: 2023/11/20 13:47:17 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ typedef struct s_struct
 
 int		main(void);
 void	init_sbase(t_data *ptr);
+void	get_input(void);
 void	input_parser(t_data *ptr);
 
 void	handle_sigint(int signum);
 void	handle_sigquit(int signum);
-void	handle_sigchld(int signum);
 
 #endif
