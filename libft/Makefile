@@ -6,7 +6,7 @@
 #    By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/09 21:19:51 by vsozonof          #+#    #+#              #
-#    Updated: 2023/11/15 11:27:35 by vsozonof         ###   ########.fr        #
+#    Updated: 2023/11/20 06:42:58 by vsozonof         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,8 +17,11 @@ CFLAGS = -Wall -Wextra -Werror -Iincludes
 AR = ar crs
 RM = rm -f
 
-COLOUR_GREEN=\033[0;32m
-COLOUR_END=\033[0m
+BL=\033[1;34m
+GR=\033[1;32m
+OR=\033[1;33m
+RD=\033[1;31m
+WH=\033[0m
 
 SRCS = 	srcs/bool_functions/ft_isalpha.c\
 		srcs/bool_functions/ft_isdigit.c\
@@ -94,21 +97,24 @@ all: $(OBJS) $(NAME)
 
 
 $(NAME): $(OBJS) $(HEADER)
-	@echo "\nBuilding library\n"
+	@echo "\n$(RD)LIBFT -$(WH)$(BL)\tBuilding library.$(WH)"
 	@$(AR) $@ $^
-	@echo "Library build complete."
+	@echo "$(RD)LIBFT -$(WH)$(BL)\tLibrary built successfully.$(WH)"
 
 %.o: %.c
-	@echo "Compiling ($<)\c\r"
+	@echo "$(RD)LIBFT -\t$(WH)$(BL)Compiling $(OR)($<)$(WH)\c\r"
 	@$(CC) $(CFLAGS) -c -o $@ $<
 	@echo "                                   \r\c" 
      
      
 clean:
-		$(RM) $(OBJS) 
+		@$(RM) $(OBJS) 
+		@echo "$(RD)LIBFT -\t$(WH)$(GR)All .o files were deleted !$(WH)"
 
 fclean: 
-		$(RM) $(NAME) $(OBJS)
+		@$(RM) $(NAME) $(OBJS)
+		@echo "$(RD)LIBFT -\t$(WH)$(GR)All .o files and binaries were deleted !$(WH)"
+
 
 re: fclean all
 

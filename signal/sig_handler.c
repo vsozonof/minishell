@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   sig_handler.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/09 23:29:44 by vsozonof          #+#    #+#             */
-/*   Updated: 2023/11/20 09:19:05 by vsozonof         ###   ########.fr       */
+/*   Created: 2023/11/20 09:27:48 by vsozonof          #+#    #+#             */
+/*   Updated: 2023/11/20 10:34:39 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	main(void)
+void	handle_sigint(int signum)
 {
-	t_data	ptr;
+	printf("%i\n", signum);
+}
 
-	init_sbase(&ptr);
-	while (42)
-	{
-		printf("%s@%s:%s", ptr.user, ptr.post, ptr.w_d);
-		ptr.input = readline(" $> ");
-		add_history(ptr.input);
-		input_parser(&ptr);
-	}
+void	handle_sigquit(int signum)
+{
+	printf("%i\n", signum);
+}
+
+void	handle_sigchld(int signum)
+{
+	printf("%i\n", signum);
 }

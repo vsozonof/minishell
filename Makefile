@@ -6,21 +6,27 @@
 #    By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/09 23:22:06 by vsozonof          #+#    #+#              #
-#    Updated: 2023/11/15 11:28:41 by vsozonof         ###   ########.fr        #
+#    Updated: 2023/11/20 09:36:47 by vsozonof         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
 CC = cc
-FLAGS = -Wall -Werror -Wextra -Iincludes -g3
+CFLAGS = -Wall -Werror -Wextra -Iincludes -g3
 
-COLOUR_GREEN=\033[0;32m
-COLOUR_END=\033[0m
+BL=\033[1;34m
+GR=\033[1;32m
+OR=\033[1;33m
+RD=\033[1;31m
+WH=\033[0m
 
 SRCS_LIB = libft/libft.a \
 
 SRCS = main.c \
+	   parsing/init_struct.c \
+	   parsing/input_parser.c \
+	   signal/sig_handler.c \
 
 OBJS = $(SRCS:.c=.o)
 
@@ -28,25 +34,28 @@ RM = rm -f
 
 all: init $(NAME)
 
-$(NAME): $(SRCS) $(OBJS)
-	@echo "Compiling ($<)\c\r"
-	$(CC) $(FLAGS) $(OBJS) $(SRCS_LIB) -o $(NAME)
-	@echo "                                   \r\c" 
+$(NAME): $(OBJS)
+	@echo "$(RD)MINISHELL -\t$(WH)$(BL)Linking $(OR)($<)$(WH)\r"
+	@$(CC) -lreadline $(CFLAGS) $(OBJS) $(SRCS_LIB) -o $(NAME)
+	@echo "                                   \r\c"
+
+%.o: %.c
+	@echo "$(RD)MINISHELL -\t$(WH)$(BL)Compiling $(OR)($<)$(WH)\r"
+	@$(CC) $(CFLAGS) -c -o $@ $<
+	@echo "                                   \r\c"
 
 init:
 	make all -C ./libft
 
 clean:
-		@echo "$(COLOUR_GREEN)****** INITIATING CLEAN  ******$(COLOUR_END)"
 		make clean -C ./libft
-		$(RM) $(OBJS)
-		@echo "$(COLOUR_GREEN)******   CLEAN COMPLETE  ******$(COLOUR_END)"
+		@$(RM) $(OBJS)
+		@echo "$(RD)MINISHELL -\t$(WH)$(GR)All .o files were deleted !$(WH)"
 
 fclean: 
-		@echo "$(COLOUR_GREEN)****** INITIATING FCLEAN ******$(COLOUR_END)"
 		make fclean -C ./libft
-		$(RM) $(NAME) $(OBJS)
-		@echo "$(COLOUR_GREEN)******  FCLEAN COMPLETE  ******$(COLOUR_END)"
+		@$(RM) $(NAME) $(OBJS)
+		@echo "$(RD)MINISHELL -\t$(WH)$(GR)All .o files and binaries were deleted !$(WH)"
 
 re: fclean all
 
