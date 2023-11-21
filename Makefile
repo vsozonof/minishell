@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+         #
+#    By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/09 23:22:06 by vsozonof          #+#    #+#              #
-#    Updated: 2023/11/20 13:44:07 by vsozonof         ###   ########.fr        #
+#    Updated: 2023/11/21 17:52:41 by tpotilli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRCS = main.c \
 	   parsing/input_parser.c \
 	   parsing/get_input.c \
 	   signal/sig_handler.c \
+	   Builtin/exit.c\
 
 OBJS = $(SRCS:.c=.o)
 

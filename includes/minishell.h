@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2023/11/20 13:47:17 by vsozonof         ###   ########.fr       */
+/*   Updated: 2023/11/21 18:23:17 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,10 @@ void	input_parser(t_data *ptr);
 
 void	handle_sigint(int signum);
 void	handle_sigquit(int signum);
+
+int		command_manager(char *input);
+void	command_exec(char *input);
+void	builtin_manager(char *input);
+int		get_kind_input(char *input,  int token);
 
 #endif
