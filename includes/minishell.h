@@ -6,14 +6,14 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2023/11/23 13:18:22 by tpotilli         ###   ########.fr       */
+/*   Updated: 2023/11/23 13:19:15 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-#include "../libft/includes/libft.h"
+# include "../libft/includes/libft.h"
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <signal.h>

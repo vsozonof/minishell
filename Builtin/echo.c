@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 12:48:29 by tpotilli          #+#    #+#             */
-/*   Updated: 2023/11/23 13:15:44 by tpotilli         ###   ########.fr       */
+/*   Updated: 2023/11/23 13:21:27 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,6 @@ void    execute_echo()
 	int		i;
 	
 	i = 0;
-	read();
+	read(fd, str);
+	printf("%s\n", str);
 }
