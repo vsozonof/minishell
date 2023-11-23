@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 18:07:01 by tpotilli          #+#    #+#             */
-/*   Updated: 2023/11/21 18:35:12 by tpotilli         ###   ########.fr       */
+/*   Updated: 2023/11/21 18:42:42 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,16 @@
 
 // }
 
-int		get_kind_input(char *input, int token)
-{
-	int i;
-	int	token;
+// int		get_kind_input(char *input, int token)
+// {
+// 	int i;
+// 	int	token;
 
-	i = 0;
-	while (input[i])
-	{
+// 	i = 0;
+// 	while (input[i])
+// 	{
 		
-		i++;/
-	}
-	return (token);
-}
+// 		i++;/
+// 	}
+// 	return (token);
+// }
