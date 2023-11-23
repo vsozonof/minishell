@@ -6,13 +6,13 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 17:52:12 by tpotilli          #+#    #+#             */
-/*   Updated: 2023/11/21 18:43:03 by tpotilli         ###   ########.fr       */
+/*   Updated: 2023/11/23 12:12:30 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// return	exit()
+// return	execute_exit()
 // {
 //     printf("Exit Shell\n");
 // }

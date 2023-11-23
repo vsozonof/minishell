@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd.c                                               :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/23 12:02:25 by tpotilli          #+#    #+#             */
-/*   Updated: 2023/11/23 12:48:52 by tpotilli         ###   ########.fr       */
+/*   Created: 2023/11/23 12:09:39 by tpotilli          #+#    #+#             */
+/*   Updated: 2023/11/23 12:48:59 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// void execute_cd(liste_chaine);
+// void	execute_pwd(lsite_chaine);
 // {
-// 	if (liste_chaine[1] == NULL)
-// 		chdir = HOME;
-// 	else
-// 	{
-// 		// utiliser chdir pour mettre le nouveau repertoire
-// 		if (chdir(liste_chaine[1] != 0))
-// 			perror(”cd\n”);
-// 	}
+// 	unsigned int i;
+
+// 	i = 0;
+// 	while (ft_strncmp(env[i], "HOME=", 5))
+// 		i++;
+// 	printf("%s\n", (env[i] + 5));
 // }

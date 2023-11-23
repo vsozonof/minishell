@@ -6,13 +6,13 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 17:45:30 by tpotilli          #+#    #+#             */
-/*   Updated: 2023/11/21 18:43:06 by tpotilli         ###   ########.fr       */
+/*   Updated: 2023/11/23 12:12:52 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// void    printenv()
+// void   execute_env()
 // {
 
 // }
