@@ -6,17 +6,17 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 12:48:29 by tpotilli          #+#    #+#             */
-/*   Updated: 2023/11/23 13:21:27 by tpotilli         ###   ########.fr       */
+/*   Updated: 2023/11/23 14:24:57 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void    execute_echo()
+void	execute_echo()
 {
 	char	*str;
 	int		i;
-	
+
 	i = 0;
 	read(fd, str);
 	printf("%s\n", str);

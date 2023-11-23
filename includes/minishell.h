@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2023/11/23 14:05:23 by tpotilli         ###   ########.fr       */
+/*   Updated: 2023/11/23 14:27:11 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,10 @@ void	handle_sigquit(int signum);
 int		command_manager(char *input);
 void	command_exec(char *input);
 void	builtin_manager(char *input);
-int		get_kind_input(char *input,  int token);
+int		get_kind_input(char *input, int token);
 
-void    execute_echo();
-void    execute_unset();
+void	execute_echo();
+void	execute_unset();
 void	execute_pwd();
 void	execute_export();
 void	execute_cd();
