@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2023/11/23 12:04:27 by tpotilli         ###   ########.fr       */
+/*   Updated: 2023/11/23 13:18:22 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <readline/history.h>
 # include <signal.h>
 # include <stdio.h>
+# include <unistd.h>
 
 typedef struct s_struct
 {
@@ -39,5 +40,13 @@ int		command_manager(char *input);
 void	command_exec(char *input);
 void	builtin_manager(char *input);
 int		get_kind_input(char *input,  int token);
+
+void    execute_echo();
+void    execute_unset();
+void	execute_pwd();
+void	execute_export();
+void	execute_cd();
+void	execute_env();
+int		execute_exit();
 
 #endif

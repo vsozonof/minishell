@@ -6,13 +6,17 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 12:48:29 by tpotilli          #+#    #+#             */
-/*   Updated: 2023/11/23 12:55:00 by tpotilli         ###   ########.fr       */
+/*   Updated: 2023/11/23 13:15:44 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// void    execute_echo()
-// {
-
-// }
+void    execute_echo()
+{
+	char	*str;
+	int		i;
+	
+	i = 0;
+	read();
+}
