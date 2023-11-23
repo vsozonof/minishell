@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2023/11/23 14:27:11 by tpotilli         ###   ########.fr       */
+/*   Updated: 2023/11/23 17:12:49 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,21 +21,45 @@
 # include <unistd.h>
 # include <stdlib.h>
 
+// ! ---------------------------------------------------------------------------
+// ?							STRUCTURES DECLARATION
+// ! ---------------------------------------------------------------------------
 typedef struct s_struct
 {
 	char	*input;
 	char	*user;
 	char	*post;
 	char	*w_d;
-}	t_data;
+}	t_prompt;
+
+typedef struct s_parse
+{
+	t_prompt		*pr;
+	char			*input;
+	char			**flag;
+	struct s_parse	*next;
+}	t_data;	
+
+// ! ---------------------------------------------------------------------------
+// ?							INITIALIZATION
+// ! ---------------------------------------------------------------------------
 
 int		main(void);
-void	init_sbase(t_data *ptr);
 void	get_input(void);
-void	input_parser(t_data *ptr);
+void	init_sbase(t_prompt *prompt);
+void	init_str(t_data *data, t_prompt *p);
 
-void	handle_sigint(int signum);
-void	handle_sigquit(int signum);
+// ! ---------------------------------------------------------------------------
+// ?							INPUT PARSING
+// ! ---------------------------------------------------------------------------
+
+void	input_parser(t_prompt *prompt);
+
+// ! ---------------------------------------------------------------------------
+// ?							SIGNAL HANDLER
+// ! ---------------------------------------------------------------------------
+
+void	handle_signals(int signum);
 
 int		command_manager(char *input);
 void	command_exec(char *input);
