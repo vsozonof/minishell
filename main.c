@@ -6,13 +6,15 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:29:44 by vsozonof          #+#    #+#             */
-/*   Updated: 2023/11/20 13:47:09 by vsozonof         ###   ########.fr       */
+/*   Updated: 2023/11/24 23:32:55 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	main(void)
+int	main(int argc, char **argv, char *envp[])
 {
-	get_input();
+	(void)argc;
+	(void)argv;
+	get_input(envp);
 }

@@ -6,11 +6,11 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 13:36:24 by vsozonof          #+#    #+#             */
-/*   Updated: 2022/11/25 13:38:12 by vsozonof         ###   ########.fr       */
+/*   Updated: 2023/11/25 05:22:05 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	"libft.h"
+#include "libft.h"
 
 int	ft_tolower(int c)
 {

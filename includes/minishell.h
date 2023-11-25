@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2023/11/23 17:12:49 by vsozonof         ###   ########.fr       */
+/*   Updated: 2023/11/25 05:06:42 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_struct
 	char	*user;
 	char	*post;
 	char	*w_d;
+	char	**envp;
 }	t_prompt;
 
 typedef struct s_parse
@@ -37,6 +38,9 @@ typedef struct s_parse
 	t_prompt		*pr;
 	char			*input;
 	char			**flag;
+	char			**envp;
+	int				n_args;
+	int				n_flags;
 	struct s_parse	*next;
 }	t_data;	
 
@@ -44,9 +48,9 @@ typedef struct s_parse
 // ?							INITIALIZATION
 // ! ---------------------------------------------------------------------------
 
-int		main(void);
-void	get_input(void);
-void	init_sbase(t_prompt *prompt);
+int		main(int argc, char **argv, char *envp[]);
+void	get_input(char **env);
+void	init_sbase(t_prompt *prompt, char **env);
 void	init_str(t_data *data, t_prompt *p);
 
 // ! ---------------------------------------------------------------------------
@@ -54,6 +58,16 @@ void	init_str(t_data *data, t_prompt *p);
 // ! ---------------------------------------------------------------------------
 
 void	input_parser(t_prompt *prompt);
+void	get_cmd(t_data *data, t_prompt *prompt);
+int		get_flags(t_data *data, t_prompt *prompt, int start);
+void	get_args(t_data *data, t_prompt *prompt, int start);
+
+// ! ---------------------------------------------------------------------------
+// ?							PARSING UTILS
+// ! ---------------------------------------------------------------------------
+
+int		flags_counter(char *str);
+int		args_counter(char *str);
 
 // ! ---------------------------------------------------------------------------
 // ?							SIGNAL HANDLER

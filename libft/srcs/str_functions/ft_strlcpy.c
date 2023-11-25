@@ -6,11 +6,11 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 13:41:04 by vsozonof          #+#    #+#             */
-/*   Updated: 2022/11/21 12:53:14 by vsozonof         ###   ########.fr       */
+/*   Updated: 2023/11/25 05:24:10 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	"libft.h"
+#include "libft.h"
 
 size_t	ft_strlcpy(char *dest, const char *src, size_t size)
 {
@@ -24,7 +24,7 @@ size_t	ft_strlcpy(char *dest, const char *src, size_t size)
 	i = ft_strlen((char *)src);
 	c = 0;
 	if (n > 0)
-	{	
+	{
 		while (c < n - 1)
 		{
 			if (src[c] == '\0')

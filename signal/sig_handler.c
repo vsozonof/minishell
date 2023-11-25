@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 09:27:48 by vsozonof          #+#    #+#             */
-/*   Updated: 2023/11/23 14:26:45 by vsozonof         ###   ########.fr       */
+/*   Updated: 2023/11/25 00:22:09 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void	handle_signals(int signum)
 		ptr.post = ft_substr(tmp, 6, 12);
 		ptr.w_d = getcwd(NULL, 0);
 		printf("\n%s@%s:%s $>", ptr.user, ptr.post, ptr.w_d);
+		free(ptr.post);
 	}
 	else if (signum == SIGQUIT)
-		(void) signum;
-	free(ptr.post);
+		(void)signum;
 }

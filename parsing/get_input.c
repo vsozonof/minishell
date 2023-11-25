@@ -6,17 +6,17 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 13:42:18 by vsozonof          #+#    #+#             */
-/*   Updated: 2023/11/23 17:13:10 by vsozonof         ###   ########.fr       */
+/*   Updated: 2023/11/25 00:31:03 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	get_input(void)
+void	get_input(char **env)
 {
 	t_prompt	prompt;
 
-	init_sbase(&prompt);
+	init_sbase(&prompt, env);
 	while (42)
 	{
 		printf("%s@%s:%s", prompt.user, prompt.post, prompt.w_d);
@@ -29,4 +29,5 @@ void	get_input(void)
 		else
 			break ;
 	}
+	clear_history();
 }

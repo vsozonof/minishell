@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   command_manager.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 18:07:01 by tpotilli          #+#    #+#             */
-/*   Updated: 2023/11/21 18:42:42 by tpotilli         ###   ########.fr       */
+/*   Updated: 2023/11/25 05:25:14 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.c"
+#include "minishell.h"
 
 // int command_manager(char *input)
 // {
@@ -28,7 +28,6 @@
 
 // void	command_exec(char *input)
 // {
-	
 // }
 
 // void	builtin_manager(char *input)
@@ -44,7 +43,6 @@
 // 	i = 0;
 // 	while (input[i])
 // 	{
-		
 // 		i++;/
 // 	}
 // 	return (token);

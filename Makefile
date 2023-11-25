@@ -6,7 +6,7 @@
 #    By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/09 23:22:06 by vsozonof          #+#    #+#              #
-#    Updated: 2023/11/24 17:51:48 by vsozonof         ###   ########.fr        #
+#    Updated: 2023/11/25 05:03:11 by vsozonof         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,8 @@ SRCS = main.c \
 	   parsing/get_input.c \
 	   parsing/init_struct.c \
 	   parsing/input_parser.c \
+	   utils/args_counter.c \
+	   utils/flags_counter.c \
 	   signal/sig_handler.c \
 	   Builtin/exit.c\
 
