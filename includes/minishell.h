@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2023/11/25 12:55:09 by tpotilli         ###   ########.fr       */
+/*   Updated: 2023/11/25 14:41:01 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,5 +99,13 @@ void    execute_unset(t_data *data);
 // void	execute_export();
 // void	execute_cd();
 // int		execute_exit();
+
+// ! ---------------------------------------------------------------------------
+// ?							Utils
+// ! ---------------------------------------------------------------------------
+
+void	free_data_struct(t_data *data);
+void	free_data_envp(t_data *data, int i);
+void	free_data_flag(t_data *data, int i);
 
 #endif
