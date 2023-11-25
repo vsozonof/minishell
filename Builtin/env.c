@@ -6,13 +6,20 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 17:45:30 by tpotilli          #+#    #+#             */
-/*   Updated: 2023/11/23 12:12:52 by tpotilli         ###   ########.fr       */
+/*   Updated: 2023/11/25 12:46:06 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// void   execute_env()
-// {
+void   execute_env(t_data *data)
+{
+    int     i;
 
-// }
+    i = 0;
+    while (data->envp[i])
+    {
+        ft_printf("%s\n", data->envp[i]);
+        i++;
+    }
+}

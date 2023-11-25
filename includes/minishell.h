@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2023/11/25 05:06:42 by vsozonof         ###   ########.fr       */
+/*   Updated: 2023/11/25 12:55:09 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,17 +75,29 @@ int		args_counter(char *str);
 
 void	handle_signals(int signum);
 
-int		command_manager(char *input);
-void	command_exec(char *input);
-void	builtin_manager(char *input);
-int		get_kind_input(char *input, int token);
+// ! ---------------------------------------------------------------------------
+// ?							Command
+// ! ---------------------------------------------------------------------------
 
-void	execute_echo();
-void	execute_unset();
-void	execute_pwd();
-void	execute_export();
-void	execute_cd();
-void	execute_env();
-int		execute_exit();
+int		command_manager(t_data *data);
+int		get_kind_input(t_data *data, int token);
+void	command_exec(char *input);
+void	builtin_manager(t_data *tmp);
+int		found_builtin(t_data *tmp);
+
+// ! ---------------------------------------------------------------------------
+// ?							Builtin
+// ! ---------------------------------------------------------------------------
+
+void	execute_cd(t_data *data);
+void	execute_echo(t_data *data);
+void	execute_pwd(t_data *data);
+void	execute_env(t_data *data);
+void	execute_export(t_data *data);
+void    execute_unset(t_data *data);
+
+// void	execute_export();
+// void	execute_cd();
+// int		execute_exit();
 
 #endif

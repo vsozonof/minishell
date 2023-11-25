@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_parser.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 09:14:23 by vsozonof          #+#    #+#             */
-/*   Updated: 2023/11/25 05:20:03 by vsozonof         ###   ########.fr       */
+/*   Updated: 2023/11/25 10:48:05 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	get_cmd(t_data *data, t_prompt *prompt)
 	while (prompt->input[c] && !ft_is_whitespace(prompt->input[c]))
 		c++;
 	data->input = ft_substr(prompt->input, i, c);
+	command_manager(data);
 	// while (prompt->input[c])
 	// {
 	// 	while (prompt->input[c] && ft_is_whitespace(prompt->input[c]))

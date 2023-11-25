@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+         #
+#    By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/09 23:22:06 by vsozonof          #+#    #+#              #
-#    Updated: 2023/11/25 05:03:11 by vsozonof         ###   ########.fr        #
+#    Updated: 2023/11/25 12:44:40 by tpotilli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,11 @@ SRCS = main.c \
 	   utils/args_counter.c \
 	   utils/flags_counter.c \
 	   signal/sig_handler.c \
-	   Builtin/exit.c\
+	   Exec/command_manager.c \
+	   Builtin/cd.c \
+	   Builtin/echo.c \
+	   Builtin/pwd.c \
+	   Builtin/env.c \
 
 OBJS = $(SRCS:.c=.o)
 

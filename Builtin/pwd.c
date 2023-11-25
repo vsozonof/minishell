@@ -6,19 +6,20 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 12:09:39 by tpotilli          #+#    #+#             */
-/*   Updated: 2023/11/23 13:57:20 by tpotilli         ###   ########.fr       */
+/*   Updated: 2023/11/25 12:16:09 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// void	execute_pwd(lsite_chaine);
-// {
-// 	unsigned int i;
+void	execute_pwd(t_data *data)
+{
+	unsigned int i;
 
-// 	i = 0;
-// 	while (ft_strncmp(env[i], "HOME=", 5))
-// 		i++;
-// 	printf("%s\n", (env[i] + 5));
-// }
+	i = 0;
+	while (ft_strncmp(data->envp[i], "PWD=", 4) != 0)
+		i++;
+	printf("%s\n", (data->envp[i] + 4));
+}
+
 //getcwd
