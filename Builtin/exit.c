@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 17:52:12 by tpotilli          #+#    #+#             */
-/*   Updated: 2023/11/25 15:38:51 by tpotilli         ###   ########.fr       */
+/*   Updated: 2023/11/25 16:00:50 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	execute_exit(t_data *data)
 {
 	printf("Exit Shell\n");
-	free_data_struct(data);
+	(void)data;
+	// free_data_struct(data);
 	return (0);
 }
