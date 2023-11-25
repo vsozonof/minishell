@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 12:09:39 by tpotilli          #+#    #+#             */
-/*   Updated: 2023/11/25 12:16:09 by tpotilli         ###   ########.fr       */
+/*   Updated: 2023/11/25 15:37:07 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	execute_pwd(t_data *data)
 {
-	unsigned int i;
+	unsigned int	i;
 
 	i = 0;
 	while (ft_strncmp(data->envp[i], "PWD=", 4) != 0)
