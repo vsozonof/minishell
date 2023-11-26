@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_manager.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 18:07:01 by tpotilli          #+#    #+#             */
-/*   Updated: 2023/11/25 15:59:35 by tpotilli         ###   ########.fr       */
+/*   Updated: 2023/11/25 18:56:25 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int command_manager(t_data *data)
 {
 	int		token;
+	(void)token; // sinon sa compile pas atm vu que tu l'use pas
 	t_data	*tmp;
 
 	tmp = data;

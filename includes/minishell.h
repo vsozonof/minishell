@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2023/11/25 15:37:17 by tpotilli         ###   ########.fr       */
+/*   Updated: 2023/11/26 07:39:51 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,12 @@ typedef struct s_parse
 	t_prompt		*pr;
 	char			*input;
 	char			**flag;
+	char			**args;
 	char			**envp;
 	int				n_args;
 	int				n_flags;
+	int				counter;
+	int				c_args;
 	struct s_parse	*next;
 }	t_data;	
 
@@ -51,7 +54,8 @@ typedef struct s_parse
 int		main(int argc, char **argv, char *envp[]);
 void	get_input(char **env);
 void	init_sbase(t_prompt *prompt, char **env);
-void	init_str(t_data *data, t_prompt *p);
+void	init_str(t_data *data, t_prompt *prompt);
+void	init_str_pipe(t_data *data, t_prompt *prompt);
 
 // ! ---------------------------------------------------------------------------
 // ?							INPUT PARSING
@@ -60,14 +64,19 @@ void	init_str(t_data *data, t_prompt *p);
 void	input_parser(t_prompt *prompt);
 void	get_cmd(t_data *data, t_prompt *prompt);
 int		get_flags(t_data *data, t_prompt *prompt, int start);
-void	get_args(t_data *data, t_prompt *prompt, int start);
+int		get_args(t_data *data, t_prompt *prompt, int start);
+
+void	pipes_parser(t_data *data, t_prompt *prompt);
 
 // ! ---------------------------------------------------------------------------
 // ?							PARSING UTILS
 // ! ---------------------------------------------------------------------------
 
 int		flags_counter(char *str);
+int		flags_counter_pipe(char *str);
 int		args_counter(char *str);
+int		args_counter_pipe(char *str);
+int		is_pipe(t_prompt *prompt);
 
 // ! ---------------------------------------------------------------------------
 // ?							SIGNAL HANDLER
