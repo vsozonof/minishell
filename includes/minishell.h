@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2023/11/26 07:39:51 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/06 15:35:51 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,16 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include <fcntl.h>
+# include <string.h>
+# include <sys/types.h>
+# include <sys/wait.h>
+# include <errno.h>
 
 // ! ---------------------------------------------------------------------------
 // ?							STRUCTURES DECLARATION
 // ! ---------------------------------------------------------------------------
+
 typedef struct s_struct
 {
 	char	*input;
@@ -91,8 +97,17 @@ void	handle_signals(int signum);
 int		command_manager(t_data *data);
 int		get_kind_input(t_data *data, int token);
 void	command_exec(char *input);
-void	builtin_manager(t_data *tmp);
+int		builtin_checker(t_data *tmp);
+void	builtin_manager(t_data *tmp, int token);
 int		found_builtin(t_data *tmp);
+int		not_builtin(t_data *data);
+int		multi_pipe(t_data *data);
+int		ft_pipex(char *argv[], int *file, char *env[], int argc);
+int		process(char *cmd, char *env[], int token);
+int		ft_create_fd(char *argv, int flag);
+int		pipe_command(t_data *data);
+char	**remake_argv(t_data *data);
+void	exec_one_arg(char **cmd);
 
 // ! ---------------------------------------------------------------------------
 // ?							Builtin

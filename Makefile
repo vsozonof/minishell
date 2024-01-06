@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+         #
+#    By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/09 23:22:06 by vsozonof          #+#    #+#              #
-#    Updated: 2023/11/26 06:18:34 by vsozonof         ###   ########.fr        #
+#    Updated: 2024/01/06 15:25:13 by tpotilli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,8 @@ SRCS = main.c \
 	   utils/is_pipe.c \
 	   signal/sig_handler.c \
 	   Exec/command_manager.c \
+	   Exec/command_overall.c \
+	   Exec/execute.c \
 	   Builtin/cd.c \
 	   Builtin/echo.c \
 	   Builtin/pwd.c \
