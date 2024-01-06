@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 09:14:23 by vsozonof          #+#    #+#             */
-/*   Updated: 2023/11/26 08:08:08 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/06 15:02:18 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ void	input_parser(t_prompt *prompt)
 		init_str(&data, prompt);
 		get_cmd(&data, prompt);
 	}
-	// command_manager(&data);
+	// printf("n args = %i - n flags = %i\n", data.n_args, data.n_flags);
+	command_manager(&data);
 }
 
 void	pipes_parser(t_data *data, t_prompt *prompt)
@@ -67,6 +68,8 @@ void	get_cmd(t_data *data, t_prompt *prompt)
 	while (prompt->input[c] && !ft_is_whitespace(prompt->input[c]))
 		c++;
 	data->input = ft_substr(prompt->input, i, c);
+	if (!data->args && !data->flag)
+		return ;
 	while (prompt->input[c])
 	{
 		while (prompt->input[c] && ft_is_whitespace(prompt->input[c]))

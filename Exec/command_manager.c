@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 18:07:01 by tpotilli          #+#    #+#             */
-/*   Updated: 2023/11/25 18:56:25 by vsozonof         ###   ########.fr       */
+/*   Updated: 2023/12/15 15:03:09 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ int command_manager(t_data *data)
 
 void	builtin_manager(t_data *tmp)
 {
-	// if (ft_strncmp(tmp->input, "cd", 2) == 0)
-	// 	execute_cd(tmp);
+	if (ft_strncmp(tmp->input, "cd", 2) == 0)
+		execute_cd(tmp);
 	// else if (ft_strncmp(tmp->input, "echo", 4) == 0)
 	// 	execute_echo(tmp);
 	if (ft_strncmp(tmp->input, "env", 3) == 0)

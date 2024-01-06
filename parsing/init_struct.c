@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 08:35:01 by vsozonof          #+#    #+#             */
-/*   Updated: 2023/11/26 07:40:58 by vsozonof         ###   ########.fr       */
+/*   Updated: 2023/12/29 18:59:34 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	init_sbase(t_prompt *ptr, char **env)
 	sigaction(SIGQUIT, &sa_quit, NULL);
 	ptr->user = getenv("LOGNAME");
 	tmp = getenv("SESSION_MANAGER");
-	ptr->post = ft_substr(tmp, 6, 12);
+	ptr->post = ft_substr(tmp, 6, 6); // 6 12
 	ptr->w_d = getcwd(NULL, 0);
 	ptr->envp = env;
 }
@@ -35,8 +35,14 @@ void	init_str(t_data *data, t_prompt *prompt)
 	data->envp = prompt->envp;
 	data->n_flags = flags_counter(prompt->input);
 	data->n_args = args_counter(prompt->input);
-	data->flag = malloc(sizeof(char *) * data->n_flags);
-	data->args = malloc(sizeof(char *) * data->n_args);
+	if (data->n_flags)
+		data->flag = malloc(sizeof(char *) * data->n_flags);
+	else
+		data->flag = NULL;
+	if (data->n_args)
+		data->args = malloc(sizeof(char *) * data->n_args);
+	else
+		data->args = NULL;
 	data->counter = 0;
 	data->c_args = 0;
 }
