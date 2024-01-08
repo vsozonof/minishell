@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_parser.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 09:14:23 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/08 10:39:30 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/08 11:03:17 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	input_parser(t_prompt *prompt)
 			return ;
 		data.cmds = pipes_splitter(prompt->input, '|', &data);
 		printf("%i\n", data.n_cmds);
+		command_manager(&data);
 		free_cmds(&data);
 		free(prompt->input);
 		// Recup input avec pipe ici (data->cmds) - utilise data->n_cmds comme aide pour
