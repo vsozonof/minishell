@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/08 10:25:18 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/08 11:41:24 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,12 +106,16 @@ void	builtin_manager(t_data *tmp, int token);
 int		found_builtin(t_data *tmp);
 int		not_builtin(t_data *data);
 int		multi_pipe(t_data *data);
-int		ft_pipex(char *argv[], int *file, char *env[], int argc);
-int		process(char *cmd, char *env[], int token);
+int		ft_pipex(char *argv[], char *env[], int argc);
+int		process(char *cmd, char *env[]);
 int		ft_create_fd(char *argv, int flag);
+void	ft_do_process(char *envp[], char *cmd);
 int		pipe_command(t_data *data);
 char	**remake_argv(t_data *data);
 void	exec_one_arg(char **cmd);
+void	ft_freedb(char **str);
+char	*str_join_free(char *path, char *cmd);
+char	**ft_get_path(char **env);
 
 // ! ---------------------------------------------------------------------------
 // ?							Builtin

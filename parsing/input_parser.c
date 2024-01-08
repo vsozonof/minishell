@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 09:14:23 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/08 11:20:52 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/08 11:55:13 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ void	input_parser(t_prompt *prompt)
 		if (is_valid_pipe(prompt->input, 0))
 			return ;
 		data.cmds = pipes_splitter(prompt->input, '|', &data);
-		pipe_command(&data);
+		printf("%i\n", data.n_cmds);
+		command_manager(&data);
 		free_cmds(&data);
 		free(prompt->input);
 		// Recup input avec pipe ici (data->cmds) - utilise data->n_cmds comme aide pour

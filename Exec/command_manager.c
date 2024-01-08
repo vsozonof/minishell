@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 18:07:01 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/08 11:19:33 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/08 11:54:13 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,17 @@
 
 int command_manager(t_data *data)
 {
-	int		check;
+	// int		check;
 	// int		i;
 
 	// i = 0;
 	// while (i < data->n_args)
 	// {
-	// pipe_command(data);
-		check = builtin_checker(data);
-		if (check != 0)
-			builtin_manager(data, check);
+	printf("yooow\n");
+	pipe_command(data);
+		// check = builtin_checker(data);
+		// if (check != 0)
+			// builtin_manager(data, check);
 		// i++;
 	// }
 	// regler la partie des maillon pour l'exec
