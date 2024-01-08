@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/08 07:30:35 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/08 10:25:18 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,15 @@
 // ?							STRUCTURES DECLARATION
 // ! ---------------------------------------------------------------------------
 
+struct	s_parse;
 typedef struct s_struct
 {
-	char	*input;
-	char	*user;
-	char	*post;
-	char	*w_d;
-	char	**envp;
+	char			*input;
+	char			*user;
+	char			*post;
+	char			*w_d;
+	char			**envp;
+	struct s_parse	*data;
 }	t_prompt;
 
 typedef struct s_parse
@@ -136,5 +138,7 @@ void	free_data_envp(t_data *data, int i);
 void	free_flags(t_data *data);
 void	free_args(t_data *data);
 void	free_cmds(t_data *data);
+void	update_pwd(t_data *data);
+void	free_pwd(t_data *data);
 
 #endif

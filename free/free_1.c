@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 04:25:22 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/08 07:41:26 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/08 10:15:15 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,14 @@ void	free_cmds(t_data *data)
 		i++;
 	}
 	free(data->cmds);
+}
+
+void	free_pwd(t_data *data)
+{
+	unsigned int	i;
+
+	i = 0;
+	while (ft_strncmp(data->envp[i], "PWD=", 4) != 0)
+		i++;
+	free(data->envp[i]);
 }

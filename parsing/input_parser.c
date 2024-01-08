@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 09:14:23 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/08 09:22:15 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/08 10:39:30 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,14 @@ void	input_parser(t_prompt *prompt)
 {
 	t_data	data;
 
+	prompt->data = &data;
 	if (is_pipe(prompt))
 	{
 		init_str_pipe(&data, prompt);
 		if (is_valid_pipe(prompt->input, 0))
 			return ;
 		data.cmds = pipes_splitter(prompt->input, '|', &data);
+		printf("%i\n", data.n_cmds);
 		free_cmds(&data);
 		free(prompt->input);
 		// Recup input avec pipe ici (data->cmds) - utilise data->n_cmds comme aide pour
