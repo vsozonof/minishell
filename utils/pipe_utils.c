@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 06:15:38 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/08 07:23:43 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/08 10:43:22 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int	is_pipe(t_prompt *prompt)
 
 int	is_valid_pipe(char *str, int i)
 {
-	printf("i = %i\n", i);
 	while (ft_is_whitespace(str[i]) && str[i])
 		i++;
 	if (str[i] == '|')

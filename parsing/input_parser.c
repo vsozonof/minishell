@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 09:14:23 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/08 10:39:30 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/08 11:20:52 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	input_parser(t_prompt *prompt)
 		if (is_valid_pipe(prompt->input, 0))
 			return ;
 		data.cmds = pipes_splitter(prompt->input, '|', &data);
-		printf("%i\n", data.n_cmds);
+		pipe_command(&data);
 		free_cmds(&data);
 		free(prompt->input);
 		// Recup input avec pipe ici (data->cmds) - utilise data->n_cmds comme aide pour
@@ -79,7 +79,6 @@ int	get_flags(t_data *data, t_prompt *prompt, int start)
 	while (prompt->input[start] == '-')
 		start++;
 	end = start;
-	printf("wesh - %i\n", start);
 	while (prompt->input[end] && !ft_is_whitespace(prompt->input[end]))
 		end++;
 	data->flag[data->counter] = ft_substr(prompt->input, start, (end - start));

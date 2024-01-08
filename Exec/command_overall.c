@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 12:26:54 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/08 04:14:45 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/08 10:56:45 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 int pipe_command(t_data *data)
 {
+	printf("%s\n%s\n%s\n", data->cmds[0], data->cmds[1], data->cmds[2]);
     // printf("input %s\ncounter %d\n", data->input, data->n_args);
     // printf("c args %d\n", data->c_args);
     // printf("voici la liste dans data\n");

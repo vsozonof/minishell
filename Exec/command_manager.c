@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 18:07:01 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/08 09:51:25 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/08 11:19:33 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int command_manager(t_data *data)
 	// i = 0;
 	// while (i < data->n_args)
 	// {
-	pipe_command(data);
+	// pipe_command(data);
 		check = builtin_checker(data);
 		if (check != 0)
 			builtin_manager(data, check);

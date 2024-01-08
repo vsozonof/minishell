@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 12:02:25 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/08 10:33:36 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/08 11:44:15 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	execute_cd(t_data *data)
 {
 	char	*home;
 
+	if (data->n_args > 1)
+		printf("cd: too many arguments\n");
 	home = getenv("HOME");
 	if (!data->args)
 	{
