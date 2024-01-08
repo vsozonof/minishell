@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 09:14:23 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/06 15:02:18 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/08 09:22:15 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,37 +23,24 @@ void	input_parser(t_prompt *prompt)
 	if (is_pipe(prompt))
 	{
 		init_str_pipe(&data, prompt);
-		pipes_parser(&data, prompt);
+		if (is_valid_pipe(prompt->input, 0))
+			return ;
+		data.cmds = pipes_splitter(prompt->input, '|', &data);
+		free_cmds(&data);
+		free(prompt->input);
+		// Recup input avec pipe ici (data->cmds) - utilise data->n_cmds comme aide pour
+		// l'index
 	}
 	else if (!is_pipe(prompt))
 	{
 		init_str(&data, prompt);
 		get_cmd(&data, prompt);
+		command_manager(&data);
+		free(data.input);
+		free(prompt->input);
+		free_args(&data);
+		free_flags(&data);
 	}
-	// printf("n args = %i - n flags = %i\n", data.n_args, data.n_flags);
-	command_manager(&data);
-}
-
-void	pipes_parser(t_data *data, t_prompt *prompt)
-{
-	int		i;
-	int		c;
-
-	i = 0;
-	if (prompt->input[i] == '|')
-		printf("minishell: syntax error near unexpected token `|'\n");
-	while (prompt->input[i])
-	{
-		while (prompt->input[i] && ft_is_whitespace(prompt->input[i]))
-			i++;
-		c = i;
-		while (prompt->input[c] && !ft_is_whitespace(prompt->input[c]))
-			c++;
-		data->input = ft_substr(prompt->input, i, c);
-		i = c;
-		i++;
-	}
-	(void)data;
 }
 
 void	get_cmd(t_data *data, t_prompt *prompt)
@@ -90,6 +77,7 @@ int	get_flags(t_data *data, t_prompt *prompt, int start)
 	while (prompt->input[start] == '-')
 		start++;
 	end = start;
+	printf("wesh - %i\n", start);
 	while (prompt->input[end] && !ft_is_whitespace(prompt->input[end]))
 		end++;
 	data->flag[data->counter] = ft_substr(prompt->input, start, (end - start));
@@ -104,7 +92,9 @@ int	get_args(t_data *data, t_prompt *prompt, int start)
 	end = start;
 	while (prompt->input[end] && !ft_is_whitespace(prompt->input[end]))
 		end++;
-	data->args[data->c_args] = ft_substr(prompt->input, start, (end - start));
+	if (data->n_args && data->c_args < data->n_args)
+		data->args[data->c_args]
+			= ft_substr(prompt->input, start, (end - start));
 	data->c_args++;
 	return (end);
 }

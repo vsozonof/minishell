@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/06 15:35:51 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/08 07:30:35 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,11 @@ typedef struct s_parse
 	char			*input;
 	char			**flag;
 	char			**args;
+	char			**cmds;
 	char			**envp;
 	int				n_args;
 	int				n_flags;
+	int				n_cmds;
 	int				counter;
 	int				c_args;
 	struct s_parse	*next;
@@ -72,8 +74,6 @@ void	get_cmd(t_data *data, t_prompt *prompt);
 int		get_flags(t_data *data, t_prompt *prompt, int start);
 int		get_args(t_data *data, t_prompt *prompt, int start);
 
-void	pipes_parser(t_data *data, t_prompt *prompt);
-
 // ! ---------------------------------------------------------------------------
 // ?							PARSING UTILS
 // ! ---------------------------------------------------------------------------
@@ -83,6 +83,8 @@ int		flags_counter_pipe(char *str);
 int		args_counter(char *str);
 int		args_counter_pipe(char *str);
 int		is_pipe(t_prompt *prompt);
+int		is_valid_pipe(char *str, int i);
+char	**pipes_splitter(char const *s, char c, t_data *data);
 
 // ! ---------------------------------------------------------------------------
 // ?							SIGNAL HANDLER
@@ -131,6 +133,8 @@ void	execute_cd(t_data *data);
 
 void	free_data_struct(t_data *data);
 void	free_data_envp(t_data *data, int i);
-void	free_data_flag(t_data *data, int i);
+void	free_flags(t_data *data);
+void	free_args(t_data *data);
+void	free_cmds(t_data *data);
 
 #endif

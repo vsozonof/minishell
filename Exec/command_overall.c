@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_overall.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 12:26:54 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/06 15:49:01 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/08 04:14:45 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,20 @@
 
 int pipe_command(t_data *data)
 {
-    printf("input %s\ncounter %d\n", data->input, data->n_args);
-    printf("c args %d\n", data->c_args);
-    printf("voici la liste dans data\n");
-    printf("salut\n");
-	printf("input entier : %s\n", data->input);
+    // printf("input %s\ncounter %d\n", data->input, data->n_args);
+    // printf("c args %d\n", data->c_args);
+    // printf("voici la liste dans data\n");
+    // printf("salut\n");
+	// printf("input entier : %s\n", data->input);
 	// if (data->n_args == 1)
 		// exec_one_arg(data->input);
 	int i = 0;
 	while (data->n_args > i)
 	{
-		printf("args entier : %s\n", data->args[i]);
+		// printf("args entier : %s\n", data->args[i]);
 		i++;
 	}
-	printf("BREF\n");
+	// printf("BREF\n");
 
 	return (0);
 }

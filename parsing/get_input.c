@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 13:42:18 by vsozonof          #+#    #+#             */
-/*   Updated: 2023/12/29 18:18:28 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/08 07:47:50 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	get_input(char **env)
 	{
 		printf("%s@%s:%s", prompt.user, prompt.post, prompt.w_d);
 		prompt.input = readline("$> ");
+		prompt.input = ft_strdup(prompt.input);
 		if (prompt.input)
 		{
 			add_history(prompt.input);
@@ -30,4 +31,6 @@ void	get_input(char **env)
 			break ;
 	}
 	clear_history();
+	free(prompt.w_d);
+	free(prompt.post);
 }
