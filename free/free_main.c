@@ -1,23 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   free_main.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/09 23:29:44 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/09 07:19:17 by vsozonof         ###   ########.fr       */
+/*   Created: 2024/01/09 04:29:11 by vsozonof          #+#    #+#             */
+/*   Updated: 2024/01/09 05:55:13 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// valgrind --leak-check=full --suppressions=rl_leak_ignore.supp ./minishell
-
-int	main(int argc, char **argv, char *envp[])
-{
-	(void)argc;
-	(void)argv;
-	get_input(envp);
-}
-

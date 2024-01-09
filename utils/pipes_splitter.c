@@ -6,13 +6,13 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 05:50:20 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/08 06:39:57 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/08 21:41:12 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-size_t	ft_word_counter(const char *s, char c)
+size_t	ft_word_counter_pipe(const char *s, char c)
 {
 	unsigned int	i;
 	unsigned int	j;
@@ -40,7 +40,7 @@ size_t	ft_word_counter(const char *s, char c)
 	return (j + 1);
 }
 
-size_t	ft_word_len(const char *s, char c, int pos)
+size_t	word_len(const char *s, char c, int pos)
 {
 	size_t	i;
 
@@ -53,7 +53,7 @@ size_t	ft_word_len(const char *s, char c, int pos)
 	return (i + 1);
 }
 
-char	**ft_return_free(char **tab, size_t string_index)
+char	**return_free(char **tab, size_t string_index)
 {
 	while (string_index > 0)
 	{
@@ -64,7 +64,7 @@ char	**ft_return_free(char **tab, size_t string_index)
 	return (NULL);
 }
 
-char	**ft_splitter(char **tab, const char *s, char c, size_t pos)
+char	**ft_pipe_splitter(char **tab, const char *s, char c, size_t pos)
 {
 	size_t	string_index;
 	size_t	string_letter;
@@ -73,9 +73,9 @@ char	**ft_splitter(char **tab, const char *s, char c, size_t pos)
 	string_letter = 0;
 	while (s[pos])
 	{
-		tab[string_index] = malloc(sizeof(char) * ft_word_len(s, c, pos));
+		tab[string_index] = malloc(sizeof(char) * word_len(s, c, pos));
 		if (!tab[string_index])
-			ft_return_free(tab, string_index);
+			return_free(tab, string_index);
 		while (s[pos] != c && s[pos])
 		{
 			tab[string_index][string_letter] = s[pos];
@@ -100,7 +100,7 @@ char	**pipes_splitter(char const *s, char c, t_data *data)
 
 	if (!s)
 		return (NULL);
-	len = ft_word_counter(s, c);
+	len = ft_word_counter_pipe(s, c);
 	data->n_cmds = (len - 1);
 	if (len == 1 || s[0] == 0)
 	{
@@ -116,6 +116,6 @@ char	**pipes_splitter(char const *s, char c, t_data *data)
 	i = 0;
 	while (s[i] == c)
 		i++;
-	ft_splitter(tab, s, c, i);
+	ft_pipe_splitter(tab, s, c, i);
 	return (tab);
 }

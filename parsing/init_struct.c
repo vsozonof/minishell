@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 08:35:01 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/08 06:56:24 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/09 06:22:04 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	init_str(t_data *data, t_prompt *prompt)
 
 void	init_str_pipe(t_data *data, t_prompt *prompt)
 {
-	data->pr = prompt;
+	// data->pr = prompt;
 	data->envp = prompt->envp;
 	data->counter = 0;
 	data->c_args = 0;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/08 11:41:24 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/09 07:45:58 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,10 @@ void	get_cmd(t_data *data, t_prompt *prompt);
 int		get_flags(t_data *data, t_prompt *prompt, int start);
 int		get_args(t_data *data, t_prompt *prompt, int start);
 
+int		is_input_valid(char *str);
+int		exception_checker(char *str);
+int		unclosed_quote_detector(char *str);
+
 // ! ---------------------------------------------------------------------------
 // ?							PARSING UTILS
 // ! ---------------------------------------------------------------------------
@@ -85,7 +89,7 @@ int		flags_counter_pipe(char *str);
 int		args_counter(char *str);
 int		args_counter_pipe(char *str);
 int		is_pipe(t_prompt *prompt);
-int		is_valid_pipe(char *str, int i);
+int		is_valid_pipe(char *str);
 char	**pipes_splitter(char const *s, char c, t_data *data);
 
 // ! ---------------------------------------------------------------------------

@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 18:07:01 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/08 11:54:13 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/08 21:43:37 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@ int command_manager(t_data *data)
 {
 	// int		check;
 	// int		i;
-
+	(void)data;
 	// i = 0;
 	// while (i < data->n_args)
 	// {
-	printf("yooow\n");
-	pipe_command(data);
+	// printf("yooow\n");
+	// pipe_command(data);
 		// check = builtin_checker(data);
 		// if (check != 0)
 			// builtin_manager(data, check);

@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 07:38:41 by vsozonof          #+#    #+#             */
-/*   Updated: 2023/04/12 08:08:32 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/09 04:54:16 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 int	pr_error(char *error)
 {
-	ft_printf("\033[1;31m");
-	ft_printf("Error: %s\n", error);
-	ft_printf("\033[0;37m");
+	ft_printf("minishell: %s\n", error);
 	return (0);
 }

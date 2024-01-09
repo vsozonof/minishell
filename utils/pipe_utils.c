@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 06:15:38 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/08 10:43:22 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/09 07:16:50 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,25 +23,26 @@ int	is_pipe(t_prompt *prompt)
 	return (0);
 }
 
-int	is_valid_pipe(char *str, int i)
+int	is_valid_pipe(char *str)
 {
-	while (ft_is_whitespace(str[i]) && str[i])
+	int	i;
+
+	i = 0;
+	while (str[i] && ft_is_whitespace(str[i]))
 		i++;
 	if (str[i] == '|')
-		return (printf
-			("minishell: syntax error near unexpected token `|'\n"));
+		return (pr_error("syntax error near unexpected token `|'"));
 	while (str[i])
 	{
 		while (str[i] && str[i] != '|')
 			i++;
 		if (str[i] == '|' && str[i + 1] == '|'
 			&& str[i + 2] != '|')
-			return (printf("Double Pipe Handler\n"));
+			return (pr_error("`||' operator not handled"));
 		else if (str[i] == '|' && str[i + 1] == '|'
 			&& str[i + 2] == '|')
-			return (printf
-				("minishell: syntax error near unexpected token `|'\n"));
-		else
+			return (pr_error("syntax error near unexpected token `|'"));
+		if (str[i] == '|')
 			i++;
 	}
 	return (0);
