@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 05:01:39 by vsozonof          #+#    #+#             */
-/*   Updated: 2023/11/26 07:39:26 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/10 17:08:21 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ int	flags_counter(char *str)
 	i = -1;
 	c = 0;
 	while (str[++i])
-		if (((str[i] == '-' && ft_isalpha(str[i + 1])) && str[i - 1] != '-')
-			|| ((str[i] == '-' && str[i + 1] == '-') && ft_isalpha(str[i + 2])))
+		if (((str[i] == '-' && ft_isalpha(str[i + 1])) && ft_is_whitespace(str[i - 1]))
+			|| (str[i] == '-' && str[i + 1] == '-' && ft_isalpha(str[i + 2] && ft_is_whitespace(str[i - 1]))))
 			c++;
 	return (c);
 }

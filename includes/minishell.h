@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/09 07:45:58 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/10 05:13:39 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ int		args_counter_pipe(char *str);
 int		is_pipe(t_prompt *prompt);
 int		is_valid_pipe(char *str);
 char	**pipes_splitter(char const *s, char c, t_data *data);
+int		is_valid_char(int c);
 
 // ! ---------------------------------------------------------------------------
 // ?							SIGNAL HANDLER

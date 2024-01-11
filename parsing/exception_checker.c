@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 04:37:37 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/09 07:46:33 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/10 05:14:32 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	is_input_valid(char *str)
 	i = 0;
 	while (str[i] && ft_is_whitespace(str[i]))
 		i++;
-	if (!ft_isalpha(str[i]))
+	if (!is_valid_char(str[i]))
 		return (pr_error("parsing error : invalid input."));
 	else if (!exception_checker(str))
 		return (0);

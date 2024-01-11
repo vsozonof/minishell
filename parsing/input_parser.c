@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 09:14:23 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/09 07:46:16 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/10 16:34:51 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void	get_cmd(t_data *data, t_prompt *prompt)
 	int		c;
 
 	i = 0;
+	printf("NFLAGS = %i - NARGS = %i\n", data->n_flags, data->n_args);
 	while (prompt->input[i] && ft_is_whitespace(prompt->input[i]))
 		i++;
 	c = i;
@@ -75,7 +76,7 @@ void	get_cmd(t_data *data, t_prompt *prompt)
 int	get_flags(t_data *data, t_prompt *prompt, int start)
 {
 	int	end;
-
+	printf("GET FLAGS\n");
 	while (prompt->input[start] == '-')
 		start++;
 	end = start;
@@ -89,7 +90,7 @@ int	get_flags(t_data *data, t_prompt *prompt, int start)
 int	get_args(t_data *data, t_prompt *prompt, int start)
 {
 	int	end;
-
+	printf("GET ARGS\n");
 	end = start;
 	while (prompt->input[end] && !ft_is_whitespace(prompt->input[end]))
 		end++;

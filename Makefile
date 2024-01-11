@@ -6,7 +6,7 @@
 #    By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/09 23:22:06 by vsozonof          #+#    #+#              #
-#    Updated: 2024/01/09 05:02:03 by vsozonof         ###   ########.fr        #
+#    Updated: 2024/01/10 05:13:58 by vsozonof         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ SRCS = main.c \
 	   utils/flags_counter.c \
 	   utils/pipe_utils.c \
 	   utils/pipes_splitter.c \
+	   utils/is_valid_char.c \
 	   signal/sig_handler.c \
 	   Exec/command_manager.c \
 	   Exec/command_overall.c \

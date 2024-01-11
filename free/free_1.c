@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 04:25:22 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/09 07:25:12 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/10 04:24:18 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ void	free_flags(t_data *data)
 	i = 0;
 	while (i < data->n_flags)
 	{
-		printf("%i\n", data->n_flags);
 		free(data->flag[i]);
 		i++;
 	}
