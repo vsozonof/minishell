@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 18:07:01 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/08 21:43:37 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/16 17:46:41 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,21 +38,22 @@ int command_manager(t_data *data)
 
 int	builtin_checker(t_data *tmp)
 {
+	(void)tmp;
 	int		token;
 
 	token = 0;
-	if (ft_strncmp(tmp->input, "cd", 2) == 0) // probleme pour arg
-		token = 1;
-	if (ft_strncmp(tmp->input, "echo", 4) == 0)
-		token = 2;
-	else if (ft_strncmp(tmp->input, "env", 3) == 0)
-		token = 3;
-	else if (ft_strncmp(tmp->input, "exit", 4) == 0)
-		token = 4;
-	else if (ft_strncmp(tmp->input, "export", 6) == 0)
-		token = 5;
-	if (ft_strncmp(tmp->input, "pwd", 3) == 0)
-		token = 6;
+	// if (ft_strncmp(tmp->input, "cd", 2) == 0) // probleme pour arg
+	// 	token = 1;
+	// if (ft_strncmp(tmp->input, "echo", 4) == 0)
+	// 	token = 2;
+	// else if (ft_strncmp(tmp->input, "env", 3) == 0)
+	// 	token = 3;
+	// else if (ft_strncmp(tmp->input, "exit", 4) == 0)
+	// 	token = 4;
+	// else if (ft_strncmp(tmp->input, "export", 6) == 0)
+	// 	token = 5;
+	// if (ft_strncmp(tmp->input, "pwd", 3) == 0)
+	// 	token = 6;
 	// else if (ft_strncmp(tmp->input, "unset", 5) == 0)
 		// token = 7;
 	return (token);

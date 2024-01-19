@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 12:09:39 by tpotilli          #+#    #+#             */
-/*   Updated: 2023/11/25 15:37:07 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/16 17:47:36 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,7 @@
 
 void	execute_pwd(t_data *data)
 {
-	unsigned int	i;
-
-	i = 0;
-	while (ft_strncmp(data->envp[i], "PWD=", 4) != 0)
-		i++;
-	printf("%s\n", (data->envp[i] + 4));
+	(void)data;
 }
 
 //getcwd

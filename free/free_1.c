@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 04:25:22 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/10 04:24:18 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/19 03:07:46 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,44 +22,14 @@ void	free_data_struct(t_data *data)
 		free(data->input);
 		free(data->pr);
 		free_data_envp(data, i);
-		free_flags(data);
 		data = data->next;
 	}
 }
 
 void	free_data_envp(t_data *data, int i)
 {
-	while (data->envp[i])
-	{
-		free(data->envp[i]);
-		i++;
-	}
-}
-
-void	free_flags(t_data *data)
-{
-	int	i;
-
-	i = 0;
-	while (i < data->n_flags)
-	{
-		free(data->flag[i]);
-		i++;
-	}
-	free(data->flag);
-}
-
-void	free_args(t_data *data)
-{
-	int	i;
-
-	i = 0;
-	while (i < data->n_args)
-	{
-		free(data->args[i]);
-		i++;
-	}
-	free(data->args);
+	(void)data;
+	(void)i;
 }
 
 void	free_cmds(t_data *data)
@@ -77,10 +47,19 @@ void	free_cmds(t_data *data)
 
 void	free_pwd(t_data *data)
 {
-	unsigned int	i;
+	(void)data;
+}
 
-	i = 0;
-	while (ft_strncmp(data->envp[i], "PWD=", 4) != 0)
-		i++;
-	free(data->envp[i]);
+void	free_env(t_env	*env)
+{
+	t_env	*tmp;
+
+	tmp = NULL;
+	while (env)
+	{
+		tmp = env->next;
+		free(env->var);
+		free(env);
+		env = tmp;
+	}
 }

@@ -6,17 +6,18 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 13:42:18 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/09 07:18:55 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/19 07:17:04 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	get_input(char **env)
+void	get_input(char **envp)
 {
 	t_prompt	prompt;
 
-	init_sbase(&prompt, env);
+	init_sbase(&prompt, envp);
+	init_extras(&prompt);
 	while (42)
 	{
 		printf("%s@%s:%s", prompt.user, prompt.post, prompt.w_d);
@@ -24,12 +25,14 @@ void	get_input(char **env)
 		if (prompt.input)
 		{
 			add_history(prompt.input);
-			input_parser(&prompt);
+			if (!is_input_valid(prompt.input))
+				free(prompt.input);
+			else
+				input_parser(&prompt);
 		}
 		else
 			break ;
 	}
 	clear_history();
-	free(prompt.w_d);
-	free(prompt.post);
+	free_end_of_program(&prompt);
 }

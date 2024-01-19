@@ -6,15 +6,16 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 08:35:01 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/09 06:22:04 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/19 15:48:42 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	init_sbase(t_prompt *ptr, char **env)
+int	init_sbase(t_prompt *ptr, char **env)
 {
 	char				*tmp;
+	t_env				*env_l;
 	struct sigaction	sa_int;
 	struct sigaction	sa_quit;
 
@@ -24,35 +25,49 @@ void	init_sbase(t_prompt *ptr, char **env)
 	sa_quit.sa_handler = handle_signals;
 	sigaction(SIGINT, &sa_int, NULL);
 	sigaction(SIGQUIT, &sa_quit, NULL);
-	ptr->user = getenv("LOGNAME");
-	tmp = getenv("SESSION_MANAGER");
-	ptr->post = ft_substr(tmp, 6, 6); // 6 12 - a free
-	ptr->w_d = getcwd(NULL, 0); // getcwd use realloc -> a free
-	ptr->envp = env;
+	env_l = malloc(sizeof(t_env));
+	if (!env_l)
+		return (ptr->env = NULL, 0);
+	else
+	{
+		if (!put_env_to_lst(env_l, env))
+			return (ptr->env = NULL, 0);
+		ptr->user = getenv("LOGNAME");
+		tmp = getenv("SESSION_MANAGER");
+		ptr->post = ft_substr(tmp, 6, 6);
+		ptr->w_d = getcwd(NULL, 0);
+	}
+	return (ptr->env = env_l, 0);
 }
 
-void	init_str(t_data *data, t_prompt *prompt)
+void	init_extras(t_prompt *ptr)
 {
+	ptr->name = ft_strdup("minishell");
+	ptr->pid = ft_itoa((int)getpid());
+}
+
+int	init_str(t_data *data, t_prompt *prompt)
+{
+	data->head = NULL;
+	data->new_head = NULL;
+	data->tail = NULL;
+	data->to_add = NULL;
+	data->i_status = 0;
+	data->c_status = ft_itoa(data->i_status);
+	data->input = prompt->input;
 	data->pr = prompt;
-	data->envp = prompt->envp;
-	data->n_flags = flags_counter(prompt->input);
-	data->n_args = args_counter(prompt->input);
-	if (data->n_flags)
-		data->flag = malloc(sizeof(char *) * data->n_flags);
-	else
-		data->flag = NULL;
-	if (data->n_args)
-		data->args = malloc(sizeof(char *) * data->n_args);
-	else
-		data->args = NULL;
-	data->counter = 0;
-	data->c_args = 0;
+	data->env = prompt->env;
+	return (1);
 }
 
-void	init_str_pipe(t_data *data, t_prompt *prompt)
+int	init_str_pipe(t_data *data, t_prompt *prompt)
 {
-	// data->pr = prompt;
-	data->envp = prompt->envp;
-	data->counter = 0;
-	data->c_args = 0;
+	data->head = NULL;
+	data->new_head = NULL;
+	data->tail = NULL;
+	data->to_add = NULL;
+	data->pr = prompt;
+	data->input = prompt->input;
+	data->env = prompt->env;
+	return (1);
 }

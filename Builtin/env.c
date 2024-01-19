@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 17:45:30 by tpotilli          #+#    #+#             */
-/*   Updated: 2023/11/25 15:38:42 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/16 17:47:52 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,5 @@
 
 void	execute_env(t_data *data)
 {
-	int	i;
-
-	i = 0;
-	while (data->envp[i])
-	{
-		ft_printf("%s\n", data->envp[i]);
-		i++;
-	}
+	(void)data;
 }

@@ -6,7 +6,7 @@
 #    By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/09 23:22:06 by vsozonof          #+#    #+#              #
-#    Updated: 2024/01/10 05:13:58 by vsozonof         ###   ########.fr        #
+#    Updated: 2024/01/19 01:28:37 by vsozonof         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,12 +29,15 @@ SRCS = main.c \
 	   parsing/input_parser.c \
 	   parsing/args_parser.c \
 	   parsing/exception_checker.c \
+	   free/free_main.c \
 	   free/free_1.c \
-	   utils/args_counter.c \
-	   utils/flags_counter.c \
-	   utils/pipe_utils.c \
 	   utils/pipes_splitter.c \
-	   utils/is_valid_char.c \
+	   utils/pipe_utils.c \
+	   utils/pipe_utils-2.c \
+	   utils/env_utils.c \
+	   utils/quote_utils.c \
+	   utils/expand_utils.c \
+	   utils/expand_handler.c \
 	   signal/sig_handler.c \
 	   Exec/command_manager.c \
 	   Exec/command_overall.c \

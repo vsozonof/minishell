@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/10 05:13:39 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/19 04:22:22 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,27 +33,35 @@
 struct	s_parse;
 typedef struct s_struct
 {
+	char			*name;
+	char			*pid;
 	char			*input;
 	char			*user;
 	char			*post;
 	char			*w_d;
-	char			**envp;
 	struct s_parse	*data;
+	struct s_env	*env;
 }	t_prompt;
+
+typedef struct s_env
+{
+	char			*var;
+	struct s_env	*next;
+}	t_env;
 
 typedef struct s_parse
 {
 	t_prompt		*pr;
+	t_env			*env;
 	char			*input;
-	char			**flag;
-	char			**args;
+	char			*head;
+	char			*new_head;
+	char			*tail;
+	char			*to_add;
 	char			**cmds;
-	char			**envp;
-	int				n_args;
-	int				n_flags;
 	int				n_cmds;
-	int				counter;
-	int				c_args;
+	int				i_status;
+	char			*c_status;
 	struct s_parse	*next;
 }	t_data;	
 
@@ -62,36 +70,46 @@ typedef struct s_parse
 // ! ---------------------------------------------------------------------------
 
 int		main(int argc, char **argv, char *envp[]);
-void	get_input(char **env);
-void	init_sbase(t_prompt *prompt, char **env);
-void	init_str(t_data *data, t_prompt *prompt);
-void	init_str_pipe(t_data *data, t_prompt *prompt);
+void	get_input(char **envp);
+int		init_sbase(t_prompt *prompt, char **env);
+void	init_extras(t_prompt *ptr);
+int		init_str(t_data *data, t_prompt *prompt);
+int		init_str_pipe(t_data *data, t_prompt *prompt);
 
 // ! ---------------------------------------------------------------------------
 // ?							INPUT PARSING
 // ! ---------------------------------------------------------------------------
 
 void	input_parser(t_prompt *prompt);
-void	get_cmd(t_data *data, t_prompt *prompt);
-int		get_flags(t_data *data, t_prompt *prompt, int start);
-int		get_args(t_data *data, t_prompt *prompt, int start);
+int		get_cmd(t_data *data);
 
 int		is_input_valid(char *str);
+int		is_piped_input_valid(char *str);
 int		exception_checker(char *str);
 int		unclosed_quote_detector(char *str);
+
+void	expand_handler(t_data *data);
+void	reg_expander(t_data *data);
+void	reg_expand_splitter(t_data *data, int i);
+void	reg_expand_joiner(t_data *data);
+void	search_and_split(t_data *data, int i);
 
 // ! ---------------------------------------------------------------------------
 // ?							PARSING UTILS
 // ! ---------------------------------------------------------------------------
 
-int		flags_counter(char *str);
-int		flags_counter_pipe(char *str);
-int		args_counter(char *str);
-int		args_counter_pipe(char *str);
-int		is_pipe(t_prompt *prompt);
+void	ft_printlst(t_env *L);
+
+char	*ft_get_env(t_env *env, char *str);
+int		put_env_to_lst(t_env *env, char **envp);
+int		is_there_pipe(t_prompt *prompt);
+int		is_there_dollar(char *str);
+int		is_there_backslash(char *str);
+int		ispipe(int c);
 int		is_valid_pipe(char *str);
+int		is_in_quotes(char *str, int c);
+int		is_pipe_content_valid(char *str);
 char	**pipes_splitter(char const *s, char c, t_data *data);
-int		is_valid_char(int c);
 
 // ! ---------------------------------------------------------------------------
 // ?							SIGNAL HANDLER
@@ -139,15 +157,18 @@ void	execute_cd(t_data *data);
 // int		execute_exit();
 
 // ! ---------------------------------------------------------------------------
-// ?							Utils
+// ?							Utils Free
 // ! ---------------------------------------------------------------------------
 
+void	free_manager(t_data *data, int key);
 void	free_data_struct(t_data *data);
 void	free_data_envp(t_data *data, int i);
 void	free_flags(t_data *data);
 void	free_args(t_data *data);
 void	free_cmds(t_data *data);
-void	update_pwd(t_data *data);
+void	free_env(t_env	*env);
 void	free_pwd(t_data *data);
+void	free_end_of_program(t_prompt *p);
+void	update_pwd(t_data *data);
 
 #endif

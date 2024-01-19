@@ -1,25 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_cell.c                                      :+:      :+:    :+:   */
+/*   expand_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/26 07:27:10 by vsozonof          #+#    #+#             */
-/*   Updated: 2023/11/26 07:27:27 by vsozonof         ###   ########.fr       */
+/*   Created: 2024/01/18 23:35:58 by vsozonof          #+#    #+#             */
+/*   Updated: 2024/01/19 04:30:24 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_data	*create_cell(int data)
+int	is_there_dollar(char *str)
 {
-	t_list_b	*cell;
+	int	i;
 
-	cell = malloc(sizeof(t_list_b));
-	if (!cell)
-		return (NULL);
-	cell->data = data;
-	cell->next = NULL;
-	return (cell);
+	i = -1;
+	while (str[++i])
+		if (str[i] == '$' && is_in_quotes(str, i) != 1)
+			return (1);
+	return (0);
+}
+
+int	is_there_backslash(char *str)
+{
+	int	i;
+
+	i = -1;
+	while (str[++i])
+		if (str[i] == '\\' && is_in_quotes(str, i) != 1)
+			return (1);
+	return (0);
 }

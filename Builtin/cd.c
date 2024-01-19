@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 12:02:25 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/08 11:44:15 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/16 17:47:14 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,34 +16,10 @@
 
 void	execute_cd(t_data *data)
 {
-	char	*home;
-
-	if (data->n_args > 1)
-		printf("cd: too many arguments\n");
-	home = getenv("HOME");
-	if (!data->args)
-	{
-		if (!home)
-			return ;
-		else
-		{
-			chdir("~");
-			data->pr->w_d = home;
-		}
-	}
-	update_pwd(data);
+	(void)data;
 }
 
 void	update_pwd(t_data *data)
 {
-	unsigned int	i;
-	static int		c;
-
-	i = 0;
-	while (ft_strncmp(data->envp[i], "PWD=", 4) != 0)
-		i++;
-	if (c)
-		free(data->envp[i]);
-	data->envp[i] = ft_strjoin("PWD=", data->pr->w_d);
-	c++;
+	(void)data;
 }

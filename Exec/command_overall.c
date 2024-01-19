@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 12:26:54 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/08 21:43:17 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/16 17:46:12 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,12 @@ int pipe_command(t_data *data)
 
 int multi_pipe(t_data *data)
 {
+	(void)data;
 	// file[0] = ft_create_fd(argv[1], O_RDONLY);
 	// file[1] = ft_create_fd(argv[argc - 1], O_WRONLY | O_CREAT | O_TRUNC);
 	// if (file[0] == -1 || file[1] == -1)
 	// 	return (1);
-	ft_pipex(data->cmds, data->envp, data->n_cmds);
+	// ft_pipex(data->cmds, data->envp, data->n_cmds);
 	return (0);
 }
 
