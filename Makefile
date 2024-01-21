@@ -6,7 +6,7 @@
 #    By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/09 23:22:06 by vsozonof          #+#    #+#              #
-#    Updated: 2024/01/19 01:28:37 by vsozonof         ###   ########.fr        #
+#    Updated: 2024/01/21 05:34:50 by vsozonof         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,11 +38,13 @@ SRCS = main.c \
 	   utils/quote_utils.c \
 	   utils/expand_utils.c \
 	   utils/expand_handler.c \
+	   utils/n_args.c \
 	   signal/sig_handler.c \
 	   Exec/command_manager.c \
 	   Exec/command_overall.c \
 	   Exec/execute.c \
 	   Builtin/cd.c \
+	   Builtin/cd-utils.c \
 	   Builtin/echo.c \
 	   Builtin/pwd.c \
 	   Builtin/env.c \

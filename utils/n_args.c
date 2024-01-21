@@ -1,38 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd.c                                               :+:      :+:    :+:   */
+/*   n_args.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/23 12:02:25 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/21 05:45:34 by vsozonof         ###   ########.fr       */
+/*   Created: 2024/01/21 05:05:23 by vsozonof          #+#    #+#             */
+/*   Updated: 2024/01/21 05:14:20 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// ! Update les var dans la struct prompt quand changement de dossier
-
-void	execute_cd(t_data *data)
+int	n_args(char *str)
 {
-	char	*path;
-	printf("input = %s\n", data->input);
-	if (n_args(data->input) == 0)
-	{
-		printf("HOME!\n");
-		return ;
-	}
-	else if (n_args(data->input) != 1)
-	{
-		pr_error("cd: too many arguments.");
-		return ;
-	}
-	path = extract_path(data->input);
-	printf("path = %s\n", path);
-}
+	int	i;
+	int	c;
 
-void	update_pwd(t_data *data)
-{
-	(void)data;
+	i = 0;
+	c = 0;
+	while (str[i] && ft_is_whitespace(str[i]))
+		i++;
+	while (str[i] && !ft_is_whitespace(str[i]))
+		i++;
+	while (str[i])
+	{
+		if (ft_is_whitespace(str[i]))
+			i++;
+		else
+		{
+			c++;
+			while (str[i] && !ft_is_whitespace(str[i]))
+				i++;
+		}
+	}
+	return (c);
 }

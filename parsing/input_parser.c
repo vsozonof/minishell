@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 09:14:23 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/19 15:56:47 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/21 04:58:35 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	input_parser(t_prompt *prompt)
 	{
 		if (!get_cmd(&data))
 			return ; // Free ?
+		execute_cd(&data);
 		// command_manager(&data);
 		free_manager(&data, 1);
 	}

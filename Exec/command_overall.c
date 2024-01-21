@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_overall.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 12:26:54 by tpotilli          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/01/16 17:46:12 by vsozonof         ###   ########.fr       */
-=======
-/*   Updated: 2024/01/10 11:03:12 by tpotilli         ###   ########.fr       */
->>>>>>> refs/remotes/origin/main
+/*   Updated: 2024/01/21 04:23:29 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +15,7 @@
 
 int pipe_command(t_data *data)
 {
+	(void)data;
 	// printf("%s\n%s\n%s\n", data->cmds[0], data->cmds[1], data->cmds[2]);
     // printf("input %s\ncounter %d\n", data->input, data->n_args);
     // printf("c args %d\n", data->c_args);

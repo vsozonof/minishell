@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/19 04:22:22 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/21 05:35:20 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ int		is_valid_pipe(char *str);
 int		is_in_quotes(char *str, int c);
 int		is_pipe_content_valid(char *str);
 char	**pipes_splitter(char const *s, char c, t_data *data);
+int		n_args(char *str);
 
 // ! ---------------------------------------------------------------------------
 // ?							SIGNAL HANDLER
@@ -141,10 +142,11 @@ char	*str_join_free(char *path, char *cmd);
 char	**ft_get_path(char **env);
 
 // ! ---------------------------------------------------------------------------
-// ?							Builtin
+// ?							Builtin && Tools
 // ! ---------------------------------------------------------------------------
 
 void	execute_cd(t_data *data);
+char	*extract_path(char *str);
 void	execute_echo(t_data *data);
 void	execute_pwd(t_data *data);
 void	execute_env(t_data *data);
