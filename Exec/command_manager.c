@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_manager.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 18:07:01 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/22 15:04:54 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/22 15:14:51 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,23 @@
 int command_manager(t_data *data)
 {
 	(void)data;
-
-	data->pr->nv = get_new_argv(envp);
-	fprintf(stderr, "argc = %d\n", data->n_cmds);
-	fprintf(stderr, "argv = %s\n", data->cmds[0]);
-	fprintf(stderr, "argv = %s\n", data->cmds[1]);
 	int i = 0;
+
 	while (data->pr->nv[i])
 	{
-		fprintf(stderr, "%s\n", data->pr->nv[i]);
+		printf("%s\n", data->pr->nv[i]);
 		i++;
 	}
+	// data->pr->nv = get_new_argv(envp);
+	// fprintf(stderr, "argc = %d\n", data->n_cmds);
+	// fprintf(stderr, "argv = %s\n", data->cmds[0]);
+	// fprintf(stderr, "argv = %s\n", data->cmds[1]);
+	// int i = 0;
+	// while (data->pr->nv[i])
+	// {
+	// 	fprintf(stderr, "%s\n", data->pr->nv[i]);
+	// 	i++;
+	// }
 	// // Pipex_Exec(data->n_cmds, data->cmds, data->pr->envp);
 	// int		check;
 	// int		i;

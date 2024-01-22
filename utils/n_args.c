@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 05:05:23 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/22 11:39:20 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/22 13:50:19 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,11 @@ int	n_args(char *str)
 	{
 		if (ft_is_whitespace(str[i]))
 			i++;
+		else if (str[i] == 39 || str[i] == '"')
+		{
+			i += (quote_skipper(str, i) - i);
+			c++;
+		}
 		else
 		{
 			c++;
@@ -34,5 +39,24 @@ int	n_args(char *str)
 				i++;
 		}
 	}
+	return (c);
+}
+
+int	quote_skipper(char *str, int c)
+{
+	if (str[c] == 39)
+	{
+		c++;
+		while (str[c] && str[c] != 39)
+			c++;
+	}
+	else if (str[c] == '"')
+	{
+		c++;
+		while (str[c] && str[c] != '"')
+			c++;
+	}
+	if (str[c] == 39 || str[c] == '"')
+		c++;
 	return (c);
 }
