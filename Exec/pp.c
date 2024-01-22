@@ -6,13 +6,20 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:11:05 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/22 19:46:31 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/22 21:47:41 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+// n_redires = len du tab
+// tab = redirection/here_doc
 // retirer des initialisation
+// 1 = simple quote vers la gauche
+// 2 = droite
+// 3 = db_gauche
+// 4 = droite
+
 int	ft_pipex(t_data	*data)
 {
 	pid_t		pid[data->n_cmds];
@@ -33,9 +40,11 @@ int	ft_pipex(t_data	*data)
 			return (printf("erreur de fork\n"), 1);
 		if (pid[i] == 0)
 		{
-			if (i % 2 == 0)
+			if (data->n_redires >= 1)
+				redirection_here_manager(data, pipefd, i);
+			else if (i % 2 == 0)
 				cmd = child_process_in(pipefd, data, i, 0);
-			else
+			else if (i %2 == 1)
 				cmd = child_process_in(pipefd, data, i, 1);
 			if (cmd == NULL)
 			{
