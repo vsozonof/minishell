@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_manager.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 18:07:01 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/22 15:14:51 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/22 15:25:40 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 int command_manager(t_data *data)
 {
 	(void)data;
-	int i = 0;
+	// int i = 0;
 
-	while (data->pr->nv[i])
-	{
-		printf("%s\n", data->pr->nv[i]);
-		i++;
-	}
+	// while (data->pr->nv[i])
+	// {
+	// 	printf("%s\n", data->pr->nv[i]);
+	// 	i++;
+	// }
 	// data->pr->nv = get_new_argv(envp);
 	// fprintf(stderr, "argc = %d\n", data->n_cmds);
 	// fprintf(stderr, "argv = %s\n", data->cmds[0]);
@@ -32,7 +32,8 @@ int command_manager(t_data *data)
 	// 	fprintf(stderr, "%s\n", data->pr->nv[i]);
 	// 	i++;
 	// }
-	// // Pipex_Exec(data->n_cmds, data->cmds, data->pr->envp);
+	if (data->n_cmds >= 2)
+		Pipex_Exec(data);
 	// int		check;
 	// int		i;
 	// (void)data;

@@ -6,15 +6,15 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:11:05 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/22 15:13:22 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/22 15:43:13 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_pipex(char *argv[], char *env[], int argc)
+int	ft_pipex(t_data	*data)
 {
-	pid_t		pid[argc]; // retirer des initialisation
+	pid_t		pid[data->n_cmds]; // retirer des initialisation
 	int			**pipefd;
 	int			i;
 	char		**cmd_argument;
@@ -25,7 +25,7 @@ int	ft_pipex(char *argv[], char *env[], int argc)
 	pipefd = alloc_pipe(i, pipefd);
 	if (!pipefd[1] || !pipefd[0])
 		return (free(pipefd), -1);
-	while (i < argc)
+	while (i < data->n_cmds)
 	{
 		pid[i] = fork();
 		if (pid[i] < 0)
@@ -33,19 +33,19 @@ int	ft_pipex(char *argv[], char *env[], int argc)
 		if (pid[i] == 0)
 		{
 			if (i % 2 == 0)
-				cmd = child_process_in(pipefd, argv, env, i, argc, 0);
+				cmd = child_process_in(pipefd, data, i, 0);
 			else
-				cmd = child_process_in(pipefd, argv, env, i, argc, 1);
+				cmd = child_process_in(pipefd, data, i, 1);
 			if (cmd == NULL)
 			{
-				free_pipe_argv(pipefd, argv);
+				free_pipe_argv(pipefd, data->cmds);
 				exit(0);
 			}
 			else
 			{
-				cmd_argument = ft_split(argv[i], ' ');
-				execve(cmd, cmd_argument, env);
-				free_pipe_argv(pipefd, argv);
+				cmd_argument = ft_split(data->cmds[i], ' ');
+				execve(cmd, cmd_argument, data->pr->nv);
+				free_pipe_argv(pipefd, data->cmds);
 				exit(0);
 			}
 		}
@@ -54,12 +54,12 @@ int	ft_pipex(char *argv[], char *env[], int argc)
 		i++;
 	}
 	i = 0;
-	while (i < argc)
+	while (i < data->n_cmds)
 	{
 		waitpid(pid[i], NULL, 0);
 		i++;
 	}
-	free_pipe_argv(pipefd, argv);
+	free_pipe_argv(pipefd, data->cmds);
 	return (0);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/22 15:09:58 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/22 15:42:03 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,18 +134,18 @@ int		found_builtin(t_data *tmp);
 int		not_builtin(t_data *data);
 int		multi_pipe(t_data *data);
 
-int		Pipex_Exec(int argc, char *argv[], char *envp[]);
-int		ft_pipex(char *argv[], char *env[], int argc);
+int		Pipex_Exec(t_data *data);
+int		ft_pipex(t_data	*data);
 int		**alloc_pipe(int i, int **pipefd);
 int		**parent_process(int **pipefd, int i);
-int		len_fd_tab(char **str, int i);
+int		len_fd_tab(char	**str, int i);
 int		found_max(char **argv);
 int		verif_arg_fd(char *argv[], int i);
 char	*str_join_free(char *path, char *cmd);
 void	ft_freedb(char **str);
-void	free_pipe_argv(int **pipefd, char *argv[]);
+void	free_pipe_argv(int **pipefd, char	*argv[]);
 int		check_dup(int pipe, int token, int pipe2);
-char	*child_process_in(int **pipefd, char **argv, char **env, int i, int argc, int token);
+char	*child_process_in(int **pipefd, t_data *data, int i, int token);
 char	**arg(char *str);
 int		ft_create_fd(char *argv, int flag);
 char	**ft_get_path(char **env);

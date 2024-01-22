@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:10:29 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/22 15:14:14 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/22 15:44:29 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	check_dup(int pipe, int token, int pipe2)
 	return (0);
 }
 // regler le probleme des fd
-char	*child_process_in(int **pipefd, char **argv, char **env, int i, int argc, int token)
+char	*child_process_in(int **pipefd, t_data *data, int i, int token)
 {
 	char		*cmd;
 	char		**buf;
@@ -52,9 +52,9 @@ char	*child_process_in(int **pipefd, char **argv, char **env, int i, int argc, i
 		verif = check_dup(0, 0, pipefd[0][1]);
 		close(pipefd[0][1]);
 		if (verif == -1)
-			return (free_pipe_argv(pipefd, argv), NULL);
+			return (free_pipe_argv(pipefd, data->cmds), NULL);
 	}
-	else if (i == argc - 1)
+	else if (i == data->n_cmds)
 	{
 		close(pipefd[1][1]);
 		close(pipefd[0][1]);
@@ -65,7 +65,7 @@ char	*child_process_in(int **pipefd, char **argv, char **env, int i, int argc, i
 		close(pipefd[1][0]);
 		close(pipefd[0][0]);
 		if (verif == -1)
-			return (free_pipe_argv(pipefd, argv), NULL);
+			return (free_pipe_argv(pipefd, data->cmds), NULL);
 	}
 	else if (token == 0)
 	{
@@ -75,7 +75,7 @@ char	*child_process_in(int **pipefd, char **argv, char **env, int i, int argc, i
 		close(pipefd[1][0]);
 		close(pipefd[0][1]);
 		if (verif == -1)
-			return (free_pipe_argv(pipefd, argv), NULL);
+			return (free_pipe_argv(pipefd, data->cmds), NULL);
 	}
 	else if (token == 1)
 	{
@@ -85,12 +85,12 @@ char	*child_process_in(int **pipefd, char **argv, char **env, int i, int argc, i
 		close(pipefd[0][0]);
 		close(pipefd[1][1]);
 		if (verif == -1)
-			return (free_pipe_argv(pipefd, argv), NULL);
+			return (free_pipe_argv(pipefd, data->cmds), NULL);
 	}
-	buf = arg(argv[i]);
-	cmd = ft_do_process(env, buf[0], pipefd, i);
+	buf = arg(data->cmds[i]);
+	cmd = ft_do_process(data->pr->nv, buf[0], pipefd, i);
 	if (cmd == NULL)
-		return (free_pipe_argv(pipefd, argv), NULL);
+		return (free_pipe_argv(pipefd, data->cmds), NULL);
 	free(pipefd[0]);
 	free(pipefd[1]);
 	return (cmd);
