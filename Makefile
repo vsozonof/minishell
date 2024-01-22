@@ -6,7 +6,7 @@
 #    By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/09 23:22:06 by vsozonof          #+#    #+#              #
-#    Updated: 2024/01/22 13:46:42 by tpotilli         ###   ########.fr        #
+#    Updated: 2024/01/22 15:12:02 by tpotilli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,7 @@ SRCS = main.c \
 	   Exec/main_pp.c \
 	   Exec/pp_free.c \
 	   Exec/pp_utils.c \
+	   Exec/pp_utils2.c \
 	   Exec/pp.c \
 	   Exec/child_pp.c \
 	   Builtin/cd.c \

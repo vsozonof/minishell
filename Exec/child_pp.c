@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_child_process.c                                 :+:      :+:    :+:   */
+/*   child_pp.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:10:29 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/22 13:17:36 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/22 15:14:14 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ int	check_dup(int pipe, int token, int pipe2)
 			return (printf("problem with dup2 3"), -1);
 		if (dup2(STDOUT_FILENO, 1) < 0)
 			return (printf("problem with dup2 4"), -1);
-		// close(pipe);
-			// return (free(pipesfd[0]), free(pipesfd[1]), free(pipesfd), printf("problem with dup2"), -1);
 	}
 	else if (token == 2)
 	{

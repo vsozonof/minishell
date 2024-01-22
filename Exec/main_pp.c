@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:10:50 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/22 14:53:14 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/22 15:11:28 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,11 @@
 
 int	Pipex_Exec(int argc, char *argv[], char *envp[])
 {
-	// char	**new_argv;
-	// int		new_argc;
 	char	**buf;
 	char	*fre;
-	(void)argc;
-	// new_argv = NULL;
-	// new_argv = get_new_argv(argv);
-	// new_argc = found_max(new_argv);
-	int i = 0;
+	int i;
+
+	i = 0;
 	while (argv[i])
 	{
 		buf = arg(argv[i]);
@@ -40,6 +36,6 @@ int	Pipex_Exec(int argc, char *argv[], char *envp[])
 	}
 	// ft_pipex(argv, envp, argc);
 	waitpid(-1, NULL, 0);
-	ft_freedb(argv);
+	// ft_freedb(argv); // a voir par rapport a mes free
 	return (0);
 }

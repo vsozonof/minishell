@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   pp.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:11:05 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/22 13:17:12 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/22 15:13:22 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,13 @@
 
 int	ft_pipex(char *argv[], char *env[], int argc)
 {
-	pid_t		pid[argc];
+	pid_t		pid[argc]; // retirer des initialisation
 	int			**pipefd;
 	int			i;
 	char		**cmd_argument;
 	char		*cmd;
-	int			c;
 
-	i = ((c = 0));
+	i = 0;
 	pipefd = NULL;
 	pipefd = alloc_pipe(i, pipefd);
 	if (!pipefd[1] || !pipefd[0])
@@ -46,13 +45,7 @@ int	ft_pipex(char *argv[], char *env[], int argc)
 			{
 				cmd_argument = ft_split(argv[i], ' ');
 				execve(cmd, cmd_argument, env);
-				close(pipefd[0][1]);
-				close(pipefd[0][0]);
-				close(pipefd[1][0]);
-				close(pipefd[1][1]);
-				free(pipefd[0]);
-				free(pipefd[1]);
-				free(pipefd);
+				free_pipe_argv(pipefd, argv);
 				exit(0);
 			}
 		}
@@ -66,13 +59,7 @@ int	ft_pipex(char *argv[], char *env[], int argc)
 		waitpid(pid[i], NULL, 0);
 		i++;
 	}
-	close(pipefd[0][1]);
-	close(pipefd[0][0]);
-	close(pipefd[1][0]);
-	close(pipefd[1][1]);
-	free(pipefd[0]);
-	free(pipefd[1]);
-	free(pipefd);
+	free_pipe_argv(pipefd, argv);
 	return (0);
 }
 
