@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pp_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:11:39 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/22 15:07:25 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/22 15:13:21 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,6 @@ char	**get_new_argv(char *argv[])
 		buf[i][j] = '\0';
 		i++;
 	}
-	buf[i] = '\0';
+	// buf[i] = '\0';
 	return (buf);
 }
