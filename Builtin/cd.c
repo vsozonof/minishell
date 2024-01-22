@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 12:02:25 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/22 14:54:06 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/22 18:58:27 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,35 +32,46 @@ void	execute_cd(t_data *data)
 	}
 	path = extract_arg(data->input);
 	if (!ft_strncmp(path, "..", 2))
+	{
 		go_back_one_level(data);
-	free(path);
+		free(path);
+	}
+	else
+		change_directory(data, path);
 }
 
 void	go_back_one_level(t_data *data)
 {
-	// char	*path;
+	char	*path;
 	int		i;
 
 	i = ft_strlen(data->pr->w_d);
-	while (i > 0 && data->pr->w_d[i] && data->pr->w_d[i] != '\\')
+	i--;
+	while (i > 0 && data->pr->w_d[i] && data->pr->w_d[i] != '/')
 		i--;
-	printf("%c\n", data->pr->w_d[i]);
+	path = ft_substr(data->pr->w_d, 0, i + 1);
+	change_directory(data, path);
 }
 
 void	change_directory(t_data *data, char *path)
 {
+	printf("%d-\n", access(path, F_OK));
 	if (access(path, F_OK) != -1)
 	{
 		if (chdir(path) == 0)
 		{
 			update_vars(data);
-			free(path);
+			return (free(path));
 		}
 		else
-			printf("poisson poulet\n");
+			printf("errno = %i\n", errno);
 	}
 	else
-		printf("poisson des alpes\n");
+	{
+		if (errno == 2)
+			pr_error("cd: No such file or directory.");
+		return (free(path));
+	}
 }
 
 void	update_vars(t_data *data)

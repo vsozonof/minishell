@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 09:14:23 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/22 15:13:53 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/22 19:08:17 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,5 @@ int	get_cmd(t_data *data)
 	if (!data->input)
 		return (pr_error("malloc error."));
 	else
-		return (1);
+		return (data->n_cmds = 1, 1);
 }
