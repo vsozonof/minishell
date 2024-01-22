@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/22 18:55:40 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/22 20:19:00 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ typedef struct s_parse
 	int				n_cmds;
 	int				i_status;
 	char			*c_status;
+	int				**tab;
+	int				n_redirs;
 	struct s_parse	*next;
 }	t_data;	
 
@@ -114,6 +116,9 @@ int		is_pipe_content_valid(char *str);
 char	**pipes_splitter(char const *s, char c, t_data *data);
 int		n_args(char *str);
 int		quote_skipper(char *str, int c);
+void	redirection_counter(t_data *data);
+void	redirection_parser(t_data *data);
+void	redirection_and_expand_handler(t_data *data);
 
 // ! ---------------------------------------------------------------------------
 // ?							SIGNAL HANDLER
@@ -161,6 +166,7 @@ int		quoted_arg_util(char *str, int c);
 void	change_directory(t_data *data, char *path);
 void	go_back_one_level(t_data *data);
 void	update_vars(t_data *data);
+void	error_handling(int err, char *str);
 
 void	execute_echo(t_data *data);
 void	execute_pwd(t_data *data);

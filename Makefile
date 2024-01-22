@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+         #
+#    By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/09 23:22:06 by vsozonof          #+#    #+#              #
-#    Updated: 2024/01/22 19:01:24 by tpotilli         ###   ########.fr        #
+#    Updated: 2024/01/22 20:03:32 by vsozonof         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRCS = main.c \
 	   parsing/init_struct.c \
 	   parsing/input_parser.c \
 	   parsing/exception_checker.c \
+	   parsing/redir_utils.c \
 	   free/free_main.c \
 	   free/free_1.c \
 	   utils/pipes_splitter.c \

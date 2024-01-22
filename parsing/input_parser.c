@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 09:14:23 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/22 19:08:17 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/22 20:05:02 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@ void	input_parser(t_prompt *prompt)
 
 	prompt->data = &data;
 	init_str(&data, prompt);
-	if (!is_there_backslash(data.input) || !is_there_dollar(data.input))
-		expand_handler(&data);
+	redirection_and_expand_handler(&data);
 	if (is_there_pipe(prompt))
 	{
 		if (!is_piped_input_valid(prompt->input))

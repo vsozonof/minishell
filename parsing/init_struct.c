@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 08:35:01 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/22 14:59:27 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/22 19:39:00 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int	init_str(t_data *data, t_prompt *prompt)
 	data->to_add = NULL;
 	data->i_status = 0;
 	data->c_status = ft_itoa(data->i_status);
+	data->n_redirs = 0;
 	data->input = prompt->input;
 	data->pr = prompt;
 	data->env = prompt->env;
@@ -67,6 +68,9 @@ int	init_str_pipe(t_data *data, t_prompt *prompt)
 	data->new_head = NULL;
 	data->tail = NULL;
 	data->to_add = NULL;
+	data->i_status = 0;
+	data->c_status = ft_itoa(data->i_status);
+	data->n_redirs = 0;
 	data->pr = prompt;
 	data->input = prompt->input;
 	data->env = prompt->env;

@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 12:02:25 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/22 18:58:27 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/22 19:24:39 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ void	go_back_one_level(t_data *data)
 
 void	change_directory(t_data *data, char *path)
 {
-	printf("%d-\n", access(path, F_OK));
 	if (access(path, F_OK) != -1)
 	{
 		if (chdir(path) == 0)
@@ -64,14 +63,11 @@ void	change_directory(t_data *data, char *path)
 			return (free(path));
 		}
 		else
-			printf("errno = %i\n", errno);
+			error_handling(errno, path);
 	}
 	else
-	{
-		if (errno == 2)
-			pr_error("cd: No such file or directory.");
-		return (free(path));
-	}
+		error_handling(errno, path);
+
 }
 
 void	update_vars(t_data *data)
