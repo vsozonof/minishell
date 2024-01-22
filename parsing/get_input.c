@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_input.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 13:42:18 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/21 12:52:53 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/22 14:49:27 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	get_input(char **envp)
 	t_prompt	prompt;
 
 	init_sbase(&prompt, envp);
-	init_extras(&prompt);
+	init_extras(&prompt, envp);
 	while (42)
 	{
 		printf("%s at %s in: %s", prompt.user, prompt.post, prompt.w_d);

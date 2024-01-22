@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 18:07:01 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/22 13:59:54 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/22 15:04:54 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,19 @@
 
 int command_manager(t_data *data)
 {
-	t_data	*tmp;
+	(void)data;
 
-	tmp = data;
+	data->pr->nv = get_new_argv(envp);
+	fprintf(stderr, "argc = %d\n", data->n_cmds);
+	fprintf(stderr, "argv = %s\n", data->cmds[0]);
+	fprintf(stderr, "argv = %s\n", data->cmds[1]);
 	int i = 0;
-	fprintf(stderr, "voici input %s\n", data->input);
-	while (tmp->cmds)
+	while (data->pr->nv[i])
 	{
-		while (tmp->cmds[i])
-		{
-			fprintf(stderr, "voici cmd[%d] %s\n", i, tmp->cmds[i]);
-			i++;
-		}
-		// data = data->next;
+		fprintf(stderr, "%s\n", data->pr->nv[i]);
+		i++;
 	}
-	// Pipex_Exec(data->new_)
+	// // Pipex_Exec(data->n_cmds, data->cmds, data->pr->envp);
 	// int		check;
 	// int		i;
 	// (void)data;

@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:10:50 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/22 13:45:47 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/22 14:53:14 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	Pipex_Exec(int argc, char *argv[], char *envp[])
 		free(fre);
 		i++;
 	}
-	ft_pipex(argv, envp, argc);
+	// ft_pipex(argv, envp, argc);
 	waitpid(-1, NULL, 0);
 	ft_freedb(argv);
 	return (0);

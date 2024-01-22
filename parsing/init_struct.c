@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 08:35:01 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/21 12:52:30 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/22 14:59:27 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,11 @@ int	init_sbase(t_prompt *ptr, char **env)
 	return (ptr->env = env_l, 0);
 }
 
-void	init_extras(t_prompt *ptr)
+void	init_extras(t_prompt *ptr, char **envp)
 {
 	ptr->name = ft_strdup("minishell");
 	ptr->pid = ft_itoa((int)getpid());
+	ptr->nv = envp;
 }
 
 int	init_str(t_data *data, t_prompt *prompt)

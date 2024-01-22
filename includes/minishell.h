@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/22 13:22:32 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/22 14:59:15 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_struct
 	char			*user;
 	char			*post;
 	char			*w_d;
+	char			**nv;
 	struct s_parse	*data;
 	struct s_env	*env;
 }	t_prompt;
@@ -72,7 +73,7 @@ typedef struct s_parse
 int		main(int argc, char **argv, char *envp[]);
 void	get_input(char **envp);
 int		init_sbase(t_prompt *prompt, char **env);
-void	init_extras(t_prompt *ptr);
+void	init_extras(t_prompt *ptr, char **envp);
 int		init_str(t_data *data, t_prompt *prompt);
 int		init_str_pipe(t_data *data, t_prompt *prompt);
 
