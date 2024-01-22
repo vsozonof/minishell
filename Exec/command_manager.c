@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_manager.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 18:07:01 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/21 13:16:04 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/22 13:59:54 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,22 @@
 
 int command_manager(t_data *data)
 {
-	int		check;
+	t_data	*tmp;
+
+	tmp = data;
+	int i = 0;
+	fprintf(stderr, "voici input %s\n", data->input);
+	while (tmp->cmds)
+	{
+		while (tmp->cmds[i])
+		{
+			fprintf(stderr, "voici cmd[%d] %s\n", i, tmp->cmds[i]);
+			i++;
+		}
+		// data = data->next;
+	}
+	// Pipex_Exec(data->new_)
+	// int		check;
 	// int		i;
 	// (void)data;
 	// i = 0;
@@ -22,9 +37,9 @@ int command_manager(t_data *data)
 	// {
 	// printf("yooow\n");
 	// pipe_command(data);
-		check = builtin_checker(data);
-		if (check != 0)
-			builtin_manager(data, check);
+		// check = builtin_checker(data);
+		// if (check != 0)
+		// 	builtin_manager(data, check);
 		// i++;
 	// }
 	// regler la partie des maillon pour l'exec

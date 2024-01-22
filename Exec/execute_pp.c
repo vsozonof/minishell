@@ -6,32 +6,42 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 12:31:19 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/08 11:44:39 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/22 13:21:46 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_do_process(char *envp[], char *cmd)
+char	*ft_do_process(char *envp[], char *cmd, int **pipesfd, int j)
 {
 	int		i;
 	char	**path;
-	char	**cmd_argument;
+	char	*buf;
+	char	*buf2;
+	(void)pipesfd;
+	(void)j;
 
 	i = 0;
-	cmd_argument = ft_split(cmd, ' ');
 	path = ft_get_path(envp);
 	while (path[i])
 	{
-		path[i] = str_join_free(path[i], "/");
-		path[i] = str_join_free(path[i], cmd_argument[0]);
-		execve(path[i], cmd_argument, envp);
+		buf = ft_strjoin(path[i], "/");
+		buf2 = ft_strjoin(buf, cmd);
+		free(buf);
+		if (access(buf2, 0) == 0)
+		{
+			free(path[i]);
+			while (path[i++])
+				free(path[i]);
+			free(path);
+			return (buf2);
+		}
+		free(buf2);
+		free(path[i]);
 		i++;
 	}
-	ft_freedb(path);
-	execve(cmd_argument[0], cmd_argument, envp);
-	ft_freedb(cmd_argument);
-	return ;
+	free(path);
+	return (NULL);
 }
 
 char	**ft_get_path(char **env)
@@ -46,36 +56,4 @@ char	**ft_get_path(char **env)
 		perror("Error: PATH not found");
 	path = ft_split(env[i] + 5, ':');
 	return (path);
-}
-
-char *str_join_free(char *path, char *cmd)
-{
-	char *str;
-	
-	str = ft_strjoin(path, cmd);
-	free(path);
-	return (str);
-}
-
-void	ft_freedb(char **str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		free(str[i]);
-		i++;
-	}
-	free(str);
-}
-
-int	ft_create_fd(char *argv, int flag)
-{
-	int	fd;
-
-	fd = open(argv, flag, 0644);
-	if (fd < 0)
-		return (printf("problem with fd\n"), -1);
-	return (fd);
 }
