@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/22 15:42:03 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/22 15:46:58 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,7 @@ char	*child_process_in(int **pipefd, t_data *data, int i, int token);
 char	**arg(char *str);
 int		ft_create_fd(char *argv, int flag);
 char	**ft_get_path(char **env);
-char	*ft_do_process(char *envp[], char *cmd, int **pipesfd, int j);
+char	*ft_do_process(char *envp[], char *cmd);
 
 // ! ---------------------------------------------------------------------------
 // ?							Builtin && Tools

@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:10:29 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/22 15:44:29 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/22 15:47:20 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ char	*child_process_in(int **pipefd, t_data *data, int i, int token)
 			return (free_pipe_argv(pipefd, data->cmds), NULL);
 	}
 	buf = arg(data->cmds[i]);
-	cmd = ft_do_process(data->pr->nv, buf[0], pipefd, i);
+	cmd = ft_do_process(data->pr->nv, buf[0]);
 	if (cmd == NULL)
 		return (free_pipe_argv(pipefd, data->cmds), NULL);
 	free(pipefd[0]);

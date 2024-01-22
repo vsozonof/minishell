@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute.c                                          :+:      :+:    :+:   */
+/*   execute_pp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 12:31:19 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/22 13:21:46 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/22 15:46:36 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*ft_do_process(char *envp[], char *cmd, int **pipesfd, int j)
+char	*ft_do_process(char *envp[], char *cmd)
 {
 	int		i;
 	char	**path;
 	char	*buf;
 	char	*buf2;
-	(void)pipesfd;
-	(void)j;
 
 	i = 0;
 	path = ft_get_path(envp);
