@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+         #
+#    By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/09 23:22:06 by vsozonof          #+#    #+#              #
-#    Updated: 2024/01/22 15:09:45 by vsozonof         ###   ########.fr        #
+#    Updated: 2024/01/22 19:01:24 by tpotilli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,9 @@ SRCS = main.c \
 	   Exec/main_pp.c \
 	   Exec/pp_free.c \
 	   Exec/pp_utils.c \
+	   Exec/pp_utils2.c \
 	   Exec/pp.c \
+	   Exec/single_arg.c \
 	   Exec/child_pp.c \
 	   Builtin/cd.c \
 	   Builtin/cd-utils.c \

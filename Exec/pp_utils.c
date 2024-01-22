@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pp_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:11:39 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/22 15:13:21 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/22 15:37:49 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		len_fd_tab(char **str, int i)
 	return (j);
 }
 
-int	found_max(char **argv)
+int	found_max(char	*argv[])
 {
 	int	i;
 
@@ -32,7 +32,7 @@ int	found_max(char **argv)
 	return (i);
 }
 
-int	verif_arg_fd(char *argv[], int i)
+int	verif_arg_fd(char	*argv[], int i)
 {
 	int		fd;
 
@@ -41,7 +41,7 @@ int	verif_arg_fd(char *argv[], int i)
 		return (-1);
 	return (fd);
 }
-int	ft_create_fd(char *argv, int flag)
+int	ft_create_fd(char	*argv, int flag)
 {
 	int	fd;
 
@@ -51,7 +51,7 @@ int	ft_create_fd(char *argv, int flag)
 	return (fd);
 }
 
-char	**get_new_argv(char *argv[])
+char	**get_new_argv(char	**argv)
 {
 	int		i;
 	int		j;
@@ -61,14 +61,14 @@ char	**get_new_argv(char *argv[])
 	i = 0;
 	buf = malloc(sizeof(char *) * found_max(argv));
 	if (!buf)
-		return (printf("malloc problem at new_argv\n"), NULL);
+		return (printf("malloc problem at argv\n"), NULL);
 	while (argv[i])
 	{
 		j = 0;
 		len = len_fd_tab(argv, i) + 1;
 		buf[i] = malloc(sizeof(char) * len);
 		if (!buf[i])
-			return (printf("malloc problem at new_argv\n"), free(buf), NULL);
+			return (printf("malloc problem at argv\n"), free(buf), NULL);
 		while (argv[i][j])
 		{
 			buf[i][j] = argv[i][j];
