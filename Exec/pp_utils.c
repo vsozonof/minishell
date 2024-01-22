@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:11:39 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/22 19:48:21 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/22 20:09:36 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ char	**get_new_argv(char	**argv)
 	buf = malloc(sizeof(char *) * found_max(argv));
 	if (!buf)
 		return (printf("malloc problem at argv\n"), NULL);
-	while (argv[i])
+	while (argv[i++])
 	{
 		j = 0;
 		len = len_fd_tab(argv, i) + 1;
@@ -76,7 +76,6 @@ char	**get_new_argv(char	**argv)
 			j++;
 		}
 		buf[i][j] = '\0';
-		i++;
 	}
 	buf[i] = NULL;
 	return (buf);
