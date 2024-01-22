@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 05:50:43 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/19 04:32:13 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/21 14:01:36 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,23 @@ char	*ft_get_env(t_env *env, char *str)
 	{
 		if (!ft_strncmp(nav->var, str, len))
 			return (ft_substr(nav->var, (len + 1), ft_strlen(nav->var)));
+		else
+			nav = nav->next;
+	}
+	return (NULL);
+}
+
+t_env	*ft_get_env_node(t_env *env, char *str)
+{
+	int		len;
+	t_env	*nav;
+
+	nav = env;
+	len = ft_strlen(str);
+	while (nav)
+	{
+		if (!ft_strncmp(nav->var, str, len))
+			return (nav);
 		else
 			nav = nav->next;
 	}

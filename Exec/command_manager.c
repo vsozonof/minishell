@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 18:07:01 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/16 17:46:41 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/21 13:16:04 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 
 int command_manager(t_data *data)
 {
-	// int		check;
+	int		check;
 	// int		i;
-	(void)data;
+	// (void)data;
 	// i = 0;
 	// while (i < data->n_args)
 	// {
 	// printf("yooow\n");
 	// pipe_command(data);
-		// check = builtin_checker(data);
-		// if (check != 0)
-			// builtin_manager(data, check);
+		check = builtin_checker(data);
+		if (check != 0)
+			builtin_manager(data, check);
 		// i++;
 	// }
 	// regler la partie des maillon pour l'exec
@@ -42,20 +42,20 @@ int	builtin_checker(t_data *tmp)
 	int		token;
 
 	token = 0;
-	// if (ft_strncmp(tmp->input, "cd", 2) == 0) // probleme pour arg
-	// 	token = 1;
-	// if (ft_strncmp(tmp->input, "echo", 4) == 0)
-	// 	token = 2;
-	// else if (ft_strncmp(tmp->input, "env", 3) == 0)
-	// 	token = 3;
-	// else if (ft_strncmp(tmp->input, "exit", 4) == 0)
-	// 	token = 4;
-	// else if (ft_strncmp(tmp->input, "export", 6) == 0)
-	// 	token = 5;
-	// if (ft_strncmp(tmp->input, "pwd", 3) == 0)
-	// 	token = 6;
-	// else if (ft_strncmp(tmp->input, "unset", 5) == 0)
-		// token = 7;
+	if (ft_strncmp(tmp->input, "cd", 2) == 0) // probleme pour arg
+		token = 1;
+	if (ft_strncmp(tmp->input, "echo", 4) == 0)
+		token = 2;
+	else if (ft_strncmp(tmp->input, "env", 3) == 0)
+		token = 3;
+	else if (ft_strncmp(tmp->input, "exit", 4) == 0)
+		token = 4;
+	else if (ft_strncmp(tmp->input, "export", 6) == 0)
+		token = 5;
+	if (ft_strncmp(tmp->input, "pwd", 3) == 0)
+		token = 6;
+	else if (ft_strncmp(tmp->input, "unset", 5) == 0)
+		token = 7;
 	return (token);
 }
 

@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 17:45:30 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/16 17:47:52 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/21 13:21:57 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,12 @@
 
 void	execute_env(t_data *data)
 {
-	(void)data;
+	t_env	*nav;
+
+	nav = data->env;
+	while (nav)
+	{
+		printf("%s\n", nav->var);
+		nav = nav->next;
+	}
 }

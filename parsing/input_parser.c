@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 09:14:23 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/21 04:58:35 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/22 07:03:58 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,19 @@ void	input_parser(t_prompt *prompt)
 	{
 		if (!get_cmd(&data))
 			return ; // Free ?
-		execute_cd(&data);
-		// command_manager(&data);
+		command_manager(&data);
 		free_manager(&data, 1);
 	}
 }
 
 int	get_cmd(t_data *data)
 {
-	data->input = ft_strdup(data->pr->input);
+	int	i;
+
+	i = 0;
+	while (data->input[i] && ft_is_whitespace(data->input[i]))
+		i++;
+	data->input = ft_substr(data->pr->input, i, ft_strlen(data->pr->input));
 	if (!data->input)
 		return (pr_error("malloc error."));
 	else

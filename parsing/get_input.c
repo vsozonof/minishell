@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 13:42:18 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/19 07:17:04 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/21 12:52:53 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	get_input(char **envp)
 	init_extras(&prompt);
 	while (42)
 	{
-		printf("%s@%s:%s", prompt.user, prompt.post, prompt.w_d);
+		printf("%s at %s in: %s", prompt.user, prompt.post, prompt.w_d);
 		prompt.input = readline("$> ");
 		if (prompt.input)
 		{

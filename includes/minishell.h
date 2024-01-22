@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/21 05:35:20 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/22 10:12:12 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ void	search_and_split(t_data *data, int i);
 void	ft_printlst(t_env *L);
 
 char	*ft_get_env(t_env *env, char *str);
+t_env	*ft_get_env_node(t_env *env, char *str);
 int		put_env_to_lst(t_env *env, char **envp);
 int		is_there_pipe(t_prompt *prompt);
 int		is_there_dollar(char *str);
@@ -146,7 +147,11 @@ char	**ft_get_path(char **env);
 // ! ---------------------------------------------------------------------------
 
 void	execute_cd(t_data *data);
-char	*extract_path(char *str);
+char	*extract_arg(char *str);
+int		quoted_arg_util(char *str, int c);
+void	change_directory(t_data *data, char *path);
+void	update_vars(t_data *data);
+
 void	execute_echo(t_data *data);
 void	execute_pwd(t_data *data);
 void	execute_env(t_data *data);

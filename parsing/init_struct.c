@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 08:35:01 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/19 15:48:42 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/21 12:52:30 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	init_sbase(t_prompt *ptr, char **env)
 			return (ptr->env = NULL, 0);
 		ptr->user = getenv("LOGNAME");
 		tmp = getenv("SESSION_MANAGER");
-		ptr->post = ft_substr(tmp, 6, 6);
+		ptr->post = ft_substr(tmp, 6, 12);
 		ptr->w_d = getcwd(NULL, 0);
 	}
 	return (ptr->env = env_l, 0);
