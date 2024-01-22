@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:11:05 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/22 15:54:10 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/22 16:08:04 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,13 @@ int	ft_pipex(t_data	*data)
 			else
 			{
 				cmd_argument = ft_split(data->cmds[i], ' ');
+				// fprintf(stderr, "%s\n", cmd);
+				// int j = 0;
+				// while (cmd_argument[j])
+				// {
+				// 	fprintf(stderr, "%s\n", cmd_argument[j]);
+				// 	j++;
+				// }
 				execve(cmd, cmd_argument, data->pr->nv);
 				free_pipe_argv(pipefd, data->cmds);
 				exit(0);

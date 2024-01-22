@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:10:29 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/22 15:47:20 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/22 16:08:30 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,18 @@ int	check_dup(int pipe, int token, int pipe2)
 {
 	if (token == 0)
 	{
-		if (dup2(STDIN_FILENO, STDIN_FILENO) < 0)
+		fprintf(stderr, "je passr par ici\n");
+		if (dup2(0, 0) < 0)
 			return (printf("problem with dup2 1"), -1);
 		if (dup2(pipe2, 1) < 0)
 			return (printf("problem with dup2 2"), -1);
 	}
 	else if (token == 1)
 	{
+		fprintf(stderr, "je passr par la\n");
 		if (dup2(pipe, 0) < 0)
 			return (printf("problem with dup2 3"), -1);
-		if (dup2(STDOUT_FILENO, 1) < 0)
+		if (dup2(1, 1) < 0)
 			return (printf("problem with dup2 4"), -1);
 	}
 	else if (token == 2)
