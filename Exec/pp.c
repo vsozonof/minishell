@@ -6,15 +6,16 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:11:05 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/22 18:52:37 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/22 19:46:31 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+// retirer des initialisation
 int	ft_pipex(t_data	*data)
 {
-	pid_t		pid[data->n_cmds]; // retirer des initialisation
+	pid_t		pid[data->n_cmds];
 	int			**pipefd;
 	int			i;
 	char		**cmd_argument;

@@ -6,13 +6,13 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:11:39 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/22 15:37:49 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/22 20:09:36 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		len_fd_tab(char **str, int i)
+int	len_fd_tab(char **str, int i)
 {
 	int		j;
 
@@ -41,6 +41,7 @@ int	verif_arg_fd(char	*argv[], int i)
 		return (-1);
 	return (fd);
 }
+
 int	ft_create_fd(char	*argv, int flag)
 {
 	int	fd;
@@ -62,7 +63,7 @@ char	**get_new_argv(char	**argv)
 	buf = malloc(sizeof(char *) * found_max(argv));
 	if (!buf)
 		return (printf("malloc problem at argv\n"), NULL);
-	while (argv[i])
+	while (argv[i++])
 	{
 		j = 0;
 		len = len_fd_tab(argv, i) + 1;
@@ -75,8 +76,7 @@ char	**get_new_argv(char	**argv)
 			j++;
 		}
 		buf[i][j] = '\0';
-		i++;
 	}
-	// buf[i] = '\0';
+	buf[i] = NULL;
 	return (buf);
 }
