@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/22 15:46:58 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/22 18:55:40 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,6 @@ int		builtin_checker(t_data *tmp);
 void	builtin_manager(t_data *tmp, int token);
 int		found_builtin(t_data *tmp);
 int		not_builtin(t_data *data);
-int		multi_pipe(t_data *data);
 
 int		Pipex_Exec(t_data *data);
 int		ft_pipex(t_data	*data);
@@ -150,6 +149,7 @@ char	**arg(char *str);
 int		ft_create_fd(char *argv, int flag);
 char	**ft_get_path(char **env);
 char	*ft_do_process(char *envp[], char *cmd);
+int		single_arg(t_data *data);
 
 // ! ---------------------------------------------------------------------------
 // ?							Builtin && Tools

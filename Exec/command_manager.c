@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 18:07:01 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/22 15:25:40 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/22 19:05:34 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,41 +14,16 @@
 
 int command_manager(t_data *data)
 {
-	(void)data;
-	// int i = 0;
-
-	// while (data->pr->nv[i])
-	// {
-	// 	printf("%s\n", data->pr->nv[i]);
-	// 	i++;
-	// }
-	// data->pr->nv = get_new_argv(envp);
-	// fprintf(stderr, "argc = %d\n", data->n_cmds);
-	// fprintf(stderr, "argv = %s\n", data->cmds[0]);
-	// fprintf(stderr, "argv = %s\n", data->cmds[1]);
-	// int i = 0;
-	// while (data->pr->nv[i])
-	// {
-	// 	fprintf(stderr, "%s\n", data->pr->nv[i]);
-	// 	i++;
-	// }
+	printf("hey = %d\n", data->n_cmds);
+	fprintf(stderr, "%d\n", data->n_cmds);
+	if (data->n_cmds == 1)
+		single_arg(data);
 	if (data->n_cmds >= 2)
 		Pipex_Exec(data);
-	// int		check;
-	// int		i;
-	// (void)data;
-	// i = 0;
-	// while (i < data->n_args)
-	// {
-	// printf("yooow\n");
-	// pipe_command(data);
-		// check = builtin_checker(data);
-		// if (check != 0)
-		// 	builtin_manager(data, check);
-		// i++;
-	// }
-	// regler la partie des maillon pour l'exec
-
+	// check = builtin_checker(data);
+	// if (check != 0)
+	// 	builtin_manager(data, check);
+	// i++;
 	// else if (token == 2)
 	// 	command_exec();
 	// else if (token == 3)

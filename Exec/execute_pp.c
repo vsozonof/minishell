@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 12:31:19 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/22 15:46:36 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/22 18:54:48 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*ft_do_process(char *envp[], char *cmd)
 
 	i = 0;
 	path = ft_get_path(envp);
-	while (path[i])
+	while (path[i++])
 	{
 		buf = ft_strjoin(path[i], "/");
 		buf2 = ft_strjoin(buf, cmd);
@@ -36,7 +36,6 @@ char	*ft_do_process(char *envp[], char *cmd)
 		}
 		free(buf2);
 		free(path[i]);
-		i++;
 	}
 	free(path);
 	return (NULL);
