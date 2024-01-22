@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/22 10:12:12 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/22 14:54:14 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ int		is_in_quotes(char *str, int c);
 int		is_pipe_content_valid(char *str);
 char	**pipes_splitter(char const *s, char c, t_data *data);
 int		n_args(char *str);
+int		quote_skipper(char *str, int c);
 
 // ! ---------------------------------------------------------------------------
 // ?							SIGNAL HANDLER
@@ -150,6 +151,7 @@ void	execute_cd(t_data *data);
 char	*extract_arg(char *str);
 int		quoted_arg_util(char *str, int c);
 void	change_directory(t_data *data, char *path);
+void	go_back_one_level(t_data *data);
 void	update_vars(t_data *data);
 
 void	execute_echo(t_data *data);
