@@ -3,41 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   command_manager.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 18:07:01 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/22 19:10:24 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/22 19:41:26 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int command_manager(t_data *data)
+int	command_manager(t_data *data)
 {
-	printf("hey = %d\n", data->n_cmds);
-	fprintf(stderr, "%d\n", data->n_cmds);
 	if (data->n_cmds == 1)
 		single_arg(data);
 	if (data->n_cmds >= 2)
 		Pipex_Exec(data);
-	// check = builtin_checker(data);
-	// if (check != 0)
-	// 	builtin_manager(data, check);
-	// i++;
-	// else if (token == 2)
-	// 	command_exec();
-	// else if (token == 3)
-	// 	return (printf("Wrong input\n"), 1);
+	else
+		builtin_checker(data);
 	return (0);
 }
 
 int	builtin_checker(t_data *tmp)
 {
-	(void)tmp;
 	int		token;
 
 	token = 0;
-	if (ft_strncmp(tmp->input, "cd", 2) == 0) // probleme pour arg
+	if (ft_strncmp(tmp->input, "cd", 2) == 0)
 		token = 1;
 	if (ft_strncmp(tmp->input, "echo", 4) == 0)
 		token = 2;
@@ -56,7 +47,6 @@ int	builtin_checker(t_data *tmp)
 
 void	builtin_manager(t_data *tmp, int token)
 {
-	// printf("token %d\n", token);
 	if (token == 1)
 		execute_cd(tmp);
 	if (token == 2)
@@ -72,21 +62,3 @@ void	builtin_manager(t_data *tmp, int token)
 	// else if (token == 7)
 		// execute_unset(tmp);
 }
-
-// void	command_exec(char *input)
-// {
-// }
-
-// void	builtin_manager(char *input)
-// {
-
-// }
-
-// int		get_kind_input(t_data *data, int token)
-// {
-// 	int i;
-// 	int	token;
-
-	
-// 	return (token);
-// }

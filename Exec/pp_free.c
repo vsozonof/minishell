@@ -6,16 +6,16 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:12:21 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/22 15:49:02 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/22 19:37:42 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char *str_join_free(char *path, char *cmd)
+char	*str_join_free(char *path, char *cmd)
 {
-	char *str;
-	
+	char	*str;
+
 	str = ft_strjoin(path, cmd);
 	free(path);
 	return (str);
@@ -44,5 +44,4 @@ void	free_pipe_argv(int **pipefd, char *argv[])
 	free(pipefd[1]);
 	free(pipefd[0]);
 	free(pipefd);
-	// ft_freedb(argv);
 }

@@ -6,13 +6,13 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:11:39 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/22 15:37:49 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/22 19:48:21 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		len_fd_tab(char **str, int i)
+int	len_fd_tab(char **str, int i)
 {
 	int		j;
 
@@ -41,6 +41,7 @@ int	verif_arg_fd(char	*argv[], int i)
 		return (-1);
 	return (fd);
 }
+
 int	ft_create_fd(char	*argv, int flag)
 {
 	int	fd;
@@ -77,6 +78,6 @@ char	**get_new_argv(char	**argv)
 		buf[i][j] = '\0';
 		i++;
 	}
-	// buf[i] = '\0';
+	buf[i] = NULL;
 	return (buf);
 }

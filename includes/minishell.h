@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/22 18:55:40 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/22 19:20:54 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,7 @@ int		ft_create_fd(char *argv, int flag);
 char	**ft_get_path(char **env);
 char	*ft_do_process(char *envp[], char *cmd);
 int		single_arg(t_data *data);
+int		exec_single(char **cmd_argument, char *fre, t_data *data);
 
 // ! ---------------------------------------------------------------------------
 // ?							Builtin && Tools
