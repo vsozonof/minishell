@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_manager.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 18:07:01 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/21 13:16:04 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/22 15:04:54 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,20 @@
 
 int command_manager(t_data *data)
 {
-	int		check;
+	(void)data;
+
+	data->pr->nv = get_new_argv(envp);
+	fprintf(stderr, "argc = %d\n", data->n_cmds);
+	fprintf(stderr, "argv = %s\n", data->cmds[0]);
+	fprintf(stderr, "argv = %s\n", data->cmds[1]);
+	int i = 0;
+	while (data->pr->nv[i])
+	{
+		fprintf(stderr, "%s\n", data->pr->nv[i]);
+		i++;
+	}
+	// // Pipex_Exec(data->n_cmds, data->cmds, data->pr->envp);
+	// int		check;
 	// int		i;
 	// (void)data;
 	// i = 0;
@@ -22,9 +35,9 @@ int command_manager(t_data *data)
 	// {
 	// printf("yooow\n");
 	// pipe_command(data);
-		check = builtin_checker(data);
-		if (check != 0)
-			builtin_manager(data, check);
+		// check = builtin_checker(data);
+		// if (check != 0)
+		// 	builtin_manager(data, check);
 		// i++;
 	// }
 	// regler la partie des maillon pour l'exec

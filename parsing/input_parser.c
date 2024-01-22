@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_parser.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 09:14:23 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/22 07:03:58 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/22 15:07:32 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	input_parser(t_prompt *prompt)
 		data.cmds = pipes_splitter(prompt->input, '|', &data);
 		if (!data.cmds)
 			return (free_manager(&data, 2));
-		// command_manager(&data);
+		command_manager(&data);
 		free_manager(&data, 2);
 	}
 	else if (!is_there_pipe(prompt))

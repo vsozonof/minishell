@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/22 14:54:14 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/22 15:09:58 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_struct
 	char			*user;
 	char			*post;
 	char			*w_d;
+	char			**nv;
 	struct s_parse	*data;
 	struct s_env	*env;
 }	t_prompt;
@@ -72,7 +73,7 @@ typedef struct s_parse
 int		main(int argc, char **argv, char *envp[]);
 void	get_input(char **envp);
 int		init_sbase(t_prompt *prompt, char **env);
-void	init_extras(t_prompt *ptr);
+void	init_extras(t_prompt *ptr, char **envp);
 int		init_str(t_data *data, t_prompt *prompt);
 int		init_str_pipe(t_data *data, t_prompt *prompt);
 
@@ -132,16 +133,23 @@ void	builtin_manager(t_data *tmp, int token);
 int		found_builtin(t_data *tmp);
 int		not_builtin(t_data *data);
 int		multi_pipe(t_data *data);
+
+int		Pipex_Exec(int argc, char *argv[], char *envp[]);
 int		ft_pipex(char *argv[], char *env[], int argc);
-int		process(char *cmd, char *env[]);
-int		ft_create_fd(char *argv, int flag);
-void	ft_do_process(char *envp[], char *cmd);
-int		pipe_command(t_data *data);
-char	**remake_argv(t_data *data);
-void	exec_one_arg(char **cmd);
-void	ft_freedb(char **str);
+int		**alloc_pipe(int i, int **pipefd);
+int		**parent_process(int **pipefd, int i);
+int		len_fd_tab(char **str, int i);
+int		found_max(char **argv);
+int		verif_arg_fd(char *argv[], int i);
 char	*str_join_free(char *path, char *cmd);
+void	ft_freedb(char **str);
+void	free_pipe_argv(int **pipefd, char *argv[]);
+int		check_dup(int pipe, int token, int pipe2);
+char	*child_process_in(int **pipefd, char **argv, char **env, int i, int argc, int token);
+char	**arg(char *str);
+int		ft_create_fd(char *argv, int flag);
 char	**ft_get_path(char **env);
+char	*ft_do_process(char *envp[], char *cmd, int **pipesfd, int j);
 
 // ! ---------------------------------------------------------------------------
 // ?							Builtin && Tools

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_overall.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 12:26:54 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/21 04:23:29 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/22 13:34:34 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,44 +41,44 @@ int multi_pipe(t_data *data)
 	return (0);
 }
 
-int	ft_pipex(char *argv[], char *env[], int argc)
-{
-	int	i;
+// int	ft_pipex(char *argv[], char *env[], int argc)
+// {
+// 	int	i;
 
-	i = 1;
-	// dup2(STDIN, 0);
-	// dup2(STDOUT, 1);
-	process(argv[0], env);
-	while (i < argc)
-	{
-		process(argv[i], env);
-		i++;
-	}
-	ft_do_process(env, argv[i]);
-	return (0);
-}
+// 	i = 1;
+// 	// dup2(STDIN, 0);
+// 	// dup2(STDOUT, 1);
+// 	process(argv[0], env);
+// 	while (i < argc)
+// 	{
+// 		process(argv[i], env);
+// 		i++;
+// 	}
+// 	ft_do_process(env, argv[i]);
+// 	return (0);
+// }
 
-int	process(char *cmd, char *env[])
-{
-	pid_t	pid;
-	int		pipefd[2];
+// int	process(char *cmd, char *env[])
+// {
+// 	pid_t	pid;
+// 	int		pipefd[2];
 
-	pipe(pipefd);
-	pid = fork();
-	if (pid)
-	{
-		close(pipefd[1]);
-		dup2(pipefd[0], 0);
-		waitpid(pid, NULL, 0);
-	}
-	else
-	{
-		close(pipefd[0]);
-		dup2(pipefd[1], 1);
-		ft_do_process(env, cmd);
-	}
-	return (0);
-}
+// 	pipe(pipefd);
+// 	pid = fork();
+// 	if (pid)
+// 	{
+// 		close(pipefd[1]);
+// 		dup2(pipefd[0], 0);
+// 		waitpid(pid, NULL, 0);
+// 	}
+// 	else
+// 	{
+// 		close(pipefd[0]);
+// 		dup2(pipefd[1], 1);
+// 		ft_do_process(env, cmd);
+// 	}
+// 	return (0);
+// }
 
 // void	exec_one_arg(char **cmd)
 // {

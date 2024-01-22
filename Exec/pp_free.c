@@ -1,38 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_input.c                                        :+:      :+:    :+:   */
+/*   pp_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/20 13:42:18 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/22 14:49:27 by tpotilli         ###   ########.fr       */
+/*   Created: 2024/01/22 13:12:21 by tpotilli          #+#    #+#             */
+/*   Updated: 2024/01/22 13:46:31 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	get_input(char **envp)
+char *str_join_free(char *path, char *cmd)
 {
-	t_prompt	prompt;
-
-	init_sbase(&prompt, envp);
-	init_extras(&prompt, envp);
-	while (42)
-	{
-		printf("%s at %s in: %s", prompt.user, prompt.post, prompt.w_d);
-		prompt.input = readline("$> ");
-		if (prompt.input)
-		{
-			add_history(prompt.input);
-			if (!is_input_valid(prompt.input))
-				free(prompt.input);
-			else
-				input_parser(&prompt);
-		}
-		else
-			break ;
-	}
-	clear_history();
-	free_end_of_program(&prompt);
+	char *str;
+	
+	str = ft_strjoin(path, cmd);
+	free(path);
+	return (str);
 }
+
+void	ft_freedb(char **str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		free(str[i]);
+		i++;
+	}
+	free(str);
+}
+void	free_pipe_argv(int **pipefd, char *argv[])
+{
+	close(pipefd[0][0]);
+	close(pipefd[0][1]);
+	close(pipefd[1][1]);
+	close(pipefd[1][0]);
+	free(pipefd[1]);
+	free(pipefd[0]);
+	free(pipefd);
+	ft_freedb(argv);
+}
+
