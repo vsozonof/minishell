@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:10:29 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/22 16:08:30 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/22 17:01:11 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int	check_dup(int pipe, int token, int pipe2)
 {
 	if (token == 0)
 	{
-		fprintf(stderr, "je passr par ici\n");
 		if (dup2(0, 0) < 0)
 			return (printf("problem with dup2 1"), -1);
 		if (dup2(pipe2, 1) < 0)
@@ -24,7 +23,6 @@ int	check_dup(int pipe, int token, int pipe2)
 	}
 	else if (token == 1)
 	{
-		fprintf(stderr, "je passr par la\n");
 		if (dup2(pipe, 0) < 0)
 			return (printf("problem with dup2 3"), -1);
 		if (dup2(1, 1) < 0)
@@ -56,14 +54,16 @@ char	*child_process_in(int **pipefd, t_data *data, int i, int token)
 		if (verif == -1)
 			return (free_pipe_argv(pipefd, data->cmds), NULL);
 	}
-	else if (i == data->n_cmds)
+	else if (i == data->n_cmds - 1)
 	{
 		close(pipefd[1][1]);
 		close(pipefd[0][1]);
 		if (token == 0)
 			verif = check_dup(pipefd[1][0], 1, 0);
 		else
+		{
 			verif = check_dup(pipefd[0][0], 1, 0);
+		}
 		close(pipefd[1][0]);
 		close(pipefd[0][0]);
 		if (verif == -1)
