@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_manager.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 18:07:01 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/25 11:21:02 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/25 11:44:30 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 int	command_manager(t_data *data)
 {
-	// int check;
-	// check = builtin_checker(data);
-	// if (check != 0)
-	// 	builtin_manager(data, check);
-	if (data->n_cmds == 1)
+	int check;
+	check = builtin_checker(data);
+	if (check != 0)
+		builtin_manager(data, check);
+	else if (data->n_cmds == 1)
 		single_arg(data);
 	else if (data->n_cmds >= 2)
 		Pipex_Exec(data);
@@ -65,7 +65,7 @@ void	builtin_manager(t_data *tmp, int token)
 	if (token == 1)
 		execute_cd(tmp);
 	if (token == 2)
-		printf("normalement echo\n");
+		execute_echo(tmp);
 	else if (token == 3)
 		execute_env(tmp);
 	else if (token == 4)

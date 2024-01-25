@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 12:09:39 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/16 17:47:36 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/25 11:36:11 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 void	execute_pwd(t_data *data)
 {
-	(void)data;
-}
+	char	*pwd;
 
-//getcwd
+	pwd = ft_get_env(data->env, "PWD");
+	printf("%s\n", pwd);
+	free(pwd);
+}

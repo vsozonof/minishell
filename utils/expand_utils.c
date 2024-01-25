@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 23:35:58 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/24 05:07:51 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/25 11:55:24 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,20 @@ int	is_valid_char(int c)
 		return (1);
 	else
 		return (0);
+}
+
+void	quote_remover(char *str)
+{
+	char	**splitted;
+	char	*tmp;
+	int		i;
+
+	i = 0;
+	splitted = ft_split(str, '"');
+	free(str);
+	while (splitted[i])
+	{
+		tmp = ft_strjoin(tmp, splitted[i]);
+		str = tmp;
+	}
 }
