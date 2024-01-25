@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/24 05:08:12 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/25 10:57:07 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,8 @@ int		is_pipe_content_valid(char *str);
 char	**pipes_splitter(char const *s, char c, t_data *data);
 int		n_args(char *str);
 int		quote_skipper(char *str, int c);
+int		is_valid_redir(char *str);
+int		redir_checker(char *str, int i);
 void	redirection_counter(t_data *data);
 void	redirection_parser(t_data *data);
 void	redirection_and_expand_handler(t_data *data);

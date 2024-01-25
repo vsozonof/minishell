@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 19:31:35 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/22 21:45:22 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/25 10:59:57 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,38 @@ void	redirection_and_expand_handler(t_data *data)
 {
 	if (!is_there_backslash(data->input) || !is_there_dollar(data->input))
 		expand_handler(data);
-	redirection_counter(data);
-	if (data->n_redirs != 0)
-		redirection_parser(data);
+	if (is_valid_redir(data->input))
+	{
+		redirection_counter(data);
+		if (data->n_redirs != 0)
+			redirection_parser(data);
+	}
+}
+
+int	is_valid_redir(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (!is_in_quotes(str, i) && ((str[i] == '>' && str[i + 1] != '>')
+				|| (str[i] == '<' && str[i + 1] != '<')))
+		{
+			i ++;
+			if (!redir_checker(str, i))
+				return (0);
+		}
+		else if (!is_in_quotes(str, i) && ((str[i] == '>' && str[i + 1] == '>')
+				|| (str[i] == '<' && str[i + 1] == '<')))
+		{
+			i += 2;
+			if (!redir_checker(str, i))
+				return (0);
+		}
+		i++;
+	}
+	return (1);
 }
 
 void	redirection_counter(t_data *data)
@@ -28,21 +57,32 @@ void	redirection_counter(t_data *data)
 	i = 0;
 	while (data->input[i])
 	{
-		if (!is_in_quotes(data->input, i) && data->input[i] == '<' && data->input[i + 1] != '<')
-			data->n_redirs++;
-		else if (!is_in_quotes(data->input, i) && data->input[i] == '<' && data->input[i + 1] == '<')
+		if (!is_in_quotes(data->input, i))
 		{
-			data->n_redirs++;
-			i += 2;
+			if (data->input[i] == '<' && data->input[i + 1] != '<')
+			{
+				data->n_redirs++;
+				i++;
+			}
+			else if (data->input[i] == '<' && data->input[i + 1] == '<')
+			{
+				data->n_redirs++;
+				i += 2;
+			}
+			else if (data->input[i] == '>' && data->input[i + 1] != '>')
+			{
+				data->n_redirs++;
+				i++;
+			}
+			else if (data->input[i] == '>' && data->input[i + 1] == '>')
+			{
+				data->n_redirs++;
+				i += 2;
+			}
+			i++;
 		}
-		else if (!is_in_quotes(data->input, i) && data->input[i] == '>' && data->input[i + 1] != '>')
-			data->n_redirs++;
-		else if (!is_in_quotes(data->input, i) && data->input[i] == '>' && data->input[i + 1] == '>')
-		{
-			data->n_redirs++;
-			i += 2;
-		}
-		i++;
+		else
+			i++;
 	}
 }
 
@@ -60,26 +100,31 @@ void	get_redir_infos(t_data *data)
 			data->tab[n][0] = i;
 			data->tab[n][1] = 1;
 			n++;
+			i++;
 		}
 		else if (!is_in_quotes(data->input, i) && data->input[i] == '<' && data->input[i + 1] == '<')
 		{
 			data->tab[n][0] = i;
 			data->tab[n][1] = 3;
 			n++;
+			i += 2;
 		}
 		else if (!is_in_quotes(data->input, i) && data->input[i] == '>' && data->input[i + 1] != '>')
 		{
 			data->tab[n][0] = i;
 			data->tab[n][1] = 2;
 			n++;
+			i++;
 		}
 		else if (!is_in_quotes(data->input, i) && data->input[i] == '>' && data->input[i + 1] == '>')
 		{
 			data->tab[n][0] = i;
 			data->tab[n][1] = 4;
 			n++;
+			i += 2;
 		}
-		i++;
+		else
+			i++;
 	}
 }
 
@@ -89,6 +134,7 @@ void	redirection_parser(t_data *data)
 
 	i = 0;
 	data->tab = malloc(sizeof (int *) * data->n_redirs);
+	printf("NREDIRS = %i\n", data->n_redirs);
 	while (i < data->n_redirs)
 	{
 		data->tab[i] = malloc(sizeof (int) * 2);

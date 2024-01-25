@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 02:16:29 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/24 05:08:31 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/25 07:15:45 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void	reg_expand_joiner(t_data *data)
 	data->input = ft_strjoin(data->new_head, data->tail);
 	free(data->tail);
 	free(data->new_head);
-	printf("new input = %s\n", data->input);
 }
 
 void	reg_expand_splitter(t_data *data, int i)
