@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:29:44 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/09 07:19:17 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/25 10:30:52 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,3 @@ int	main(int argc, char **argv, char *envp[])
 	(void)argv;
 	get_input(envp);
 }
-

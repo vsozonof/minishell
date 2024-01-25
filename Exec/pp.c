@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pp.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:11:05 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/24 04:52:19 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/25 11:06:14 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	ft_pipex(t_data	*data)
 
 	i = 0;
 	pipefd = NULL;
+	cmd = NULL;
 	pipefd = alloc_pipe(i, pipefd);
 	if (!pipefd[1] || !pipefd[0])
 		return (free(pipefd), -1);
@@ -40,12 +41,13 @@ int	ft_pipex(t_data	*data)
 			return (printf("erreur de fork\n"), 1);
 		if (pid[i] == 0)
 		{
-			if (data->n_redirs >= 1)
-				redirection_here_manager(data, pipefd, i);
-			else if (i % 2 == 0)
+			// if (data->n_redirs >= 1)
+			// 	cmd = redirection_here_manager(data, pipefd, i);
+			if (i % 2 == 0)
 				cmd = child_process_in(pipefd, data, i, 0);
-			else if (i %2 == 1)
+			else if (i % 2 == 1)
 				cmd = child_process_in(pipefd, data, i, 1);
+			fprintf(stderr, "cmd = %s\n", cmd);
 			if (cmd == NULL)
 			{
 				free_pipe_argv(pipefd, data->cmds);
