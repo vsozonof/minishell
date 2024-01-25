@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child_pp.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:10:29 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/24 04:52:47 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/25 11:00:56 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	*child_process_in(int **pipefd, t_data *data, int i, int token)
 	// int			verif;
 
 	// verif = 0;
-	if (i == 0 || i == data->n_cmds -1 )
+	if (i == 0 || i == data->n_cmds -1)
 	{
 		if (child_process_in_or_out(pipefd, data, i, token) == -1)
 			return (NULL);
