@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 18:07:01 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/25 11:08:31 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/25 11:21:02 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,10 @@ int	command_manager(t_data *data)
 	// check = builtin_checker(data);
 	// if (check != 0)
 	// 	builtin_manager(data, check);
-	// if (data->n_cmds == 1)
-		// single_arg(data);
-	// else if (data->n_cmds >= 2)
-	// fprintf(stderr, "SALUT\n");
-	Pipex_Exec(data);
+	if (data->n_cmds == 1)
+		single_arg(data);
+	else if (data->n_cmds >= 2)
+		Pipex_Exec(data);
 	// else
 		// builtin_checker(data);
 	// printf("hey = %d\n", data->n_cmds);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pp.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:11:05 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/25 11:14:50 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/25 11:21:36 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ int	ft_pipex(t_data	*data)
 				cmd = child_process_in(pipefd, data, i, 0);
 			else if (i % 2 == 1)
 				cmd = child_process_in(pipefd, data, i, 1);
-			fprintf(stderr, "cmd = %s\n", cmd);
 			if (cmd == NULL)
 			{
 				free_pipe_argv(pipefd, data->cmds);
