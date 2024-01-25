@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 02:16:29 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/19 16:09:21 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/24 05:08:31 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ void	reg_expander(t_data *data)
 	while (data->input[i])
 	{
 		if (is_in_quotes(data->input, i) != 1 && (data->input[i] == '$'
-				&& data->input[i + 1] && !ft_is_whitespace(data->input[i + 1])))
+				&& data->input[i + 1] && (!ft_is_whitespace(data->input[i + 1])
+					&& is_valid_char(data->input[i + 1]))))
 		{
 			reg_expand_splitter(data, i);
 			reg_expand_joiner(data);

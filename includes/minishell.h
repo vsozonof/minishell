@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/22 21:48:30 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/24 05:08:12 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,10 +92,12 @@ int		exception_checker(char *str);
 int		unclosed_quote_detector(char *str);
 
 void	expand_handler(t_data *data);
+int		is_valid_char(int c);
 void	reg_expander(t_data *data);
 void	reg_expand_splitter(t_data *data, int i);
 void	reg_expand_joiner(t_data *data);
 void	search_and_split(t_data *data, int i);
+
 
 // ! ---------------------------------------------------------------------------
 // ?							PARSING UTILS

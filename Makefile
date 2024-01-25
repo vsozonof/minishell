@@ -6,7 +6,7 @@
 #    By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/09 23:22:06 by vsozonof          #+#    #+#              #
-#    Updated: 2024/01/22 20:03:32 by vsozonof         ###   ########.fr        #
+#    Updated: 2024/01/24 04:53:12 by vsozonof         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,6 +50,7 @@ SRCS = main.c \
 	   Exec/pp.c \
 	   Exec/single_arg.c \
 	   Exec/child_pp.c \
+	   Exec/redirection_here.c \
 	   Builtin/cd.c \
 	   Builtin/cd-utils.c \
 	   Builtin/echo.c \
