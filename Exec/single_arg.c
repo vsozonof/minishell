@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 18:55:02 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/22 19:38:52 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/25 11:36:15 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	single_arg(t_data *data)
 	}
 	exec_single(cmd_argument, fre, data);
 	ft_freedb(buf);
+	ft_freedb(cmd_argument);
 	free(fre);
 	return (0);
 }
