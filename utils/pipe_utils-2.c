@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 06:25:09 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/18 23:28:57 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/26 22:56:31 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	is_pipe_content_valid(char *str)
 			i++;
 		while (str[i] && ft_is_whitespace(str[i]))
 			i++;
-		if (ispipe(str[i]))
+		if (ispipe(str[i]) && !is_in_quotes(str, i))
 			return (pr_error("syntax error near unexpected token `|'"));
 	}
 	return (1);

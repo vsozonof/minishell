@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 06:15:38 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/18 23:29:50 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/26 23:06:28 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	multiple_pipe_checker(char *str, int i)
 	if (ispipe(str[i]) && ispipe(str[i + 1]) && !ispipe(str[i + 2]))
 		return (pr_error("`||' operator not handled"));
 	else if (ispipe(str[i]) && ispipe(str[i + 1]) && ispipe(str[i + 2]))
-		return (pr_error("syntax error near unexpected token `|'"));
+		return (pr_error("syntax error near unexpected token `||'"));
 	return (1);
 }
 
@@ -47,7 +47,9 @@ int	is_valid_pipe(char *str)
 	i = 0;
 	while (str[i] && ft_is_whitespace(str[i]))
 		i++;
-	if (ispipe(str[i]))
+	if (!multiple_pipe_checker(str, i))
+		return (0);
+	else if (ispipe(str[i]))
 		return (pr_error("syntax error near unexpected token `|'"));
 	while (str[i])
 	{

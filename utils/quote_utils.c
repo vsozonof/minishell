@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 03:12:41 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/18 03:35:20 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/26 18:24:17 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,15 @@ int	is_in_quotes(char *str, int c)
 		i++;
 	}
 	return (q_flag);
+}
+
+int	is_there_quotes(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[++i])
+		if ((str[i] == '"' || str[i] == 39) && is_in_quotes(str, i))
+			return (1);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 12:02:25 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/22 19:24:39 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/26 19:53:46 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ void	change_directory(t_data *data, char *path)
 	}
 	else
 		error_handling(errno, path);
-
 }
 
 void	update_vars(t_data *data)

@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 02:16:29 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/25 07:15:45 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/26 19:48:30 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 void	expand_handler(t_data *data)
 {
 	reg_expander(data);
+	if (is_there_quotes(data->input))
+		data->input = quote_remover(data);
 	data->pr->input = data->input;
 }
 

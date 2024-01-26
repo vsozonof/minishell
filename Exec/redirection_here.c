@@ -3,15 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_here.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 21:47:57 by tpotilli          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/01/26 22:53:12 by tpotilli         ###   ########.fr       */
+=======
+/*   Updated: 2024/01/26 21:18:49 by vsozonof         ###   ########.fr       */
+>>>>>>> refs/remotes/origin/main
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+<<<<<<< HEAD
 //check s'il reste des redirections a faire
 
 int		redirection_manager(int **pipefd, int token, t_data *data, int i)
@@ -142,16 +147,22 @@ char	*redirection_manager(int pipe, int token, int pipe2, t_data *data)
 {
 	char	*cmd;
 	int		i;
+=======
+// char	*redirection_manager(int pipe, int token, int pipe2, t_data *data)
+// {
+// 	char	*cmd;
+// 	int		i;
+>>>>>>> refs/remotes/origin/main
 
-	cmd = NULL;
-	if (is_any_redirection(data) == 1)
-		return (cmd);
-	i = data->tab[0];
-	data->n_redirs--;
-	cmd = check_redirection(pipe, pipe2, data);
-	if (cmd != NULL)
-		return (cmd);
-	// else if ()
+// 	cmd = NULL;
+// 	if (is_any_redirection(data) == 1)
+// 		return (cmd);
+// 	i = data->tab[0];
+// 	data->n_redirs--;
+// 	cmd = check_redirection(pipe, pipe2, data);
+// 	if (cmd != NULL)
+// 		return (cmd);
+// 	// else if ()
 	// if (data->tab[i][1] == 1)
 	// {
 	// 	if (dup2(0, 0) < 0)
@@ -163,11 +174,12 @@ char	*redirection_manager(int pipe, int token, int pipe2, t_data *data)
 	
 	// else if (data->tab[i][1] == 2)
 
-	else if (data->tab[i][1] == 4)
+// 	else if (data->tab[i][1] == 4)
 	
-	return (cmd);
-}
+// 	return (cmd);
+// }
 
+<<<<<<< HEAD
 int		check_redirection(int pipe, int pipe2, t_data *data)
 {
 	int	fd;
@@ -206,3 +218,20 @@ int	is_any_redirection(t_struct *data)
 }
 
 */
+=======
+// char	*check_redirection(int pipe, int pipe2, t_data *data)
+// {
+// 	int	fd;
+// 	int	fd2;
+
+// 	fd = verif_arg_fd(data->cmds[]);
+// 	if ()
+// }
+
+// int	is_any_redirection(t_struct *data)
+// {
+// 	if (data->n_redirs > 0)
+// 		return (0);
+// 	return (1);
+// }
+>>>>>>> refs/remotes/origin/main

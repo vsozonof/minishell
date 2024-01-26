@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/01/26 22:41:16 by tpotilli         ###   ########.fr       */
+=======
+/*   Updated: 2024/01/26 22:28:50 by vsozonof         ###   ########.fr       */
+>>>>>>> refs/remotes/origin/main
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +91,7 @@ int		init_str_pipe(t_data *data, t_prompt *prompt);
 
 void	input_parser(t_prompt *prompt);
 int		get_cmd(t_data *data);
-
+int		invalid_character_checker(int c);
 int		is_input_valid(char *str);
 int		is_piped_input_valid(char *str);
 int		exception_checker(char *str);
@@ -99,7 +103,8 @@ void	reg_expander(t_data *data);
 void	reg_expand_splitter(t_data *data, int i);
 void	reg_expand_joiner(t_data *data);
 void	search_and_split(t_data *data, int i);
-
+char	*quote_remover(t_data *data);
+void	quote_flagger(char *str, int i, int q_flag);
 
 // ! ---------------------------------------------------------------------------
 // ?							PARSING UTILS
@@ -113,6 +118,8 @@ int		put_env_to_lst(t_env *env, char **envp);
 int		is_there_pipe(t_prompt *prompt);
 int		is_there_dollar(char *str);
 int		is_there_backslash(char *str);
+int		is_there_quotes(char *str);
+int		is_there_redirs(char *str);
 int		ispipe(int c);
 int		is_valid_pipe(char *str);
 int		is_in_quotes(char *str, int c);
@@ -124,7 +131,7 @@ int		is_valid_redir(char *str);
 int		redir_checker(char *str, int i);
 void	redirection_counter(t_data *data);
 void	redirection_parser(t_data *data);
-void	redirection_and_expand_handler(t_data *data);
+int		redirection_and_expand_handler(t_data *data);
 
 // ! ---------------------------------------------------------------------------
 // ?							SIGNAL HANDLER
@@ -154,7 +161,7 @@ int		verif_arg_fd(char *argv[], int i);
 char	*str_join_free(char *path, char *cmd);
 void	ft_freedb(char **str);
 void	free_pipe_argv(int **pipefd, char	*argv[]);
-int		check_dup(int pipe, int token, int pipe2);
+int		check_dup(int pipe, int token, int pipe2, t_data *data);
 char	*child_process_in(int **pipefd, t_data *data, int i, int token);
 char	**arg(char *str);
 int		ft_create_fd(char *argv, int flag);
@@ -200,12 +207,10 @@ void	execute_cd(t_data *data);
 void	free_manager(t_data *data, int key);
 void	free_data_struct(t_data *data);
 void	free_data_envp(t_data *data, int i);
-void	free_flags(t_data *data);
-void	free_args(t_data *data);
 void	free_cmds(t_data *data);
 void	free_env(t_env	*env);
 void	free_pwd(t_data *data);
 void	free_end_of_program(t_prompt *p);
-void	update_pwd(t_data *data);
+char	*strjoin_and_free(char *s1, char *s2);
 
 #endif

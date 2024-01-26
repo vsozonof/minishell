@@ -6,22 +6,26 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 19:31:35 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/25 10:59:57 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/26 22:28:40 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	redirection_and_expand_handler(t_data *data)
+int	redirection_and_expand_handler(t_data *data)
 {
-	if (!is_there_backslash(data->input) || !is_there_dollar(data->input))
+	if (is_there_backslash(data->input) || is_there_dollar(data->input)
+		|| is_there_quotes(data->input))
 		expand_handler(data);
-	if (is_valid_redir(data->input))
+	if (is_there_redirs(data->input))
 	{
+		if (!is_valid_redir(data->input))
+			return (0);
 		redirection_counter(data);
 		if (data->n_redirs != 0)
 			redirection_parser(data);
 	}
+	return (1);
 }
 
 int	is_valid_redir(char *str)
@@ -59,30 +63,20 @@ void	redirection_counter(t_data *data)
 	{
 		if (!is_in_quotes(data->input, i))
 		{
-			if (data->input[i] == '<' && data->input[i + 1] != '<')
+			if ((data->input[i] == '<' && data->input[i + 1] != '<')
+				|| (data->input[i] == '>' && data->input[i + 1] != '>'))
 			{
 				data->n_redirs++;
 				i++;
 			}
-			else if (data->input[i] == '<' && data->input[i + 1] == '<')
+			else if ((data->input[i] == '<' && data->input[i + 1] == '<')
+				|| (data->input[i] == '>' && data->input[i + 1] == '>'))
 			{
 				data->n_redirs++;
 				i += 2;
 			}
-			else if (data->input[i] == '>' && data->input[i + 1] != '>')
-			{
-				data->n_redirs++;
-				i++;
-			}
-			else if (data->input[i] == '>' && data->input[i + 1] == '>')
-			{
-				data->n_redirs++;
-				i += 2;
-			}
-			i++;
 		}
-		else
-			i++;
+		i++;
 	}
 }
 
@@ -134,17 +128,10 @@ void	redirection_parser(t_data *data)
 
 	i = 0;
 	data->tab = malloc(sizeof (int *) * data->n_redirs);
-	printf("NREDIRS = %i\n", data->n_redirs);
 	while (i < data->n_redirs)
 	{
 		data->tab[i] = malloc(sizeof (int) * 2);
 		i++;
 	}
 	get_redir_infos(data);
-	i = 0;
-	while (i < data->n_redirs)
-	{
-		printf("%i - %i\n", data->tab[i][0], data->tab[i][1]);
-		i++;
-	}
 }
