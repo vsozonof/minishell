@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:11:05 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/26 19:55:25 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/26 21:28:15 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ int	ft_pipex(t_data	*data)
 		else
 			pipefd = parent_process(pipefd, i);
 		i++;
+		data->i = i;
 	}
 	i = 0;
 	while (i < data->n_cmds)

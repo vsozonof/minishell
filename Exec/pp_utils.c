@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:11:39 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/22 20:09:36 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/26 23:11:11 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	verif_arg_fd(char	*argv[], int i)
 		return (-1);
 	return (fd);
 }
-
+//O_WRONLY | O_CREAT | O_TRUNC
 int	ft_create_fd(char	*argv, int flag)
 {
 	int	fd;

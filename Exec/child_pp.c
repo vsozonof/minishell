@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:10:29 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/26 20:02:07 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/26 22:33:20 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 int	check_dup(int pipe, int token, int pipe2, t_data *data)
 {
-	if (redirection_manager(pipe, token, pipe2, data) == NULL)
-		cmd = NULL;
 	if (token == 0)
 	{
 		if (dup2(0, 0) < 0)
@@ -58,6 +56,8 @@ char	*child_process_in(int **pipefd, t_data *data, int i, int token)
 		if (child_process_middle(pipefd, data, token) == -1)
 			return (NULL);
 	}
+	if (redirection_manager(pipefd, token, data, i) == -1)
+		return (NULL);
 	buf = arg(data->cmds[i]);
 	cmd = ft_do_process(data->pr->nv, buf[0]);
 	if (cmd == NULL)

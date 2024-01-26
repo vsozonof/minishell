@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/26 20:25:28 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/26 22:41:16 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ typedef struct s_parse
 	char			*c_status;
 	int				**tab;
 	int				n_redirs;
+	int				i;
+	int				index_redirs;
 	struct s_parse	*next;
 }	t_data;	
 
@@ -162,8 +164,11 @@ int		single_arg(t_data *data);
 int		exec_single(char **cmd_argument, char *fre, t_data *data);
 int		child_process_in_or_out(int **pipefd, t_data *data, int i, int token);
 int		child_process_middle(int **pipefd, t_data *data, int token);
-char	*redirection_manager(int pipe, int token, int pipe2, t_data *data);
+int		redirection_manager(int **pipefd, int token, t_data *data, int i);
 char	*check_redirection(int pipe, int pipe2, t_data *data);
+int		is_any_redirection(t_data *data, int i, int fd, int fd2);
+int		redirection_case(int redirect, t_data *data, int i, int **pipefd);
+int		ft_recup_fd(int token, t_data *data, int redirect);
 
 // ! ---------------------------------------------------------------------------
 // ?							Builtin && Tools
