@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:10:29 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/26 23:16:31 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/26 23:20:10 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 int	check_dup(int pipe, int token, int pipe2, t_data *data)
 {
 	(void)data;
-	// if (redirection_manager(pipe, token, pipe2, data) == NULL)
-	// 	cmd = NULL;
 	if (token == 0)
 	{
 		if (dup2(0, 0) < 0)
@@ -46,9 +44,7 @@ char	*child_process_in(int **pipefd, t_data *data, int i, int token)
 {
 	char		*cmd;
 	char		**buf;
-	// int			verif;
 
-	// verif = 0;
 	if (i == 0 || i == data->n_cmds -1)
 	{
 		if (child_process_in_or_out(pipefd, data, i, token) == -1)
@@ -59,8 +55,8 @@ char	*child_process_in(int **pipefd, t_data *data, int i, int token)
 		if (child_process_middle(pipefd, data, token) == -1)
 			return (NULL);
 	}
-	if (redirection_manager(pipefd, token, data, i) == -1)
-		return (NULL);
+	// if (redirection_manager(pipefd, token, data, i) == -1)
+	// 	return (NULL);
 	buf = arg(data->cmds[i]);
 	cmd = ft_do_process(data->pr->nv, buf[0]);
 	if (cmd == NULL)
