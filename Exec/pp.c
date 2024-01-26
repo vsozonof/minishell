@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:11:05 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/25 11:21:36 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/26 19:55:25 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ int	ft_pipex(t_data	*data)
 			return (printf("erreur de fork\n"), 1);
 		if (pid[i] == 0)
 		{
-			// if (data->n_redirs >= 1)
-			// 	cmd = redirection_here_manager(data, pipefd, i);
+			if (data->n_redirs >= 1)
+				cmd = redirection_here_manager(data, pipefd, i);
 			if (i % 2 == 0)
 				cmd = child_process_in(pipefd, data, i, 0);
 			else if (i % 2 == 1)

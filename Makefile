@@ -6,7 +6,7 @@
 #    By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/09 23:22:06 by vsozonof          #+#    #+#              #
-#    Updated: 2024/01/26 14:11:10 by vsozonof         ###   ########.fr        #
+#    Updated: 2024/01/26 20:38:28 by vsozonof         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,7 @@ SRCS = main.c \
 	   utils/strjoin_and_free.c \
 	   signal/sig_handler.c \
 	   Exec/command_manager.c \
-	   Exec/command_overall.c \
+	   Exec/UNUSED_command_overall.c \
 	   Exec/execute_pp.c \
 	   Exec/main_pp.c \
 	   Exec/pp_free.c \
