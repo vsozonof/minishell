@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 21:47:57 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/26 23:38:43 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/27 00:17:32 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,9 @@
 
 int	redirection_manager(int **pipefd, int token, t_data *data, int i)
 {
-	int	fd;
-	int	fd2;
-	int	i;
 	int	redirect;
 
-	redirect = is_any_redirection(data, i, fd, fd2);
-	fd = ((fd = 0));
-	i = 0;
+	redirect = is_any_redirection(data);
 	if (redirect == 1 || redirect == 2 || redirect == 3)
 		redirection_case(redirect, data, i, pipefd);
 	else
@@ -33,23 +28,31 @@ int	redirection_manager(int **pipefd, int token, t_data *data, int i)
 	return (0);
 }
 
-// int	redirection_case(int redirect, t_data *data, int i, int **pipefd)
-// {
-// 	int		fd;
-// 	int		fd2;
+int	redirection_case(int redirect, t_data *data, int i, int **pipefd)
+{
+	int		fd;
+	int		fd2;
 
-// 	if (redirect == 1)
-// 	{
-// 		check_dup(data->tab[data->index_redirs][], 2, );
-// 	}
-// 	else if (redirect == 2)
-// 	{
-
-// 	}
-// 	else if (redirect == 3)
-// 	{
-// 	}
-// }
+	fd = NULL;
+	fd2 = NULL;
+	// trouver quel pipefd mettre
+	if (redirect == 3)
+	{
+		if (redirection_case_3(fd, fd2, data, pipefd) == -1)
+			return (-1);
+	}
+	else if (redirect == 1)
+	{
+		if (redirection_case_1(fd, fd2, data, pipefd) == -1)
+			return (-1);
+	}
+	else if (redirect == 2)
+	{
+		if (redirection_case_2(fd, fd2, data, pipefd) == -1)
+			return (-1);
+	}
+	return (0);
+}
 
 // char	*ft_recup_fd(int token, t_data *data, int redirect)
 // {
@@ -73,10 +76,8 @@ int	redirection_manager(int **pipefd, int token, t_data *data, int i)
 // 	}
 // }
 
-int	is_any_redirection(t_data *data, int i, int fd, int fd2)
+int	is_any_redirection(t_data *data)
 {
-	int		redirect;
-
 	if (data->n_redirs > data->index_redirs + 2)
 	{
 		if (data->tab[data->index_redirs][1][1] > 0
@@ -85,7 +86,6 @@ int	is_any_redirection(t_data *data, int i, int fd, int fd2)
 		else if (data->tab[data->index_redirs + 1][1][1] > 0)
 			return (2);
 	}
-		return (3);
 	if (data->tab[data->index_redirs][1][1] > 0)
 		return (1);
 	return (0);

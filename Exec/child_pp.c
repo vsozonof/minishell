@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:10:29 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/26 23:39:57 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/27 00:19:16 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,16 +81,16 @@ int	child_process_in_or_out(int	**pi, t_data *data, int i, int token)
 	}
 	else if (i == data->n_cmds - 1)
 	{
-		close(pipefd[1][1]);
-		close(pipefd[0][1]);
+		close(pi[1][1]);
+		close(pi[0][1]);
 		if (token == 0)
-			verif = check_dup(pipefd[1][0], 1, 0, data);
+			verif = check_dup(pi[1][0], 1, 0, data);
 		else
-			verif = check_dup(pipefd[0][0], 1, 0, data);
-		close(pipefd[1][0]);
-		close(pipefd[0][0]);
+			verif = check_dup(pi[0][0], 1, 0, data);
+		close(pi[1][0]);
+		close(pi[0][0]);
 		if (verif == -1)
-			return (free_pipe_argv(pipefd, data->cmds), -1);
+			return (free_pipe_argv(pi, data->cmds), -1);
 	}
 	return (0);
 }
