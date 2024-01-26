@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 18:07:01 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/26 19:39:35 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/26 23:16:49 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int	command_manager(t_data *data)
 {
-	int check;
+	int	check;
+
 	check = builtin_checker(data);
 	if (check != 0)
 		builtin_manager(data, check);
@@ -22,19 +23,6 @@ int	command_manager(t_data *data)
 		single_arg(data);
 	else if (data->n_cmds >= 2)
 		Pipex_Exec(data);
-	// else
-		// builtin_checker(data);
-	// printf("hey = %d\n", data->n_cmds);
-	// fprintf(stderr, "%d\n", data->n_cmds);
-	// if (data->n_cmds == 1)
-	// 	single_arg(data);
-	// if (data->n_cmds >= 2)
-	// 	Pipex_Exec(data);
-	// i++;
-	// else if (token == 2)
-	// 	command_exec();
-	// else if (token == 3)
-	// 	return (printf("Wrong input\n"), 1);
 	return (0);
 }
 
@@ -70,10 +58,23 @@ void	builtin_manager(t_data *tmp, int token)
 		execute_env(tmp);
 	else if (token == 4)
 		execute_exit(tmp);
-	// else if (token == 5)
-		// execute_export(tmp);
 	else if (token == 6)
 		execute_pwd(tmp);
+}
+	// else if (token == 5)
+		// execute_export(tmp);
 	// else if (token == 7)
 		// execute_unset(tmp);
-}
+	// else
+		// builtin_checker(data);
+	// printf("hey = %d\n", data->n_cmds);
+	// fprintf(stderr, "%d\n", data->n_cmds);
+	// if (data->n_cmds == 1)
+	// 	single_arg(data);
+	// if (data->n_cmds >= 2)
+	// 	Pipex_Exec(data);
+	// i++;
+	// else if (token == 2)
+	// 	command_exec();
+	// else if (token == 3)
+	// 	return (printf("Wrong input\n"), 1);

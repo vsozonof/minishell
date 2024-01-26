@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child_pp.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:10:29 by tpotilli          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/01/26 22:33:20 by tpotilli         ###   ########.fr       */
-=======
-/*   Updated: 2024/01/26 21:17:51 by vsozonof         ###   ########.fr       */
->>>>>>> refs/remotes/origin/main
+/*   Updated: 2024/01/26 23:18:07 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +14,7 @@
 
 int	check_dup(int pipe, int token, int pipe2, t_data *data)
 {
-<<<<<<< HEAD
-=======
 	(void)data;
-	// if (redirection_manager(pipe, token, pipe2, data) == NULL)
-	// 	cmd = NULL;
->>>>>>> refs/remotes/origin/main
 	if (token == 0)
 	{
 		if (dup2(0, 0) < 0)
@@ -53,9 +44,7 @@ char	*child_process_in(int **pipefd, t_data *data, int i, int token)
 {
 	char		*cmd;
 	char		**buf;
-	// int			verif;
 
-	// verif = 0;
 	if (i == 0 || i == data->n_cmds -1)
 	{
 		if (child_process_in_or_out(pipefd, data, i, token) == -1)
@@ -66,8 +55,8 @@ char	*child_process_in(int **pipefd, t_data *data, int i, int token)
 		if (child_process_middle(pipefd, data, token) == -1)
 			return (NULL);
 	}
-	if (redirection_manager(pipefd, token, data, i) == -1)
-		return (NULL);
+	// if (redirection_manager(pipefd, token, data, i) == -1)
+	// 	return (NULL);
 	buf = arg(data->cmds[i]);
 	cmd = ft_do_process(data->pr->nv, buf[0]);
 	if (cmd == NULL)

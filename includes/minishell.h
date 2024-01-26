@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/01/26 22:41:16 by tpotilli         ###   ########.fr       */
-=======
-/*   Updated: 2024/01/26 22:28:50 by vsozonof         ###   ########.fr       */
->>>>>>> refs/remotes/origin/main
+/*   Updated: 2024/01/26 23:17:21 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
