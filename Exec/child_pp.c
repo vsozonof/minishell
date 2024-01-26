@@ -6,11 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:10:29 by tpotilli          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/01/26 22:33:20 by tpotilli         ###   ########.fr       */
-=======
-/*   Updated: 2024/01/26 21:17:51 by vsozonof         ###   ########.fr       */
->>>>>>> refs/remotes/origin/main
+/*   Updated: 2024/01/26 23:16:31 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +14,9 @@
 
 int	check_dup(int pipe, int token, int pipe2, t_data *data)
 {
-<<<<<<< HEAD
-=======
 	(void)data;
 	// if (redirection_manager(pipe, token, pipe2, data) == NULL)
 	// 	cmd = NULL;
->>>>>>> refs/remotes/origin/main
 	if (token == 0)
 	{
 		if (dup2(0, 0) < 0)
