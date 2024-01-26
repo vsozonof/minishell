@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 12:31:19 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/25 11:56:59 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/26 19:45:17 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,6 @@ char	**ft_get_path(char **env)
 	if (!env[i])
 		perror("Error: PATH not found");
 	path = ft_split(env[i] + 5, ':');
-	fprintf(stderr, "%s\n", env[i] + 5);
+	// fprintf(stderr, "%s\n", env[i] + 5);
 	return (path);
 }

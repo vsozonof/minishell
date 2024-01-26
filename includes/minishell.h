@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/25 11:14:58 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/26 20:25:28 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,7 +162,8 @@ int		single_arg(t_data *data);
 int		exec_single(char **cmd_argument, char *fre, t_data *data);
 int		child_process_in_or_out(int **pipefd, t_data *data, int i, int token);
 int		child_process_middle(int **pipefd, t_data *data, int token);
-char	*redirection_here_manager(t_data *data, int **pipefd, int i);
+char	*redirection_manager(int pipe, int token, int pipe2, t_data *data);
+char	*check_redirection(int pipe, int pipe2, t_data *data);
 
 // ! ---------------------------------------------------------------------------
 // ?							Builtin && Tools
