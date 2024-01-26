@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/26 20:38:48 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/26 21:18:36 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,7 +155,7 @@ int		verif_arg_fd(char *argv[], int i);
 char	*str_join_free(char *path, char *cmd);
 void	ft_freedb(char **str);
 void	free_pipe_argv(int **pipefd, char	*argv[]);
-int		check_dup(int pipe, int token, int pipe2);
+int		check_dup(int pipe, int token, int pipe2, t_data *data);
 char	*child_process_in(int **pipefd, t_data *data, int i, int token);
 char	**arg(char *str);
 int		ft_create_fd(char *argv, int flag);

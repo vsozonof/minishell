@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 19:31:35 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/26 20:34:16 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/26 21:23:53 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	redirection_and_expand_handler(t_data *data)
 		expand_handler(data);
 	if (is_there_redirs(data->input))
 	{
-		printf("aaaa\n");
 		if (!is_valid_redir(data->input))
 			return ;
 		redirection_counter(data);
@@ -61,10 +60,8 @@ void	redirection_counter(t_data *data)
 	i = 0;
 	while (data->input[i])
 	{
-		printf("je loop ici\n");
 		if (!is_in_quotes(data->input, i))
 		{
-			printf("je rentre la\n");
 			if ((data->input[i] == '<' && data->input[i + 1] != '<')
 				|| (data->input[i] == '>' && data->input[i + 1] != '>'))
 			{
@@ -130,17 +127,10 @@ void	redirection_parser(t_data *data)
 
 	i = 0;
 	data->tab = malloc(sizeof (int *) * data->n_redirs);
-	printf("NREDIRS = %i\n", data->n_redirs);
 	while (i < data->n_redirs)
 	{
 		data->tab[i] = malloc(sizeof (int) * 2);
 		i++;
 	}
 	get_redir_infos(data);
-	i = 0;
-	while (i < data->n_redirs)
-	{
-		printf("%i - %i\n", data->tab[i][0], data->tab[i][1]);
-		i++;
-	}
 }
