@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 09:14:23 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/26 19:43:21 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/26 22:59:37 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,12 @@ void	input_parser(t_prompt *prompt)
 
 	prompt->data = &data;
 	init_str(&data, prompt);
-	redirection_and_expand_handler(&data);
+	if (!is_piped_input_valid(prompt->input))
+		return (free_manager(&data, 0));
+	if (!redirection_and_expand_handler(&data))
+		return (free_manager(&data, 0));
 	if (is_there_pipe(prompt))
 	{
-		if (!is_piped_input_valid(prompt->input))
-			return (free_manager(&data, 0));
 		data.cmds = pipes_splitter(prompt->input, '|', &data);
 		if (!data.cmds)
 			return (free_manager(&data, 2));
@@ -37,6 +38,7 @@ void	input_parser(t_prompt *prompt)
 	{
 		if (!get_cmd(&data))
 			return (free_manager(&data, 0));
+		printf("FINAL UPDATE = %s\n", data.input);
 		// command_manager(&data);
 		free_manager(&data, 1);
 	}

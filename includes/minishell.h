@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/26 21:18:36 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/26 22:28:50 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int		init_str_pipe(t_data *data, t_prompt *prompt);
 
 void	input_parser(t_prompt *prompt);
 int		get_cmd(t_data *data);
-
+int		invalid_character_checker(int c);
 int		is_input_valid(char *str);
 int		is_piped_input_valid(char *str);
 int		exception_checker(char *str);
@@ -125,7 +125,7 @@ int		is_valid_redir(char *str);
 int		redir_checker(char *str, int i);
 void	redirection_counter(t_data *data);
 void	redirection_parser(t_data *data);
-void	redirection_and_expand_handler(t_data *data);
+int		redirection_and_expand_handler(t_data *data);
 
 // ! ---------------------------------------------------------------------------
 // ?							SIGNAL HANDLER

@@ -6,13 +6,13 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 19:31:35 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/26 21:23:53 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/26 22:28:40 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	redirection_and_expand_handler(t_data *data)
+int	redirection_and_expand_handler(t_data *data)
 {
 	if (is_there_backslash(data->input) || is_there_dollar(data->input)
 		|| is_there_quotes(data->input))
@@ -20,11 +20,12 @@ void	redirection_and_expand_handler(t_data *data)
 	if (is_there_redirs(data->input))
 	{
 		if (!is_valid_redir(data->input))
-			return ;
+			return (0);
 		redirection_counter(data);
 		if (data->n_redirs != 0)
 			redirection_parser(data);
 	}
+	return (1);
 }
 
 int	is_valid_redir(char *str)
