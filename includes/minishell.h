@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/26 23:17:21 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/26 23:22:20 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,7 @@ void	builtin_manager(t_data *tmp, int token);
 int		found_builtin(t_data *tmp);
 int		not_builtin(t_data *data);
 
-int		Pipex_Exec(t_data *data);
+int		pipex_exec(t_data *data);
 int		ft_pipex(t_data	*data);
 int		**alloc_pipe(int i, int **pipefd);
 int		**parent_process(int **pipefd, int i);

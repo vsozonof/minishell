@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:10:29 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/26 23:18:07 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/26 23:23:45 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,6 @@ char	*child_process_in(int **pipefd, t_data *data, int i, int token)
 		if (child_process_middle(pipefd, data, token) == -1)
 			return (NULL);
 	}
-	// if (redirection_manager(pipefd, token, data, i) == -1)
-	// 	return (NULL);
 	buf = arg(data->cmds[i]);
 	cmd = ft_do_process(data->pr->nv, buf[0]);
 	if (cmd == NULL)
@@ -65,19 +63,21 @@ char	*child_process_in(int **pipefd, t_data *data, int i, int token)
 	free(pipefd[1]);
 	return (cmd);
 }
+	// if (redirection_manager(pipefd, token, data, i) == -1)
+	// 	return (NULL);
 
-int	child_process_in_or_out(int	**pipefd, t_data *data, int i, int token)
+int	child_process_in_or_out(int	**pi, t_data *data, int i, int token)
 {
 	int	verif;
 
 	if (i == 0)
 	{
-		close(pipefd[0][0]);
-		close(pipefd[1][0]);
-		close(pipefd[1][1]);
-		if (check_dup(0, 0, pipefd[0][1], data) == -1)
-			return (close(pipefd[0][1]), free_pipe_argv(pipefd, data->cmds), -1);
-		close(pipefd[0][1]);
+		close(pi[0][0]);
+		close(pi[1][0]);
+		close(pi[1][1]);
+		if (check_dup(0, 0, pi[0][1], data) == -1)
+			return (close(pi[0][1]), free_pipe_argv(pi, data->cmds), -1);
+		close(pi[0][1]);
 	}
 	else if (i == data->n_cmds - 1)
 	{
@@ -95,7 +95,7 @@ int	child_process_in_or_out(int	**pipefd, t_data *data, int i, int token)
 	return (0);
 }
 
-int		child_process_middle(int **pipefd, t_data *data, int token)
+int	child_process_middle(int **pipefd, t_data *data, int token)
 {
 	int		verif;
 
