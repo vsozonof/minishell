@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/25 11:14:58 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/26 20:11:53 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,8 @@ void	reg_expander(t_data *data);
 void	reg_expand_splitter(t_data *data, int i);
 void	reg_expand_joiner(t_data *data);
 void	search_and_split(t_data *data, int i);
-
+char	*quote_remover(t_data *data);
+void	quote_flagger(char *str, int i, int q_flag);
 
 // ! ---------------------------------------------------------------------------
 // ?							PARSING UTILS
@@ -111,6 +112,8 @@ int		put_env_to_lst(t_env *env, char **envp);
 int		is_there_pipe(t_prompt *prompt);
 int		is_there_dollar(char *str);
 int		is_there_backslash(char *str);
+int		is_there_quotes(char *str);
+int		is_there_redirs(char *str);
 int		ispipe(int c);
 int		is_valid_pipe(char *str);
 int		is_in_quotes(char *str, int c);
@@ -194,12 +197,10 @@ void	execute_cd(t_data *data);
 void	free_manager(t_data *data, int key);
 void	free_data_struct(t_data *data);
 void	free_data_envp(t_data *data, int i);
-void	free_flags(t_data *data);
-void	free_args(t_data *data);
 void	free_cmds(t_data *data);
 void	free_env(t_env	*env);
 void	free_pwd(t_data *data);
 void	free_end_of_program(t_prompt *p);
-void	update_pwd(t_data *data);
+char	*strjoin_and_free(char *s1, char *s2);
 
 #endif

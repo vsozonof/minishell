@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 19:31:35 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/25 10:59:57 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/26 20:34:16 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,14 @@
 
 void	redirection_and_expand_handler(t_data *data)
 {
-	if (!is_there_backslash(data->input) || !is_there_dollar(data->input))
+	if (is_there_backslash(data->input) || is_there_dollar(data->input)
+		|| is_there_quotes(data->input))
 		expand_handler(data);
-	if (is_valid_redir(data->input))
+	if (is_there_redirs(data->input))
 	{
+		printf("aaaa\n");
+		if (!is_valid_redir(data->input))
+			return ;
 		redirection_counter(data);
 		if (data->n_redirs != 0)
 			redirection_parser(data);
@@ -57,32 +61,24 @@ void	redirection_counter(t_data *data)
 	i = 0;
 	while (data->input[i])
 	{
+		printf("je loop ici\n");
 		if (!is_in_quotes(data->input, i))
 		{
-			if (data->input[i] == '<' && data->input[i + 1] != '<')
+			printf("je rentre la\n");
+			if ((data->input[i] == '<' && data->input[i + 1] != '<')
+				|| (data->input[i] == '>' && data->input[i + 1] != '>'))
 			{
 				data->n_redirs++;
 				i++;
 			}
-			else if (data->input[i] == '<' && data->input[i + 1] == '<')
+			else if ((data->input[i] == '<' && data->input[i + 1] == '<')
+				|| (data->input[i] == '>' && data->input[i + 1] == '>'))
 			{
 				data->n_redirs++;
 				i += 2;
 			}
-			else if (data->input[i] == '>' && data->input[i + 1] != '>')
-			{
-				data->n_redirs++;
-				i++;
-			}
-			else if (data->input[i] == '>' && data->input[i + 1] == '>')
-			{
-				data->n_redirs++;
-				i += 2;
-			}
-			i++;
 		}
-		else
-			i++;
+		i++;
 	}
 }
 

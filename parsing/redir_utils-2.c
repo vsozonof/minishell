@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 10:30:26 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/25 11:09:57 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/26 20:21:44 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,16 @@ int	redir_checker(char *str, int i)
 		return (pr_error("parse error near '<'"));
 	else if (str[i] == '>')
 		return (pr_error("parse error near '>'"));
+	return (1);
+}
+
+int	is_there_redirs(char *str)
+{
+	int	i;
+
+	i = -1;
+	while (str[++i])
+		if ((str[i] == '>' || str[i] == '<') && is_in_quotes(str, i) != 1)
+			return (1);
 	return (0);
 }
