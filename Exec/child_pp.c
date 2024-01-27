@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:10:29 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/27 01:12:25 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/27 03:08:25 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,9 @@ char	*child_process_in(int **pipefd, t_data *data, int i, int token)
 		if (child_process_middle(pipefd, data, token) == -1)
 			return (NULL);
 	}
+	else if (check_redirection_now(data, i) == 0)
+		if (redirection_manager(data, i) == -1)
+			return (NULL);
 	buf = arg(data->cmds[i], data);
 	// check si les redirection sont actif, pour bien recup le cmd
 	cmd = ft_do_process(data->pr->nv, buf);
