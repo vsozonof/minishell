@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/27 04:15:53 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/27 05:38:18 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,6 +171,7 @@ int		child_process_in_or_out(int **pipefd, t_data *data, int i, int token);
 int		child_process_middle(int **pipefd, t_data *data, int token);
 int		redirection_manager(t_data *data, int i);
 int		check_redirection_now(t_data *data, int i);
+char	*ft_copy_tmp(char *tmp, char *buf);
 
 // ! ---------------------------------------------------------------------------
 // ?							Single_Pipe
