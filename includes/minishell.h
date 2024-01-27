@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/27 01:15:04 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/27 01:17:42 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,7 @@ void	builtin_manager(t_data *tmp, int token);
 int		found_builtin(t_data *tmp);
 int		not_builtin(t_data *data);
 
-int		Pipex_Exec(t_data *data);
+int		pipex_exec(t_data *data);
 int		ft_pipex(t_data	*data);
 int		**alloc_pipe(int i, int **pipefd);
 int		**parent_process(int **pipefd, int i);
@@ -163,7 +163,7 @@ void	ft_freedb(char **str);
 void	free_pipe_argv(int **pipefd, char	*argv[]);
 int		check_dup(int pipe, int token, int pipe2, t_data *data);
 char	*child_process_in(int **pipefd, t_data *data, int i, int token);
-char	**arg(char *str);
+char	*arg(char *str, t_data *data);
 int		ft_create_fd(char *argv, int flag);
 char	**ft_get_path(char **env);
 char	*ft_do_process(char *envp[], char *cmd);
@@ -173,9 +173,12 @@ int		child_process_in_or_out(int **pipefd, t_data *data, int i, int token);
 int		child_process_middle(int **pipefd, t_data *data, int token);
 int		redirection_manager(int **pipefd, int token, t_data *data, int i);
 char	*check_redirection(int pipe, int pipe2, t_data *data);
-int		is_any_redirection(t_data *data, int i, int fd, int fd2);
+int		is_any_redirection(t_data *data);
 int		redirection_case(int redirect, t_data *data, int i, int **pipefd);
 int		ft_recup_fd(int token, t_data *data, int redirect);
+int		redirection_case_1(int fd, t_data *data, int **pipefd);
+int		redirection_case_2(int fd, int fd2, t_data *data, int **pipefd);
+int		redirection_case_3(int fd, int fd2, t_data *data, int **pipefd);
 
 // ! ---------------------------------------------------------------------------
 // ?							Builtin && Tools

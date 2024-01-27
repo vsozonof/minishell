@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child_pp.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:10:29 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/26 23:20:10 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/27 01:12:25 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	check_dup(int pipe, int token, int pipe2, t_data *data)
 char	*child_process_in(int **pipefd, t_data *data, int i, int token)
 {
 	char		*cmd;
-	char		**buf;
+	char		*buf;
 
 	if (i == 0 || i == data->n_cmds -1)
 	{
@@ -55,47 +55,48 @@ char	*child_process_in(int **pipefd, t_data *data, int i, int token)
 		if (child_process_middle(pipefd, data, token) == -1)
 			return (NULL);
 	}
-	// if (redirection_manager(pipefd, token, data, i) == -1)
-	// 	return (NULL);
-	buf = arg(data->cmds[i]);
-	cmd = ft_do_process(data->pr->nv, buf[0]);
+	buf = arg(data->cmds[i], data);
+	// check si les redirection sont actif, pour bien recup le cmd
+	cmd = ft_do_process(data->pr->nv, buf);
 	if (cmd == NULL)
 		return (free_pipe_argv(pipefd, data->cmds), NULL);
 	free(pipefd[0]);
 	free(pipefd[1]);
 	return (cmd);
 }
+	// if (redirection_manager(pipefd, token, data, i) == -1)
+	// 	return (NULL);
 
-int	child_process_in_or_out(int	**pipefd, t_data *data, int i, int token)
+int	child_process_in_or_out(int	**pi, t_data *data, int i, int token)
 {
 	int	verif;
 
 	if (i == 0)
 	{
-		close(pipefd[0][0]);
-		close(pipefd[1][0]);
-		close(pipefd[1][1]);
-		if (check_dup(0, 0, pipefd[0][1], data) == -1)
-			return (close(pipefd[0][1]), free_pipe_argv(pipefd, data->cmds), -1);
-		close(pipefd[0][1]);
+		close(pi[0][0]);
+		close(pi[1][0]);
+		close(pi[1][1]);
+		if (check_dup(0, 0, pi[0][1], data) == -1)
+			return (close(pi[0][1]), free_pipe_argv(pi, data->cmds), -1);
+		close(pi[0][1]);
 	}
 	else if (i == data->n_cmds - 1)
 	{
-		close(pipefd[1][1]);
-		close(pipefd[0][1]);
+		close(pi[1][1]);
+		close(pi[0][1]);
 		if (token == 0)
-			verif = check_dup(pipefd[1][0], 1, 0, data);
+			verif = check_dup(pi[1][0], 1, 0, data);
 		else
-			verif = check_dup(pipefd[0][0], 1, 0, data);
-		close(pipefd[1][0]);
-		close(pipefd[0][0]);
+			verif = check_dup(pi[0][0], 1, 0, data);
+		close(pi[1][0]);
+		close(pi[0][0]);
 		if (verif == -1)
-			return (free_pipe_argv(pipefd, data->cmds), -1);
+			return (free_pipe_argv(pi, data->cmds), -1);
 	}
 	return (0);
 }
 
-int		child_process_middle(int **pipefd, t_data *data, int token)
+int	child_process_middle(int **pipefd, t_data *data, int token)
 {
 	int		verif;
 
@@ -122,10 +123,22 @@ int		child_process_middle(int **pipefd, t_data *data, int token)
 	return (0);
 }
 
-char	**arg(char *str)
+char	*arg(char *str, t_data *data)
 {
 	char	**buf;
+	int		i;
 
+	i = ft_strlen(str);
 	buf = ft_split(str, ' ');
-	return (buf);
+	if (data->n_redirs > 0)
+	{
+		if (data->tab[data->index_redirs][0] == i)
+		{
+			if (data->tab[data->index_redirs][1] == 1)
+				return (buf[1]);
+			else if (data->tab[data->index_redirs][1] == 3)
+				return (buf[i--]);
+		}
+	}
+	return (buf[0]);
 }

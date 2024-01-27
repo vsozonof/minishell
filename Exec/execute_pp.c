@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_pp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 12:31:19 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/26 20:38:40 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/26 23:19:14 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ char	**ft_get_path(char **env)
 	if (!env[i])
 		perror("Error: PATH not found");
 	path = ft_split(env[i] + 5, ':');
-	// fprintf(stderr, "%s\n", env[i] + 5);
 	return (path);
 }
+
+	// fprintf(stderr, "%s\n", env[i] + 5);
