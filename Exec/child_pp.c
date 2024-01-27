@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:10:29 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/27 03:08:25 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/27 03:53:39 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,12 +135,15 @@ char	*arg(char *str, t_data *data)
 	buf = ft_split(str, ' ');
 	if (data->n_redirs > 0)
 	{
-		if (data->tab[data->index_redirs][0] == i)
+		if (data->tab[data->index_redirs])
 		{
-			if (data->tab[data->index_redirs][1] == 1)
-				return (buf[1]);
-			else if (data->tab[data->index_redirs][1] == 3)
-				return (buf[i--]);
+			if (data->tab[data->index_redirs][0] == i)
+			{
+				if (data->tab[data->index_redirs][1] == 1)
+					return (buf[1]);
+				else if (data->tab[data->index_redirs][1] == 3)
+					return (buf[i--]);
+			}
 		}
 	}
 	return (buf[0]);

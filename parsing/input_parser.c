@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 09:14:23 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/27 02:25:05 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/27 03:18:39 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	input_parser(t_prompt *prompt)
 	{
 		if (!get_cmd(&data))
 			return (free_manager(&data, 0));
-		// printf("FINAL UPDATE = %s\n", data.input);
+		// printf("FINAL UPDATE = %s ENFINNNNNN\n", data.input);
 		command_manager(&data);
 		free_manager(&data, 1);
 	}
