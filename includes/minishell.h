@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/27 00:27:17 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/27 00:46:59 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,7 +159,7 @@ void	ft_freedb(char **str);
 void	free_pipe_argv(int **pipefd, char	*argv[]);
 int		check_dup(int pipe, int token, int pipe2, t_data *data);
 char	*child_process_in(int **pipefd, t_data *data, int i, int token);
-char	**arg(char *str);
+char	*arg(char *str, t_data *data);
 int		ft_create_fd(char *argv, int flag);
 char	**ft_get_path(char **env);
 char	*ft_do_process(char *envp[], char *cmd);

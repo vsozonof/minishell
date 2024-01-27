@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 18:55:02 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/25 11:36:15 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/27 00:49:09 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,23 @@
 
 int	single_arg(t_data *data)
 {
-	char	**buf;
+	char	*buf;
 	char	*fre;
 	char	**cmd_argument;
 
-	buf = arg(data->input);
+	buf = arg(data->input, data);
 	cmd_argument = ft_split(data->input, ' ');
-	fre = ft_do_process(data->pr->nv, buf[0]);
+	fre = ft_do_process(data->pr->nv, buf);
 	if (!fre || !cmd_argument)
 	{
 		perror("wrong commd\n");
-		ft_freedb(buf);
+		free(buf);
 		ft_freedb(data->cmds);
 		ft_freedb(cmd_argument);
 		return (0);
 	}
 	exec_single(cmd_argument, fre, data);
-	ft_freedb(buf);
+	free(buf);
 	ft_freedb(cmd_argument);
 	free(fre);
 	return (0);

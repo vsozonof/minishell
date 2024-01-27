@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 21:47:57 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/27 00:17:32 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/27 00:31:56 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,45 +14,63 @@
 
 //check s'il reste des redirections a faire
 
-int	redirection_manager(int **pipefd, int token, t_data *data, int i)
-{
-	int	redirect;
+// int	redirection_manager(int **pipefd, int token, t_data *data, int i)
+// {
+// 	int	redirect;
 
-	redirect = is_any_redirection(data);
-	if (redirect == 1 || redirect == 2 || redirect == 3)
-		redirection_case(redirect, data, i, pipefd);
-	else
-		return (-1);
-	i = data->tab[0];
-	data->n_redirs--;
-	return (0);
-}
+// 	redirect = is_any_redirection(data);
+// 	if (redirect == 1 || redirect == 2 || redirect == 3)
+// 		redirection_case(redirect, data, i, pipefd);
+// 	else
+// 		return (-1);
+// 	i = data->tab[0];
+// 	data->n_redirs--;
+// 	return (0);
+// }
 
-int	redirection_case(int redirect, t_data *data, int i, int **pipefd)
-{
-	int		fd;
-	int		fd2;
+// int	redirection_case(int redirect, t_data *data, int i, int **pipefd)
+// {
+// 	int		fd;
+// 	int		fd2;
 
-	fd = NULL;
-	fd2 = NULL;
-	// trouver quel pipefd mettre
-	if (redirect == 3)
-	{
-		if (redirection_case_3(fd, fd2, data, pipefd) == -1)
-			return (-1);
-	}
-	else if (redirect == 1)
-	{
-		if (redirection_case_1(fd, fd2, data, pipefd) == -1)
-			return (-1);
-	}
-	else if (redirect == 2)
-	{
-		if (redirection_case_2(fd, fd2, data, pipefd) == -1)
-			return (-1);
-	}
-	return (0);
-}
+// 	fd = NULL;
+// 	fd2 = NULL;
+// 	// trouver quel pipefd mettre
+// 	if (redirect == 3)
+// 	{
+// 		if (redirection_case_3(fd, fd2, data, pipefd) == -1)
+// 			return (-1);
+// 	}
+// 	else if (redirect == 1)
+// 	{
+// 		if (redirection_case_1(fd, fd2, data, pipefd) == -1)
+// 			return (-1);
+// 	}
+// 	else if (redirect == 2)
+// 	{
+// 		if (redirection_case_2(fd, fd2, data, pipefd) == -1)
+// 			return (-1);
+// 	}
+// 	return (0);
+// }
+
+
+// int	is_any_redirection(t_data *data)
+// {
+// 	if (data->n_redirs > data->index_redirs + 2)
+// 	{
+// 		if (data->tab[data->index_redirs][1][1] > 0
+// 		&& data->tab[data->index_redirs + 1][1][1] > 0)
+// 			return (3);
+// 		else if (data->tab[data->index_redirs + 1][1][1] > 0)
+// 			return (2);
+// 	}
+// 	if (data->tab[data->index_redirs][1][1] > 0)
+// 		return (1);
+// 	return (0);
+// }
+
+// C'EST BON AU DESSUS
 
 // char	*ft_recup_fd(int token, t_data *data, int redirect)
 // {
@@ -75,22 +93,6 @@ int	redirection_case(int redirect, t_data *data, int i, int **pipefd)
 // 		}
 // 	}
 // }
-
-int	is_any_redirection(t_data *data)
-{
-	if (data->n_redirs > data->index_redirs + 2)
-	{
-		if (data->tab[data->index_redirs][1][1] > 0
-		&& data->tab[data->index_redirs + 1][1][1] > 0)
-			return (3);
-		else if (data->tab[data->index_redirs + 1][1][1] > 0)
-			return (2);
-	}
-	if (data->tab[data->index_redirs][1][1] > 0)
-		return (1);
-	return (0);
-}
-
 // int		check_redirection(int pipe, int pipe2, t_data *data)
 // {
 // 	int	fd;
