@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 04:37:37 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/26 22:03:39 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/27 05:36:34 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,13 @@ int	is_input_valid(char *str)
 	i = 0;
 	while (str[i] && ft_is_whitespace(str[i]))
 		i++;
+	if (str[i] == '~')
+		return (pr_error("/mnt/nfs/homes/vsozonof: Is a directory"));
+	else if (str[i] == '\\')
+		return (0);
 	if (!invalid_character_checker(str[i]))
+		return (0);
+	else if (!empty_quote_handler(str))
 		return (0);
 	else if (!exception_checker(str))
 		return (0);
@@ -45,16 +51,33 @@ int	exception_checker(char *str)
 	{
 		if (!is_in_quotes(str, i))
 		{
-			if ((str[i] == '(' || str[i] == ')'))
-				return (pr_error("input error : parenthesis detected."));
+			if (str[i] == '(')
+				return (pr_error("syntax error near unexpected token `('"));
+			else if (str[i] == ')')
+				return (pr_error("syntax error near unexpected token `)'"));
 			else if (str[i] == '*')
-				return (pr_error("input error : wildcard detected."));
+				return (pr_error("syntax error near unexpected token `*'"));
+			else if (str[i] == '&' && str[i + 1] == '&')
+				return (pr_error("syntax error near unexpected token `&&'"));
 			else if (str[i] == '&')
-				return (pr_error("input error : `&' detected."));
-			else if (str[i] == ';')
-				return (pr_error("input error : `;' detected."));
+				return (pr_error("syntax error near unexpected token `&'"));
+			else if (!exception_checker_2(str, i))
+				return (0);
 		}
 		i++;
 	}
+	return (1);
+}
+
+int	exception_checker_2(char *str, int i)
+{
+	if (str[i] == ';' && str[i + 1] == ';')
+		return (pr_error("syntax error near unexpected token `;;'"));
+	else if (str[i] == ';')
+		return (pr_error("syntax error near unexpected token `;'"));
+	else if (str[i] == '.' && str[i + 1] == '.')
+		return (pr_error("..: command not found."));
+	else if (str[i] == '.')
+		return (pr_error(".: filename argument required."));
 	return (1);
 }

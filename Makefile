@@ -6,7 +6,7 @@
 #    By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/09 23:22:06 by vsozonof          #+#    #+#              #
-#    Updated: 2024/01/27 01:11:29 by vsozonof         ###   ########.fr        #
+#    Updated: 2024/01/27 02:54:57 by vsozonof         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,7 @@ SRCS = main.c \
 	   utils/env_utils.c \
 	   utils/quote_utils.c \
 	   utils/expand_utils.c \
+	   utils/expand_utils-2.c \
 	   utils/expand_handler.c \
 	   utils/n_args.c \
 	   utils/strjoin_and_free.c \

@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 02:16:29 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/26 19:48:30 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/27 05:40:51 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,21 +33,36 @@ void	reg_expander(t_data *data)
 		{
 			reg_expand_splitter(data, i);
 			reg_expand_joiner(data);
-			i = 0;
 		}
+		else if (i > 0 && !is_in_quotes(data->input, i)
+			&& ft_is_whitespace(data->input[i - 1]) && data->input[i] == '~'
+			&& (ft_is_whitespace(data->input[i + 1]) || !data->input[i + 1]))
+			tilde_expander(data, i);
+		else if ((!is_in_quotes(data->input, i)
+				|| is_in_quotes(data->input, i) == 2)
+			&& data->input[i] == '\\')
+			backslash_expander(data, i);
+		if (data->input[i] == '\0')
+			break ;
 		i++;
 	}
 }
 
 void	reg_expand_joiner(t_data *data)
 {
-	data->new_head = ft_strjoin(data->head, data->to_add);
-	free(data->head);
-	free(data->to_add);
-	free(data->input);
-	data->input = ft_strjoin(data->new_head, data->tail);
-	free(data->tail);
-	free(data->new_head);
+	if (!data->to_add)
+	{
+		free(data->input);
+		data->input = strjoin_and_free(data->head, data->tail);
+	}
+	else
+	{	
+		data->new_head = ft_strjoin(data->head, data->to_add);
+		free(data->head);
+		free(data->to_add);
+		free(data->input);
+		data->input = strjoin_and_free(data->new_head, data->tail);
+	}
 }
 
 void	reg_expand_splitter(t_data *data, int i)

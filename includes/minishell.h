@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/27 01:17:42 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/27 04:02:18 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,15 +91,20 @@ int		invalid_character_checker(int c);
 int		is_input_valid(char *str);
 int		is_piped_input_valid(char *str);
 int		exception_checker(char *str);
+int		exception_checker_2(char *str, int i);
 int		unclosed_quote_detector(char *str);
 
 void	expand_handler(t_data *data);
 int		is_valid_char(int c);
+int		is_valid_char_after_redir(int c);
 void	reg_expander(t_data *data);
 void	reg_expand_splitter(t_data *data, int i);
 void	reg_expand_joiner(t_data *data);
+void	tilde_expander(t_data *data, int i);
+void	backslash_expander(t_data *data, int i);
 void	search_and_split(t_data *data, int i);
 char	*quote_remover(t_data *data);
+int		empty_quote_handler(char *str);
 void	quote_flagger(char *str, int i, int q_flag);
 
 // ! ---------------------------------------------------------------------------
@@ -116,6 +121,7 @@ int		is_there_dollar(char *str);
 int		is_there_backslash(char *str);
 int		is_there_quotes(char *str);
 int		is_there_redirs(char *str);
+int		is_there_tilde(char *str);
 int		ispipe(int c);
 int		is_valid_pipe(char *str);
 int		is_in_quotes(char *str, int c);
