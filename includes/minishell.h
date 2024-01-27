@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/26 23:20:32 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/27 01:15:04 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,11 @@ int		is_valid_redir(char *str);
 int		redir_checker(char *str, int i);
 void	redirection_counter(t_data *data);
 void	redirection_parser(t_data *data);
+void	get_redir_infos(t_data *data);
+void	set_tab_values(t_data *data, int n, int i, int mode);
+char	*file_name_finder(t_data *data, int mode, int i, int c);
 int		redirection_and_expand_handler(t_data *data);
+void	tab_value_setter_double(t_data *data, int n, int i);
 
 // ! ---------------------------------------------------------------------------
 // ?							SIGNAL HANDLER

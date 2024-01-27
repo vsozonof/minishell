@@ -6,7 +6,7 @@
 #    By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/09 23:22:06 by vsozonof          #+#    #+#              #
-#    Updated: 2024/01/26 20:38:28 by vsozonof         ###   ########.fr        #
+#    Updated: 2024/01/27 01:11:29 by vsozonof         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ SRCS = main.c \
 	   parsing/exception_checker.c \
 	   parsing/redir_utils.c \
 	   parsing/redir_utils-2.c \
+	   parsing/redir_utils-3.c \
 	   free/free_main.c \
 	   free/free_1.c \
 	   utils/pipes_splitter.c \

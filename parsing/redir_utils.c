@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 19:31:35 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/26 22:28:40 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/27 01:14:46 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,48 +80,6 @@ void	redirection_counter(t_data *data)
 	}
 }
 
-void	get_redir_infos(t_data *data)
-{
-	int	i;
-	int	n;
-
-	i = 0;
-	n = 0;
-	while (data->input[i])
-	{
-		if (!is_in_quotes(data->input, i) && data->input[i] == '<' && data->input[i + 1] != '<')
-		{
-			data->tab[n][0] = i;
-			data->tab[n][1] = 1;
-			n++;
-			i++;
-		}
-		else if (!is_in_quotes(data->input, i) && data->input[i] == '<' && data->input[i + 1] == '<')
-		{
-			data->tab[n][0] = i;
-			data->tab[n][1] = 3;
-			n++;
-			i += 2;
-		}
-		else if (!is_in_quotes(data->input, i) && data->input[i] == '>' && data->input[i + 1] != '>')
-		{
-			data->tab[n][0] = i;
-			data->tab[n][1] = 2;
-			n++;
-			i++;
-		}
-		else if (!is_in_quotes(data->input, i) && data->input[i] == '>' && data->input[i + 1] == '>')
-		{
-			data->tab[n][0] = i;
-			data->tab[n][1] = 4;
-			n++;
-			i += 2;
-		}
-		else
-			i++;
-	}
-}
-
 void	redirection_parser(t_data *data)
 {
 	int	i;
@@ -130,7 +88,7 @@ void	redirection_parser(t_data *data)
 	data->tab = malloc(sizeof (int *) * data->n_redirs);
 	while (i < data->n_redirs)
 	{
-		data->tab[i] = malloc(sizeof (int) * 2);
+		data->tab[i] = malloc(sizeof (int) * 3);
 		i++;
 	}
 	get_redir_infos(data);
