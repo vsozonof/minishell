@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/27 03:08:21 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/27 04:15:53 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,12 +167,18 @@ char	*arg(char *str, t_data *data);
 int		ft_create_fd(char *argv, int flag);
 char	**ft_get_path(char **env);
 char	*ft_do_process(char *envp[], char *cmd);
-int		single_arg(t_data *data);
-int		exec_single(char **cmd_argument, char *fre, t_data *data);
 int		child_process_in_or_out(int **pipefd, t_data *data, int i, int token);
 int		child_process_middle(int **pipefd, t_data *data, int token);
 int		redirection_manager(t_data *data, int i);
 int		check_redirection_now(t_data *data, int i);
+
+// ! ---------------------------------------------------------------------------
+// ?							Single_Pipe
+// ! ---------------------------------------------------------------------------
+
+int		single_arg(t_data *data);
+int		exec_single(char **cmd_argument, char *fre, t_data *data);
+int		redirection_single(t_data *data);
 
 // ! ---------------------------------------------------------------------------
 // ?							Builtin && Tools

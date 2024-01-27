@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 21:47:57 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/27 03:08:16 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/27 04:00:10 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,11 @@ int	redirection_manager(t_data *data, int i)
 	}
 	else
 	{
+		fprintf(stderr, "tab = %d\n", data->tab[data->index_redirs][2]);
 		dup2(data->tab[data->index_redirs][2], 0);
 			return (printf("problem with dup2 redirection"), -1);
 		data->index_redirs++;
+		fprintf(stderr, "le second tab = %d\n", data->tab[data->index_redirs][2]);
 		dup2(data->tab[data->index_redirs][2], 1);
 			return (printf("problem with dup2 redirection"), -1);
 		data->index_redirs++;
