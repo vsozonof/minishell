@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:10:50 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/27 00:48:36 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/27 03:53:33 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	pipex_exec(t_data	*data)
 	int		i;
 
 	i = 0;
+	data->index_redirs = 0;
 	while (data->cmds[i])
 	{
 		buf = arg(data->cmds[i], data);
@@ -34,7 +35,6 @@ int	pipex_exec(t_data	*data)
 		free(fre);
 		i++;
 	}
-	data->index_redirs = 0;
 	ft_pipex(data);
 	waitpid(-1, NULL, 0);
 	return (0);

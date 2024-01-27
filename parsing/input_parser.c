@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 09:14:23 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/27 01:13:35 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/27 03:18:39 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,15 @@ void	input_parser(t_prompt *prompt)
 		data.cmds = pipes_splitter(prompt->input, '|', &data);
 		if (!data.cmds)
 			return (free_manager(&data, 2));
-		// command_manager(&data);
+		command_manager(&data);
 		free_manager(&data, 2);
 	}
 	else if (!is_there_pipe(prompt))
 	{
 		if (!get_cmd(&data))
 			return (free_manager(&data, 0));
-		printf("FINAL UPDATE = %s\n", data.input);
-		// command_manager(&data);
+		// printf("FINAL UPDATE = %s ENFINNNNNN\n", data.input);
+		command_manager(&data);
 		free_manager(&data, 1);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 18:55:02 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/27 00:49:09 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/27 04:36:44 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	single_arg(t_data *data)
 	char	*fre;
 	char	**cmd_argument;
 
+	data->index_redirs = 0;
 	buf = arg(data->input, data);
 	cmd_argument = ft_split(data->input, ' ');
 	fre = ft_do_process(data->pr->nv, buf);
@@ -25,7 +26,7 @@ int	single_arg(t_data *data)
 	{
 		perror("wrong commd\n");
 		free(buf);
-		ft_freedb(data->cmds);
+		// free(data->input);
 		ft_freedb(cmd_argument);
 		return (0);
 	}
@@ -45,6 +46,8 @@ int	exec_single(char **cmd_argument, char *fre, t_data	*data)
 		return (printf("error in fork\n"), -1);
 	else if (pid == 0)
 	{
+		if (redirection_single(data) == -1)
+			return (-1);
 		execve(fre, cmd_argument, data->pr->nv);
 		exit(0);
 	}
@@ -52,3 +55,50 @@ int	exec_single(char **cmd_argument, char *fre, t_data	*data)
 		waitpid(pid, NULL, 0);
 	return (0);
 }
+
+int	redirection_single(t_data *data)
+{
+	if (data->n_redirs > 0)
+	{
+		fprintf(stderr, "n_redir = %d\n", data->n_redirs);
+		if (data->n_redirs == 2)
+		{
+			if (dup2(data->tab[0][2], 0) < 0)
+				return (printf("problem with dup2 1"), -1);
+			if (dup2(data->tab[1][2], 1) < 0)
+				return (printf("problem with dup2 1"), -1);
+		}
+		if (data->n_redirs == 1)
+		{
+			if (data->tab[0][1] == 1)
+			{
+				if (dup2(data->tab[0][2], 0) < 0)
+					return (printf("problem with dup2 1"), -1);
+			}
+			else
+			{
+				fprintf(stderr, "je suis ici\n");
+				fprintf(stderr, "voici l'input %s\n", data->input);
+				if (dup2(data->tab[0][2], 1) < 0)
+					return (printf("problem with dup2 1"), -1);
+			}
+		}
+	}
+	return (0);
+}
+
+/*
+if (data->n_redirs > 0)
+	{
+		if (data->tab[data->index_redirs])
+		{
+			if (data->tab[data->index_redirs][0] == i)
+			{
+				if (data->tab[data->index_redirs][1] == 1)
+					return (buf[1]);
+				else if (data->tab[data->index_redirs][1] == 3)
+					return (buf[i--]);
+			}
+		}
+	}
+*/
