@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 18:55:02 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/27 04:36:44 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/28 22:00:52 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ int	single_arg(t_data *data)
 	char	*buf;
 	char	*fre;
 	char	**cmd_argument;
+	int		i;
 
+	i = 0;
 	data->index_redirs = 0;
 	buf = arg(data->input, data);
 	cmd_argument = ft_split(data->input, ' ');
@@ -26,7 +28,6 @@ int	single_arg(t_data *data)
 	{
 		perror("wrong commd\n");
 		free(buf);
-		// free(data->input);
 		ft_freedb(cmd_argument);
 		return (0);
 	}
@@ -34,12 +35,14 @@ int	single_arg(t_data *data)
 	free(buf);
 	ft_freedb(cmd_argument);
 	free(fre);
+	close(data->tab[0][2]);
 	return (0);
 }
 
 int	exec_single(char **cmd_argument, char *fre, t_data	*data)
 {
 	int		pid;
+	int		i;
 
 	pid = fork();
 	if (pid < 0)
@@ -49,6 +52,9 @@ int	exec_single(char **cmd_argument, char *fre, t_data	*data)
 		if (redirection_single(data) == -1)
 			return (-1);
 		execve(fre, cmd_argument, data->pr->nv);
+		free(fre);
+		i = 0;
+		ft_freedb(cmd_argument);
 		exit(0);
 	}
 	else if (pid > 0)
@@ -64,23 +70,23 @@ int	redirection_single(t_data *data)
 		if (data->n_redirs == 2)
 		{
 			if (dup2(data->tab[0][2], 0) < 0)
-				return (printf("problem with dup2 1"), -1);
+				return (close(data->tab[data->index_redirs][2]), printf("problem with dup2 1"), -1);
 			if (dup2(data->tab[1][2], 1) < 0)
-				return (printf("problem with dup2 1"), -1);
+				return (close(data->tab[data->index_redirs][2]), printf("problem with dup2 1"), -1);
 		}
 		if (data->n_redirs == 1)
 		{
 			if (data->tab[0][1] == 1)
 			{
 				if (dup2(data->tab[0][2], 0) < 0)
-					return (printf("problem with dup2 1"), -1);
+					return (close(data->tab[data->index_redirs][2]), printf("problem with dup2 1"), -1);
 			}
 			else
 			{
 				fprintf(stderr, "je suis ici\n");
 				fprintf(stderr, "voici l'input %s\n", data->input);
 				if (dup2(data->tab[0][2], 1) < 0)
-					return (printf("problem with dup2 1"), -1);
+					return (close(data->tab[data->index_redirs][2]), printf("problem with dup2 1"), -1);
 			}
 		}
 	}

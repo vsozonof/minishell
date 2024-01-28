@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/27 05:41:47 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/28 20:30:13 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,6 +178,7 @@ int		child_process_middle(int **pipefd, t_data *data, int token);
 int		redirection_manager(t_data *data, int i);
 int		check_redirection_now(t_data *data, int i);
 char	*ft_copy_tmp(char *tmp, char *buf);
+int		len_db_tab(char **str);
 
 // ! ---------------------------------------------------------------------------
 // ?							Single_Pipe
