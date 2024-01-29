@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:10:29 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/28 22:12:10 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/28 22:24:54 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,9 @@ char	*arg(char *str, t_data *data)
 {
 	char	**buf;
 	int		i;
+	char	*tmp;
 
+	tmp = NULL;
 	i = ft_strlen(str);
 	buf = ft_split(str, ' ');
 	if (data->n_redirs > 0)
@@ -138,29 +140,12 @@ char	*arg(char *str, t_data *data)
 		if (data->tab[data->index_redirs])
 		{
 			if (data->tab[data->index_redirs][0] == i)
-			{
-				if (data->tab[data->index_redirs][1] == 1)
-				{
-					fprintf(stderr, "je passe par lallllll\n");
-					free(buf[0]);
-					free(buf[2]);
-					return (buf[1]);
-				}
-				else if (data->tab[data->index_redirs][1] == 3)
-				{
-					fprintf(stderr, "je passe par laaaaaaa\n");
-					free(buf[1]);
-					free(buf[0]);
-					return (buf[i--]);
-				}
-			}
+				return (arg_helper(buf, tmp, data, i));
 		}
 	}
-	fprintf(stderr, "je passe par la\n");
-	i = 1;
-	while (buf[i]);
-	free(buf[1]);
-	return (buf[0]);
+	tmp = copy_arg(tmp, buf[0]);
+	ft_freedb(buf);
+	return (tmp);
 }
 
 /*

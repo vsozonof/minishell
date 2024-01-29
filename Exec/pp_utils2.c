@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 15:09:52 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/28 20:30:31 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/28 22:24:40 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,37 @@ int	len_db_tab(char **str)
 	while (str[j])
 		j++;
 	return (j);
+}
+
+char *copy_arg(char *dest, char *src)
+{
+	int	i;
+
+	i = 0;
+	dest = malloc(sizeof(char) * (ft_strlen(src) + 1));
+	while (src[i])
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
+}
+
+char	*arg_helper(char **buf, char *tmp, t_data *data, int i)
+{
+	if (data->tab[data->index_redirs][1] == 1)
+	{
+		tmp = copy_arg(tmp, buf[1]);
+		return (ft_freedb(buf), tmp);
+	}
+	else if (data->tab[data->index_redirs][1] == 3)
+	{
+		i--;
+		tmp = copy_arg(tmp, buf[i]);
+		return (ft_freedb(buf), tmp);
+	}
+	return (NULL);
 }
 
 /*
