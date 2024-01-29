@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 15:09:52 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/29 05:19:39 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/29 23:15:58 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,41 @@ int	ft_count_space(char *buf)
 		c++;
 	}
 	return (cpt);
+}
+
+int	len_buf(char *buf, int i)
+{
+	int		len;
+	int		cpt;
+	int		calcul;
+
+	len = ((cpt = 0));
+	while (buf[i])
+	{
+		if (buf[i] == ' ' && buf[i + 1] == ' ')
+			cpt++;
+		else
+			len++;
+			
+		i++;
+	}
+	i = ((cpt = 0));
+	while (buf[i])
+	{
+		if (i == 11)
+		{
+			i++;
+			while (buf[i] != ' ')
+			{
+				cpt++;
+				i++;
+			}
+		}
+		i++;
+	}
+	cpt++;
+	calcul = len - cpt;
+	return (len);
 }
 
 // char	*single_arg_test(t_data *data, char *buf)

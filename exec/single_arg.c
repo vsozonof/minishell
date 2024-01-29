@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 18:55:02 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/29 19:29:30 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/29 23:29:52 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	single_arg(t_data *data)
 	else
 		essaie = data->input;
 	fprintf(stderr, " essaie = %s\n", essaie);
-	cmd_argument = ft_split(essaie, ' ');
+	cmd_argument = ft_split(data->input, ' ');
 	fre = ft_do_process(data->pr->nv, buf);
 	if (!fre || !cmd_argument)
 	{
@@ -68,29 +68,38 @@ char *ft_essaie(t_data *data)
 	buf[c] = '\0';
 	i = 0;
 	c = 0;
-	buf2 = ft_essaie_helper(buf, i, c);
+	buf2 = ft_essaie_helper(buf, i, c, data);
 	free(buf);
 	return (buf2);
 }
 
-char *ft_essaie_helper(char *buf, int i, int c)
+char *ft_essaie_helper(char *buf, int i, int j, t_data *data)
 {
-	char	*buf2;
-	int		cpt;
-	(void)c;
+	char	*str;
+	int		len;
+	(void)j;
+	(void)data;
 
-	cpt = ft_count_space(buf);
-	int y = 0;
-	while (buf[y] && buf[y] != ' ')
-		y++;
-	buf2 = malloc(sizeof(char) * (y + 1));
-	while (buf[i] && buf[i] != ' ')
+	len = len_buf(buf, i);
+	str = malloc(sizeof(char) * (len + 1));
+	while (buf[i])
 	{
-		buf2[i] = buf[i];
+		str[j] = buf[i];
+		j++;
 		i++;
+		if (buf[i] == ' ' && buf[i + 1] == ' ')
+			i++;
+		// if (i == 11)
+		// {
+		// 	i++;
+		// 	while (buf[i] != ' ')
+		// 		i++;
+		// 	i++;
+		// }
 	}
-	buf2[i] = '\0';
-	return (buf2);
+	str[j] = '\0';
+	fprintf(stderr, "VOICI LE RESULTAT %s\n", str);
+	return (str);
 }
 
 int	exec_single(char **cmd_argument, char *fre, t_data	*data)
@@ -129,6 +138,7 @@ int	redirection_single(t_data *data)
 {
 	if (data->n_redirs > 0)
 	{
+		// fprintf(stderr, "%d\n", data->n_redirs);
 		if (data->n_redirs == 2)
 		{
 			if (dup2(data->tab[0][2], 0) < 0)
@@ -136,18 +146,21 @@ int	redirection_single(t_data *data)
 			if (dup2(data->tab[1][2], 1) < 0)
 				return (close(data->tab[data->index_redirs][2]), printf("problem with dup2 1"), -1);
 		}
-		if (data->n_redirs == 1)
+		else if (data->n_redirs == 1)
 		{
 			if (redirection_single_chev(data) == 0)
 			{
+				// fprintf(stderr, "je suis donc en entre\n");
 				if (dup2(data->tab[0][2], 0) < 0)
 					return (close(data->tab[data->index_redirs][2]), printf("problem with dup2 1"), -1);
 			}
 			else if (redirection_single_chev(data) == 1)
 			{
+				// fprintf(stderr, "je suis donc en sortie\n");
 				if (dup2(data->tab[0][2], 1) < 0)
 					return (close(data->tab[data->index_redirs][2]), printf("problem with dup2 1"), -1);
 			}
+			fprintf(stderr, "je sors\n");
 		}
 	}
 	return (0);
@@ -158,17 +171,22 @@ int	redirection_single_chev(t_data *data)
 	int		i;
 	int		cpt;
 
-	i = ((cpt = 0));
-	fprintf(stderr, "voici la pos de mon fd %d\n", data->tab[0][0]);
+	i = 0;
+	cpt = data->tab[0][0];
+	// fprintf(stderr, "voici la pos de mon fd %d\n", cpt);
 	while (data->input[i++])
 	{
-		if ((data->input[i] == '>' || data->input[i] == '<')
-		&& cpt == 1)
+		if (data->input[i] == ' ')
+			cpt--;
+		// fprintf(stderr, "%d\n", cpt);
+		// fprintf(stderr, " i = %d\n", i);
+		if (data->input[i] == '>' && cpt > 0)
 			return (1);
-		else if (data->tab[0][0] == 1)
+		else if (data->input[i] == '<' && cpt > 0)
+			return (2);
+		else if ((data->input[i] == '>' || data->input[i] == '<')
+			&& cpt == 0)
 			return (0);
-		// if (data->input[i] == ' ')
-			
 	}
 	return (-1);
 }
@@ -215,5 +233,37 @@ char	**espoir(char **cmd_argument)
 	}
 	buf[c] = NULL;
 	return (buf);
+}
+*/
+
+/*
+{
+	char	*buf2;
+	char	**split;
+	int		cpt;
+	int		fd_pos;
+
+	fd_pos = data->tab[0][0];
+	cpt = ft_count_space(buf);
+	int y = 0;
+	while (buf[y] && buf[y] != ' ')
+		y++;
+	split = ft_split(buf, ' ');
+	buf2 = malloc(sizeof(char) * (y + 1));
+	while (split[i])
+	{
+		j = 0;
+		if (i != fd_pos)
+		{
+			while (split[i][j] && split[i][j] != ' ')
+			{
+				buf2[j] = split[i][j];
+				j++;
+			}
+		}
+		i++;
+	}
+	buf2[j] = '\0';
+	return (buf2);
 }
 */
