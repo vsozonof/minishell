@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 18:55:02 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/29 23:29:52 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/29 23:46:26 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	single_arg(t_data *data)
 	else
 		essaie = data->input;
 	fprintf(stderr, " essaie = %s\n", essaie);
-	cmd_argument = ft_split(data->input, ' ');
+	cmd_argument = ft_split(essaie, ' ');
 	fre = ft_do_process(data->pr->nv, buf);
 	if (!fre || !cmd_argument)
 	{
@@ -84,18 +84,18 @@ char *ft_essaie_helper(char *buf, int i, int j, t_data *data)
 	str = malloc(sizeof(char) * (len + 1));
 	while (buf[i])
 	{
+		if (i == 11)
+		{
+			i++;
+			while (buf[i] != ' ')
+				i++;
+			i++;
+		}
 		str[j] = buf[i];
 		j++;
 		i++;
-		if (buf[i] == ' ' && buf[i + 1] == ' ')
-			i++;
-		// if (i == 11)
-		// {
+		// if (buf[i] == ' ' && buf[i + 1] == ' ')
 		// 	i++;
-		// 	while (buf[i] != ' ')
-		// 		i++;
-		// 	i++;
-		// }
 	}
 	str[j] = '\0';
 	fprintf(stderr, "VOICI LE RESULTAT %s\n", str);
@@ -116,7 +116,7 @@ int	exec_single(char **cmd_argument, char *fre, t_data	*data)
 		int j = 0;
 		while (cmd_argument[j])
 		{
-			fprintf(stderr, "%s\n", cmd_argument[j]);
+			fprintf(stderr, "cmd = %s\n", cmd_argument[j]);
 			j++;
 		}
 		fprintf(stderr, "JUSTE AVANT EXEC VOICI %s\n", fre);
