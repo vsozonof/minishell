@@ -1,6 +1,5 @@
 builtin
 Builtin
-cat
 exec
 file
 files
@@ -18,4 +17,3 @@ signal
 test2
 test3
 utils
-wc

@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:10:29 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/27 05:40:59 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/28 22:24:54 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,34 @@ char	*arg(char *str, t_data *data)
 {
 	char	**buf;
 	int		i;
+	char	*tmp;
 
+	tmp = NULL;
+	i = ft_strlen(str);
+	buf = ft_split(str, ' ');
+	if (data->n_redirs > 0)
+	{
+		if (data->tab[data->index_redirs])
+		{
+			if (data->tab[data->index_redirs][0] == i)
+				return (arg_helper(buf, tmp, data, i));
+		}
+	}
+	tmp = copy_arg(tmp, buf[0]);
+	ft_freedb(buf);
+	return (tmp);
+}
+
+/*
+char	*arg(char *str, t_data *data)
+{
+	char	**buf;
+	char	*tmp;
+	int		i;
+	int		j;
+
+	j = 0;
+	tmp = NULL;
 	i = ft_strlen(str);
 	buf = ft_split(str, ' ');
 	if (data->n_redirs > 0)
@@ -140,14 +167,44 @@ char	*arg(char *str, t_data *data)
 			if (data->tab[data->index_redirs][0] == i)
 			{
 				if (data->tab[data->index_redirs][1] == 1)
-					return (buf[1]);
+				{
+					while (buf[1][j])
+					{
+						tmp[j] = buf[1][j];
+						j++;
+					}
+					free(buf);
+					return (tmp);
+				}
 				else if (data->tab[data->index_redirs][1] == 3)
-					return (buf[i--]);
+				{
+					i--;
+					while (buf[1][j])
+					{
+						tmp[j] = buf[i][j];
+						j++;
+					}
+					free(buf);
+					return (tmp);
+				}
 			}
 		}
 	}
-	return (buf[0]);
+	fprintf(stderr, "%s\n", buf[0]);
+	while (buf[0][j])
+	{
+		tmp[j] = buf[0][j];
+		j++;
+	}
+	j = 0;
+	while (buf[j])
+	{
+		free()
+	}
+	free(buf);
+	return (tmp);
 }
+*/
 
 /*
 char	*arg(char *str, t_data *data)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_manager.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 18:07:01 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/29 00:06:21 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/29 17:30:29 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	command_manager(t_data *data)
 		builtin_manager(data, check);
 	else if (data->n_cmds == 1)
 		single_arg(data);
-	else if (data->n_cmds >= 2)
+	else if (data->n_cmds >= 1)
 		pipex_exec(data);
 	return (0);
 }
