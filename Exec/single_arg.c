@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 18:55:02 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/29 01:14:03 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/29 02:42:06 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,28 +18,30 @@ int	single_arg(t_data *data)
 	char	*fre;
 	char	**cmd_argument;
 	int		i;
-	char	*essaie;
+	// char	*essaie;
 
 	i = 0;
 	data->index_redirs = 0;
 	buf = arg(data->input, data);
-	essaie = ft_essaie(data);
-	cmd_argument = ft_split(essaie, ' ');
+	// essaie = ft_essaie(data);
+	cmd_argument = ft_split(buf, ' ');
 	fre = ft_do_process(data->pr->nv, buf);
 	if (!fre || !cmd_argument)
 	{
 		perror("wrong commd\n");
 		free(buf);
 		ft_freedb(cmd_argument);
-		free(essaie);
+		// free(essaie);
 		return (0);
 	}
-	exec_single(cmd_argument, fre, data, essaie);
+	// fprintf(stderr, "%s\n", essaie);
+	exec_single(cmd_argument, fre, data);
 	free(buf);
 	ft_freedb(cmd_argument);
 	free(fre);
-	close(data->tab[0][2]);
-	free(essaie);
+	if (data->n_redirs > 0)
+		close(data->tab[0][2]);
+	// free(essaie);
 	return (0);
 }
 
@@ -74,27 +76,27 @@ char *ft_essaie_helper(char *buf)
 	char	*buf2;
 	int		c;
 	int		cpt;
+	int		len;
 
 	c = ((i = 0));
-	cpt = 0;
-	while (buf[c + 1])
+	cpt = ft_count_space(buf);
+	c = 0;
+	len = (ft_strlen(buf) + 1 - cpt);
+	buf2 = malloc(sizeof(char) * len);
+	while (buf[i] && buf[i + 1])
 	{
-		if (buf[c] == ' ' && buf[c + 1] == ' ')
-			cpt++;
-	}
-	buf2 = malloc(sizeof(char) * (ft_strlen(buf) + 1 - cpt));
-	while (buf[i])
-	{
-		while (buf[i] == ' ')
-			i++;
-		buf2[i] = buf[i];
+		if (buf[i] != ' ')
+		{
+			buf2[c] = buf[i];
+			c++;
+		}
 		i++;
 	}
-	buf2[i] = '\0';
+	buf2[c] = '\0';
 	return (buf2);
 }
 
-int	exec_single(char **cmd_argument, char *fre, t_data	*data, char *essaie)
+int	exec_single(char **cmd_argument, char *fre, t_data	*data)
 {
 	int		pid;
 	int		i;
@@ -104,7 +106,7 @@ int	exec_single(char **cmd_argument, char *fre, t_data	*data, char *essaie)
 		return (printf("error in fork\n"), -1);
 	else if (pid == 0)
 	{
-		if (redirection_single(data, essaie) == -1)
+		if (redirection_single(data) == -1)
 			return (-1);
 		execve(fre, cmd_argument, data->pr->nv);
 		free(fre);
@@ -117,11 +119,10 @@ int	exec_single(char **cmd_argument, char *fre, t_data	*data, char *essaie)
 	return (0);
 }
 
-int	redirection_single(t_data *data, char *essaie)
+int	redirection_single(t_data *data)
 {
 	if (data->n_redirs > 0)
 	{
-		fprintf(stderr, "n_redir = %d\n", data->n_redirs);
 		if (data->n_redirs == 2)
 		{
 			if (dup2(data->tab[0][2], 0) < 0)
@@ -138,8 +139,6 @@ int	redirection_single(t_data *data, char *essaie)
 			}
 			else
 			{
-				fprintf(stderr, "je suis ici\n");
-				fprintf(stderr, "voici l'input %s\n", essaie);
 				if (dup2(data->tab[0][2], 1) < 0)
 					return (close(data->tab[data->index_redirs][2]), printf("problem with dup2 1"), -1);
 			}

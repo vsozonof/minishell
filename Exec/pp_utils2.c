@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 15:09:52 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/28 22:24:40 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/29 01:55:06 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,23 @@ char	*arg_helper(char **buf, char *tmp, t_data *data, int i)
 		return (ft_freedb(buf), tmp);
 	}
 	return (NULL);
+}
+
+int	ft_count_space(char *buf)
+{
+	int	i;
+	int	c;
+	int	cpt;
+	
+	i = ((c = 0));
+	cpt = 0;
+	while (buf[c] && buf[c + 1])
+	{
+		if (buf[c] == ' ' && buf[c + 1] == ' ')
+			cpt++;
+		c++;
+	}
+	return (cpt);
 }
 
 /*
