@@ -1,0 +1,15 @@
+Builtin
+Exec
+free
+includes
+libft
+main.c
+main.o
+Makefile
+minishell
+parsing
+rl_leak_ignore.supp
+signal
+test2
+test3
+utils

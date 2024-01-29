@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 18:55:02 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/29 02:42:06 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/29 06:27:27 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,15 @@ int	single_arg(t_data *data)
 	char	*buf;
 	char	*fre;
 	char	**cmd_argument;
-	int		i;
-	// char	*essaie;
+	char	*essaie;
 
-	i = 0;
 	data->index_redirs = 0;
 	buf = arg(data->input, data);
-	// essaie = ft_essaie(data);
-	cmd_argument = ft_split(buf, ' ');
+	if (data->n_redirs > 0)
+		essaie = ft_essaie(data);
+	else
+		essaie = data->input;
+	cmd_argument = ft_split(essaie, ' ');
 	fre = ft_do_process(data->pr->nv, buf);
 	if (!fre || !cmd_argument)
 	{
@@ -34,14 +35,13 @@ int	single_arg(t_data *data)
 		// free(essaie);
 		return (0);
 	}
-	// fprintf(stderr, "%s\n", essaie);
 	exec_single(cmd_argument, fre, data);
-	free(buf);
 	ft_freedb(cmd_argument);
+	free(buf);
 	free(fre);
+	// free(essaie);
 	if (data->n_redirs > 0)
 		close(data->tab[0][2]);
-	// free(essaie);
 	return (0);
 }
 
@@ -65,41 +65,36 @@ char *ft_essaie(t_data *data)
 		i++;
 	}
 	buf[c] = '\0';
-	buf2 = ft_essaie_helper(buf);
+	i = 0;
+	c = 0;
+	buf2 = ft_essaie_helper(buf, i, c);
 	free(buf);
 	return (buf2);
 }
 
-char *ft_essaie_helper(char *buf)
+char *ft_essaie_helper(char *buf, int i, int c)
 {
-	int		i;
 	char	*buf2;
-	int		c;
 	int		cpt;
-	int		len;
+	(void)c;
 
-	c = ((i = 0));
 	cpt = ft_count_space(buf);
-	c = 0;
-	len = (ft_strlen(buf) + 1 - cpt);
-	buf2 = malloc(sizeof(char) * len);
-	while (buf[i] && buf[i + 1])
+	int y = 0;
+	while (buf[y] && buf[y] != ' ')
+		y++;
+	buf2 = malloc(sizeof(char) * (y + 1));
+	while (buf[i] && buf[i] != ' ')
 	{
-		if (buf[i] != ' ')
-		{
-			buf2[c] = buf[i];
-			c++;
-		}
+		buf2[i] = buf[i];
 		i++;
 	}
-	buf2[c] = '\0';
+	buf2[i] = '\0';
 	return (buf2);
 }
 
 int	exec_single(char **cmd_argument, char *fre, t_data	*data)
 {
 	int		pid;
-	int		i;
 
 	pid = fork();
 	if (pid < 0)
@@ -108,9 +103,15 @@ int	exec_single(char **cmd_argument, char *fre, t_data	*data)
 	{
 		if (redirection_single(data) == -1)
 			return (-1);
+		int j = 0;
+		while (cmd_argument[j])
+		{
+			fprintf(stderr, "%s\n", cmd_argument[j]);
+			j++;
+		}
 		execve(fre, cmd_argument, data->pr->nv);
+		fprintf(stderr, "rater\n");
 		free(fre);
-		i = 0;
 		ft_freedb(cmd_argument);
 		exit(0);
 	}
@@ -147,8 +148,8 @@ int	redirection_single(t_data *data)
 	return (0);
 }
 
-/*
-if (data->n_redirs > 0)
+
+/*if (data->n_redirs > 0)
 	{
 		if (data->tab[data->index_redirs])
 		{
@@ -161,4 +162,34 @@ if (data->n_redirs > 0)
 			}
 		}
 	}
+*/
+
+/*
+
+char	**espoir(char **cmd_argument)
+{
+	int		i;
+	int		j;
+	int		c;
+	char	**buf;
+
+	i = 0;
+	c = 0;
+	buf = malloc(sizeof(char *) * (found_max(cmd_argument) + 1));
+	while (cmd_argument[i + 1])
+	{
+		j = 0;
+		buf[c] = malloc(sizeof(char *) * (ft_strlen(cmd_argument[i]) + 1));
+		while (cmd_argument[i][j])
+		{
+			buf[c][j] = cmd_argument[i][j];
+			j++;
+		}
+		buf[c][j] = '\0';
+		i++;
+		c++;
+	}
+	buf[c] = NULL;
+	return (buf);
+}
 */

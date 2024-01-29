@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 12:31:19 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/29 02:50:16 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/29 04:44:33 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	*ft_do_process(char *envp[], char *cmd)
 		}
 		free(buf2);
 	}
-	free(path[i]);
+	// free(path[i]);
 	free(path);
 	return (NULL);
 }
