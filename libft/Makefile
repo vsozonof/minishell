@@ -6,7 +6,7 @@
 #    By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/09 21:19:51 by vsozonof          #+#    #+#              #
-#    Updated: 2023/11/20 12:55:21 by vsozonof         ###   ########.fr        #
+#    Updated: 2024/01/28 22:04:47 by vsozonof         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,7 @@ SRCS = 	srcs/bool_functions/ft_isalpha.c\
 		srcs/str_functions/ft_strmapi.c\
 		srcs/str_functions/ft_substr.c\
 		srcs/str_functions/ft_strjoin.c\
+		srcs/str_functions/ft_strjoin_free.c\
 		srcs/str_functions/ft_strtrim.c\
 		srcs/str_functions/ft_split.c\
 		srcs/str_functions/ft_atol.c \

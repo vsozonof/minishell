@@ -1,48 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   n_args.c                                           :+:      :+:    :+:   */
+/*   cd-utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/21 05:05:23 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/22 13:50:19 by vsozonof         ###   ########.fr       */
+/*   Created: 2024/01/21 05:27:00 by vsozonof          #+#    #+#             */
+/*   Updated: 2024/01/29 02:47:45 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	n_args(char *str)
+char	*cd_extract_arg(char *str)
 {
-	int	i;
-	int	c;
+	int		i;
+	int		c;
+	char	*cd_path;
 
 	i = 0;
-	c = 0;
 	while (str[i] && ft_is_whitespace(str[i]))
 		i++;
 	while (str[i] && !ft_is_whitespace(str[i]))
 		i++;
-	while (str[i])
+	while (str[i] && ft_is_whitespace(str[i]))
+		i++;
+	c = i;
+	if (str[i] == '"' || str[i] == 39)
 	{
-		if (ft_is_whitespace(str[i]))
-			i++;
-		else if (str[i] == 39 || str[i] == '"')
-		{
-			i += (quote_skipper(str, i) - i);
-			c++;
-		}
-		else
-		{
-			c++;
-			while (str[i] && !ft_is_whitespace(str[i]))
-				i++;
-		}
+		c = quoted_arg_util(str, c);
+		cd_path = ft_substr(str, i + 1, c - 3);
 	}
-	return (c);
+	else
+	{
+		while (str[c] && !ft_is_whitespace(str[c]))
+			c++;
+		cd_path = ft_substr(str, i, c);
+	}
+	return (cd_path);
 }
 
-int	quote_skipper(char *str, int c)
+int	quoted_arg_util(char *str, int c)
 {
 	if (str[c] == 39)
 	{
@@ -56,7 +54,18 @@ int	quote_skipper(char *str, int c)
 		while (str[c] && str[c] != '"')
 			c++;
 	}
-	if (str[c] == 39 || str[c] == '"')
-		c++;
+	if (str[c] == '"' || str[c] == 39)
+		c--;
 	return (c);
+}
+
+void	error_handling(int err, char *str)
+{
+	if (err == 2)
+		printf("minishell: cd: %s: No such file or directory.\n", str);
+	else if (err == 20)
+		printf("minishell: cd: %s: is not a directory.", str);
+	else if (err == 13)
+		printf("minishell: cd: %s: Permission denied.\n", str);
+	free(str);
 }

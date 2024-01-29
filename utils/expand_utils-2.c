@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 02:54:33 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/27 05:41:14 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/28 21:35:00 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,3 +48,4 @@ int	is_there_tilde(char *str)
 			return (1);
 	return (0);
 }
+  

@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 08:35:01 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/24 05:16:25 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/28 23:26:37 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,11 @@ int	init_sbase(t_prompt *ptr, char **env)
 	return (ptr->env = env_l, 0);
 }
 
-void	init_extras(t_prompt *ptr, char **envp)
+void	init_extras(t_prompt *ptr)
 {
 	ptr->name = ft_strdup("minishell");
 	ptr->pid = ft_itoa((int)getpid());
-	ptr->nv = envp;
+	create_side_env(ptr);
 }
 
 int	init_str(t_data *data, t_prompt *prompt)

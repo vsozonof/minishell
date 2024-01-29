@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/27 05:41:47 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/29 06:09:56 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ typedef struct s_parse
 int		main(int argc, char **argv, char *envp[]);
 void	get_input(char **envp);
 int		init_sbase(t_prompt *prompt, char **env);
-void	init_extras(t_prompt *ptr, char **envp);
+void	init_extras(t_prompt *ptr);
 int		init_str(t_data *data, t_prompt *prompt);
 int		init_str_pipe(t_data *data, t_prompt *prompt);
 
@@ -116,6 +116,8 @@ void	ft_printlst(t_env *L);
 char	*ft_get_env(t_env *env, char *str);
 t_env	*ft_get_env_node(t_env *env, char *str);
 int		put_env_to_lst(t_env *env, char **envp);
+void	create_side_env(t_prompt *ptr);
+int		env_len(t_env *env);
 int		is_there_pipe(t_prompt *prompt);
 int		is_there_dollar(char *str);
 int		is_there_backslash(char *str);
@@ -192,7 +194,7 @@ int		redirection_single(t_data *data);
 // ! ---------------------------------------------------------------------------
 
 void	execute_cd(t_data *data);
-char	*extract_arg(char *str);
+char	*cd_extract_arg(char *str);
 int		quoted_arg_util(char *str, int c);
 void	change_directory(t_data *data, char *path);
 void	go_back_one_level(t_data *data);
@@ -202,7 +204,21 @@ void	error_handling(int err, char *str);
 void	execute_echo(t_data *data);
 void	execute_pwd(t_data *data);
 void	execute_env(t_data *data);
+
 void	execute_export(t_data *data);
+char	*export_extract_arg(char *str);
+void	export_no_args(t_env *env);
+int		export_valid_args_counter(char *str);
+int		export_is_valid_arg(char *str, int i);
+void	export_error_handler(char *str, char *to_check, char *rest);
+char	*extract_var_name(char *str, int i);
+char	*extract_var_value(char *str, int i);
+int		export_var_name_checker(char *str);
+int		is_valid_var_first_char(int c);
+int		is_valid_var_char(int c);
+int		is_valid_var_name(char *var);
+void	export_finalizer(char *args, int i);
+
 void	execute_unset(t_data *data);
 int		execute_exit(t_data *data);
 void	execute_cd(t_data *data);
@@ -215,12 +231,9 @@ void	execute_cd(t_data *data);
 // ! ---------------------------------------------------------------------------
 
 void	free_manager(t_data *data, int key);
-void	free_data_struct(t_data *data);
-void	free_data_envp(t_data *data, int i);
 void	free_cmds(t_data *data);
 void	free_env(t_env	*env);
-void	free_pwd(t_data *data);
+void	free_env_tab(char **env);
 void	free_end_of_program(t_prompt *p);
-char	*strjoin_and_free(char *s1, char *s2);
 
 #endif

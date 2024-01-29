@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strjoin_and_free.c                                 :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/26 14:07:54 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/26 14:15:07 by vsozonof         ###   ########.fr       */
+/*   Created: 2023/11/21 17:52:12 by tpotilli          #+#    #+#             */
+/*   Updated: 2023/11/25 16:00:50 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*strjoin_and_free(char *s1, char *s2)
+int	execute_exit(t_data *data)
 {
-	char	*str;
-
-	str = ft_strjoin(s1, s2);
-	free(s1);
-	free(s2);
-	return (str);
+	printf("Exit Shell\n");
+	(void)data;
+	// free_data_struct(data);
+	return (0);
 }

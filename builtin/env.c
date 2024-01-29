@@ -1,38 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_input.c                                        :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/20 13:42:18 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/28 23:27:44 by vsozonof         ###   ########.fr       */
+/*   Created: 2023/11/21 17:45:30 by tpotilli          #+#    #+#             */
+/*   Updated: 2024/01/21 13:21:57 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	get_input(char **envp)
+void	execute_env(t_data *data)
 {
-	t_prompt	prompt;
+	t_env	*nav;
 
-	init_sbase(&prompt, envp);
-	init_extras(&prompt);
-	while (42)
+	nav = data->env;
+	while (nav)
 	{
-		printf("%s at %s in: %s", prompt.user, prompt.post, prompt.w_d);
-		prompt.input = readline("$> ");
-		if (prompt.input)
-		{
-			add_history(prompt.input);
-			if (!is_input_valid(prompt.input))
-				free(prompt.input);
-			else
-				input_parser(&prompt);
-		}
-		else
-			break ;
+		printf("%s\n", nav->var);
+		nav = nav->next;
 	}
-	clear_history();
-	free_end_of_program(&prompt);
 }

@@ -1,49 +1,53 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_main.c                                        :+:      :+:    :+:   */
+/*   free_utils-1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/09 04:29:11 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/24 05:22:47 by vsozonof         ###   ########.fr       */
+/*   Created: 2024/01/08 04:25:22 by vsozonof          #+#    #+#             */
+/*   Updated: 2024/01/28 23:24:41 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	free_manager(t_data *data, int key)
+void	free_cmds(t_data *data)
 {
 	int	i;
 
 	i = 0;
-	if (key == 1)
+	while (i < data->n_cmds)
 	{
-		free(data->pr->input);
-		free(data->input);
+		free(data->cmds[i]);
+		i++;
 	}
-	else if (key == 2)
+	free(data->cmds);
+}
+
+void	free_env(t_env	*env)
+{
+	t_env	*tmp;
+
+	tmp = NULL;
+	while (env)
 	{
-		free_cmds(data);
-		free(data->pr->input);
-	}
-	free(data->c_status);
-	if (data->n_redirs)
-	{
-		while (i < data->n_redirs)
-		{
-			free(data->tab[i]);
-			i++;
-		}
-		free(data->tab);
+		tmp = env->next;
+		free(env->var);
+		free(env);
+		env = tmp;
 	}
 }
 
-void	free_end_of_program(t_prompt *p)
+void	free_env_tab(char **env)
 {
-	free(p->w_d);
-	free(p->post);
-	free_env(p->env);
-	free(p->name);
-	free(p->pid);
+	int	i;
+
+	i = 0;
+	while (env[i])
+	{
+		free(env[i]);
+		i++;
+	}
+	free(env);
 }

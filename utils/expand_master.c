@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expand_handler.c                                   :+:      :+:    :+:   */
+/*   expand_master.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 02:16:29 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/27 05:40:51 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/29 00:49:14 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 void	expand_handler(t_data *data)
 {
 	reg_expander(data);
-	if (is_there_quotes(data->input))
-		data->input = quote_remover(data);
+	// if (is_there_quotes(data->input))
+	// 	data->input = quote_remover(data);
 	data->pr->input = data->input;
 }
 

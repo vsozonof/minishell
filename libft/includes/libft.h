@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 22:14:34 by vsozonoff         #+#    #+#             */
-/*   Updated: 2023/10/03 12:31:39 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/28 22:13:54 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void		ft_striteri(char *s, void (*f)(unsigned int, char*));
 char		*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char		*ft_itoa(int n);
 char		*ft_strjoin(char const *s1, char const *s2);
+char		*strjoin_and_free(char *s1, char *s2);
 char		*ft_strchr(const char *s, int c);
 char		*ft_strrchr(const char *s, int c);
 char		*ft_strnstr(const char *s1, const char *s2, size_t len);

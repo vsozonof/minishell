@@ -6,7 +6,7 @@
 #    By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/09 23:22:06 by vsozonof          #+#    #+#              #
-#    Updated: 2024/01/27 02:54:57 by vsozonof         ###   ########.fr        #
+#    Updated: 2024/01/29 06:10:21 by vsozonof         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,39 +28,44 @@ SRCS = main.c \
 	   parsing/init_struct.c \
 	   parsing/input_parser.c \
 	   parsing/exception_checker.c \
-	   parsing/redir_utils.c \
+	   parsing/redir_utils-1.c \
 	   parsing/redir_utils-2.c \
 	   parsing/redir_utils-3.c \
-	   free/free_main.c \
-	   free/free_1.c \
-	   utils/pipes_splitter.c \
-	   utils/pipe_utils.c \
+	   free/free_master.c \
+	   free/free_utils-1.c \
+	   utils/pipe_splitter.c \
+	   utils/pipe_utils-1.c \
 	   utils/pipe_utils-2.c \
-	   utils/env_utils.c \
-	   utils/quote_utils.c \
-	   utils/expand_utils.c \
+	   utils/env_utils-1.c \
+	   utils/env_utils-2.c \
+	   utils/quote_utils-1.c \
+	   utils/expand_master.c \
+	   utils/expand_utils-1.c \
 	   utils/expand_utils-2.c \
-	   utils/expand_handler.c \
-	   utils/n_args.c \
-	   utils/strjoin_and_free.c \
-	   signal/sig_handler.c \
-	   Exec/command_manager.c \
-	   Exec/UNUSED_command_overall.c \
-	   Exec/execute_pp.c \
-	   Exec/main_pp.c \
-	   Exec/pp_free.c \
-	   Exec/pp_utils.c \
-	   Exec/pp_utils2.c \
-	   Exec/pp.c \
-	   Exec/single_arg.c \
-	   Exec/child_pp.c \
-	   Exec/redirection_here.c \
-	   Builtin/cd.c \
-	   Builtin/cd-utils.c \
-	   Builtin/echo.c \
-	   Builtin/pwd.c \
-	   Builtin/env.c \
-	   Builtin/exit.c \
+	   utils/args_counter.c \
+	   signal/signal_master.c \
+	   exec/command_manager.c \
+	   exec/UNUSED_command_overall.c \
+	   exec/execute_pp.c \
+	   exec/main_pp.c \
+	   exec/pp_free.c \
+	   exec/pp_utils.c \
+	   exec/pp_utils2.c \
+	   exec/pp.c \
+	   exec/single_arg.c \
+	   exec/child_pp.c \
+	   exec/redirection_here.c \
+	   builtin/cd.c \
+	   builtin/cd-utils.c \
+	   builtin/echo.c \
+	   builtin/export.c \
+	   builtin/export_utils-1.c \
+	   builtin/export_utils-2.c \
+	   builtin/export_utils-3.c \
+	   builtin/export_utils-4.c \
+	   builtin/pwd.c \
+	   builtin/env.c \
+	   builtin/exit.c \
 
 OBJS = $(SRCS:.c=.o)
 
