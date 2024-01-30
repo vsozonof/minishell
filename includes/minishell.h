@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/29 06:38:08 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/30 02:34:45 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ void	tilde_expander(t_data *data, int i);
 void	backslash_expander(t_data *data, int i);
 void	search_and_split(t_data *data, int i);
 char	*quote_remover(t_data *data);
+char	*quote_remover_v2(char *str);
 int		empty_quote_handler(char *str);
 void	quote_flagger(char *str, int i, int q_flag);
 
@@ -117,6 +118,8 @@ char	*ft_get_env(t_env *env, char *str);
 t_env	*ft_get_env_node(t_env *env, char *str);
 int		put_env_to_lst(t_env *env, char **envp);
 void	create_side_env(t_prompt *ptr);
+void	add_var_to_env(t_data *data, char *var);
+void	del_var_from_env(t_data *data, char *var);
 int		env_len(t_env *env);
 int		is_there_pipe(t_prompt *prompt);
 int		is_there_dollar(char *str);
@@ -220,11 +223,16 @@ int		export_var_name_checker(char *str);
 int		is_valid_var_first_char(int c);
 int		is_valid_var_char(int c);
 int		is_valid_var_name(char *var);
-void	export_finalizer(char *args, int i);
+char	*export_finalizer(char *args, int i, t_data *data);
+void	do_export(char *var_name, char *var_value, t_data *data);
 
 void	execute_unset(t_data *data);
+char	*unset_extract_var_name(char *args, int i);
+int		unset_var_name_skipper(char *args, int i);
+void	do_unset(char *args, t_data *data);
+
+
 int		execute_exit(t_data *data);
-void	execute_cd(t_data *data);
 
 // void	execute_export();
 // int		execute_exit();

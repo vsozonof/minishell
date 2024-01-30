@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 02:54:33 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/28 21:35:00 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/30 00:31:14 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,32 @@ int	is_there_tilde(char *str)
 		if (str[i] == '~')
 			return (1);
 	return (0);
+}
+
+char	*quote_remover_v2(char *str)
+{
+	char	**splitted;
+	char	*tmp;
+	int		i;
+
+	i = 0;
+	quote_flagger(str, -1, 0);
+	splitted = ft_split(str, ']');
+	tmp = strjoin_and_free(splitted[i], splitted[i + 1]);
+	i += 2;
+	if (splitted[i - 1] == NULL)
+	{
+		free(str);
+		free(splitted);
+		return (tmp);
+	}
+	while (splitted[i])
+	{
+		tmp = strjoin_and_free(tmp, splitted[i]);
+		i++;
+	}
+	free(str);
+	free(splitted);
+	return (tmp);
 }
   

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unset.c                                            :+:      :+:    :+:   */
+/*   unset_master.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 12:54:08 by tpotilli          #+#    #+#             */
-/*   Updated: 2023/11/25 15:39:26 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/30 02:44:13 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,25 @@
 void	execute_unset(t_data *data)
 {
 	int		i;
-	int		j;
+	char	*args;
+	char	**splitted;
 
-	i = ((j = 0));
-	while (data->envp[i])
+	i = 0;
+	args = export_extract_arg(data->input);
+	splitted = ft_split(args, ' ');
+	while (splitted[i])
 	{
-		if (ft_strncmp(data->envp[i], data->input) == 0)
-			//supr
+		do_unset(splitted[i], data);
 		i++;
 	}
+	ft_split_free(splitted);
+	free(args);
+}
+
+void	do_unset(char *args, t_data *data)
+{
+	if (!ft_get_env_node(data->env, args))
+		return ;
+	else
+		del_var_from_env(data, args);
 }

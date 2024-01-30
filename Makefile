@@ -6,7 +6,7 @@
 #    By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/09 23:22:06 by vsozonof          #+#    #+#              #
-#    Updated: 2024/01/29 06:10:21 by vsozonof         ###   ########.fr        #
+#    Updated: 2024/01/30 01:25:12 by vsozonof         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,16 +55,18 @@ SRCS = main.c \
 	   exec/single_arg.c \
 	   exec/child_pp.c \
 	   exec/redirection_here.c \
-	   builtin/cd.c \
-	   builtin/cd-utils.c \
+	   builtin/cd/cd_master.c \
+	   builtin/cd/cd_utils-1.c \
+	   builtin/export/export_master.c \
+	   builtin/export/export_utils-1.c \
+	   builtin/export/export_utils-2.c \
+	   builtin/export/export_utils-3.c \
+	   builtin/export/export_utils-4.c \
+	   builtin/unset/unset_master.c \
+	   builtin/unset/unset_utils-1.c \
+	   builtin/pwd/pwd_master.c \
+	   builtin/env/env_master.c \
 	   builtin/echo.c \
-	   builtin/export.c \
-	   builtin/export_utils-1.c \
-	   builtin/export_utils-2.c \
-	   builtin/export_utils-3.c \
-	   builtin/export_utils-4.c \
-	   builtin/pwd.c \
-	   builtin/env.c \
 	   builtin/exit.c \
 
 OBJS = $(SRCS:.c=.o)

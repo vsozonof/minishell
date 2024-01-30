@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 00:35:14 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/29 06:32:03 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/29 22:00:11 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	export_is_valid_arg(char *str, int i)
 		while (str[i] && str[i] == '=')
 			i++;
 		if (str[i] == '"' || str[i] == 39)
-			return ((i += quote_skipper(str, i)));
+			return ((i += (quote_skipper(str, i) - i)));
 		else if (!ft_is_whitespace(str[i]))
 		{
 			while (str[i] && !ft_is_whitespace(str[i]))
@@ -52,6 +52,8 @@ int	export_is_valid_arg(char *str, int i)
 		else if (ft_is_whitespace(str[i]) || !str[i])
 			return (i);
 	}
+	if (str[i] == '\0')
+		return (-1);
 	return (0);
 }
 
@@ -64,15 +66,13 @@ int	export_valid_args_counter(char *str)
 	while (str[i])
 	{
 		if (is_valid_var_first_char(str[i])
-			&& ((i - 1) != 0 || ft_is_whitespace(str[i - 1])))
+			&& (i == 0 || ft_is_whitespace(str[i - 1])))
 		{
-			printf("aaaa\n");
 			if (export_is_valid_arg(str, i))
 			{
-				printf("baaaa\n");
 				c++;
 				i = export_is_valid_arg(str, i);
-				if (!str[i])
+				if (!(i >= 0 && i < (int)ft_strlen(str)))
 					return (c);
 			}
 		}
