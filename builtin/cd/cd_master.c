@@ -1,18 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd.c                                               :+:      :+:    :+:   */
+/*   cd_master.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 12:02:25 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/29 02:48:01 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/30 05:32:53 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// ! Update les var dans la struct prompt quand changement de dossier
 
 void	execute_cd(t_data *data)
 {
@@ -20,21 +18,19 @@ void	execute_cd(t_data *data)
 
 	if (n_args(data->input) == 0)
 	{
+		if (!ft_get_env_node(data->env, "HOME"))
+			return (exit_status_updater(data, 1, "cd: HOME not set."));
 		change_directory(data, ft_get_env(data->env, "HOME"));
-		data->i_status = 0;
-		return ;
+		return (exit_status_updater(data, 0, NULL));
 	}
 	else if (n_args(data->input) != 1)
-	{
-		pr_error("cd: too many arguments.");
-		data->i_status = 127;
-		return ;
-	}
+		return (exit_status_updater(data, 1, "cd: too many arguments."));
 	path = cd_extract_arg(data->input);
 	if (!ft_strncmp(path, "..", 2))
 	{
 		go_back_one_level(data);
 		free(path);
+		return (exit_status_updater(data, 0, NULL));
 	}
 	else
 		change_directory(data, path);
@@ -63,10 +59,10 @@ void	change_directory(t_data *data, char *path)
 			return (free(path));
 		}
 		else
-			error_handling(errno, path);
+			error_handling(errno, path, data);
 	}
 	else
-		error_handling(errno, path);
+		error_handling(errno, path, data);
 }
 
 void	update_vars(t_data *data)

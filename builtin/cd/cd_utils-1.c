@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd-utils.c                                         :+:      :+:    :+:   */
+/*   cd_utils-1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 05:27:00 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/29 02:47:45 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/30 05:34:07 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	quoted_arg_util(char *str, int c)
 	return (c);
 }
 
-void	error_handling(int err, char *str)
+void	error_handling(int err, char *str, t_data *data)
 {
 	if (err == 2)
 		printf("minishell: cd: %s: No such file or directory.\n", str);
@@ -68,4 +68,5 @@ void	error_handling(int err, char *str)
 	else if (err == 13)
 		printf("minishell: cd: %s: Permission denied.\n", str);
 	free(str);
+	exit_status_updater(data, err, NULL);
 }

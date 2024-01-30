@@ -6,7 +6,7 @@
 #    By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/09 23:22:06 by vsozonof          #+#    #+#              #
-#    Updated: 2024/01/30 02:46:25 by vsozonof         ###   ########.fr        #
+#    Updated: 2024/01/30 04:47:14 by vsozonof         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ SRCS = main.c \
 	   parsing/redir_utils-3.c \
 	   free/free_master.c \
 	   free/free_utils-1.c \
+	   utils/exit_status.c \
 	   utils/pipe_splitter.c \
 	   utils/pipe_utils-1.c \
 	   utils/pipe_utils-2.c \
@@ -66,7 +67,7 @@ SRCS = main.c \
 	   builtin/unset/unset_utils-1.c \
 	   builtin/pwd/pwd_master.c \
 	   builtin/env/env_master.c \
-	   builtin/echo.c \
+	   builtin/echo/echo_master.c \
 	   builtin/exit.c \
 
 OBJS = $(SRCS:.c=.o)

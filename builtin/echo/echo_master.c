@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo.c                                             :+:      :+:    :+:   */
+/*   echo_master.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 12:48:29 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/25 11:43:54 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/30 03:41:23 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,28 @@
 
 void	execute_echo(t_data *data)
 {
-	printf("%s\n", data->input);
-}
+	char	*to_print;
+	char	*tmp;
+	int		flag;
 
+	to_print = export_extract_arg(data->input);
+	if (!to_print)
+		printf("\n");
+	if (ft_strnstr(to_print, "-n ", 3))
+	{
+		flag = 1;
+		tmp = export_extract_arg(to_print);
+		free(to_print);
+		to_print = tmp;
+		if (is_there_quotes(to_print))
+			to_print = quote_remover_v2(to_print);
+		printf("%s", to_print);
+	}
+	else
+	{
+		if (is_there_quotes(to_print))
+			to_print = quote_remover_v2(to_print);
+		printf("%s\n", to_print);
+	}
+	free(to_print);
+}

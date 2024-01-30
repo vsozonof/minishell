@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/30 02:46:38 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/30 05:32:44 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,18 @@
 # include <sys/wait.h>
 # include <errno.h>
 
+# ifndef G_STATUS
+#  define G_STATUS
+
+extern int	g_status;
+
+# endif
+
 // ! ---------------------------------------------------------------------------
 // ?							STRUCTURES DECLARATION
 // ! ---------------------------------------------------------------------------
 
-struct	s_parse;
+struct		s_parse;
 typedef struct s_struct
 {
 	char			*name;
@@ -113,7 +120,7 @@ void	quote_flagger(char *str, int i, int q_flag);
 // ! ---------------------------------------------------------------------------
 
 void	ft_printlst(t_env *L);
-
+void	exit_status_updater(t_data *data, int status, char *str);
 char	*ft_get_env(t_env *env, char *str);
 t_env	*ft_get_env_node(t_env *env, char *str);
 int		put_env_to_lst(t_env *env, char **envp);
@@ -207,10 +214,10 @@ int		quoted_arg_util(char *str, int c);
 void	change_directory(t_data *data, char *path);
 void	go_back_one_level(t_data *data);
 void	update_vars(t_data *data);
-void	error_handling(int err, char *str);
+void	error_handling(int err, char *str, t_data *data);
 
 void	execute_echo(t_data *data);
-void	execute_pwd(t_data *data);
+void	execute_pwd(void);
 void	execute_env(t_data *data);
 
 void	execute_export(t_data *data);

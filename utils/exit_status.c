@@ -1,21 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   exit_status.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/21 17:52:12 by tpotilli          #+#    #+#             */
-/*   Updated: 2023/11/25 16:00:50 by tpotilli         ###   ########.fr       */
+/*   Created: 2024/01/30 04:46:20 by vsozonof          #+#    #+#             */
+/*   Updated: 2024/01/30 05:22:51 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	execute_exit(t_data *data)
+void	exit_status_updater(t_data *data, int status, char *str)
 {
-	printf("Exit Shell\n");
-	(void)data;
-	// free_data_struct(data);
-	return (0);
+	if (str)
+		pr_error(str);
+	free(data->c_status);
+	data->i_status = status;
+	data->c_status = ft_itoa(status);
 }
