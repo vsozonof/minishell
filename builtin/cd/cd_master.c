@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 12:02:25 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/30 05:32:53 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/30 09:42:58 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,18 @@ void	execute_cd(t_data *data)
 	if (n_args(data->input) == 0)
 	{
 		if (!ft_get_env_node(data->env, "HOME"))
-			return (exit_status_updater(data, 1, "cd: HOME not set."));
+			return (exit_status_updater(data, 1, "HOME not set.", "cd :"));
 		change_directory(data, ft_get_env(data->env, "HOME"));
-		return (exit_status_updater(data, 0, NULL));
+		return (exit_status_updater(data, 0, NULL, NULL));
 	}
 	else if (n_args(data->input) != 1)
-		return (exit_status_updater(data, 1, "cd: too many arguments."));
+		return (exit_status_updater(data, 1, "too many arguments.", "cd :"));
 	path = cd_extract_arg(data->input);
 	if (!ft_strncmp(path, "..", 2))
 	{
 		go_back_one_level(data);
 		free(path);
-		return (exit_status_updater(data, 0, NULL));
+		return (exit_status_updater(data, 0, NULL, NULL));
 	}
 	else
 		change_directory(data, path);

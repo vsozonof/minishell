@@ -6,7 +6,7 @@
 #    By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/09 23:22:06 by vsozonof          #+#    #+#              #
-#    Updated: 2024/01/30 04:47:14 by vsozonof         ###   ########.fr        #
+#    Updated: 2024/01/30 07:49:28 by vsozonof         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,21 +28,21 @@ SRCS = main.c \
 	   parsing/init_struct.c \
 	   parsing/input_parser.c \
 	   parsing/exception_checker.c \
-	   parsing/redir_utils-1.c \
-	   parsing/redir_utils-2.c \
-	   parsing/redir_utils-3.c \
+	   parsing/redirs/redir_utils-1.c \
+	   parsing/redirs/redir_utils-2.c \
+	   parsing/redirs/redir_utils-3.c \
+	   parsing/expand/expand_master.c \
+	   parsing/expand/expand_utils-1.c \
+	   parsing/expand/expand_utils-2.c \
+	   parsing/pipes/pipe_splitter.c \
+	   parsing/pipes/pipe_utils-1.c \
+	   parsing/pipes/pipe_utils-2.c \
+	   parsing/env/env_utils-1.c \
+	   parsing/env/env_utils-2.c \
 	   free/free_master.c \
 	   free/free_utils-1.c \
 	   utils/exit_status.c \
-	   utils/pipe_splitter.c \
-	   utils/pipe_utils-1.c \
-	   utils/pipe_utils-2.c \
-	   utils/env_utils-1.c \
-	   utils/env_utils-2.c \
 	   utils/quote_utils-1.c \
-	   utils/expand_master.c \
-	   utils/expand_utils-1.c \
-	   utils/expand_utils-2.c \
 	   utils/args_counter.c \
 	   signal/signal_master.c \
 	   exec/command_manager.c \

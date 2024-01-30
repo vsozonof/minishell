@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 04:29:11 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/28 23:26:02 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/30 09:48:10 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ void	free_manager(t_data *data, int key)
 	if (key == 1)
 	{
 		free(data->pr->input);
-		free(data->input);
+		if (data->input)
+			free(data->input);
 	}
 	else if (key == 2)
 	{

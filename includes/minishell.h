@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/30 05:32:44 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/30 09:23:17 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ int		exception_checker_2(char *str, int i);
 int		unclosed_quote_detector(char *str);
 
 void	expand_handler(t_data *data);
+int		expand_is_valid_char(int c);
 int		is_valid_char(int c);
 int		is_valid_char_after_redir(int c);
 void	reg_expander(t_data *data);
@@ -120,7 +121,7 @@ void	quote_flagger(char *str, int i, int q_flag);
 // ! ---------------------------------------------------------------------------
 
 void	ft_printlst(t_env *L);
-void	exit_status_updater(t_data *data, int status, char *str);
+void	exit_status_updater(t_data *data, int status, char *str, char *cmd);
 char	*ft_get_env(t_env *env, char *str);
 t_env	*ft_get_env_node(t_env *env, char *str);
 int		put_env_to_lst(t_env *env, char **envp);
@@ -217,6 +218,7 @@ void	update_vars(t_data *data);
 void	error_handling(int err, char *str, t_data *data);
 
 void	execute_echo(t_data *data);
+
 void	execute_pwd(void);
 void	execute_env(t_data *data);
 
