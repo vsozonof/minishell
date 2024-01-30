@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 12:31:19 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/26 23:19:14 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/29 04:44:33 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,29 +16,42 @@ char	*ft_do_process(char *envp[], char *cmd)
 {
 	int		i;
 	char	**path;
-	char	*buf;
 	char	*buf2;
 
 	i = 0;
 	path = ft_get_path(envp);
+	if (!path)
+		return (NULL);
 	while (path[i++])
 	{
-		buf = ft_strjoin(path[i], "/");
-		buf2 = ft_strjoin(buf, cmd);
-		free(buf);
+		buf2 = ft_strjoin_help(path, cmd, i);
+		free(path[i]);
 		if (access(buf2, 0) == 0)
 		{
-			free(path[i]);
 			while (path[i++])
 				free(path[i]);
-			free(path);
-			return (buf2);
+			return (free(path), buf2);
 		}
 		free(buf2);
-		free(path[i]);
 	}
+	// free(path[i]);
 	free(path);
 	return (NULL);
+}
+
+char *ft_strjoin_help(char **path, char *cmd, int i)
+{
+	char	*buf;
+	char	*buf2;
+	
+	buf = ft_strjoin(path[i], "/");
+	if (!buf)
+		return (fprintf(stderr, "ERROR IN PATH\n"), NULL);
+	buf2 = ft_strjoin(buf, cmd);
+	if (!buf2)
+		return (fprintf(stderr, "ERROR IN PATH\n"), NULL);
+	free(buf);
+	return (buf2);
 }
 
 char	**ft_get_path(char **env)
@@ -54,5 +67,3 @@ char	**ft_get_path(char **env)
 	path = ft_split(env[i] + 5, ':');
 	return (path);
 }
-
-	// fprintf(stderr, "%s\n", env[i] + 5);
