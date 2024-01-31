@@ -6,7 +6,7 @@
 #    By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/09 23:22:06 by vsozonof          #+#    #+#              #
-#    Updated: 2024/01/29 17:28:19 by tpotilli         ###   ########.fr        #
+#    Updated: 2024/01/30 00:19:16 by tpotilli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,6 +55,7 @@ SRCS = main.c \
 	   exec/single_arg.c \
 	   exec/child_pp.c \
 	   exec/redirection_here.c \
+	   exec/redirection_arg.c \
 	   builtin/cd.c \
 	   builtin/cd-utils.c \
 	   builtin/echo.c \

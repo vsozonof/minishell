@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/29 23:16:08 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/30 14:46:33 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,11 +178,11 @@ int		len_db_tab(char **str);
 char	*copy_arg(char *dest, char *src);
 char	*arg_helper(char **buf, char *tmp, t_data *data, int i);
 char	*ft_strjoin_help(char **path, char *cmd, int i);
-char	*ft_essaie(t_data *data);
-char	*ft_essaie_helper(char *buf, int i, int , t_data *data);
+char	*ft_essaie(t_data *data, char *input);
+char	*ft_essaie_helper(char *buf, char *input, int , t_data *data);
 int		ft_count_space(char *buf);
-int		redirection_single_chev(t_data *data);
-int		len_buf(char *buf, int i);
+int		redirection_single_chev(t_data *data, char *input);
+int		len_buf(char *buf, char *input, t_data *data, int act_redir);
 
 // ! ---------------------------------------------------------------------------
 // ?							Single_Pipe

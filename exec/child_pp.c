@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:10:29 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/28 22:24:54 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/30 03:16:40 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	check_dup(int pipe, int token, int pipe2, t_data *data)
 {
 	(void)data;
+	fprintf(stderr, "mon token est donc %d\n", token);
 	if (token == 0)
 	{
 		if (dup2(0, 0) < 0)
@@ -55,11 +56,10 @@ char	*child_process_in(int **pipefd, t_data *data, int i, int token)
 		if (child_process_middle(pipefd, data, token) == -1)
 			return (NULL);
 	}
-	else if (check_redirection_now(data, i) == 0)
+	if (check_redirection_now(data, i) == 0)
 		if (redirection_manager(data, i) == -1)
 			return (NULL);
 	buf = arg(data->cmds[i], data);
-	// check si les redirection sont actif, pour bien recup le cmd
 	cmd = ft_do_process(data->pr->nv, buf);
 	if (cmd == NULL)
 		return (free_pipe_argv(pipefd, data->cmds), NULL);
@@ -67,6 +67,7 @@ char	*child_process_in(int **pipefd, t_data *data, int i, int token)
 	free(pipefd[1]);
 	return (cmd);
 }
+
 	// if (redirection_manager(pipefd, token, data, i) == -1)
 	// 	return (NULL);
 

@@ -1,13 +1,12 @@
 builtin
 Builtin
-cat
 exec
-file
-files
-files2
+file1
+file2
 free
 includes
 libft
+ls
 main.c
 main.o
 Makefile
@@ -15,6 +14,7 @@ minishell
 parsing
 rl_leak_ignore.supp
 signal
+test
 test2
 test3
 utils

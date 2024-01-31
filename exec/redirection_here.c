@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 21:47:57 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/29 00:21:28 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/30 03:17:36 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,28 +18,30 @@ int	check_redirection_now(t_data *data, int i)
 {
 	if (data->n_redirs > 0)
 	{
-		if (data->tab[data->index_redirs][0] == i)
+		fprintf(stderr, "inde = %i i = %i\n", data->index_redirs, i);
+		if (data->index_redirs == i)
 			return (0);
 	}
+	fprintf(stderr, "aucune redirection detecter\n");
 	return (-1);
 }
 
 int	redirection_manager(t_data *data, int i)
 {
 	fprintf(stderr, "voici mon i dans redirection %d\n", i);
-	if (i == 0)
+	if (i == 0) // faire chev pour lui
 	{
 		dup2(data->tab[data->index_redirs][2], 0);
 			return (printf("problem with dup2 redirection"), -1);
 		data->index_redirs++;
 	}
-	else if (i == data->n_cmds -1)
+	else if (i == data->n_cmds -1) // lui
 	{
 		dup2(data->tab[data->index_redirs][2], 1);
 			return (printf("problem with dup2 redirection"), -1);
 		data->index_redirs++;
 	}
-	else
+	else // et lui
 	{
 		fprintf(stderr, "tab = %d\n", data->tab[data->index_redirs][2]);
 		dup2(data->tab[data->index_redirs][2], 0);

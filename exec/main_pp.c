@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:10:50 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/28 22:26:45 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/30 01:06:47 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	pipex_exec(t_data	*data)
 
 	i = 0;
 	data->index_redirs = 0;
+	fprintf(stderr, "je passe par multi\n");
 	while (data->cmds[i])
 	{
 		buf = arg(data->cmds[i], data);

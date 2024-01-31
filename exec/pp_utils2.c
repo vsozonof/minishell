@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 15:09:52 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/29 23:15:58 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/31 14:39:52 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,38 +78,32 @@ int	ft_count_space(char *buf)
 	return (cpt);
 }
 
-int	len_buf(char *buf, int i)
+// else if (data->input[i] == '<')
+// 	c = '<';
+int	len_buf(char *buf, char *input, t_data *data, int act_redir)
 {
 	int		len;
-	int		cpt;
-	int		calcul;
+	int		i;
+	(void)data;
+	(void)act_redir;
+	(void)buf;
 
-	len = ((cpt = 0));
-	while (buf[i])
+	len = ((i = 0));
+	while (input[i])
 	{
-		if (buf[i] == ' ' && buf[i + 1] == ' ')
-			cpt++;
-		else
-			len++;
-			
-		i++;
-	}
-	i = ((cpt = 0));
-	while (buf[i])
-	{
-		if (i == 11)
+		if (input[i] == ' ' && input[i + 1] == '>')
 		{
-			i++;
-			while (buf[i] != ' ')
-			{
-				cpt++;
+			i += 3;
+			while (ft_isalnum(input[i]))
 				i++;
-			}
+			if (!input[i])
+				break;
 		}
+		len++;
 		i++;
 	}
-	cpt++;
-	calcul = len - cpt;
+	if (input[i] == ' ')
+		len--;
 	return (len);
 }
 

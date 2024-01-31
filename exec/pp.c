@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:11:05 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/27 03:54:01 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/30 01:13:10 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	ft_pipex(t_data	*data)
 	int			i;
 	char		**cmd_argument;
 	char		*cmd;
+	char		*essaie;
 
 	i = 0;
 	pipefd = NULL;
@@ -53,7 +54,18 @@ int	ft_pipex(t_data	*data)
 			}
 			else
 			{
-				cmd_argument = ft_split(data->cmds[i], ' ');
+				if (data->n_redirs > 0)
+					essaie = ft_essaie(data, data->cmds[i]);
+				else
+					essaie = data->cmds[i];
+				fprintf(stderr, "essaie = %s\n", essaie);
+				cmd_argument = ft_split(essaie, ' ');
+				int q = 0;
+				while (cmd_argument[q])
+				{
+					fprintf(stderr, "cmd_arg = %s\n", cmd_argument[q]);
+					q++;
+				}
 				execve(cmd, cmd_argument, data->pr->nv);
 				free_pipe_argv(pipefd, data->cmds);
 				exit(0);

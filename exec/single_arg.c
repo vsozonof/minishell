@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 18:55:02 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/30 00:01:02 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/30 03:54:30 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,9 @@ int	single_arg(t_data *data)
 	data->index_redirs = 0;
 	buf = arg(data->input, data);
 	if (data->n_redirs > 0)
-		essaie = ft_essaie(data);
+		essaie = ft_essaie(data, data->input);
 	else
 		essaie = data->input;
-	fprintf(stderr, " essaie = %s\n", essaie);
 	cmd_argument = ft_split(essaie, ' ');
 	fre = ft_do_process(data->pr->nv, buf);
 	if (!fre || !cmd_argument)
@@ -36,95 +35,35 @@ int	single_arg(t_data *data)
 		// free(essaie);
 		return (0);
 	}
+	int	c = 0;
+	fprintf(stderr, "fre = %s\n", fre);
+	while (cmd_argument[c++])
+		fprintf(stderr, "cmd = %s\n", cmd_argument[c]);
 	exec_single(cmd_argument, fre, data);
 	ft_freedb(cmd_argument);
 	free(buf);
 	free(fre);
-	free(essaie);
+	// free(essaie);
 	if (data->n_redirs > 0)
 		close(data->tab[0][2]);
 	return (0);
 }
 
-char *ft_essaie(t_data *data)
-{
-	char	*buf;
-	char	*buf2;
-	int		c;
-	int		i;
-
-	buf = malloc(sizeof(char) * (ft_strlen(data->input) + 1));
-	i = 0;
-	c = 0;
-	while (data->input[i])
-	{
-		if (data->input[i] != '>' && data->input[i] != '<')
-		{
-			buf[c] = data->input[i];
-			c++;
-		}
-		i++;
-	}
-	buf[c] = '\0';
-	i = 0;
-	c = 0;
-	buf2 = ft_essaie_helper(buf, i, c, data);
-	free(buf);
-	return (buf2);
-}
-
-char *ft_essaie_helper(char *buf, int i, int j, t_data *data)
-{
-	char	*str;
-	int		len;
-	(void)j;
-	(void)data;
-
-	len = len_buf(buf, i);
-	str = malloc(sizeof(char) * (len + 1));
-	while (buf[i])
-	{
-		if (i == 11)
-		{
-			i++;
-			while (buf[i] != ' ')
-				i++;
-			i++;
-		}
-		str[j] = buf[i];
-		j++;
-		i++;
-		// if (buf[i] == ' ' && buf[i + 1] == ' ')
-		// 	i++;
-	}
-	str[j] = '\0';
-	fprintf(stderr, "VOICI LE RESULTAT %s\n", str);
-	return (str);
-}
-
 int	exec_single(char **cmd_argument, char *fre, t_data	*data)
 {
 	int		pid;
+	int		j;
+	int		i;
 
 	pid = fork();
+	j = ((i = 0));
 	if (pid < 0)
 		return (printf("error in fork\n"), -1);
 	else if (pid == 0)
 	{
 		if (redirection_single(data) == -1)
 			return (-1);
-		int j = 0;
-		while (cmd_argument[j])
-		{
-			fprintf(stderr, "cmd = %s\n", cmd_argument[j]);
-			j++;
-		}
-		fprintf(stderr, "JUSTE AVANT EXEC VOICI %s\n", fre);
-		int i = 0;
-		while (cmd_argument[i++])
-			fprintf(stderr, "%s\n", cmd_argument[i]);
 		execve(fre, cmd_argument, data->pr->nv);
-		fprintf(stderr, "rater\n");
 		free(fre);
 		ft_freedb(cmd_argument);
 		exit(0);
@@ -148,17 +87,17 @@ int	redirection_single(t_data *data)
 		}
 		else if (data->n_redirs == 1)
 		{
-			if (redirection_single_chev(data) == 0)
+			if (redirection_single_chev(data, data->input) == 0)
 			{
-				// fprintf(stderr, "je suis donc en entre\n");
 				if (dup2(data->tab[0][2], 0) < 0)
 					return (close(data->tab[data->index_redirs][2]), printf("problem with dup2 1"), -1);
+				close(data->tab[0][2]);
 			}
-			else if (redirection_single_chev(data) == 1)
+			else if (redirection_single_chev(data, data->input) == 1)
 			{
-				// fprintf(stderr, "je suis donc en sortie\n");
 				if (dup2(data->tab[0][2], 1) < 0)
 					return (close(data->tab[data->index_redirs][2]), printf("problem with dup2 1"), -1);
+				close(data->tab[0][2]);
 			}
 			fprintf(stderr, "je sors\n");
 		}
@@ -166,6 +105,32 @@ int	redirection_single(t_data *data)
 	return (0);
 }
 
+int	redirection_single_chev(t_data *data, char *input)
+{
+	int		i;
+	int		cpt;
+
+	i = 0;
+	cpt = data->tab[0][0];
+	// fprintf(stderr, "voici la pos de mon fd %d\n", cpt);
+	while (input[i++])
+	{
+		if (input[i] == ' ')
+			cpt--;
+		// fprintf(stderr, "%d\n", cpt);
+		// fprintf(stderr, " i = %d\n", i);
+		if (input[i] == '>' && cpt > 0)
+			return (1);
+		else if (input[i] == '<' && cpt > 0)
+			return (2);
+		else if ((input[i] == '>' || input[i] == '<')
+			&& cpt == 0)
+			return (0);
+	}
+	return (-1);
+}
+
+/* ancienne versin bonne pour single arg a garder !!!!!!!!!!!!!
 int	redirection_single_chev(t_data *data)
 {
 	int		i;
@@ -190,6 +155,7 @@ int	redirection_single_chev(t_data *data)
 	}
 	return (-1);
 }
+*/
 
 /*if (data->n_redirs > 0)
 	{
