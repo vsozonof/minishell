@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   export.c                                           :+:      :+:    :+:   */
+/*   pwd_master.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/23 12:49:13 by tpotilli          #+#    #+#             */
-/*   Updated: 2023/11/25 15:38:04 by tpotilli         ###   ########.fr       */
+/*   Created: 2023/11/23 12:09:39 by tpotilli          #+#    #+#             */
+/*   Updated: 2024/01/30 02:57:42 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	execute_export(t_data *data)
+void	execute_pwd(void)
 {
-	int	i;
-	int	j;
+	char	*pwd;
 
-	i = 0;
-	while (data->envp[i])
-		i++;
-	while (data->input)
-	{
-		data->envp[i][j] = data->input[j];
-		j++;
-	}
+	pwd = NULL;
+	pwd = getcwd(pwd, 0);
+	printf("%s\n", pwd);
+	free(pwd);
 }

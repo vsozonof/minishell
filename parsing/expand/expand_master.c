@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 02:16:29 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/29 00:49:14 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/30 10:24:01 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 void	expand_handler(t_data *data)
 {
 	reg_expander(data);
+	if (!data->input)
+		return ;
 	// if (is_there_quotes(data->input))
 	// 	data->input = quote_remover(data);
 	data->pr->input = data->input;
@@ -29,7 +31,7 @@ void	reg_expander(t_data *data)
 	{
 		if (is_in_quotes(data->input, i) != 1 && (data->input[i] == '$'
 				&& data->input[i + 1] && (!ft_is_whitespace(data->input[i + 1])
-					&& is_valid_char(data->input[i + 1]))))
+					&& expand_is_valid_char(data->input[i + 1]))))
 		{
 			reg_expand_splitter(data, i);
 			reg_expand_joiner(data);
@@ -42,7 +44,7 @@ void	reg_expander(t_data *data)
 				|| is_in_quotes(data->input, i) == 2)
 			&& data->input[i] == '\\')
 			backslash_expander(data, i);
-		if (data->input[i] == '\0')
+		if (!data->input || ft_strlen(data->input) == 0)
 			break ;
 		i++;
 	}
@@ -54,6 +56,11 @@ void	reg_expand_joiner(t_data *data)
 	{
 		free(data->input);
 		data->input = strjoin_and_free(data->head, data->tail);
+		if (ft_strlen(data->input) == 0)
+		{
+			free(data->input);
+			data->input = NULL;
+		}
 	}
 	else
 	{	
@@ -85,7 +92,7 @@ void	reg_expand_splitter(t_data *data, int i)
 		data->to_add = ft_strdup(data->c_status);
 		data->tail = ft_substr(data->input, (i + 2), ft_strlen(data->input));
 	}
-	else if (data->input[i] == '$' && ft_isalpha(data->input[i + 1]))
+	else if (data->input[i] == '$' && expand_is_valid_char(data->input[i + 1]))
 		search_and_split(data, i);
 }
 
@@ -95,10 +102,10 @@ void	search_and_split(t_data *data, int i)
 	char	*to_find;
 
 	c = 0;
-	if (data->input[i] == '$' && ft_isalpha(data->input[i + 1]))
+	if (data->input[i] == '$' && expand_is_valid_char(data->input[i + 1]))
 		i++;
 	c = i;
-	while (data->input[c] && ft_isalpha(data->input[c]))
+	while (data->input[c] && expand_is_valid_char(data->input[c]))
 		c++;
 	to_find = ft_substr(data->input, i, (c - i));
 	data->to_add = ft_get_env(data->env, to_find);

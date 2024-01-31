@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_manager.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 18:07:01 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/29 17:30:29 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/30 02:58:18 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,12 @@ void	builtin_manager(t_data *tmp, int token)
 	else if (token == 4)
 		execute_exit(tmp);
 	else if (token == 6)
-		execute_pwd(tmp);
+		execute_pwd();
 	else if (token == 5)
 		execute_export(tmp);
+	else if (token == 7)
+		execute_unset(tmp);
 }
-	// else if (token == 7)
-		// execute_unset(tmp);
 	// else
 		// builtin_checker(data);
 	// printf("hey = %d\n", data->n_cmds);

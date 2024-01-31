@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 04:37:37 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/27 05:36:34 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/30 10:59:23 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,5 @@ int	exception_checker_2(char *str, int i)
 		return (pr_error("syntax error near unexpected token `;;'"));
 	else if (str[i] == ';')
 		return (pr_error("syntax error near unexpected token `;'"));
-	else if (str[i] == '.' && str[i + 1] == '.')
-		return (pr_error("..: command not found."));
-	else if (str[i] == '.')
-		return (pr_error(".: filename argument required."));
 	return (1);
 }

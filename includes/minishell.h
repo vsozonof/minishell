@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/30 14:46:33 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/31 14:50:15 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,18 @@
 # include <sys/wait.h>
 # include <errno.h>
 
+# ifndef G_STATUS
+#  define G_STATUS
+
+extern int	g_status;
+
+# endif
+
 // ! ---------------------------------------------------------------------------
 // ?							STRUCTURES DECLARATION
 // ! ---------------------------------------------------------------------------
 
-struct	s_parse;
+struct		s_parse;
 typedef struct s_struct
 {
 	char			*name;
@@ -95,6 +102,7 @@ int		exception_checker_2(char *str, int i);
 int		unclosed_quote_detector(char *str);
 
 void	expand_handler(t_data *data);
+int		expand_is_valid_char(int c);
 int		is_valid_char(int c);
 int		is_valid_char_after_redir(int c);
 void	reg_expander(t_data *data);
@@ -104,6 +112,7 @@ void	tilde_expander(t_data *data, int i);
 void	backslash_expander(t_data *data, int i);
 void	search_and_split(t_data *data, int i);
 char	*quote_remover(t_data *data);
+char	*quote_remover_v2(char *str);
 int		empty_quote_handler(char *str);
 void	quote_flagger(char *str, int i, int q_flag);
 
@@ -112,11 +121,13 @@ void	quote_flagger(char *str, int i, int q_flag);
 // ! ---------------------------------------------------------------------------
 
 void	ft_printlst(t_env *L);
-
+void	exit_status_updater(t_data *data, int status, char *str, char *cmd);
 char	*ft_get_env(t_env *env, char *str);
 t_env	*ft_get_env_node(t_env *env, char *str);
 int		put_env_to_lst(t_env *env, char **envp);
 void	create_side_env(t_prompt *ptr);
+void	add_var_to_env(t_data *data, char *var);
+void	del_var_from_env(t_data *data, char *var);
 int		env_len(t_env *env);
 int		is_there_pipe(t_prompt *prompt);
 int		is_there_dollar(char *str);
@@ -204,10 +215,11 @@ int		quoted_arg_util(char *str, int c);
 void	change_directory(t_data *data, char *path);
 void	go_back_one_level(t_data *data);
 void	update_vars(t_data *data);
-void	error_handling(int err, char *str);
+void	error_handling(int err, char *str, t_data *data);
 
 void	execute_echo(t_data *data);
-void	execute_pwd(t_data *data);
+
+void	execute_pwd(void);
 void	execute_env(t_data *data);
 
 void	execute_export(t_data *data);
@@ -222,11 +234,16 @@ int		export_var_name_checker(char *str);
 int		is_valid_var_first_char(int c);
 int		is_valid_var_char(int c);
 int		is_valid_var_name(char *var);
-void	export_finalizer(char *args, int i);
+char	*export_finalizer(char *args, int i, t_data *data);
+void	do_export(char *var_name, char *var_value, t_data *data);
 
 void	execute_unset(t_data *data);
+char	*unset_extract_var_name(char *args, int i);
+int		unset_var_name_skipper(char *args, int i);
+void	do_unset(char *args, t_data *data);
+
+
 int		execute_exit(t_data *data);
-void	execute_cd(t_data *data);
 
 // void	execute_export();
 // int		execute_exit();

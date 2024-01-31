@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redir_utils.c                                      :+:      :+:    :+:   */
+/*   redir_utils-1.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 19:31:35 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/27 03:13:41 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/30 08:52:34 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	redirection_and_expand_handler(t_data *data)
 	if (is_there_backslash(data->input) || is_there_dollar(data->input)
 		|| is_there_quotes(data->input) || is_there_tilde(data->input))
 		expand_handler(data);
+	if (!data->input)
+		return (0);
 	if (is_there_redirs(data->input))
 	{
 		if (!is_valid_redir(data->input))
@@ -76,7 +78,8 @@ void	redirection_counter(t_data *data)
 				i += 2;
 			}
 		}
-		i++;
+		if (i < (int)ft_strlen(data->input))
+			i++;
 	}
 }
 

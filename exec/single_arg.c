@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 18:55:02 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/30 03:54:30 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/31 14:50:07 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	single_arg(t_data *data)
 	fre = ft_do_process(data->pr->nv, buf);
 	if (!fre || !cmd_argument)
 	{
-		perror("wrong commd\n");
+		exit_status_updater(data, 1, "command not found", buf);
 		free(buf);
 		ft_freedb(cmd_argument);
 		// free(essaie);
@@ -43,7 +43,7 @@ int	single_arg(t_data *data)
 	ft_freedb(cmd_argument);
 	free(buf);
 	free(fre);
-	// free(essaie);
+	free(essaie);
 	if (data->n_redirs > 0)
 		close(data->tab[0][2]);
 	return (0);

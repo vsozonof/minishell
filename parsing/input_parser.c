@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_parser.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 09:14:23 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/29 17:30:13 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/30 11:22:13 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,5 @@ int	get_cmd(t_data *data)
 	data->input = ft_substr(data->pr->input, i, ft_strlen(data->pr->input));
 	if (!data->input)
 		return (pr_error("malloc error."));
-	else
-		return (data->n_cmds = 1, 1);
+	return (data->n_cmds = 1, 1);
 }

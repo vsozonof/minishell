@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 22:20:24 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/28 23:19:22 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/30 02:45:14 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,49 @@ int	env_len(t_env *env)
 		tmp = tmp->next;
 	}
 	return (i);
+}
+
+void	add_var_to_env(t_data *data, char *var)
+{
+	t_env	*tmp;
+
+	tmp = data->env;
+	while (tmp->next)
+		tmp = tmp->next;
+	tmp->next = malloc(sizeof(t_env));
+	if (!tmp->next)
+		return ;
+	tmp->next->var = var;
+	tmp->next->next = NULL;
+	free_env_tab(data->pr->nv);
+	create_side_env(data->pr);
+}
+
+void	del_var_from_env(t_data *data, char *var)
+{
+	t_env	*nav;
+	t_env	*prev;
+	int		len;
+
+	nav = data->env;
+	prev = data->env;
+	len = ft_strlen(var);
+	if (ft_strncmp(nav->var, var, len))
+		nav = nav->next;
+	while (nav)
+	{
+		if (!ft_strncmp(nav->var, var, len))
+		{
+			free(nav->var);
+			prev->next = nav->next;
+			free_env_tab(data->pr->nv);
+			create_side_env(data->pr);
+			return (free(nav));
+		}
+		else
+		{
+			prev = nav;
+			nav = nav->next;
+		}
+	}
 }
