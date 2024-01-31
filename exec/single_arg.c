@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 18:55:02 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/31 14:50:07 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/31 15:13:47 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ int	single_arg(t_data *data)
 	ft_freedb(cmd_argument);
 	free(buf);
 	free(fre);
-	free(essaie);
+	if (data->n_redirs > 0)
+		free(essaie);
 	if (data->n_redirs > 0)
 		close(data->tab[0][2]);
 	return (0);
