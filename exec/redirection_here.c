@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 21:47:57 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/01 11:41:05 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/01 13:53:18 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,16 @@ int	redirection_manager(t_data *data, int i)
 {
 	int		token;
 
-	token = actual_redirect(data, i);
+	token = first_redirect(data->cmds[i]);
 	fprintf(stderr, "voici mon i dans redirection %d et mon token %d\n", i, token);
-	if (token == 2)
+	if (token == 1)
 	{
 		dup2(data->tab[data->index_redirs][2], 0);
 			return (printf("problem with dup2 redirection"), -1);
 		close(data->tab[data->index_redirs][2]);
 		data->index_redirs++;
 	}
-	else if (token == 1)
+	else if (token == 3)
 	{
 		fprintf(stderr, "je passe donc par la sortie\n");
 		dup2(data->tab[data->index_redirs][2], 1);
@@ -76,20 +76,75 @@ int	redirection_manager(t_data *data, int i)
 	return (0);
 }
 
-int		actual_redirect(t_data *data, int i)
+int		first_redirect(char *str)
 {
 	int		j;
-	int		token;
 
 	j = 0;
-	token = 0;
-	while (data->cmds[i][j])
+	while (str[j])
 	{
-		if (data->cmds[i][j] == '>')
-			token = 1;
-		else if (data->cmds[i][j] == '<')
-			token = 2;
+		if (str[j] == '>')
+		{
+			if (str[j + 1] == '>')
+				return (4);
+			return (3);
+		}
+		else if (str[j] == '<')
+		{
+			if (str[j + 1] == '<')
+				return (2);
+			return (1);
+		}
 		j++;
+	}
+	return (0);
+} // si token = 0 ya r ,1 <, 2 <<, 3 >
+
+int		last_redirect(char *str)
+{
+	int		j;
+
+	j = ft_strlen(str);
+	while (j > 0)
+	{
+		if (str[j] == '>')
+		{
+			if (str[j - 1] == '>')
+				return (4);
+			return (3);
+		}
+		else if (str[j] == '<')
+		{
+			if (str[j - 1] == '<')
+				return (2);
+			return (1);
+		}
+		j--;
+	}
+	return (0);
+} // si token = 0 ya r ,1 <, 2 <<, 3 >
+
+int		is_redirect_actual(char *input)
+{
+	int		i;
+	int		token;
+
+	i = ((token = 0));
+	while (input[i])
+	{
+		if (input[i] == '>')
+		{
+			token++;
+			if (input[i + 1] == '>')
+				i++;
+		}
+		else if (input[i] == '<')
+		{
+			token++;
+			if (input[i + 1] == '<')
+				i++;
+		}
+		i++;
 	}
 	return (token);
 }

@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 18:55:02 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/31 15:13:47 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/01 13:51:55 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,32 +76,36 @@ int	exec_single(char **cmd_argument, char *fre, t_data	*data)
 
 int	redirection_single(t_data *data)
 {
-	if (data->n_redirs > 0)
+	int		last;
+	int		first;
+	int		verif;
+
+	first = first_redirect(data->input);
+	last = last_redirect(data->input);
+	verif = is_redirect_actual(data->input);
+	fprintf(stderr, "voici donc first %d et last %d et verif %d\n", first, last, verif);
+	if (data->n_redirs == 2)
 	{
-		// fprintf(stderr, "%d\n", data->n_redirs);
-		if (data->n_redirs == 2)
+		if (dup2(data->tab[0][2], 0) < 0)
+			return (close(data->tab[data->index_redirs][2]), printf("problem with dup2 1"), -1);
+		if (dup2(data->tab[1][2], 1) < 0)
+			return (close(data->tab[data->index_redirs][2]), printf("problem with dup2 1"), -1);
+	}
+	else if (data->n_redirs == 1)
+	{
+		if (redirection_single_chev(data, data->input) == 0)
 		{
 			if (dup2(data->tab[0][2], 0) < 0)
 				return (close(data->tab[data->index_redirs][2]), printf("problem with dup2 1"), -1);
-			if (dup2(data->tab[1][2], 1) < 0)
-				return (close(data->tab[data->index_redirs][2]), printf("problem with dup2 1"), -1);
+			close(data->tab[0][2]);
 		}
-		else if (data->n_redirs == 1)
+		else if (redirection_single_chev(data, data->input) == 1)
 		{
-			if (redirection_single_chev(data, data->input) == 0)
-			{
-				if (dup2(data->tab[0][2], 0) < 0)
-					return (close(data->tab[data->index_redirs][2]), printf("problem with dup2 1"), -1);
-				close(data->tab[0][2]);
-			}
-			else if (redirection_single_chev(data, data->input) == 1)
-			{
-				if (dup2(data->tab[0][2], 1) < 0)
-					return (close(data->tab[data->index_redirs][2]), printf("problem with dup2 1"), -1);
-				close(data->tab[0][2]);
-			}
-			fprintf(stderr, "je sors\n");
+			if (dup2(data->tab[0][2], 1) < 0)
+				return (close(data->tab[data->index_redirs][2]), printf("problem with dup2 1"), -1);
+			close(data->tab[0][2]);
 		}
+		fprintf(stderr, "je sors\n");
 	}
 	return (0);
 }

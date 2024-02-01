@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:10:50 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/30 01:06:47 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/01 13:20:23 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	pipex_exec(t_data	*data)
 		{
 			perror("wrong commd\n");
 			free(buf);
-			ft_freedb(data->cmds);
+			// ft_freedb(data->cmds);
 			return (0);
 		}
 		free(buf);

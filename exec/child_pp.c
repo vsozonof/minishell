@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:10:29 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/01 11:59:50 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/01 12:05:32 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ char	*child_process_in(int **pipefd, t_data *data, int i, int token)
 	return (cmd);
 }
 
-	// if (redirection_manager(pipefd, token, data, i) == -1)
-	// 	return (NULL);
+// if (redirection_manager(pipefd, token, data, i) == -1)
+// 	return (NULL);
 
 int	child_process_in_or_out(int	**pi, t_data *data, int i, int token)
 {

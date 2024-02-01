@@ -1,4 +1,8 @@
-
+builtin:
+cd
+echo
+env
+exit.c
 exit.o
 export
 pwd

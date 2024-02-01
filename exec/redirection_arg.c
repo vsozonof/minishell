@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 00:18:44 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/01 11:01:47 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/01 12:57:10 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ char *ft_essaie_helper(char *buf, char *input, int j, t_data *data)
 	str = malloc(sizeof(char) * (len + 1));
 	while (input[i])
 	{
-		if (input[i] == ' ' && input[i + 1] == '>')
+		if (input[i] == ' ' && (input[i + 1] == '>'
+		|| input[i + 1] == '<' ))
 		{
 			i += 3;
 			while (ft_isalnum(input[i]))
