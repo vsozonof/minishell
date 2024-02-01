@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:11:05 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/31 14:48:07 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/01 11:58:21 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,11 @@ int	ft_pipex(t_data	*data)
 	pipefd = alloc_pipe(i, pipefd);
 	if (!pipefd[1] || !pipefd[0])
 		return (free(pipefd), -1);
+	fprintf(stderr, "============DEBUT DE PP\n============");
 	while (i < data->n_cmds)
 	{
+		fprintf(stderr, "JE SUIS A MA %d\n", i);
+		fprintf(stderr, "mon input = %s\n", data->cmds[i]);
 		pid[i] = fork();
 		if (pid[i] < 0)
 			return (printf("erreur de fork\n"), 1);
@@ -49,12 +52,13 @@ int	ft_pipex(t_data	*data)
 				cmd = child_process_in(pipefd, data, i, 1);
 			if (cmd == NULL)
 			{
+				fprintf(stderr, "MON CMD EST NULL (celui de %d) \n", i);
 				free_pipe_argv(pipefd, data->cmds);
 				exit(0);
 			}
 			else
 			{
-				if (data->n_redirs > 0)
+				if (check_redirection_now(data, i) == 0)
 					essaie = ft_essaie(data, data->cmds[i]);
 				else
 					essaie = data->cmds[i];
@@ -66,6 +70,7 @@ int	ft_pipex(t_data	*data)
 					fprintf(stderr, "cmd_arg = %s\n", cmd_argument[q]);
 					q++;
 				}
+				close(data->tab[data->index_redirs][2]);
 				execve(cmd, cmd_argument, data->pr->nv);
 				free_pipe_argv(pipefd, data->cmds);
 				exit(0);

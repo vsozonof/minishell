@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:10:29 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/30 03:16:40 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/01 11:59:50 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,12 @@ char	*child_process_in(int **pipefd, t_data *data, int i, int token)
 		if (child_process_middle(pipefd, data, token) == -1)
 			return (NULL);
 	}
+	data->nb_redirs_ac = get_nb_redirs_ac(data);
 	if (check_redirection_now(data, i) == 0)
-		if (redirection_manager(data, i) == -1)
-			return (NULL);
+		redirection_manager(data, i); // !!!! regler les cas ou ca echoue
 	buf = arg(data->cmds[i], data);
 	cmd = ft_do_process(data->pr->nv, buf);
+	fprintf(stderr, "DONC MON CMD A LA FIN DE IN %s\n", cmd);
 	if (cmd == NULL)
 		return (free_pipe_argv(pipefd, data->cmds), NULL);
 	free(pipefd[0]);

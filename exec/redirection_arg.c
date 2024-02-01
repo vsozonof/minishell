@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 00:18:44 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/31 14:39:42 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/01 11:01:47 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ char *ft_essaie(t_data *data, char *input)
 
 	i = ((c = 0));
     fprintf(stderr, "voici linput pour la len %s\n", input);
-	buf = malloc(sizeof(char) * (ft_strlen(input)));
+	buf = malloc(sizeof(char) * (ft_strlen(input) + 1));
+	fprintf(stderr ,"ma len = %zu\n", ft_strlen(input));
 	while (input[i])
 	{
 		if (input[i] != '>' && input[i] != '<')
@@ -72,7 +73,7 @@ char *ft_essaie_helper(char *buf, char *input, int j, t_data *data)
 		j++;
 	}
 	str[j] = '\0';
-	fprintf(stderr, "VOICI LE RESULTAT %s\n", str);
+	fprintf(stderr, "VOICI LE RESULTAT de ft_essaie_helper %s\n", str);
 	return (str);
 }
 

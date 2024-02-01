@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/31 14:50:15 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/01 10:53:17 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ typedef struct s_parse
 	char			*c_status;
 	int				**tab;
 	int				n_redirs;
+	int				nb_redirs_ac;
 	int				i;
 	int				index_redirs;
 	struct s_parse	*next;
@@ -194,6 +195,9 @@ char	*ft_essaie_helper(char *buf, char *input, int , t_data *data);
 int		ft_count_space(char *buf);
 int		redirection_single_chev(t_data *data, char *input);
 int		len_buf(char *buf, char *input, t_data *data, int act_redir);
+int		get_nb_redirs_ac(t_data *data);
+void	close_all_pipe(int **pipefd, t_data *data);
+int		actual_redirect(t_data *data, int i);
 
 // ! ---------------------------------------------------------------------------
 // ?							Single_Pipe

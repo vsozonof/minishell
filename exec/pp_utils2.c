@@ -6,18 +6,28 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 15:09:52 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/31 14:39:52 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/01/31 18:41:51 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	close_all_pipe(int **pipefd)
+void	close_all_pipe(int **pipefd, t_data *data)
 {
+	int		i;
+	(void)data;
+
+	i = 0;
 	close(pipefd[0][0]);
 	close(pipefd[0][1]);
 	close(pipefd[1][1]);
 	close(pipefd[1][0]);
+	// close(data->tab[i][2]);
+	// while (data->n_redirs > i)
+	// {
+	// 	close(data->tab[i][2]);
+	// 	i++;
+	// }
 }
 
 int	len_db_tab(char **str)
