@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 21:47:57 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/01 13:53:18 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/01 17:02:06 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,23 +79,28 @@ int	redirection_manager(t_data *data, int i)
 int		first_redirect(char *str)
 {
 	int		j;
+	int		cpt;
+	int		check;
 
-	j = 0;
+	check = 0;
+	j = ((cpt = 0));
 	while (str[j])
 	{
 		if (str[j] == '>')
+			check++;
+		if (str[j] == '<')
 		{
-			if (str[j + 1] == '>')
-				return (4);
-			return (3);
-		}
-		else if (str[j] == '<')
-		{
-			if (str[j + 1] == '<')
-				return (2);
-			return (1);
+			if (str[j + 1] != '<')
+				break;
+			cpt++;
 		}
 		j++;
+	}
+	if (cpt > 1)
+	{
+		if (check > 0)
+			return (-2);
+		return (-1);
 	}
 	return (0);
 } // si token = 0 ya r ,1 <, 2 <<, 3 >
@@ -103,25 +108,22 @@ int		first_redirect(char *str)
 int		last_redirect(char *str)
 {
 	int		j;
+	int		verif;
 
-	j = ft_strlen(str);
-	while (j > 0)
+	j = ((verif = 0));
+	while (str[j])
 	{
+		// fprintf(stderr, "dans last_redirecct %d\n", j);
 		if (str[j] == '>')
 		{
-			if (str[j - 1] == '>')
-				return (4);
-			return (3);
+			verif++;
+			// if (str[j - 1] == '>')
 		}
-		else if (str[j] == '<')
-		{
-			if (str[j - 1] == '<')
-				return (2);
-			return (1);
-		}
-		j--;
+		j++;
 	}
-	return (0);
+	if (verif > 0)
+		verif--;
+	return (verif);
 } // si token = 0 ya r ,1 <, 2 <<, 3 >
 
 int		is_redirect_actual(char *input)

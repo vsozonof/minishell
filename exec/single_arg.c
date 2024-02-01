@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 18:55:02 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/01 13:51:55 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/01 17:11:13 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,9 @@ int	single_arg(t_data *data)
 	char	*fre;
 	char	**cmd_argument;
 	char	*essaie;
+	int		i;
 
-	data->index_redirs = 0;
+	data->index_redirs = ((i = 0));
 	buf = arg(data->input, data);
 	if (data->n_redirs > 0)
 		essaie = ft_essaie(data, data->input);
@@ -35,18 +36,22 @@ int	single_arg(t_data *data)
 		// free(essaie);
 		return (0);
 	}
-	int	c = 0;
-	fprintf(stderr, "fre = %s\n", fre);
-	while (cmd_argument[c++])
-		fprintf(stderr, "cmd = %s\n", cmd_argument[c]);
 	exec_single(cmd_argument, fre, data);
 	ft_freedb(cmd_argument);
 	free(buf);
 	free(fre);
 	if (data->n_redirs > 0)
 		free(essaie);
+	data->index_redirs = 0;
 	if (data->n_redirs > 0)
-		close(data->tab[0][2]);
+	{
+		while (data->n_redirs > 0)
+		{
+			close(data->tab[i][2]);
+			i++;
+			data->n_redirs--;
+		}
+	}
 	return (0);
 }
 
@@ -64,6 +69,13 @@ int	exec_single(char **cmd_argument, char *fre, t_data	*data)
 	{
 		if (redirection_single(data) == -1)
 			return (-1);
+		fprintf(stderr, "fre = %s\n", fre);
+		int x = 0;
+		while (cmd_argument[x])
+		{
+			fprintf(stderr, "cmd = %s\n", cmd_argument[x]);
+			x++;
+		}
 		execve(fre, cmd_argument, data->pr->nv);
 		free(fre);
 		ft_freedb(cmd_argument);
@@ -84,28 +96,15 @@ int	redirection_single(t_data *data)
 	last = last_redirect(data->input);
 	verif = is_redirect_actual(data->input);
 	fprintf(stderr, "voici donc first %d et last %d et verif %d\n", first, last, verif);
-	if (data->n_redirs == 2)
+	if (data->n_redirs > 1)
 	{
-		if (dup2(data->tab[0][2], 0) < 0)
-			return (close(data->tab[data->index_redirs][2]), printf("problem with dup2 1"), -1);
-		if (dup2(data->tab[1][2], 1) < 0)
-			return (close(data->tab[data->index_redirs][2]), printf("problem with dup2 1"), -1);
+		if (redirection_single_1(data, first, last, verif) == -1)
+			return (-1);
 	}
 	else if (data->n_redirs == 1)
 	{
-		if (redirection_single_chev(data, data->input) == 0)
-		{
-			if (dup2(data->tab[0][2], 0) < 0)
-				return (close(data->tab[data->index_redirs][2]), printf("problem with dup2 1"), -1);
-			close(data->tab[0][2]);
-		}
-		else if (redirection_single_chev(data, data->input) == 1)
-		{
-			if (dup2(data->tab[0][2], 1) < 0)
-				return (close(data->tab[data->index_redirs][2]), printf("problem with dup2 1"), -1);
-			close(data->tab[0][2]);
-		}
-		fprintf(stderr, "je sors\n");
+		if (redirection_single_2(data, first, last, verif) == -1)
+			return (-1);
 	}
 	return (0);
 }

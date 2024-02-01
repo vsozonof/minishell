@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/01 13:52:28 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/01 17:09:20 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,6 +200,8 @@ void	close_all_pipe(int **pipefd, t_data *data);
 int		first_redirect(char *str);
 int		last_redirect(char *str);
 int		is_redirect_actual(char *input);
+int		redirection_single_1(t_data *data, int first, int last, int verif);
+int		redirection_single_2(t_data *data, int first, int last, int verif);
 
 // ! ---------------------------------------------------------------------------
 // ?							Single_Pipe

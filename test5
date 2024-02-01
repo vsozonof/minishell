@@ -32,6 +32,8 @@ redirection_arg.c
 redirection_arg.o
 redirection_here.c
 redirection_here.o
+redirection_single.c
+redirection_single.o
 single_arg.c
 single_arg.o
 UNUSED_command_overall.c
