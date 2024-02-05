@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/05 13:05:09 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/05 15:58:24 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,15 +201,18 @@ int		redirection_single_chev(t_data *data, char *input);
 int		len_buf(char *buf, char *input, t_data *data, int act_redir);
 int		get_nb_redirs_ac(t_data *data);
 void	close_all_pipe(int **pipefd, t_data *data);
-int		first_redirect(char *str);
-int		last_redirect(char *str);
+int		first_redirect(t_data *data);
+int		last_redirect(t_data *data);
 int		is_redirect_actual(char *input);
 int		redirection_single_1(t_data *data, int first, int last, int verif);
 int		redirection_single_2(t_data *data, int first, int last, int verif);
 void	free_single(t_data *data, char **cmd_argument, char *buf, char *fre);
 int		redirection_here_doc(t_data *data, char *input);
 char    *ft_do_here_doc(t_data *data);
-int		get_name_heredoc();
+char	*get_name_heredoc();
+int		ft_make_here_doc(t_data *data, int file);
+char	*get_flag_here(t_data *data);
+char	*main_here_doc(t_data *data);
 
 // ! ---------------------------------------------------------------------------
 // ?							Single_Pipe

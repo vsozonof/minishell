@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 21:47:57 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/01 17:02:06 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/05 17:05:07 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ int	redirection_manager(t_data *data, int i)
 {
 	int		token;
 
-	token = first_redirect(data->cmds[i]);
+	// token = first_redirect(data->cmds[i]);
+	token = 0; // chnager ca !!!
 	fprintf(stderr, "voici mon i dans redirection %d et mon token %d\n", i, token);
 	if (token == 1)
 	{
@@ -76,56 +77,49 @@ int	redirection_manager(t_data *data, int i)
 	return (0);
 }
 
-int		first_redirect(char *str)
+int		first_redirect(t_data *data)
 {
 	int		j;
-	int		cpt;
+	int		i;
+	int		check;
+
+	check = -1;
+	j = ((i = 0));
+	if (data->n_redirs > 0)
+	{
+		while (i < data->n_redirs)
+		{
+			if (data->tab[i][1] == 1)
+			{
+				fprintf(stderr, "donc la mon tab est en infile\n");
+				check = i;
+			}
+			i++;
+		}
+	}
+	return (check);
+} // si token = 0 ya r ,1 <, 2 <<, 3 >
+// pour celui la c'est des <
+int		last_redirect(t_data *data)
+{
+	int		j;
+	int		i;
 	int		check;
 
 	check = 0;
-	j = ((cpt = 0));
-	while (str[j])
+	j = ((i = 0));
+	if (data->n_redirs > 0)
 	{
-		if (str[j] == '>')
-			check++;
-		if (str[j] == '<')
+		while (i < data->n_redirs)
 		{
-			if (str[j + 1] != '<')
-				break;
-			cpt++;
+			if (data->tab[i][1] == 3)
+				check = i;
+			i++;
 		}
-		j++;
 	}
-	if (cpt > 1)
-	{
-		if (check > 0)
-			return (-2);
-		return (-1);
-	}
-	return (0);
+	return (check);
 } // si token = 0 ya r ,1 <, 2 <<, 3 >
-
-int		last_redirect(char *str)
-{
-	int		j;
-	int		verif;
-
-	j = ((verif = 0));
-	while (str[j])
-	{
-		// fprintf(stderr, "dans last_redirecct %d\n", j);
-		if (str[j] == '>')
-		{
-			verif++;
-			// if (str[j - 1] == '>')
-		}
-		j++;
-	}
-	if (verif > 0)
-		verif--;
-	return (verif);
-} // si token = 0 ya r ,1 <, 2 <<, 3 >
-
+// pour celui la c'est des >
 int		is_redirect_actual(char *input)
 {
 	int		i;

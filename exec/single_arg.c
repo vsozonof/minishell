@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 18:55:02 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/05 12:39:03 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/05 16:25:39 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	single_arg(t_data *data)
 	data->index_redirs = ((i = 0));
 	buf = arg(data->input, data);
 	if (data->n_redirs > 0)
-		essaie = ft_essaie(data, data->input);
+		essaie = data->redir_tab[0];
 	else
 		essaie = data->input;
 	cmd_argument = ft_split(essaie, ' ');
@@ -53,8 +53,11 @@ int	exec_single(char **cmd_argument, char *fre, t_data	*data)
 		return (printf("error in fork\n"), -1);
 	else if (pid == 0)
 	{
-		if (redirection_single(data) == -1)
-			return (-1);
+		if (data->n_redirs > 0)
+		{
+			if (redirection_single(data) == -1)
+				return (-1);
+		}
 		fprintf(stderr, "fre = %s\n", fre);
 		while (cmd_argument[x])
 		{
@@ -62,6 +65,7 @@ int	exec_single(char **cmd_argument, char *fre, t_data	*data)
 			x++;
 		}
 		execve(fre, cmd_argument, data->pr->nv);
+		fprintf(stderr, "execve fail\n");
 		free(fre);
 		ft_freedb(cmd_argument);
 		exit(0);
@@ -77,12 +81,17 @@ int	redirection_single(t_data *data)
 	int		first;
 	int		verif;
 
-	first = first_redirect(data->input);
-	last = last_redirect(data->input);
+	first = first_redirect(data);
+	last = last_redirect(data);
 	verif = is_redirect_actual(data->input);
 	fprintf(stderr, "voici donc first %d et last %d et verif %d\n", first, last, verif);
-	// if (data->nb_here_doc > 1)
-	// 	ft_do_here_doc();
+	fprintf(stderr, "voici redir_tab \n");
+	int i = 0;
+	while (data->redir_tab[i])
+	{
+		fprintf(stderr, "data = %s\n", data->redir_tab[i]);
+		i++;
+	}
 	if (data->n_redirs > 1)
 	{
 		if (redirection_single_1(data, first, last, verif) == -1)
