@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 18:55:02 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/05 08:08:49 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/05 11:27:15 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,27 +38,9 @@ int	single_arg(t_data *data)
 	exec_single(cmd_argument, fre, data);
 	if (data->n_redirs > 0)
 		free(essaie);
-	return (0);
-}
-
-void	free_single(t_data *data, char **cmd_argument, char *buf, char *fre)
-{
-	int		i;
-
-	i = 0;
-	ft_freedb(cmd_argument);
 	free(buf);
-	free(fre);
-	data->index_redirs = 0;
-	if (data->n_redirs > 0)
-	{
-		while (data->n_redirs > 0)
-		{
-			close(data->tab[i][2]);
-			i++;
-			data->n_redirs--;
-		}
-	}
+	free_single(data, cmd_argument, buf, fre);
+	return (0);
 }
 
 int	exec_single(char **cmd_argument, char *fre, t_data	*data)

@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:12:21 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/22 19:37:42 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/05 11:25:43 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,24 @@ void	free_pipe_argv(int **pipefd, char *argv[])
 	free(pipefd[1]);
 	free(pipefd[0]);
 	free(pipefd);
+}
+
+void	free_single(t_data *data, char **cmd_argument, char *buf, char *fre)
+{
+	int		i;
+
+	i = 0;
+	ft_freedb(cmd_argument);
+	free(buf);
+	free(fre);
+	data->index_redirs = 0;
+	if (data->n_redirs > 0)
+	{
+		while (data->n_redirs > 0)
+		{
+			close(data->tab[i][2]);
+			i++;
+			data->n_redirs--;
+		}
+	}
 }
