@@ -6,7 +6,7 @@
 #    By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/09 23:22:06 by vsozonof          #+#    #+#              #
-#    Updated: 2024/02/01 17:11:28 by tpotilli         ###   ########.fr        #
+#    Updated: 2024/02/05 13:02:41 by tpotilli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,6 +59,7 @@ SRCS = main.c \
 	   exec/redirection_here.c \
 	   exec/redirection_arg.c \
 	   exec/redirection_single.c \
+	   exec/here_doc.c \
 	   builtin/unset/unset_master.c \
 	   builtin/unset/unset_utils-1.c \
 	   builtin/cd/cd_master.c \

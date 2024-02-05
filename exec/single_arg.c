@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 18:55:02 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/05 11:27:15 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/05 12:39:03 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ int	single_arg(t_data *data)
 	exec_single(cmd_argument, fre, data);
 	if (data->n_redirs > 0)
 		free(essaie);
-	free(buf);
 	free_single(data, cmd_argument, buf, fre);
 	return (0);
 }
@@ -82,6 +81,8 @@ int	redirection_single(t_data *data)
 	last = last_redirect(data->input);
 	verif = is_redirect_actual(data->input);
 	fprintf(stderr, "voici donc first %d et last %d et verif %d\n", first, last, verif);
+	// if (data->nb_here_doc > 1)
+	// 	ft_do_here_doc();
 	if (data->n_redirs > 1)
 	{
 		if (redirection_single_1(data, first, last, verif) == -1)

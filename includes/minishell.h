@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/05 08:07:00 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/05 12:52:09 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ typedef struct s_parse
 	int				nb_redirs_ac;
 	int				i;
 	int				index_redirs;
+	int				nb_here_doc;
 	struct s_parse	*next;
 }	t_data;	
 
@@ -203,6 +204,9 @@ int		is_redirect_actual(char *input);
 int		redirection_single_1(t_data *data, int first, int last, int verif);
 int		redirection_single_2(t_data *data, int first, int last, int verif);
 void	free_single(t_data *data, char **cmd_argument, char *buf, char *fre);
+int		redirection_here_doc(t_data *data, char *input);
+char    *ft_do_here_doc(t_data *data);
+int		get_name_heredoc();
 
 // ! ---------------------------------------------------------------------------
 // ?							Single_Pipe

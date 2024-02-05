@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_utils-2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 10:30:26 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/30 09:10:55 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/05 12:43:24 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,14 @@ int	redir_checker(char *str, int i)
 	else if (str[i - 1] == '<' && str[i] == '>'
 		&& (i >= 2 && str[i - 2] != '<'))
 		return (pr_error("parse error near '\\n'"));
-	else if (str[i] == '<' && str[i - 1] == '<')
-		return (pr_error("parse error near '<<'"));
+	// else if (str[i] == '<' && str[i - 1] == '<')
+	// 	return (pr_error("parse error near '<<'"));
 	else if (str[i] == '>' && str[i - 1] == '>')
 		return (pr_error("parse error near '>>'"));
-	else if (str[i] == '<' || (str[i] == '<' && str[i - 1] == '>'))
-		return (pr_error("parse error near '<'"));
-	else if (str[i] == '>' || (str[i] == '<' && str[i - 1] == '<'))
-		return (pr_error("parse error near '>'"));
+	// else if (str[i] == '<' || (str[i] == '<' && str[i - 1] == '>'))
+	// 	return (pr_error("parse error near '<'"));
+	// else if (str[i] == '>' || (str[i] == '<' && str[i - 1] == '<'))
+	// 	return (pr_error("parse error near '>'"));
 	return (1);
 }
 
