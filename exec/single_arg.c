@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 18:55:02 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/05 07:53:32 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/05 08:08:49 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,22 @@ int	single_arg(t_data *data)
 		exit_status_updater(data, 1, "command not found", buf);
 		free(buf);
 		ft_freedb(cmd_argument);
-		// free(essaie);
 		return (0);
 	}
 	exec_single(cmd_argument, fre, data);
+	if (data->n_redirs > 0)
+		free(essaie);
+	return (0);
+}
+
+void	free_single(t_data *data, char **cmd_argument, char *buf, char *fre)
+{
+	int		i;
+
+	i = 0;
 	ft_freedb(cmd_argument);
 	free(buf);
 	free(fre);
-	if (data->n_redirs > 0)
-		free(essaie);
 	data->index_redirs = 0;
 	if (data->n_redirs > 0)
 	{
@@ -52,19 +59,15 @@ int	single_arg(t_data *data)
 			data->n_redirs--;
 		}
 	}
-	return (0);
 }
 
 int	exec_single(char **cmd_argument, char *fre, t_data	*data)
 {
 	int		pid;
-	int		j;
-	int		i;
+	int		x;
 
+	x = 0;
 	pid = fork();
-	j = ((i = 0));
-	(void)i;
-	(void)j;
 	if (pid < 0)
 		return (printf("error in fork\n"), -1);
 	else if (pid == 0)
@@ -72,7 +75,6 @@ int	exec_single(char **cmd_argument, char *fre, t_data	*data)
 		if (redirection_single(data) == -1)
 			return (-1);
 		fprintf(stderr, "fre = %s\n", fre);
-		int x = 0;
 		while (cmd_argument[x])
 		{
 			fprintf(stderr, "cmd = %s\n", cmd_argument[x]);
