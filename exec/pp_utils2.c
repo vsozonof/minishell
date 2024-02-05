@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 15:09:52 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/31 18:41:51 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/05 07:53:09 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	close_all_pipe(int **pipefd, t_data *data)
 {
 	int		i;
 	(void)data;
+	(void)i;
 
 	i = 0;
 	close(pipefd[0][0]);
@@ -78,6 +79,7 @@ int	ft_count_space(char *buf)
 	int	cpt;
 	
 	i = ((c = 0));
+	(void)i;
 	cpt = 0;
 	while (buf[c] && buf[c + 1])
 	{

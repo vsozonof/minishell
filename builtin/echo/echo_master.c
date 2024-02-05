@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo_master.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 12:48:29 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/30 12:51:31 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/05 07:55:30 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	execute_echo(t_data *data)
 	char	*to_print;
 	char	*tmp;
 	int		flag;
+	(void)flag;
 
 	to_print = export_extract_arg(data->input);
 	if (!to_print)

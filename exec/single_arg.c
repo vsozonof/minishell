@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 18:55:02 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/01 17:11:13 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/05 07:53:32 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ int	exec_single(char **cmd_argument, char *fre, t_data	*data)
 
 	pid = fork();
 	j = ((i = 0));
+	(void)i;
+	(void)j;
 	if (pid < 0)
 		return (printf("error in fork\n"), -1);
 	else if (pid == 0)
