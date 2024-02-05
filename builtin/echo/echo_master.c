@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 12:48:29 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/05 11:57:23 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/05 13:03:10 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	execute_echo(t_data *data)
 	char	*to_print;
 	char	*tmp;
 	int		flag;
+	(void)flag;
 
 	to_print = export_extract_arg(data->input);
 	if (!to_print)

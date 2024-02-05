@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 18:55:02 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/01 17:11:13 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/05 11:27:15 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,36 +33,23 @@ int	single_arg(t_data *data)
 		exit_status_updater(data, 1, "command not found", buf);
 		free(buf);
 		ft_freedb(cmd_argument);
-		// free(essaie);
 		return (0);
 	}
 	exec_single(cmd_argument, fre, data);
-	ft_freedb(cmd_argument);
-	free(buf);
-	free(fre);
 	if (data->n_redirs > 0)
 		free(essaie);
-	data->index_redirs = 0;
-	if (data->n_redirs > 0)
-	{
-		while (data->n_redirs > 0)
-		{
-			close(data->tab[i][2]);
-			i++;
-			data->n_redirs--;
-		}
-	}
+	free(buf);
+	free_single(data, cmd_argument, buf, fre);
 	return (0);
 }
 
 int	exec_single(char **cmd_argument, char *fre, t_data	*data)
 {
 	int		pid;
-	int		j;
-	int		i;
+	int		x;
 
+	x = 0;
 	pid = fork();
-	j = ((i = 0));
 	if (pid < 0)
 		return (printf("error in fork\n"), -1);
 	else if (pid == 0)
@@ -70,7 +57,6 @@ int	exec_single(char **cmd_argument, char *fre, t_data	*data)
 		if (redirection_single(data) == -1)
 			return (-1);
 		fprintf(stderr, "fre = %s\n", fre);
-		int x = 0;
 		while (cmd_argument[x])
 		{
 			fprintf(stderr, "cmd = %s\n", cmd_argument[x]);
