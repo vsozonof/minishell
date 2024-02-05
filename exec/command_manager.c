@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 18:07:01 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/30 02:58:18 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/05 10:34:37 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,19 +31,26 @@ int	builtin_checker(t_data *tmp)
 	int		token;
 
 	token = 0;
-	if (ft_strncmp(tmp->input, "cd", 2) == 0)
+	if (ft_strncmp(tmp->input, "cd", 2) == 0
+		&& (tmp->input[2] == '\0' || ft_is_whitespace(tmp->input[2])))
 		token = 1;
-	if (ft_strncmp(tmp->input, "echo", 4) == 0)
+	if (ft_strncmp(tmp->input, "echo", 4) == 0
+		&& (tmp->input[4] == '\0' || ft_is_whitespace(tmp->input[4])))
 		token = 2;
-	else if (ft_strncmp(tmp->input, "env", 3) == 0)
+	else if (ft_strncmp(tmp->input, "env", 3) == 0
+		&& (tmp->input[3] == '\0' || ft_is_whitespace(tmp->input[3])))
 		token = 3;
-	else if (ft_strncmp(tmp->input, "exit", 4) == 0)
+	else if (ft_strncmp(tmp->input, "exit", 4) == 0
+		&& (tmp->input[4] == '\0' || ft_is_whitespace(tmp->input[4])))
 		token = 4;
-	else if (ft_strncmp(tmp->input, "export", 6) == 0)
+	else if (ft_strncmp(tmp->input, "export", 6) == 0
+		&& (tmp->input[6] == '\0' || ft_is_whitespace(tmp->input[6])))
 		token = 5;
-	if (ft_strncmp(tmp->input, "pwd", 3) == 0)
+	if (ft_strncmp(tmp->input, "pwd", 3) == 0
+		&& (tmp->input[3] == '\0' || ft_is_whitespace(tmp->input[3])))
 		token = 6;
-	else if (ft_strncmp(tmp->input, "unset", 5) == 0)
+	else if (ft_strncmp(tmp->input, "unset", 5) == 0
+		&& (tmp->input[5] == '\0' || ft_is_whitespace(tmp->input[5])))
 		token = 7;
 	return (token);
 }

@@ -6,36 +6,21 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 00:49:25 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/27 01:14:58 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/05 12:23:54 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*file_name_finder(t_data *data, int mode, int i, int c)
+char	*file_name_finder(t_data *data, int i, int c)
 {
-	if (mode == '<')
-	{
-		i--;
-		while (ft_is_whitespace(data->input[i]) && i > 0)
-			i--;
-		c = i;
-		while (!ft_is_whitespace(data->input[i]) && i > 0)
-			i--;
-		c++;
-		return (ft_substr(data->input, i, (c - i)));
-	}
-	else if (mode == '>')
-	{
+	i++;
+	while (ft_is_whitespace(data->input[i]) && data->input[i])
 		i++;
-		while (ft_is_whitespace(data->input[i]) && data->input[i])
-			i++;
-		c = i;
-		while (!ft_is_whitespace(data->input[i]) && data->input[i])
-			i++;
-		return (ft_substr(data->input, c, (i - c)));
-	}
-	return (NULL);
+	c = i;
+	while (!ft_is_whitespace(data->input[i]) && data->input[i])
+		i++;
+	return (ft_substr(data->input, c, (i - c)));
 }
 
 void	set_tab_values(t_data *data, int n, int i, int mode)
@@ -45,9 +30,9 @@ void	set_tab_values(t_data *data, int n, int i, int mode)
 	file_name = NULL;
 	if (mode == 1)
 	{
-		file_name = file_name_finder(data, data->input[i], i, 0);
 		if (data->input[i] == '<')
 		{
+			file_name = file_name_finder(data, i, 0);
 			data->tab[n][0] = i;
 			data->tab[n][1] = 1;
 			data->tab[n][2] = ft_create_fd(file_name,
@@ -55,6 +40,7 @@ void	set_tab_values(t_data *data, int n, int i, int mode)
 		}
 		else if (data->input[i] == '>')
 		{
+			file_name = file_name_finder(data, i, 0);
 			data->tab[n][0] = i;
 			data->tab[n][1] = 3;
 			data->tab[n][2] = ft_create_fd(file_name,

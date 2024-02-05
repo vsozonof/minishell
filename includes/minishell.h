@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/05 12:52:09 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/05 13:05:09 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ typedef struct s_parse
 	int				i_status;
 	char			*c_status;
 	int				**tab;
+	char			**redir_tab;
 	int				n_redirs;
 	int				nb_redirs_ac;
 	int				i;
@@ -150,9 +151,11 @@ void	redirection_counter(t_data *data);
 void	redirection_parser(t_data *data);
 void	get_redir_infos(t_data *data);
 void	set_tab_values(t_data *data, int n, int i, int mode);
-char	*file_name_finder(t_data *data, int mode, int i, int c);
+char	*file_name_finder(t_data *data, int i, int c);
 int		redirection_and_expand_handler(t_data *data);
 void	tab_value_setter_double(t_data *data, int n, int i);
+void	extract_redir_cmds(char **splitted, t_data *data);
+int		cmd_counter(char **splitted);
 
 // ! ---------------------------------------------------------------------------
 // ?							SIGNAL HANDLER
@@ -231,6 +234,8 @@ void	update_vars(t_data *data);
 void	error_handling(int err, char *str, t_data *data);
 
 void	execute_echo(t_data *data);
+int		is_wspace_or_null(char *str, int i);
+int		flag_skipper(char *str);
 
 void	execute_pwd(void);
 void	execute_env(t_data *data);
