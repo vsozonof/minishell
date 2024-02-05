@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 04:37:37 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/30 10:59:23 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/05 11:13:14 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ int	is_input_valid(char *str)
 	else if (str[i] == '\\')
 		return (0);
 	if (!invalid_character_checker(str[i]))
-		return (0);
-	else if (!empty_quote_handler(str))
 		return (0);
 	else if (!exception_checker(str))
 		return (0);

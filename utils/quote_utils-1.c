@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   quote_utils.c                                      :+:      :+:    :+:   */
+/*   quote_utils-1.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 03:12:41 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/27 02:25:47 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/05 11:06:09 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,18 +72,11 @@ int	is_there_quotes(char *str)
 {
 	int	i;
 
-	i = 0;
+	i = -1;
+	if (!str)
+		return (0);
 	while (str[++i])
 		if ((str[i] == '"' || str[i] == 39) && is_in_quotes(str, i))
 			return (1);
 	return (0);
-}
-
-int	empty_quote_handler(char *str)
-{
-	if (str[0] == '"' && str[1] == '"')
-		return (pr_error(" : command not found."));
-	else if (str[0] == 39 && str[1] == 39)
-		return (pr_error(" : command not found."));
-	return (1);
 }

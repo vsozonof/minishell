@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expand_utils.c                                     :+:      :+:    :+:   */
+/*   expand_utils-1.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 23:35:58 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/26 21:54:01 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/05 11:09:33 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ char	*quote_remover(t_data *data)
 	i = 0;
 	quote_flagger(data->input, -1, 0);
 	splitted = ft_split(data->input, ']');
+	if (!splitted[i])
+		return (free(splitted), NULL);
 	tmp = strjoin_and_free(splitted[i], splitted[i + 1]);
 	i += 2;
 	if (splitted[i - 1] == NULL)

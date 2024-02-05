@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 10:30:26 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/30 09:10:55 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/05 12:59:29 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,46 @@ int	is_valid_char_after_redir(int c)
 	else if (ft_isprint(c))
 		return (1);
 	return (0);
+}
+
+void	extract_redir_cmds(char **splitted, t_data *data)
+{
+	int	i;
+	int	c;
+	int	count;
+
+	i = 0;
+	c = 0;
+	count = cmd_counter(splitted);
+	data->redir_tab = malloc(sizeof(char *) * (count + 1));
+	if (!data->redir_tab)
+		return ;
+	while (splitted[c] && i < count)
+	{
+		if (splitted[c][0] == '<' || splitted[c][0] == '>')
+			c += 2;
+		data->redir_tab[i] = ft_strdup(splitted[c]);
+		i++;
+		c++;
+	}
+	data->redir_tab[i] = NULL;
+	ft_split_free(splitted);
+	return ;
+}
+
+int	cmd_counter(char **splitted)
+{
+	int	i;
+	int	count;
+
+	i = 0;
+	count = 0;
+	while (splitted[i])
+	{
+		if (splitted[i][0] == '<' || splitted[i][0] == '>')
+			count -= 2;
+		i++;
+		count++;
+	}
+	return (count);
 }

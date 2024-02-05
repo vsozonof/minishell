@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 02:16:29 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/30 10:24:01 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/05 11:12:45 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void	expand_handler(t_data *data)
 	reg_expander(data);
 	if (!data->input)
 		return ;
-	// if (is_there_quotes(data->input))
-	// 	data->input = quote_remover(data);
+	if (is_there_quotes(data->input))
+		data->input = quote_remover(data);
 	data->pr->input = data->input;
 }
 
@@ -44,7 +44,8 @@ void	reg_expander(t_data *data)
 				|| is_in_quotes(data->input, i) == 2)
 			&& data->input[i] == '\\')
 			backslash_expander(data, i);
-		if (!data->input || ft_strlen(data->input) == 0)
+		if (!data->input || ft_strlen(data->input) == 0
+			|| i == (int)ft_strlen(data->input))
 			break ;
 		i++;
 	}
