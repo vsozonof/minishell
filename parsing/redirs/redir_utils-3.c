@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_utils-3.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 00:49:25 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/05 12:23:54 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/06 09:14:23 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	set_tab_values(t_data *data, int n, int i, int mode)
 			data->tab[n][0] = i;
 			data->tab[n][1] = 1;
 			data->tab[n][2] = ft_create_fd(file_name,
-					O_WRONLY | O_CREAT | O_TRUNC);
+					O_RDONLY);
 		}
 		else if (data->input[i] == '>')
 		{

@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 17:10:46 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/05 17:04:37 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/06 09:15:28 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,40 @@
 
 int redirection_single_1(t_data *data, int first, int last, int verif)
 {
+	int		i;
+
+	i = 0;
 	(void)verif;
-	fprintf(stderr, "dans ma redirection mon first %d\n", first);
-	if (data->n_redirs > 1)
+	fprintf(stderr, "dans ma redirection mon first %d et end %d\n", first, last);
+	fprintf(stderr, "voici mes files %s et %s\n", ft_itoa(data->tab[1][0]), ft_itoa(data->tab[2][0]));
+	if (first == -1)
 	{
-		if (first == -1)
-		{
-			fprintf(stderr, "je met bien 0 en input\n");
-			if (dup2(0, 0) < 0)
-				return (close(data->tab[data->index_redirs][2]), printf("problem with dup2 1"), -1);
-		}
-		else
-		{
-			if (dup2(data->tab[first][2], 0) < 0)
-				return (close(data->tab[data->index_redirs][2]), printf("problem with dup2 1"), -1);
-		}
+		fprintf(stderr, "je met bien 0 en input\n");
+		if (dup2(0, 0) < 0)
+			return (close(data->tab[data->index_redirs][2]), printf("problem with dup2 1"), -1);
+	}
+	else
+	{
+		if (dup2(data->tab[first][2], 0) < 0)
+			return (close(data->tab[data->index_redirs][2]), printf("problem with dup2 1"), -1);
+	}
+	if (last == -1)
+	{
+		if (dup2(0, 1) < 0)
+			return (close(data->tab[data->index_redirs][2]), printf("problem with dup2 1"), -1);
+	}
+	else
+	{
 		if (dup2(data->tab[last][2], 1) < 0)
 			return (close(data->tab[data->index_redirs][2]), printf("problem with dup2 1"), -1);
-		close(data->tab[0][2]);
-		close(data->tab[1][2]);
-		// close(data->tab[last][2]);
 	}
+	while (data->n_redirs > 0)
+	{
+		close(data->tab[i][2]);
+		data->n_redirs--;
+		i++;
+	}
+		// close(data->tab[last][2]);
 	return (0);
 }
 
