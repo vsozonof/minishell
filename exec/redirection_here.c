@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 21:47:57 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/05 17:05:07 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/06 12:54:33 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,7 @@ int	check_redirection_now(t_data *data, int i)
 	{
 		// fprintf(stderr, "voici ma string dans redirection_now %s et voici i %d\n", data->cmds[i], i);
 		if (data->cmds[i][j] == '>' || data->cmds[i][j] == '<')
-		{
 			return (0);
-		}
 		j++;
 	}
 	// if (data->n_redirs > 0)
@@ -40,44 +38,51 @@ int	check_redirection_now(t_data *data, int i)
 int	redirection_manager(t_data *data, int i)
 {
 	int		token;
+	int		first;
+	int		last;
 
 	// token = first_redirect(data->cmds[i]);
-	token = 0; // chnager ca !!!
+	fprintf(stderr, "JE PASSE PAR REDIRECTION MANAGER ET i = %d\n", i);
+	first = first_redirect(data, data->cmds[i]);
+	last = last_redirect(data, data->cmds[i]);
+	token = get_nb_redirs_ac(data->cmds[i]);
 	fprintf(stderr, "voici mon i dans redirection %d et mon token %d\n", i, token);
-	if (token == 1)
-	{
-		dup2(data->tab[data->index_redirs][2], 0);
-			return (printf("problem with dup2 redirection"), -1);
-		close(data->tab[data->index_redirs][2]);
-		data->index_redirs++;
-	}
-	else if (token == 3)
-	{
-		fprintf(stderr, "je passe donc par la sortie\n");
-		dup2(data->tab[data->index_redirs][2], 1);
-			return (printf("problem with dup2 redirection"), -1);
-		close(data->tab[data->index_redirs][2]);
-		data->index_redirs++;
-	}
-	else if (data->nb_redirs_ac > 1)
-	{
-		fprintf(stderr, "tab = %d\n", data->tab[data->index_redirs][2]);
-		dup2(data->tab[data->index_redirs][2], 0);
-			return (printf("problem with dup2 redirection"), -1);
-		close(data->tab[data->index_redirs][2]);
-		data->index_redirs++;
-		fprintf(stderr, "le second tab = %d\n", data->tab[data->index_redirs][2]);
-		dup2(data->tab[data->index_redirs][2], 1);
-			return (printf("problem with dup2 redirection"), -1);
-		close(data->tab[data->index_redirs][2]);
-		data->index_redirs++;
-		data->n_redirs--;
-	}
+	if (token > 0)
+		redirection_single_1(data, first, last, 0);
+	// if (token == 1)
+	// {
+	// 	dup2(data->tab[data->index_redirs][2], 0);
+	// 		return (printf("problem with dup2 redirection"), -1);
+	// 	close(data->tab[data->index_redirs][2]);
+	// 	data->index_redirs++;
+	// }
+	// else if (token == 3)
+	// {
+	// 	fprintf(stderr, "je passe donc par la sortie\n");
+	// 	dup2(data->tab[data->index_redirs][2], 1);
+	// 		return (printf("problem with dup2 redirection"), -1);
+	// 	close(data->tab[data->index_redirs][2]);
+	// 	data->index_redirs++;
+	// }
+	// else if (data->nb_redirs_ac > 1)
+	// {
+	// 	fprintf(stderr, "tab = %d\n", data->tab[data->index_redirs][2]);
+	// 	dup2(data->tab[data->index_redirs][2], 0);
+	// 		return (printf("problem with dup2 redirection"), -1);
+	// 	close(data->tab[data->index_redirs][2]);
+	// 	data->index_redirs++;
+	// 	fprintf(stderr, "le second tab = %d\n", data->tab[data->index_redirs][2]);
+	// 	dup2(data->tab[data->index_redirs][2], 1);
+	// 		return (printf("problem with dup2 redirection"), -1);
+	// 	close(data->tab[data->index_redirs][2]);
+	// 	data->index_redirs++;
+	// 	data->n_redirs--;
+	// }
 	data->n_redirs--;
 	return (0);
 }
 
-int		first_redirect(t_data *data)
+int		first_redirect(t_data *data, char *input)
 {
 	int		j;
 	int		i;
@@ -87,7 +92,7 @@ int		first_redirect(t_data *data)
 	j = ((i = 0));
 	if (data->n_redirs > 0)
 	{
-		while (i < data->n_redirs)
+		while (i < data->n_redirs && input[i] && input[i] != '|')
 		{
 			if (data->tab[i][1] == 1)
 			{
@@ -99,8 +104,9 @@ int		first_redirect(t_data *data)
 	}
 	return (check);
 } // si token = 0 ya r ,1 <, 2 <<, 3 >
+
 // pour celui la c'est des <
-int		last_redirect(t_data *data)
+int		last_redirect(t_data *data, char *input)
 {
 	int		j;
 	int		i;
@@ -110,8 +116,13 @@ int		last_redirect(t_data *data)
 	j = ((i = 0));
 	if (data->n_redirs > 0)
 	{
-		while (i < data->n_redirs)
+		while (i < data->n_redirs && input[i] != '|' && input[i])
 		{
+			if (data->tab[i][1] == 4)
+			{
+				check = i;
+				
+			}
 			if (data->tab[i][1] == 3)
 				check = i;
 			i++;

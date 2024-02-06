@@ -6,24 +6,48 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 16:38:26 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/31 16:43:17 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/06 12:21:17 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	get_nb_redirs_ac(t_data *data)
+int	get_nb_redirs_ac(char *input)
 {
 	int		nb;
-	int		j;
+	int		i;
 
-	nb = ((j = 0));
-	while (data->cmds[data->index_redirs][j])
+	i = nb = 0;
+	while (input[i])
 	{
-		if (data->cmds[data->index_redirs][j] == '>'
-			|| data->cmds[data->index_redirs][j] == '<')
+		if (input[i] == '>' || input[i] == '<')
 			nb++;
-		j++;
+		i++;
 	}
 	return (nb);
+}
+
+int	get_kind_redirs_ac(char *input)
+{
+	int		in;
+	int		out;
+	int		i;
+
+	i = ((out = 0));
+	in = 0;
+	while (input[i])
+	{
+		if (input[i] == '>')
+			out++;
+		if (input[i] == '<')
+			in++;
+		i++;
+	}
+	if (in > 0 && out > 0)
+		return (3);
+	else if (in > 0)
+		return (1);
+	else if (out > 0)
+		return (2);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 00:49:25 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/06 09:14:23 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/06 13:26:00 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,11 +83,15 @@ void	get_redir_infos(t_data *data)
 
 void	tab_value_setter_double(t_data *data, int n, int i)
 {
+	// int		file_name;
+
+	// file_name = NULL;
 	if (data->input[i] == '>' && data->input[i + 1] == '>')
 	{
+		// file_name = file_name_finder(data, i, 0);
 		data->tab[n][0] = i;
 		data->tab[n][1] = 4;
-		data->tab[n][2] = 0;
+		// data->tab[n][2] = ft_create_fd();
 	}
 	else if (data->input[i] == '<' && data->input[i + 1] == '<')
 	{

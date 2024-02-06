@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 12:31:19 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/05 15:42:36 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/06 15:24:42 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,18 @@ char	*ft_do_process(char *envp[], char *cmd)
 	char	*buf2;
 
 	i = 0;
+	if (ft_do_process_helper(cmd) == 0)
+	{
+		buf2 = ft_strdup(cmd);
+		return (buf2);
+	}	
 	path = ft_get_path(envp);
 	if (!path)
 		return (NULL);
 	while (path[i++])
 	{
 		buf2 = ft_strjoin_help(path, cmd, i);
-		if (access(buf2, 0) == 0)
+		if (access(buf2, X_OK) == 0)
 		{
 			ft_split_free(path);
 			return (buf2);
@@ -34,6 +39,13 @@ char	*ft_do_process(char *envp[], char *cmd)
 	}
 	ft_split_free(path);
 	return (NULL);
+}
+
+int		ft_do_process_helper(char *cmd)
+{
+	if (access(cmd, X_OK) == 0)
+		return (0);
+	return (-1);
 }
 
 char *ft_strjoin_help(char **path, char *cmd, int i)

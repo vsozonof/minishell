@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 18:55:02 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/05 16:25:39 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/06 10:52:53 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,10 @@ int	redirection_single(t_data *data)
 	int		first;
 	int		verif;
 
-	first = first_redirect(data);
-	last = last_redirect(data);
+	first = first_redirect(data, data->input);
+	last = last_redirect(data, data->input);
 	verif = is_redirect_actual(data->input);
+	(void)verif;
 	fprintf(stderr, "voici donc first %d et last %d et verif %d\n", first, last, verif);
 	fprintf(stderr, "voici redir_tab \n");
 	int i = 0;

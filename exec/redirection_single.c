@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 17:10:46 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/06 09:15:28 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/06 12:39:33 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,8 @@ int redirection_single_1(t_data *data, int first, int last, int verif)
 	i = 0;
 	(void)verif;
 	fprintf(stderr, "dans ma redirection mon first %d et end %d\n", first, last);
-	fprintf(stderr, "voici mes files %s et %s\n", ft_itoa(data->tab[1][0]), ft_itoa(data->tab[2][0]));
 	if (first == -1)
 	{
-		fprintf(stderr, "je met bien 0 en input\n");
 		if (dup2(0, 0) < 0)
 			return (close(data->tab[data->index_redirs][2]), printf("problem with dup2 1"), -1);
 	}
@@ -41,10 +39,10 @@ int redirection_single_1(t_data *data, int first, int last, int verif)
 		if (dup2(data->tab[last][2], 1) < 0)
 			return (close(data->tab[data->index_redirs][2]), printf("problem with dup2 1"), -1);
 	}
-	while (data->n_redirs > 0)
+	while (data->n_redirs > i)
 	{
 		close(data->tab[i][2]);
-		data->n_redirs--;
+		// data->n_redirs--;
 		i++;
 	}
 		// close(data->tab[last][2]);

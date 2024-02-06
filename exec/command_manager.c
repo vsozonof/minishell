@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_manager.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 18:07:01 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/05 10:34:37 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/06 13:16:30 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ void	builtin_manager(t_data *tmp, int token)
 	else if (token == 7)
 		execute_unset(tmp);
 }
+
 	// else
 		// builtin_checker(data);
 	// printf("hey = %d\n", data->n_cmds);
