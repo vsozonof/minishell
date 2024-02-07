@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 04:29:11 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/30 09:48:10 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/07 12:38:07 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	free_manager(t_data *data, int key)
 		free(data->pr->input);
 	}
 	free(data->c_status);
+	free_redir_tab(data->redir_tab);
 	if (data->n_redirs)
 	{
 		while (i < data->n_redirs)

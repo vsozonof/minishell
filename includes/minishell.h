@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/06 15:29:37 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/07 12:31:59 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -281,5 +281,6 @@ void	free_cmds(t_data *data);
 void	free_env(t_env	*env);
 void	free_env_tab(char **env);
 void	free_end_of_program(t_prompt *p);
+void	free_redir_tab(char **redir_tab);
 
 #endif
