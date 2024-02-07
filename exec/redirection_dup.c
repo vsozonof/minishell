@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 17:10:46 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/07 11:10:48 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/07 15:52:36 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,13 @@ int redirection_dup_1(t_data *data, int first, int last)
 		if (dup2(data->tab[first][2], 0) < 0)
 			return (close(data->tab[data->index_redirs][2]), printf("problem with dup2 1"), -1);
 	}
+	if (redirection_dup1_helper(last, data, i) == -1)
+		return (-1);
+	return (0);
+}
+
+int	redirection_dup1_helper(int last, t_data *data, int i)
+{
 	if (last == -1)
 	{
 		if (dup2(0, 1) < 0)
@@ -38,24 +45,18 @@ int redirection_dup_1(t_data *data, int first, int last)
 		if (dup2(data->tab[last][2], 1) < 0)
 			return (close(data->tab[data->index_redirs][2]), printf("problem with dup2 1"), -1);
 	}
-	fprintf(stderr, "JE VAIS CLOSE MES FD\n");
 	while (data->n_redirs > i)
 	{
 		close(data->tab[i][2]);
-		// data->n_redirs--;
 		i++;
 	}
-	fprintf(stderr, "J'AI CLOSE MES FD %d\n", i);
-		// close(data->tab[last][2]);
 	return (0);
 }
 
 int redirection_dup_2(t_data *data, int first, int last)
 {
-	char	*path;
 	(void)first;
 	(void)last;
-	path = NULL;
 	if (data->n_redirs == 1)
 	{
 		// if (redirection_here_doc(data, data->input) == 1)

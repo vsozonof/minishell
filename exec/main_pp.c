@@ -6,11 +6,12 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:10:50 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/07 11:14:59 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/07 15:12:50 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
 // cat > test1 > test2 < test3 | wc
 /*
 **	This function takes as parameter:
@@ -36,7 +37,7 @@
 **  then we go to ft_pipex to start the execution
 */
 
-int	pipex_exec(t_data	*data)
+int	pipex_exec(t_data *data)
 {
 	int		i;
 	char	**cmd_argument;
@@ -44,17 +45,19 @@ int	pipex_exec(t_data	*data)
 	data->index_redirs = ((i = 0));
 	cmd_argument = NULL;
 	fprintf(stderr, "je passe par multi\n");
-	// fprintf(stderr, "je test la commande complete sans redirection\n");
-	// int		j = 0;
-	// while (data->redir_tab[j])
-	// {
-	// 	fprintf(stderr, "voici mon pipe cpmplet %s \n", data->redir_tab[j]);
-	// 	j++;
-	// }
+	i = 0;
+	if (data->n_redirs > 0)
+	{
+		while (data->redir_tab[i])
+		{
+			fprintf(stderr, "mon tab = %s\n", data->redir_tab[i]);
+			i++;
+		}
+	}
+	i = 0;
 	if (ft_check_access(data, i) == -1)
 		return (-1);
 	fprintf(stderr, "\n\n\n\n");
-	fprintf(stderr, "len_db_tab(data->cmds) %d\n", len_db_tab(data->cmds));
 	i = 0;
 	ft_pipex(data, i, cmd_argument);
 	ft_freedb(data->actual_path);

@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/07 11:13:37 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/07 15:52:39 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,34 +174,24 @@ void	builtin_manager(t_data *tmp, int token);
 
 int		pipex_exec(t_data *data);
 int		ft_pipex(t_data	*data, int i, char **cmd_argument);
-int		**alloc_pipe(int i, int **pipefd);
+int		**alloc_pipe(int i);
 int		**parent_process(int **pipefd, int i);
-int		len_fd_tab(char	**str, int i);
-int		verif_arg_fd(char *argv[], int i);
 char	*str_join_free(char *path, char *cmd);
 void	ft_freedb(char **str);
 void	free_all_pipe(int **pipefd);
-int		check_dup(int pipe, int token, int pipe2, t_data *data);
+int		check_dup(int pipe, int token, int pipe2);
 int		child_process_in(int **pipefd, t_data *data, int i, int token);
 char	*arg(char *str, t_data *data);
-int		ft_create_fd(char *argv, int flag);
 char	**ft_get_path(char **env);
 char	*ft_do_process(char *envp[], char *cmd);
 int		child_process_in_or_out(int **pipefd, t_data *data, int i, int token);
-int		child_process_middle(int **pipefd, t_data *data, int token);
+int		child_process_middle(int **pipefd, int token);
 int		redirection_manager(t_data *data, int i);
 int		check_redirection_now(t_data *data, int i);
-int		len_db_tab(char **str);
-char	*copy_arg(char *dest, char *src);
-char	*arg_helper(char **buf, char *tmp, t_data *data, int i);
 char	*ft_strjoin_help(char **path, char *cmd, int i);
 char	*ft_essaie(t_data *data, char *input);
 char	*ft_essaie_helper(char *buf, char *input, int , t_data *data);
-int		ft_count_space(char *buf);
 int		redirection_single_chev(t_data *data, char *input);
-int		len_buf(char *buf, char *input, t_data *data, int act_redir);
-int		get_nb_redirs_ac(char *input);
-void	close_all_pipe(int **pipefd, t_data *data);
 int		first_redirect(t_data *data, char *input);
 int		last_redirect(t_data *data, char *input);
 int		is_redirect_actual(char *input);
@@ -214,10 +204,13 @@ char	*get_name_heredoc();
 int		ft_make_here_doc(t_data *data, int file);
 char	*get_flag_here(t_data *data);
 char	*main_here_doc(t_data *data);
-int		get_kind_redirs_ac(char *input);
 int		ft_do_process_helper(char *cmd);
 int		ft_check_access(t_data *data, int i);
 void	free_all_fd(t_data *data);
+void	wait_and_free(t_data *data, int **pipefd, int *pid);
+int		ft_pipex_helper(t_data *data, int **pipefd, int i);
+int		child_process(t_data *data, int **pipefd, int i, char **cmd_argument);
+int		redirection_dup1_helper(int last, t_data *data, int i);
 
 // ! ---------------------------------------------------------------------------
 // ?							Single_Pipe
@@ -227,7 +220,23 @@ int		single_arg(t_data *data);
 int		exec_single(char **cmd_argument, char *fre, t_data *data);
 int		redirection_single(t_data *data);
 char	**espoir(char **cmd_argument);
+int		ft_count_space(char *buf);
+
+// ! ---------------------------------------------------------------------------
+// ?							Free && utils Exec
+// ! ---------------------------------------------------------------------------
+
+int		get_nb_redirs_ac(char *input);
+int		get_kind_redirs_ac(char *input);
+void	close_all_pipe(int **pipefd, t_data *data);
+int		len_db_tab(char **str);
+char	*arg_helper(char **buf, char *tmp, t_data *data, int i);
+char	*copy_arg(char *dest, char *src);
+int		len_buf(char *buf, char *input, t_data *data, int act_redir);
+int		len_fd_tab(char	**str, int i);
 int		found_max(char **cmd_argument);
+int		verif_arg_fd(char *argv[], int i);
+int		ft_create_fd(char *argv, int flag);
 
 // ! ---------------------------------------------------------------------------
 // ?							Builtin && Tools

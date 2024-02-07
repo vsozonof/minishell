@@ -6,13 +6,11 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 21:47:57 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/07 11:06:04 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/07 15:34:56 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-//check s'il reste des redirections a faire
 
 int	check_redirection_now(t_data *data, int i)
 {
@@ -21,17 +19,10 @@ int	check_redirection_now(t_data *data, int i)
 	j = 0;
 	while (data->cmds[i][j])
 	{
-		// fprintf(stderr, "voici ma string dans redirection_now %s et voici i %d\n", data->cmds[i], i);
 		if (data->cmds[i][j] == '>' || data->cmds[i][j] == '<')
 			return (0);
 		j++;
 	}
-	// if (data->n_redirs > 0)
-	// {
-	// 	fprintf(stderr, "inde = %i i = %i\n", data->index_redirs, i);
-	// 	if (data->index_redirs == i)
-	// 		return (0);
-	// }
 	return (-1);
 }
 
@@ -41,7 +32,6 @@ int	redirection_manager(t_data *data, int i)
 	int		first;
 	int		last;
 
-	// token = first_redirect(data->cmds[i]);
 	fprintf(stderr, "JE PASSE PAR REDIRECTION MANAGER ET i = %d\n", i);
 	first = first_redirect(data, data->cmds[i]);
 	last = last_redirect(data, data->cmds[i]);
