@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_here.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 21:47:57 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/06 12:54:33 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/07 11:57:21 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ int		first_redirect(t_data *data, char *input)
 
 	check = -1;
 	j = ((i = 0));
+	(void)j;
 	if (data->n_redirs > 0)
 	{
 		while (i < data->n_redirs && input[i] && input[i] != '|')
@@ -114,6 +115,7 @@ int		last_redirect(t_data *data, char *input)
 
 	check = 0;
 	j = ((i = 0));
+	(void)j;
 	if (data->n_redirs > 0)
 	{
 		while (i < data->n_redirs && input[i] != '|' && input[i])

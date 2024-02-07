@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_single.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 17:10:46 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/06 12:39:33 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/07 11:57:35 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int redirection_single_2(t_data *data, int first, int last, int verif)
 	(void)first;
 	(void)last;
 	path = NULL;
+	(void)path;
 	if (data->n_redirs == 1)
 	{
 		// if (redirection_here_doc(data, data->input) == 1)

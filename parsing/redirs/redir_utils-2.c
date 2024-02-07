@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_utils-2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 10:30:26 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/06 13:27:19 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/07 12:29:18 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ void	extract_redir_cmds(char **splitted, t_data *data)
 	{
 		if (splitted[c][0] == '<' || splitted[c][0] == '>')
 			c += 2;
+		if (splitted[c][0] == '|')
+			c++;
 		data->redir_tab[i] = ft_strdup(splitted[c]);
 		i++;
 		c++;
@@ -96,6 +98,8 @@ int	cmd_counter(char **splitted)
 	{
 		if (splitted[i][0] == '<' || splitted[i][0] == '>')
 			count -= 2;
+		if (splitted[i][0] == '|')
+			count--;
 		i++;
 		count++;
 	}
