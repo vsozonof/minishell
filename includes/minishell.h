@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/07 12:31:59 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/07 11:13:37 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,16 +173,16 @@ int		builtin_checker(t_data *tmp);
 void	builtin_manager(t_data *tmp, int token);
 
 int		pipex_exec(t_data *data);
-int		ft_pipex(t_data	*data);
+int		ft_pipex(t_data	*data, int i, char **cmd_argument);
 int		**alloc_pipe(int i, int **pipefd);
 int		**parent_process(int **pipefd, int i);
 int		len_fd_tab(char	**str, int i);
 int		verif_arg_fd(char *argv[], int i);
 char	*str_join_free(char *path, char *cmd);
 void	ft_freedb(char **str);
-void	free_pipe_argv(int **pipefd, char	*argv[]);
+void	free_all_pipe(int **pipefd);
 int		check_dup(int pipe, int token, int pipe2, t_data *data);
-char	*child_process_in(int **pipefd, t_data *data, int i, int token);
+int		child_process_in(int **pipefd, t_data *data, int i, int token);
 char	*arg(char *str, t_data *data);
 int		ft_create_fd(char *argv, int flag);
 char	**ft_get_path(char **env);
@@ -205,8 +205,8 @@ void	close_all_pipe(int **pipefd, t_data *data);
 int		first_redirect(t_data *data, char *input);
 int		last_redirect(t_data *data, char *input);
 int		is_redirect_actual(char *input);
-int		redirection_single_1(t_data *data, int first, int last, int verif);
-int		redirection_single_2(t_data *data, int first, int last, int verif);
+int		redirection_dup_1(t_data *data, int first, int last);
+int		redirection_dup_2(t_data *data, int first, int last);
 void	free_single(t_data *data, char **cmd_argument, char *buf, char *fre);
 int		redirection_here_doc(t_data *data, char *input);
 char    *ft_do_here_doc(t_data *data);
@@ -216,6 +216,8 @@ char	*get_flag_here(t_data *data);
 char	*main_here_doc(t_data *data);
 int		get_kind_redirs_ac(char *input);
 int		ft_do_process_helper(char *cmd);
+int		ft_check_access(t_data *data, int i);
+void	free_all_fd(t_data *data);
 
 // ! ---------------------------------------------------------------------------
 // ?							Single_Pipe
@@ -281,6 +283,5 @@ void	free_cmds(t_data *data);
 void	free_env(t_env	*env);
 void	free_env_tab(char **env);
 void	free_end_of_program(t_prompt *p);
-void	free_redir_tab(char **redir_tab);
 
 #endif

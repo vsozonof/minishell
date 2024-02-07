@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 04:25:22 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/07 12:38:20 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/01/28 23:24:41 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,19 +50,4 @@ void	free_env_tab(char **env)
 		i++;
 	}
 	free(env);
-}
-
-void	free_redir_tab(char **redir_tab)
-{
-	int	i;
-
-	i = 0;
-	if (!redir_tab)
-		return ;
-	while (redir_tab[i])
-	{
-		free(redir_tab[i]);
-		i++;
-	}
-	free(redir_tab);
 }

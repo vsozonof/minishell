@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:11:05 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/06 15:31:25 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/07 11:13:14 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,13 @@
 // 3 = db_gauche
 // 4 = droite
 
-int	ft_pipex(t_data	*data)
+int	ft_pipex(t_data	*data, int i,char **cmd_argument)
 {
 	pid_t		pid[data->n_cmds];
 	int			**pipefd;
-	int			i;
-	char		**cmd_argument;
-	char		*cmd;
 	char		*essaie;
 
-	i = 0;
 	pipefd = NULL;
-	cmd = NULL;
-	cmd = NULL;
 	pipefd = alloc_pipe(i, pipefd);
 	if (!pipefd[1] || !pipefd[0])
 		return (free(pipefd), -1);
@@ -47,44 +41,27 @@ int	ft_pipex(t_data	*data)
 		if (pid[i] == 0)
 		{
 			if (i % 2 == 0)
-				cmd = child_process_in(pipefd, data, i, 0);
+				child_process_in(pipefd, data, i, 0);
 			else if (i % 2 == 1)
-				cmd = child_process_in(pipefd, data, i, 1);
-			if (cmd == NULL)
-			{
-				fprintf(stderr, "MON CMD EST NULL (celui de %d) \n", i);
-				free_pipe_argv(pipefd, data->cmds);
-				exit(0);
-			}
+				child_process_in(pipefd, data, i, 1);
+			if (check_redirection_now(data, i) == 0)
+				essaie = data->redir_tab[i];
 			else
+				essaie = data->cmds[i];
+			fprintf(stderr, "essaie = %s\n", essaie);
+			cmd_argument = ft_split(essaie, ' ');
+			int q = 0;
+			while (data->actual_path[q])
 			{
-				(void)cmd;
-				if (check_redirection_now(data, i) == 0)
-					essaie = data->redir_tab[i];
-				else
-					essaie = data->cmds[i];
-				fprintf(stderr, "essaie = %s\n", essaie);
-				cmd_argument = ft_split(essaie, ' ');
-				int q = 0;
-				while (cmd_argument[q])
-				{
-					fprintf(stderr, "cmd_arg = %s\n", cmd_argument[q]);
-					q++;
-				}
-				if (data->n_redirs > 0)
-				{
-					
-				}
-				while (data->n_redirs > i)
-				{
-					close(data->tab[i][2]);
-					// data->n_redirs--;
-					i++;
-				}
-				execve(data->actual_path[i], cmd_argument, data->pr->nv);
-				free_pipe_argv(pipefd, data->cmds);
-				exit(0);
+				// fprintf(stderr, "cmd_arg = %s\n", cmd_argument[q]);
+				fprintf(stderr, "data->actual_path[%d] = %s\n", q, data->actual_path[q]);
+				q++;
 			}
+			q = 0;
+			fprintf(stderr, "juste avant mon execve mon i = %d et path %s\n", i, data->actual_path[i]);
+			execve(data->actual_path[i], cmd_argument, data->pr->nv);
+			free_all_pipe(pipefd);
+			exit(0);
 		}
 		else
 			pipefd = parent_process(pipefd, i);
@@ -97,9 +74,26 @@ int	ft_pipex(t_data	*data)
 		waitpid(pid[i], NULL, 0);
 		i++;
 	}
-	free_pipe_argv(pipefd, data->cmds);
+	free_all_pipe(pipefd);
+	free_all_fd(data);
 	return (0);
 }
+
+
+
+/*
+**	This function takes as parameter: 
+**
+**	pipefd: an array of pipe
+**	i: to know where i am in pipe
+**	(if i am equal to 0 i'm pair)
+**
+** =====================================================
+** =====================================================
+**
+**	this function will allocate two array of pipe
+**
+*/
 
 int	**alloc_pipe(int i, int **pipefd)
 {
@@ -121,6 +115,21 @@ int	**alloc_pipe(int i, int **pipefd)
 	}
 	return (pipefd);
 }
+
+/*
+**	This function takes as parameter: 
+**
+**	pipefd: an array of pipe
+**	i: to know where i am in pipe
+**	(if i am equal to 0 i'm pair)
+**
+** =====================================================
+** =====================================================
+**
+**	so we check i we are pair or not
+**	then we close our pipe and alloc it again
+**
+*/
 
 int	**parent_process(int **pipefd, int i)
 {
