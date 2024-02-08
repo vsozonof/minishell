@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_dup.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 17:10:46 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/07 15:52:36 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/08 11:44:27 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ int redirection_dup_2(t_data *data, int first, int last)
 	return (0);
 }
 
-int	redirection_here_doc(t_data *data, char *input)
 {
 	int		i;
 	(void)data;

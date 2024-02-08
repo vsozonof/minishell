@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child_pp.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:10:29 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/08 10:08:07 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/08 11:39:41 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int	child_process_in(int **pipefd, t_data *data, int i, int token)
 	if (check_redirection_now(data, i) == 0)
 		redirection_manager(data, i); // !!!! regler les cas ou ca echoue
 	buf = arg(data->cmds[i], data);
+	(void)buf;
 	free(pipefd[0]);
 	free(pipefd[1]);
 	return (0);

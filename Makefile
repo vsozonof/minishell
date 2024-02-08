@@ -6,11 +6,7 @@
 #    By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/09 23:22:06 by vsozonof          #+#    #+#              #
-<<<<<<< HEAD
-#    Updated: 2024/02/08 06:02:09 by vsozonof         ###   ########.fr        #
-=======
-#    Updated: 2024/02/07 15:05:02 by tpotilli         ###   ########.fr        #
->>>>>>> refs/remotes/origin/main
+#    Updated: 2024/02/08 11:43:43 by vsozonof         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,17 +50,14 @@ SRCS = main.c \
 	   exec/execute_pp.c \
 	   exec/main_pp.c \
 	   exec/pp_free.c \
-	   exec/pp_free2.c \
 	   exec/pp_utils.c \
 	   exec/pp_utils2.c \
 	   exec/pp_utils3.c \
 	   exec/pp.c \
-	   exec/pp_helper.c \
 	   exec/single_arg.c \
 	   exec/child_pp.c \
 	   exec/redirection_here.c \
 	   exec/redirection_arg.c \
-	   exec/redirection_dup.c \
 	   exec/here_doc.c \
 	   builtin/unset/unset_master.c \
 	   builtin/unset/unset_utils-1.c \
