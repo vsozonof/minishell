@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/07 12:31:59 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/08 06:55:26 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ char	*quote_remover(t_data *data);
 char	*quote_remover_v2(char *str);
 int		empty_quote_handler(char *str);
 void	quote_flagger(char *str, int i, int q_flag);
+void	unquote_command(t_data *data);
 
 // ! ---------------------------------------------------------------------------
 // ?							PARSING UTILS

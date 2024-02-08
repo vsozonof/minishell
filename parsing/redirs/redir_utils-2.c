@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 10:30:26 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/07 12:29:18 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/08 10:56:32 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,9 @@ void	extract_redir_cmds(char **splitted, t_data *data)
 	int	i;
 	int	c;
 	int	count;
+	char *tmp;
 
-	i = 0;
-	c = 0;
+	i = ((c = 0));
 	count = cmd_counter(splitted);
 	data->redir_tab = malloc(sizeof(char *) * (count + 1));
 	if (!data->redir_tab)
@@ -78,13 +78,29 @@ void	extract_redir_cmds(char **splitted, t_data *data)
 			c += 2;
 		if (splitted[c][0] == '|')
 			c++;
-		data->redir_tab[i] = ft_strdup(splitted[c]);
-		i++;
-		c++;
+		if (splitted[c][0] != '<' && splitted[c][0] != '>'
+			&& splitted[c][0] != '|')
+		{
+			data->redir_tab[i] = ft_strdup(splitted[c]);
+			if (splitted[c + 1] && (splitted[c + 1][0] != '<' && splitted[c + 1][0] != '>'
+				&& splitted[c + 1][0] != '|'))
+			{
+				tmp = data->redir_tab[i];
+				data->redir_tab[i] = ft_strjoin(data->redir_tab[i], " ");
+				free(tmp);
+				tmp = data->redir_tab[i] = ft_strjoin(data->redir_tab[i], splitted[c + 1]);
+				c += 2;
+				i++;
+			}
+			else
+			{
+				i++;
+				c++;
+			}
+		}
 	}
 	data->redir_tab[i] = NULL;
 	ft_split_free(splitted);
-	return ;
 }
 
 int	cmd_counter(char **splitted)

@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 08:35:01 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/28 23:26:37 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/08 03:40:23 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int	init_str(t_data *data, t_prompt *prompt)
 	data->new_head = NULL;
 	data->tail = NULL;
 	data->to_add = NULL;
+	data->redir_tab = NULL;
 	data->i_status = 0;
 	data->c_status = ft_itoa(data->i_status);
 	data->n_redirs = 0;

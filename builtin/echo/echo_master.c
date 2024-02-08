@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 12:48:29 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/05 13:03:10 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/08 08:25:22 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void	execute_echo(t_data *data)
 	char	*to_print;
 	char	*tmp;
 	int		flag;
-	(void)flag;
 
+	data->input = quote_remover_v2(data->input);
 	to_print = export_extract_arg(data->input);
 	if (!to_print)
 		return (ft_putstr("\n"));

@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 09:14:23 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/07 12:21:44 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/08 10:57:39 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,14 @@ void	input_parser(t_prompt *prompt)
 	init_str(&data, prompt);
 	if (!is_piped_input_valid(prompt->input))
 		return (free_manager(&data, 0));
+	if (is_there_pipe(prompt))
+		data.cmds = pipes_splitter(prompt->input, '|', &data);
 	if (!redirection_and_expand_handler(&data))
 		return (free_manager(&data, 0));
-	// printf("Final input = %s\n", data.input);
+
+	printf("input b4 exec : %s\n", data.input);
 	if (is_there_pipe(prompt))
 	{
-		data.cmds = pipes_splitter(prompt->input, '|', &data);
-		if (!data.cmds)
-			return (free_manager(&data, 2));
 		// command_manager(&data);
 		free_manager(&data, 2);
 	}

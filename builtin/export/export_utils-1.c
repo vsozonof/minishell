@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 00:20:38 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/29 23:08:49 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/08 09:56:09 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ char	*extract_var_name(char *str, int i)
 {
 	int	c;
 
-	c = i;
 	while (i > 0 && str[i] != '=')
 		i--;
+	c = i;
 	while (c > 0 && !ft_is_whitespace(str[c - 1]))
 		c--;
 	return (ft_substr(str, c, (i - c)));

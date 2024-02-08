@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 12:02:25 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/01/30 09:42:58 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/08 10:24:36 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	execute_cd(t_data *data)
 {
 	char	*path;
 
+	data->input = quote_remover_v2(data->input);
 	if (n_args(data->input) == 0)
 	{
 		if (!ft_get_env_node(data->env, "HOME"))
@@ -73,7 +74,6 @@ void	update_vars(t_data *data)
 
 	old_pwd = ft_get_env_node(data->env, "OLDPWD");
 	pwd = ft_get_env_node(data->env, "PWD");
-	free(data->pr->w_d);
 	data->pr->w_d = getcwd(NULL, 0);
 	old_wd = pwd->var;
 	free(old_pwd->var);
