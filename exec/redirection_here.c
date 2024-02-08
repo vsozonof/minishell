@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_here.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 21:47:57 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/07 11:57:21 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/07 15:34:56 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-//check s'il reste des redirections a faire
 
 int	check_redirection_now(t_data *data, int i)
 {
@@ -21,17 +19,10 @@ int	check_redirection_now(t_data *data, int i)
 	j = 0;
 	while (data->cmds[i][j])
 	{
-		// fprintf(stderr, "voici ma string dans redirection_now %s et voici i %d\n", data->cmds[i], i);
 		if (data->cmds[i][j] == '>' || data->cmds[i][j] == '<')
 			return (0);
 		j++;
 	}
-	// if (data->n_redirs > 0)
-	// {
-	// 	fprintf(stderr, "inde = %i i = %i\n", data->index_redirs, i);
-	// 	if (data->index_redirs == i)
-	// 		return (0);
-	// }
 	return (-1);
 }
 
@@ -41,14 +32,13 @@ int	redirection_manager(t_data *data, int i)
 	int		first;
 	int		last;
 
-	// token = first_redirect(data->cmds[i]);
 	fprintf(stderr, "JE PASSE PAR REDIRECTION MANAGER ET i = %d\n", i);
 	first = first_redirect(data, data->cmds[i]);
 	last = last_redirect(data, data->cmds[i]);
 	token = get_nb_redirs_ac(data->cmds[i]);
 	fprintf(stderr, "voici mon i dans redirection %d et mon token %d\n", i, token);
 	if (token > 0)
-		redirection_single_1(data, first, last, 0);
+		redirection_dup_1(data, first, last);
 	// if (token == 1)
 	// {
 	// 	dup2(data->tab[data->index_redirs][2], 0);
@@ -90,7 +80,6 @@ int		first_redirect(t_data *data, char *input)
 
 	check = -1;
 	j = ((i = 0));
-	(void)j;
 	if (data->n_redirs > 0)
 	{
 		while (i < data->n_redirs && input[i] && input[i] != '|')
@@ -115,7 +104,6 @@ int		last_redirect(t_data *data, char *input)
 
 	check = 0;
 	j = ((i = 0));
-	(void)j;
 	if (data->n_redirs > 0)
 	{
 		while (i < data->n_redirs && input[i] != '|' && input[i])

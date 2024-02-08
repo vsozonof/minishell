@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 18:55:02 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/06 10:52:53 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/07 15:43:50 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,7 @@ int	single_arg(t_data *data)
 	char	*fre;
 	char	**cmd_argument;
 	char	*essaie;
-	int		i;
 
-	data->index_redirs = ((i = 0));
 	buf = arg(data->input, data);
 	if (data->n_redirs > 0)
 		essaie = data->redir_tab[0];
@@ -58,14 +56,9 @@ int	exec_single(char **cmd_argument, char *fre, t_data	*data)
 			if (redirection_single(data) == -1)
 				return (-1);
 		}
-		fprintf(stderr, "fre = %s\n", fre);
-		while (cmd_argument[x])
-		{
+		while (cmd_argument[x++])
 			fprintf(stderr, "cmd = %s\n", cmd_argument[x]);
-			x++;
-		}
 		execve(fre, cmd_argument, data->pr->nv);
-		fprintf(stderr, "execve fail\n");
 		free(fre);
 		ft_freedb(cmd_argument);
 		exit(0);
@@ -79,15 +72,11 @@ int	redirection_single(t_data *data)
 {
 	int		last;
 	int		first;
-	int		verif;
+	int		i;
 
 	first = first_redirect(data, data->input);
 	last = last_redirect(data, data->input);
-	verif = is_redirect_actual(data->input);
-	(void)verif;
-	fprintf(stderr, "voici donc first %d et last %d et verif %d\n", first, last, verif);
-	fprintf(stderr, "voici redir_tab \n");
-	int i = 0;
+	i = 0;
 	while (data->redir_tab[i])
 	{
 		fprintf(stderr, "data = %s\n", data->redir_tab[i]);
@@ -95,12 +84,12 @@ int	redirection_single(t_data *data)
 	}
 	if (data->n_redirs > 1)
 	{
-		if (redirection_single_1(data, first, last, verif) == -1)
+		if (redirection_dup_1(data, first, last) == -1)
 			return (-1);
 	}
 	else if (data->n_redirs == 1)
 	{
-		if (redirection_single_2(data, first, last, verif) == -1)
+		if (redirection_dup_2(data, first, last) == -1)
 			return (-1);
 	}
 	return (0);

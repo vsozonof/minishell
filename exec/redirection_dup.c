@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redirection_single.c                               :+:      :+:    :+:   */
+/*   redirection_dup.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 17:10:46 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/07 11:57:35 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/07 15:52:36 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int redirection_single_1(t_data *data, int first, int last, int verif)
+int redirection_dup_1(t_data *data, int first, int last)
 {
 	int		i;
 
 	i = 0;
-	(void)verif;
 	fprintf(stderr, "dans ma redirection mon first %d et end %d\n", first, last);
 	if (first == -1)
 	{
@@ -29,6 +28,13 @@ int redirection_single_1(t_data *data, int first, int last, int verif)
 		if (dup2(data->tab[first][2], 0) < 0)
 			return (close(data->tab[data->index_redirs][2]), printf("problem with dup2 1"), -1);
 	}
+	if (redirection_dup1_helper(last, data, i) == -1)
+		return (-1);
+	return (0);
+}
+
+int	redirection_dup1_helper(int last, t_data *data, int i)
+{
 	if (last == -1)
 	{
 		if (dup2(0, 1) < 0)
@@ -42,21 +48,15 @@ int redirection_single_1(t_data *data, int first, int last, int verif)
 	while (data->n_redirs > i)
 	{
 		close(data->tab[i][2]);
-		// data->n_redirs--;
 		i++;
 	}
-		// close(data->tab[last][2]);
 	return (0);
 }
 
-int redirection_single_2(t_data *data, int first, int last, int verif)
+int redirection_dup_2(t_data *data, int first, int last)
 {
-	char	*path;
-	(void)verif;
 	(void)first;
 	(void)last;
-	path = NULL;
-	(void)path;
 	if (data->n_redirs == 1)
 	{
 		// if (redirection_here_doc(data, data->input) == 1)

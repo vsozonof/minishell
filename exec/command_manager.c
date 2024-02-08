@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 18:07:01 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/06 13:16:30 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/07 15:43:55 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,10 @@
 
 int	command_manager(t_data *data)
 {
-	int	check;
+	int		check;
+	int		i;
+
+	data->index_redirs = ((i = 0));
 
 	check = builtin_checker(data);
 	if (check != 0)

@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 10:30:26 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/08 10:56:32 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/08 11:04:18 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,8 +114,6 @@ int	cmd_counter(char **splitted)
 	{
 		if (splitted[i][0] == '<' || splitted[i][0] == '>')
 			count -= 2;
-		if (splitted[i][0] == '|')
-			count--;
 		i++;
 		count++;
 	}
