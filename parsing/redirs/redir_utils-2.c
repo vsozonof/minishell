@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 10:30:26 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/08 11:04:18 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/08 12:20:37 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,19 +66,23 @@ void	extract_redir_cmds(char **splitted, t_data *data)
 	int	c;
 	int	count;
 	char *tmp;
+	int	j;
 
+	j = 0;
+	while (splitted[j])
+		j++;
 	i = ((c = 0));
 	count = cmd_counter(splitted);
 	data->redir_tab = malloc(sizeof(char *) * (count + 1));
 	if (!data->redir_tab)
 		return ;
-	while (splitted[c] && i < count)
+	while (splitted[c])
 	{
-		if (splitted[c][0] == '<' || splitted[c][0] == '>')
+		if (c < j && (splitted[c][0] == '<' || splitted[c][0] == '>'))
 			c += 2;
-		if (splitted[c][0] == '|')
+		if (c < j && splitted[c][0] == '|')
 			c++;
-		if (splitted[c][0] != '<' && splitted[c][0] != '>'
+		if (c < j && splitted[c][0] != '<' && splitted[c][0] != '>'
 			&& splitted[c][0] != '|')
 		{
 			data->redir_tab[i] = ft_strdup(splitted[c]);
@@ -88,7 +92,9 @@ void	extract_redir_cmds(char **splitted, t_data *data)
 				tmp = data->redir_tab[i];
 				data->redir_tab[i] = ft_strjoin(data->redir_tab[i], " ");
 				free(tmp);
-				tmp = data->redir_tab[i] = ft_strjoin(data->redir_tab[i], splitted[c + 1]);
+				tmp = data->redir_tab[i];
+				data->redir_tab[i] = ft_strjoin(data->redir_tab[i], splitted[c + 1]);
+				free(tmp);
 				c += 2;
 				i++;
 			}
