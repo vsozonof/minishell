@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 17:10:46 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/07 15:52:36 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/08 11:53:10 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,17 +87,16 @@ int redirection_dup_2(t_data *data, int first, int last)
 	return (0);
 }
 
-int	redirection_here_doc(t_data *data, char *input)
-{
-	int		i;
-	(void)data;
+// {
+// 	int		i;
+// 	(void)data;
 
-	i = 0;
-	while (input[i] && input[i + 1])
-	{
-		if (input[i] == '<' && input[i + 1] == '<')
-			return (1);
-		i++;
-	}
-	return (-1);
-}
+// 	i = 0;
+// 	while (input[i] && input[i + 1])
+// 	{
+// 		if (input[i] == '<' && input[i + 1] == '<')
+// 			return (1);
+// 		i++;
+// 	}
+// 	return (-1);
+// }

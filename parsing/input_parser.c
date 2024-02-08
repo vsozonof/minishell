@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_parser.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 09:14:23 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/08 11:06:33 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/08 11:45:32 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	input_parser(t_prompt *prompt)
 	{
 		if (!get_cmd(&data))
 			return (free_manager(&data, 0));
-		command_manager(&data);
+		// command_manager(&data);
 		free_manager(&data, 1);
 	}
 }
