@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 18:55:02 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/07 15:43:50 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/08 15:07:45 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	single_arg(t_data *data)
 
 	buf = arg(data->input, data);
 	if (data->n_redirs > 0)
-		essaie = data->redir_tab[0];
+		essaie = ft_strdup(data->redir_tab[0]);
 	else
 		essaie = data->input;
 	cmd_argument = ft_split(essaie, ' ');
@@ -34,8 +34,8 @@ int	single_arg(t_data *data)
 		return (0);
 	}
 	exec_single(cmd_argument, fre, data);
-	if (data->n_redirs > 0)
-		free(essaie);
+	// if (data->n_redirs > 0)
+	// 	free(essaie);
 	free_single(data, cmd_argument, buf, fre);
 	return (0);
 }
@@ -84,14 +84,14 @@ int	redirection_single(t_data *data)
 	}
 	if (data->n_redirs > 1)
 	{
-		if (redirection_dup_1(data, first, last) == -1)
+		if (redirection_dup1_in(data, first, last) == -1)
 			return (-1);
 	}
-	else if (data->n_redirs == 1)
-	{
-		if (redirection_dup_2(data, first, last) == -1)
-			return (-1);
-	}
+	// else if (data->n_redirs == 1)
+	// {
+	// 	if (redirection_dup_2(data, first, last) == -1)
+	// 		return (-1);
+	// }
 	return (0);
 }
 

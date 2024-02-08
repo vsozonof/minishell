@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_master.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 04:29:11 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/08 12:23:23 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/08 13:22:30 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ void	free_manager(t_data *data, int key)
 		free(data->pr->input);
 	}
 	free(data->c_status);
-	ft_split_free(data->redir_tab);
+	if (data->redir_tab)
+		ft_split_free(data->redir_tab);
 	if (data->n_redirs)
 	{
 		while (i < data->n_redirs)

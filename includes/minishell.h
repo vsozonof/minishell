@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/08 11:50:19 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/08 15:18:03 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,8 +195,8 @@ int		redirection_single_chev(t_data *data, char *input);
 int		first_redirect(t_data *data, char *input);
 int		last_redirect(t_data *data, char *input);
 int		is_redirect_actual(char *input);
-int		redirection_dup_1(t_data *data, int first, int last);
-int		redirection_dup_2(t_data *data, int first, int last);
+int		redirection_dup1_in(t_data *data, int first, int last);
+int		redirection_dup1_out(t_data *data, int first, int last);
 void	free_single(t_data *data, char **cmd_argument, char *buf, char *fre);
 int		redirection_here_doc(t_data *data, char *input);
 char    *ft_do_here_doc(t_data *data);
@@ -211,7 +211,6 @@ void	free_all_fd(t_data *data);
 void	wait_and_free(t_data *data, int **pipefd, int *pid);
 int		ft_pipex_helper(t_data *data, int **pipefd, int i);
 int		child_process(t_data *data, int **pipefd, int i, char **cmd_argument);
-int		redirection_dup1_helper(int last, t_data *data, int i);
 
 // ! ---------------------------------------------------------------------------
 // ?							Single_Pipe
