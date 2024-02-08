@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:11:05 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/08 10:00:09 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/08 10:27:16 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,6 @@ int	ft_pipex(t_data	*data, int i, char **cmd_argument)
 	wait_and_free(data, pipefd, pid);
 	return (0);
 }
-
-
 
 /*
 **	This function takes as parameter: 
