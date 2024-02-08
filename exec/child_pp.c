@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:10:29 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/06 15:31:38 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/06 16:50:14 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,21 +41,19 @@ int	check_dup(int pipe, int token, int pipe2, t_data *data)
 }
 
 // regler le probleme des fd
-char	*child_process_in(int **pipefd, t_data *data, int i, int token)
+int	child_process_in(int **pipefd, t_data *data, int i, int token)
 {
-	char		*cmd;
 	char		*buf;
 
-	cmd = "salut";
 	if (i == 0 || i == data->n_cmds -1)
 	{
 		if (child_process_in_or_out(pipefd, data, i, token) == -1)
-			return (NULL);
+			return (-1);
 	}
 	else if (token == 0 || token == 1)
 	{
 		if (child_process_middle(pipefd, data, token) == -1)
-			return (NULL);
+			return (-1);
 	}
 	data->nb_redirs_ac = get_nb_redirs_ac(data->cmds[i]);
 	if (check_redirection_now(data, i) == 0)
@@ -63,7 +61,7 @@ char	*child_process_in(int **pipefd, t_data *data, int i, int token)
 	buf = arg(data->cmds[i], data);
 	free(pipefd[0]);
 	free(pipefd[1]);
-	return (cmd);
+	return (0);
 }
 
 // if (redirection_manager(pipefd, token, data, i) == -1)
@@ -79,7 +77,7 @@ int	child_process_in_or_out(int	**pi, t_data *data, int i, int token)
 		close(pi[1][0]);
 		close(pi[1][1]);
 		if (check_dup(0, 0, pi[0][1], data) == -1)
-			return (close(pi[0][1]), free_pipe_argv(pi, data->cmds), -1);
+			return (close(pi[0][1]), free_all_pipe(pi), -1);
 		close(pi[0][1]);
 	}
 	else if (i == data->n_cmds - 1)
@@ -93,7 +91,7 @@ int	child_process_in_or_out(int	**pi, t_data *data, int i, int token)
 		close(pi[1][0]);
 		close(pi[0][0]);
 		if (verif == -1)
-			return (free_pipe_argv(pi, data->cmds), -1);
+			return (free_all_pipe(pi), -1);
 	}
 	return (0);
 }
@@ -110,7 +108,7 @@ int	child_process_middle(int **pipefd, t_data *data, int token)
 		close(pipefd[1][0]);
 		close(pipefd[0][1]);
 		if (verif == -1)
-			return (free_pipe_argv(pipefd, data->cmds), -1);
+			return (free_all_pipe(pipefd), -1);
 	}
 	else if (token == 1)
 	{
@@ -120,7 +118,7 @@ int	child_process_middle(int **pipefd, t_data *data, int token)
 		close(pipefd[0][0]);
 		close(pipefd[1][1]);
 		if (verif == -1)
-			return (free_pipe_argv(pipefd, data->cmds), -1);
+			return (free_all_pipe(pipefd), -1);
 	}
 	return (0);
 }

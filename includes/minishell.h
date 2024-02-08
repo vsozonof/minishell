@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/06 15:29:37 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/06 16:50:31 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,16 +173,16 @@ int		builtin_checker(t_data *tmp);
 void	builtin_manager(t_data *tmp, int token);
 
 int		pipex_exec(t_data *data);
-int		ft_pipex(t_data	*data);
+int		ft_pipex(t_data	*data, int i, char **cmd_argument);
 int		**alloc_pipe(int i, int **pipefd);
 int		**parent_process(int **pipefd, int i);
 int		len_fd_tab(char	**str, int i);
 int		verif_arg_fd(char *argv[], int i);
 char	*str_join_free(char *path, char *cmd);
 void	ft_freedb(char **str);
-void	free_pipe_argv(int **pipefd, char	*argv[]);
+void	free_all_pipe(int **pipefd);
 int		check_dup(int pipe, int token, int pipe2, t_data *data);
-char	*child_process_in(int **pipefd, t_data *data, int i, int token);
+int		child_process_in(int **pipefd, t_data *data, int i, int token);
 char	*arg(char *str, t_data *data);
 int		ft_create_fd(char *argv, int flag);
 char	**ft_get_path(char **env);
@@ -216,6 +216,7 @@ char	*get_flag_here(t_data *data);
 char	*main_here_doc(t_data *data);
 int		get_kind_redirs_ac(char *input);
 int		ft_do_process_helper(char *cmd);
+int		ft_check_access(t_data *data, int i);
 
 // ! ---------------------------------------------------------------------------
 // ?							Single_Pipe
