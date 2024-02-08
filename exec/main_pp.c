@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:10:50 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/08 10:03:35 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/08 11:11:27 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,7 @@ int	pipex_exec(t_data	*data)
 	cmd_argument = NULL;
 	data->index_redirs = ((i = 0));
 	fprintf(stderr, "je passe par multi\n");
-	// fprintf(stderr, "je test la commande complete sans redirection\n");
-	// int		j = 0;
-	// while (data->redir_tab[j])
-	// {
-	// 	fprintf(stderr, "voici mon pipe cpmplet %s \n", data->redir_tab[j]);
-	// 	j++;
-	// }
+	fprintf(stderr, "OUIIII PAR MULLLTI\n\n\n\n\n\n");
 	if (ft_check_access(data, i) == -1)
 		return (-1);
 	fprintf(stderr, "\n\n\n\n");

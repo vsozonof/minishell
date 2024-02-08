@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 14:57:24 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/07 15:30:39 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/08 10:13:57 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,6 @@ int	child_process(t_data *data, int **pipefd, int i, char **cmd_argument)
 	fprintf(stderr, "all_cmd = %s\n", cmd_arg);
 	cmd_argument = ft_split(cmd_arg, ' ');
 	int q = 0;
-	while (data->actual_path[q])
-	{
-		fprintf(stderr, "data->actual_path[%d] = %s\n", q, data->actual_path[q]);
-		q++;
-	}
-	q = 0;
 	if (data->n_redirs > 0)
 	{
 		while (data->redir_tab[q])

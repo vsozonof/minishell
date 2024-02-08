@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_parser.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 09:14:23 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/08 11:03:55 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/08 11:06:33 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ void	input_parser(t_prompt *prompt)
 	if (!redirection_and_expand_handler(&data))
 		return (free_manager(&data, 0));
 
-	printf("input b4 exec : %s\n", data.input);
+	// printf("input b4 exec : %s\n", data.input);
 	if (is_there_pipe(prompt))
 	{
-		// command_manager(&data);
+		command_manager(&data);
 		free_manager(&data, 2);
 	}
 	else if (!is_there_pipe(prompt))

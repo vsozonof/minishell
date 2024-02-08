@@ -3,14 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+         #
+#    By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/09 23:22:06 by vsozonof          #+#    #+#              #
-<<<<<<< HEAD
-#    Updated: 2024/02/08 06:02:09 by vsozonof         ###   ########.fr        #
-=======
-#    Updated: 2024/02/07 15:05:02 by tpotilli         ###   ########.fr        #
->>>>>>> refs/remotes/origin/main
+#    Updated: 2024/02/08 11:05:14 by tpotilli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
