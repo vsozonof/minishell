@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   single_arg.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 18:55:02 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/09 08:09:18 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/09 10:08:29 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,24 +18,26 @@ int	single_arg(t_data *data)
 	char	*fre;
 	char	**cmd_argument;
 	char	*essaie;
+	int		i;
 
+	data->index_redirs = ((i = 0));
 	buf = arg(data->input, data);
 	if (data->n_redirs > 0)
-		essaie = ft_strdup(data->redir_tab[0]);
+		essaie = data->redir_tab[0];
 	else
 		essaie = data->input;
 	cmd_argument = ft_split(essaie, ' ');
 	fre = ft_do_process(data->pr->nv, buf);
 	if (!fre || !cmd_argument)
 	{
-		set_status(data, 1, "command not found", buf);
+		fprintf(stderr, "problem with a command\n");
 		free(buf);
 		ft_freedb(cmd_argument);
 		return (0);
 	}
 	exec_single(cmd_argument, fre, data);
-	if (data->n_redirs > 0)
-		free(essaie);
+	// if (data->n_redirs > 0)
+	// 	free(essaie);
 	free_single(data, cmd_argument, buf, fre);
 	return (0);
 }
@@ -56,9 +58,8 @@ int	exec_single(char **cmd_argument, char *fre, t_data	*data)
 			if (redirection_single(data) == -1)
 				return (-1);
 		}
-		while (cmd_argument[x++])
-			fprintf(stderr, "cmd = %s\n", cmd_argument[x]);
 		execve(fre, cmd_argument, data->pr->nv);
+		fprintf(stderr, "execve fail\n");
 		free(fre);
 		ft_freedb(cmd_argument);
 		exit(0);
@@ -72,26 +73,10 @@ int	redirection_single(t_data *data)
 {
 	int		last;
 	int		first;
-	int		i;
 
 	first = first_redirect(data, data->input);
 	last = last_redirect(data, data->input);
-	i = 0;
-	while (data->redir_tab[i])
-	{
-		fprintf(stderr, "data = %s\n", data->redir_tab[i]);
-		i++;
-	}
-	if (data->n_redirs > 1)
-	{
-		if (redirection_dup1_in(data, first, last) == -1)
-			return (-1);
-	}
-	// else if (data->n_redirs == 1)
-	// {
-	// 	if (redirection_dup_2(data, first, last) == -1)
-	// 		return (-1);
-	// }
+	redirection_dup1(data, first, last);
 	return (0);
 }
 

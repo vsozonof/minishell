@@ -6,32 +6,38 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 17:10:46 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/08 15:07:22 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/09 10:06:07 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int redirection_dup1_in(t_data *data, int first, int last)
+int redirection_dup1(t_data *data, int first, int last)
 {
 	int		i;
 
 	i = 0;
 	fprintf(stderr, "dans ma redirection mon first %d et end %d\n", first, last);
-	if (first == -1 && dup2(0, 0) < 0)
-		return (close(data->tab[data->index_redirs][2]), printf("problem with dup2 1"), -1);
+	if (first == -1)
+	{
+		if (dup2(0, 0) < 0)
+			return (close(data->tab[data->index_redirs][2]), printf("problem with dup2 1"), -1);
+	}
 	else
 	{
 		if (dup2(data->tab[first][2], 0) < 0)
 			return (close(data->tab[data->index_redirs][2]), printf("problem with dup2 1"), -1);
 	}
-	if (redirection_dup1_out(data, last, i) == -1)
+	if (redirection_dup1_helper(data, last) == -1)
 		return (-1);
 	return (0);
 }
 
-int	redirection_dup1_out(t_data *data, int last, int i)
+int redirection_dup1_helper(t_data *data, int last)
 {
+	int		i;
+
+	i = 0;
 	if (last == -1)
 	{
 		if (dup2(0, 1) < 0)
@@ -52,8 +58,10 @@ int	redirection_dup1_out(t_data *data, int last, int i)
 
 int redirection_dup_2(t_data *data, int first, int last)
 {
+	char	*path;
 	(void)first;
 	(void)last;
+	path = NULL;
 	if (data->n_redirs == 1)
 	{
 		// if (redirection_here_doc(data, data->input) == 1)
@@ -84,16 +92,17 @@ int redirection_dup_2(t_data *data, int first, int last)
 	return (0);
 }
 
-// {
-// 	int		i;
-// 	(void)data;
+int	redirection_here_doc(t_data *data, char *input)
+{
+	int		i;
+	(void)data;
 
-// 	i = 0;
-// 	while (input[i] && input[i + 1])
-// 	{
-// 		if (input[i] == '<' && input[i + 1] == '<')
-// 			return (1);
-// 		i++;
-// 	}
-// 	return (-1);
-// }
+	i = 0;
+	while (input[i] && input[i + 1])
+	{
+		if (input[i] == '<' && input[i + 1] == '<')
+			return (1);
+		i++;
+	}
+	return (-1);
+}

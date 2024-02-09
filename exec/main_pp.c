@@ -6,23 +6,15 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:10:50 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/08 15:37:44 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/09 10:11:56 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 // cat > test1 > test2 < test3 | wc
-// ls > out > out1 > out2 < Makefile | cat < Makefile
-// pour la cmd au dessus, il faut que dans out2 il y est un ls
-// et que dans mon terminal il y ait le cat makefile
-// peut etre ls ecrit proprement  dans out2 mais que tout se fait concatener
-// par cat < makefile qui ecrit le makefile dans out2
-// si plsuieurs pipe faire attention au input a la place du pipe
-
-// !!! dnas redirection manager j'ai baisser mon nb_redirs -> retirer
-
+// ls > out > out2 < Makefile | cat < Makefile
 /*
-**	This function takes as parameter: 
+**	This function takes as parameter:
 **
 **
 ** =====================================================
@@ -32,7 +24,7 @@
 */
 
 /*
-**	This function takes as parameter: 
+**	This function takes as parameter:
 **
 **	data -> the struct who contains all variables
 **  to exec our program
@@ -50,29 +42,19 @@ int	pipex_exec(t_data	*data)
 	int		i;
 	char	**cmd_argument;
 
-	cmd_argument = NULL;
 	data->index_redirs = ((i = 0));
+	cmd_argument = NULL;
 	fprintf(stderr, "je passe par multi\n");
-	while (data->cmds[i])
-	{
-		fprintf(stderr, "data->cmds[%d] = %s\n\n\n", i, data->cmds[i]);
-		i++;
-	}
-	i = 0;
-	while (data->redir_tab && data->redir_tab[i])
-	{
-		fprintf(stderr, "data->redir[%d] = %s\n\n\n", i, data->redir_tab[i]);
-		i++;
-	}
-	i = 0;
+	// fprintf(stderr, "je test la commande complete sans redirection\n");
+	// int		j = 0;
+	// while (data->redir_tab[j])
+	// {
+	// 	fprintf(stderr, "voici mon pipe cpmplet %s \n", data->redir_tab[j]);
+	// 	j++;
+	// }
 	if (ft_check_access(data, i) == -1)
 		return (-1);
-	i = 0;
-	while (data->actual_path[i])
-	{
-		fprintf(stderr, "data->actual[%d] = %s\n\n\n", i, data->actual_path[i]);
-		i++;
-	}
+	fprintf(stderr, "\n\n\n\n");
 	fprintf(stderr, "len_db_tab(data->cmds) %d\n", len_db_tab(data->cmds));
 	i = 0;
 	ft_pipex(data, i, cmd_argument);
@@ -90,6 +72,9 @@ int	ft_check_access(t_data *data, int i)
 		return (-1);
 	while (data->cmds[i])
 	{
+		data->actual_path[i] = malloc(sizeof(char) * (ft_strlen(data->cmds[i]) + 1));
+		if (!data->actual_path[i])
+			return (-1);
 		buf = arg(data->cmds[i], data);
 		data->actual_path[i] = ft_do_process(data->pr->nv, buf);
 		if (!data->actual_path[i])

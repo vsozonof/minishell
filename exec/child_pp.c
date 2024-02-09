@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:10:29 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/08 14:09:48 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/09 10:03:21 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	check_dup(int pipe, int token, int pipe2)
 {
+	fprintf(stderr, "mon token est donc %d\n", token);
 	if (token == 0)
 	{
 		if (dup2(0, 0) < 0)
@@ -57,7 +58,6 @@ int	child_process_in(int **pipefd, t_data *data, int i, int token)
 	if (check_redirection_now(data, i) == 0)
 		redirection_manager(data, i); // !!!! regler les cas ou ca echoue
 	buf = arg(data->cmds[i], data);
-	(void)buf;
 	free(pipefd[0]);
 	free(pipefd[1]);
 	return (0);
@@ -129,7 +129,7 @@ char	*arg(char *str, t_data *data)
 	char	*tmp;
 
 	tmp = NULL;
-	i = ft_strlen(str) - 1;
+	i = ft_strlen(str);
 	buf = ft_split(str, ' ');
 	if (data->n_redirs > 0)
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/09 08:36:37 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/09 10:05:41 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,8 +196,9 @@ int		redirection_single_chev(t_data *data, char *input);
 int		first_redirect(t_data *data, char *input);
 int		last_redirect(t_data *data, char *input);
 int		is_redirect_actual(char *input);
-int		redirection_dup1_in(t_data *data, int first, int last);
-int		redirection_dup1_out(t_data *data, int first, int last);
+int		redirection_dup1(t_data *data, int first, int last);
+int		redirection_dup1_helper(t_data *data, int last);
+int		redirection_dup2(t_data *data, int first, int last);
 void	free_single(t_data *data, char **cmd_argument, char *buf, char *fre);
 int		redirection_here_doc(t_data *data, char *input);
 char    *ft_do_here_doc(t_data *data);
