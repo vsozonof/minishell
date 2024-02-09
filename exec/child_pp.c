@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child_pp.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:10:29 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/08 11:39:41 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/08 14:09:48 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ char	*arg(char *str, t_data *data)
 	char	*tmp;
 
 	tmp = NULL;
-	i = ft_strlen(str);
+	i = ft_strlen(str) - 1;
 	buf = ft_split(str, ' ');
 	if (data->n_redirs > 0)
 	{

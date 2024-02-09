@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 09:14:23 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/09 03:58:08 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/09 04:43:24 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,14 @@ void	input_parser(t_prompt *prompt)
 	if (is_there_pipe(prompt))
 	{
 		command_manager(&data);
+		command_manager(&data);
 		free_manager(&data, 2);
 	}
 	else if (!is_there_pipe(prompt))
 	{
 		if (!get_cmd(&data))
 			return (free_manager(&data, 0));
+		command_manager(&data);
 		command_manager(&data);
 		free_manager(&data, 1);
 	}
