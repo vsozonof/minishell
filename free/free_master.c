@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 04:29:11 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/09 04:42:41 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/09 07:41:15 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	free_manager(t_data *data, int key)
 		free(data->pr->input);
 	}
 	free(data->c_status);
+	data->c_status = NULL;
 	if (data->redir_tab)
 		ft_split_free(data->redir_tab);
 	if (data->redir_tab)
@@ -42,4 +43,6 @@ void	free_end_of_program(t_prompt *p)
 	free_env_tab(p->nv);
 	free(p->name);
 	free(p->pid);
+	if (p->data->c_status)
+		free(p->data->c_status);
 }

@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/09 04:42:59 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/09 07:30:45 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int		init_str_pipe(t_data *data, t_prompt *prompt);
 // ?							INPUT PARSING
 // ! ---------------------------------------------------------------------------
 
-void	input_parser(t_prompt *prompt);
+void	input_parser(t_prompt *prompt, t_data *data);
 int		get_cmd(t_data *data);
 int		invalid_character_checker(int c);
 int		is_input_valid(char *str);

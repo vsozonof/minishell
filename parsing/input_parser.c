@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 09:14:23 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/09 04:43:24 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/09 07:49:13 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,32 +16,32 @@
 // * Flags et Args trouvable dans data.arg / data.flag
 // * Env trouvable dans data.envp
 
-void	input_parser(t_prompt *prompt)
+void	input_parser(t_prompt *prompt, t_data *data)
 {
-	t_data	data;
-
-	prompt->data = &data;
-	init_str(&data, prompt);
-	if (!is_piped_input_valid(prompt->input, &data))
-		return (free_manager(&data, 0));
-	if (is_there_pipe(prompt))
-		data.cmds = pipes_splitter(prompt->input, '|', &data);
-	if (!redirection_and_expand_handler(&data))
-		return (free_manager(&data, 0));
-	printf("input b4 exec : [%s]\n\n", data.input);
+	init_str(data, prompt);
+	if (!is_piped_input_valid(prompt->input, data))
+		return (free_manager(data, 0));
 	if (is_there_pipe(prompt))
 	{
-		command_manager(&data);
-		command_manager(&data);
-		free_manager(&data, 2);
+		data->cmds = pipes_splitter(prompt->input, '|', data);
+		if (!data->cmds)
+			return (set_status(data, 12, NULL, "malloc error."),
+				free_manager(data, 0));
+	}
+	if (!redirection_and_expand_handler(data))
+		return (free_manager(data, 0));
+	printf("input b4 exec : [%s]\n\n", data->input);
+	if (is_there_pipe(prompt))
+	{
+		command_manager(data);
+		free_manager(data, 2);
 	}
 	else if (!is_there_pipe(prompt))
 	{
-		if (!get_cmd(&data))
-			return (free_manager(&data, 0));
-		command_manager(&data);
-		command_manager(&data);
-		free_manager(&data, 1);
+		if (!get_cmd(data))
+			return (free_manager(data, 0));
+		command_manager(data);
+		free_manager(data, 1);
 	}
 }
 
