@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 19:31:35 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/09 08:36:52 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/09 13:48:40 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,10 @@ int	redirection_and_expand_handler(t_data *data)
 		redirection_counter(data);
 		if (data->n_redirs != 0)
 			redirection_parser(data);
-		extract_redir_cmds(ft_split(data->input, ' '), data);
+		if (are_token_sep_by_wspace(data->input))
+			extract_redir_cmds(ft_split(data->input, ' '), data);
+		else
+			extract_redir_no_wspace(data, r_word_counter(data, 0, 1));
 	}
 	return (1);
 }

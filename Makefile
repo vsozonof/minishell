@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+         #
+#    By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/09 23:22:06 by vsozonof          #+#    #+#              #
-#    Updated: 2024/02/08 12:01:09 by tpotilli         ###   ########.fr        #
+#    Updated: 2024/02/09 13:44:09 by vsozonof         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ SRCS = main.c \
 	   parsing/redirs/redir_utils-1.c \
 	   parsing/redirs/redir_utils-2.c \
 	   parsing/redirs/redir_utils-3.c \
+	   parsing/redirs/redir_utils-4.c \
 	   parsing/expand/expand_master.c \
 	   parsing/expand/expand_utils-1.c \
 	   parsing/expand/expand_utils-2.c \

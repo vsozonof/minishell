@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/09 10:05:41 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/09 13:48:15 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,7 @@ int		is_there_backslash(char *str);
 int		is_there_quotes(char *str);
 int		is_there_redirs(char *str);
 int		is_there_tilde(char *str);
+int		is_token(char *str, int i);
 int		ispipe(int c);
 int		is_valid_pipe(char *str, t_data *data);
 int		is_in_quotes(char *str, int c);
@@ -159,6 +160,9 @@ int		redirection_and_expand_handler(t_data *data);
 void	tab_value_setter_double(t_data *data, int n, int i);
 void	extract_redir_cmds(char **splitted, t_data *data);
 int		cmd_counter(char **splitted);
+int 	r_word_counter(t_data *data, int i, int j);
+int		are_token_sep_by_wspace(char *str);
+void	extract_redir_no_wspace(t_data *data, int n);
 
 // ! ---------------------------------------------------------------------------
 // ?							SIGNAL HANDLER
