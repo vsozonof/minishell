@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 08:35:01 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/08 03:40:23 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/09 08:31:22 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ void	init_extras(t_prompt *ptr)
 {
 	ptr->name = ft_strdup("minishell");
 	ptr->pid = ft_itoa((int)getpid());
+	ptr->data->i_status = 0;
+	ptr->data->c_status = ft_itoa(ptr->data->i_status);
 	create_side_env(ptr);
 }
 
@@ -54,12 +56,11 @@ int	init_str(t_data *data, t_prompt *prompt)
 	data->tail = NULL;
 	data->to_add = NULL;
 	data->redir_tab = NULL;
-	data->i_status = 0;
-	data->c_status = ft_itoa(data->i_status);
 	data->n_redirs = 0;
 	data->input = prompt->input;
 	data->pr = prompt;
 	data->env = prompt->env;
+	data->tab = NULL;
 	return (1);
 }
 

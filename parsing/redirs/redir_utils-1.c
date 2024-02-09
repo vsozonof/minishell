@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 19:31:35 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/05 12:54:05 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/09 08:36:52 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	redirection_and_expand_handler(t_data *data)
 		return (0);
 	if (is_there_redirs(data->input))
 	{
-		if (!is_valid_redir(data->input))
+		if (!is_valid_redir(data->input, data))
 			return (0);
 		redirection_counter(data);
 		if (data->n_redirs != 0)
@@ -31,7 +31,7 @@ int	redirection_and_expand_handler(t_data *data)
 	return (1);
 }
 
-int	is_valid_redir(char *str)
+int	is_valid_redir(char *str, t_data *data)
 {
 	int	i;
 
@@ -42,14 +42,14 @@ int	is_valid_redir(char *str)
 				|| (str[i] == '<' && str[i + 1] != '<')))
 		{
 			i ++;
-			if (!redir_checker(str, i))
+			if (!redir_checker(str, i, data))
 				return (0);
 		}
 		else if (!is_in_quotes(str, i) && ((str[i] == '>' && str[i + 1] == '>')
 				|| (str[i] == '<' && str[i + 1] == '<')))
 		{
 			i ++;
-			if (!redir_checker(str, i))
+			if (!redir_checker(str, i, data))
 				return (0);
 		}
 		i++;
@@ -90,6 +90,7 @@ void	redirection_parser(t_data *data)
 
 	i = 0;
 	data->tab = malloc(sizeof (int *) * data->n_redirs);
+	data->n = data->n_redirs;
 	while (i < data->n_redirs)
 	{
 		data->tab[i] = malloc(sizeof (int) * 3);

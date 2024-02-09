@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/09 07:30:45 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/09 08:36:37 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct s_parse
 {
 	t_prompt		*pr;
 	t_env			*env;
+	int				n;
 	char			*input;
 	char			*head;
 	char			*new_head;
@@ -147,8 +148,8 @@ int		is_pipe_content_valid(char *str, t_data *data);
 char	**pipes_splitter(char const *s, char c, t_data *data);
 int		n_args(char *str);
 int		quote_skipper(char *str, int c);
-int		is_valid_redir(char *str);
-int		redir_checker(char *str, int i);
+int		is_valid_redir(char *str, t_data *data);
+int		redir_checker(char *str, int i, t_data *data);
 void	redirection_counter(t_data *data);
 void	redirection_parser(t_data *data);
 void	get_redir_infos(t_data *data);

@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 18:55:02 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/09 04:42:26 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/09 08:09:18 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ int	single_arg(t_data *data)
 		return (0);
 	}
 	exec_single(cmd_argument, fre, data);
-	// if (data->n_redirs > 0)
-	// 	free(essaie);
+	if (data->n_redirs > 0)
+		free(essaie);
 	free_single(data, cmd_argument, buf, fre);
 	return (0);
 }

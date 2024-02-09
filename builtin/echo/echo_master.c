@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 12:48:29 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/08 08:25:22 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/09 08:45:44 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	execute_echo(t_data *data)
 
 	data->input = quote_remover_v2(data->input);
 	to_print = export_extract_arg(data->input);
+	printf("toprint = [%s]\n", to_print);
 	if (!to_print)
 		return (ft_putstr("\n"));
 	if (ft_strnstr(to_print, "-n", 2))
