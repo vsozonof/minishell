@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/08 11:50:19 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/09 04:00:27 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ typedef struct s_parse
 // ! ---------------------------------------------------------------------------
 
 int		main(int argc, char **argv, char *envp[]);
-void	get_input(char **envp);
+int		get_input(char **envp);
 int		init_sbase(t_prompt *prompt, char **env);
 void	init_extras(t_prompt *ptr);
 int		init_str(t_data *data, t_prompt *prompt);
@@ -100,7 +100,7 @@ void	input_parser(t_prompt *prompt);
 int		get_cmd(t_data *data);
 int		invalid_character_checker(int c);
 int		is_input_valid(char *str);
-int		is_piped_input_valid(char *str);
+int		is_piped_input_valid(char *str, t_data *data);
 int		exception_checker(char *str);
 int		exception_checker_2(char *str, int i);
 int		unclosed_quote_detector(char *str);
@@ -126,7 +126,7 @@ void	unquote_command(t_data *data);
 // ! ---------------------------------------------------------------------------
 
 void	ft_printlst(t_env *L);
-void	exit_status_updater(t_data *data, int status, char *str, char *cmd);
+void	set_status(t_data *data, int status, char *str, char *cmd);
 char	*ft_get_env(t_env *env, char *str);
 t_env	*ft_get_env_node(t_env *env, char *str);
 int		put_env_to_lst(t_env *env, char **envp);
@@ -141,9 +141,9 @@ int		is_there_quotes(char *str);
 int		is_there_redirs(char *str);
 int		is_there_tilde(char *str);
 int		ispipe(int c);
-int		is_valid_pipe(char *str);
+int		is_valid_pipe(char *str, t_data *data);
 int		is_in_quotes(char *str, int c);
-int		is_pipe_content_valid(char *str);
+int		is_pipe_content_valid(char *str, t_data *data);
 char	**pipes_splitter(char const *s, char c, t_data *data);
 int		n_args(char *str);
 int		quote_skipper(char *str, int c);
@@ -295,5 +295,6 @@ void	free_cmds(t_data *data);
 void	free_env(t_env	*env);
 void	free_env_tab(char **env);
 void	free_end_of_program(t_prompt *p);
+void	free_tab(int **tab, int n_redir);
 
 #endif

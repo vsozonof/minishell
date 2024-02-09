@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 04:29:11 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/08 12:23:23 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/09 01:58:09 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 
 void	free_manager(t_data *data, int key)
 {
-	int	i;
-
-	i = 0;
 	if (key == 1)
 	{
 		free(data->pr->input);
@@ -29,16 +26,10 @@ void	free_manager(t_data *data, int key)
 		free(data->pr->input);
 	}
 	free(data->c_status);
-	ft_split_free(data->redir_tab);
+	if (data->redir_tab)
+		ft_split_free(data->redir_tab);
 	if (data->n_redirs)
-	{
-		while (i < data->n_redirs)
-		{
-			free(data->tab[i]);
-			i++;
-		}
-		free(data->tab);
-	}
+		free_tab(data->tab, data->n_redirs);
 }
 
 void	free_end_of_program(t_prompt *p)

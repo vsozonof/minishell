@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 05:50:43 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/08 10:18:51 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/09 02:32:23 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ char	*ft_get_env(t_env *env, char *str)
 
 	nav = env;
 	to_find = ft_strjoin(str, "=");
-	if (str)
-		free(str);
 	len = ft_strlen(to_find);
 	while (nav)
 	{

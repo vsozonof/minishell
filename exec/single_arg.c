@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   single_arg.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 18:55:02 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/07 15:43:50 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/09 03:51:48 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	single_arg(t_data *data)
 	fre = ft_do_process(data->pr->nv, buf);
 	if (!fre || !cmd_argument)
 	{
-		exit_status_updater(data, 1, "command not found", buf);
+		set_status(data, 1, "command not found", buf);
 		free(buf);
 		ft_freedb(cmd_argument);
 		return (0);

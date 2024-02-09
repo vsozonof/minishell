@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 05:27:00 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/30 09:25:19 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/09 03:51:58 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,5 @@ void	error_handling(int err, char *str, t_data *data)
 	else if (err == 13)
 		printf("minishell: cd: %s: Permission denied.\n", str);
 	free(str);
-	exit_status_updater(data, err, NULL, NULL);
+	set_status(data, err, NULL, NULL);
 }

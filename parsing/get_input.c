@@ -6,13 +6,13 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 13:42:18 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/30 11:01:37 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/09 03:32:18 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	get_input(char **envp)
+int	get_input(char **envp)
 {
 	t_prompt	prompt;
 
@@ -35,4 +35,5 @@ void	get_input(char **envp)
 	}
 	clear_history();
 	free_end_of_program(&prompt);
+	return (prompt.data->i_status);
 }

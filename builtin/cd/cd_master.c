@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 12:02:25 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/08 10:24:36 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/09 03:52:13 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,18 @@ void	execute_cd(t_data *data)
 	if (n_args(data->input) == 0)
 	{
 		if (!ft_get_env_node(data->env, "HOME"))
-			return (exit_status_updater(data, 1, "HOME not set.", "cd :"));
+			return (set_status(data, 1, "HOME not set.", "cd :"));
 		change_directory(data, ft_get_env(data->env, "HOME"));
-		return (exit_status_updater(data, 0, NULL, NULL));
+		return (set_status(data, 0, NULL, NULL));
 	}
 	else if (n_args(data->input) != 1)
-		return (exit_status_updater(data, 1, "too many arguments.", "cd :"));
+		return (set_status(data, 1, "too many arguments.", "cd :"));
 	path = cd_extract_arg(data->input);
 	if (!ft_strncmp(path, "..", 2))
 	{
 		go_back_one_level(data);
 		free(path);
-		return (exit_status_updater(data, 0, NULL, NULL));
+		return (set_status(data, 0, NULL, NULL));
 	}
 	else
 		change_directory(data, path);
@@ -74,10 +74,14 @@ void	update_vars(t_data *data)
 
 	old_pwd = ft_get_env_node(data->env, "OLDPWD");
 	pwd = ft_get_env_node(data->env, "PWD");
+	free(data->pr->w_d);
 	data->pr->w_d = getcwd(NULL, 0);
-	old_wd = pwd->var;
-	free(old_pwd->var);
-	old_pwd->var = ft_strjoin("OLD", old_wd);
-	free(old_wd);
-	pwd->var = ft_strjoin("PWD=", data->pr->w_d);
+	if (pwd && old_pwd)
+	{
+		old_wd = pwd->var;
+		free(old_pwd->var);
+		old_pwd->var = ft_strjoin("OLD", old_wd);
+		free(old_wd);
+		pwd->var = ft_strjoin("PWD=", data->pr->w_d);
+	}
 }

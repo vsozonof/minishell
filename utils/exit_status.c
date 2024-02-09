@@ -6,13 +6,13 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 04:46:20 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/30 09:27:08 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/09 03:51:22 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	exit_status_updater(t_data *data, int status, char *str, char *cmd)
+void	set_status(t_data *data, int status, char *str, char *cmd)
 {
 	printf("minishell: ");
 	if (cmd)

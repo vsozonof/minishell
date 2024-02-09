@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 02:16:29 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/08 08:29:38 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/09 02:40:50 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,7 @@ void	search_and_split(t_data *data, int i)
 		c++;
 	to_find = ft_substr(data->input, i, (c - i));
 	data->to_add = ft_get_env(data->env, to_find);
+	free(to_find);
 	data->head = ft_substr(data->input, 0, (i - 1));
 	data->tail = ft_substr(data->input, c, ft_strlen(data->input));
 }
