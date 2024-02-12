@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 13:42:48 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/09 14:12:17 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/12 08:55:05 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int	r_word_counter(t_data *data, int i, int j)
 				i++;
 			j++;
 		}
+		if (i == (int)ft_strlen(data->input))
+			break ;
 		i++;
 	}
 	return (j);
@@ -58,16 +60,40 @@ void	extract_redir_no_wspace(t_data *data, int n)
 	i = 0;
 	tab = malloc(sizeof(char *) * n);
 	if (!tab)
-		return (set_status(data, 12, NULL, "malloc error."));
-	while (data->input[i] && j < n)
+		return (set_status(data, 12, "malloc error.", NULL));
+	data->new_head = ft_strdup(data->input);
+	while (data->input[i] && j < (n - 1))
 	{
-		while (data->input[i] && ft_is_whitespace(data->input[i]))
-			i++;
-		c = i;
-		while (data->input[i] && !ft_is_whitespace(data->input[i])
-			&& !is_token(data->input, i))
-			i++;
-		tab[j] = ft_substr(data->input, c, (ft_strlen(data->input) - i));
+		tab[j] = extract_word(data, 0, 0);
 		j++;
 	}
+	free(data->new_head);
+	tab[j] = NULL;
+	extract_redir_cmds(tab, data);
+}
+
+char	*extract_word(t_data *data, int i, int c)
+{
+	char	*rest;
+	char	*word;
+
+	if (!data->new_head)
+		return (NULL);
+	while (data->new_head[i] && ft_is_whitespace(data->new_head[i]))
+		i++;
+	c = i;
+	if (!is_token(data->new_head, i))
+	{
+		while (data->new_head[i] && !ft_is_whitespace(data->new_head[i])
+			&& !is_token(data->new_head, i))
+			i++;
+	}
+	else
+		while (data->new_head[i] && is_token(data->new_head, i))
+			i++;
+	word = ft_substr(data->new_head, c, (i - c));
+	rest = ft_substr(data->new_head, i, ft_strlen(data->new_head));
+	free(data->new_head);
+	data->new_head = rest;
+	return (word);
 }

@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 09:14:23 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/09 13:55:21 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/12 08:55:21 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	input_parser(t_prompt *prompt, t_data *data)
 	{
 		data->cmds = pipes_splitter(prompt->input, '|', data);
 		if (!data->cmds)
-			return (set_status(data, 12, NULL, "malloc error."),
+			return (set_status(data, 12, "malloc error.", NULL),
 				free_manager(data, 0));
 	}
 	if (!redirection_and_expand_handler(data))
@@ -55,7 +55,7 @@ int	get_cmd(t_data *data)
 	data->input = ft_substr(data->pr->input, i, ft_strlen(data->pr->input));
 	if (!data->input)
 	{
-		set_status(data, 12, NULL, "malloc error.");
+		set_status(data, 12, "malloc error.", NULL);
 		return (0);
 	}
 	return (data->n_cmds = 1, 1);

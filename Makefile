@@ -6,7 +6,7 @@
 #    By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/09 23:22:06 by vsozonof          #+#    #+#              #
-#    Updated: 2024/02/09 13:44:09 by vsozonof         ###   ########.fr        #
+#    Updated: 2024/02/12 08:07:30 by vsozonof         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,7 +75,7 @@ SRCS = main.c \
 	   builtin/export/export_utils-4.c \
 	   builtin/pwd/pwd_master.c \
 	   builtin/env/env_master.c \
-	   builtin/exit.c \
+	   builtin/exit/exit.c \
 
 OBJS = $(SRCS:.c=.o)
 

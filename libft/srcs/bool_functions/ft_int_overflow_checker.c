@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 07:44:02 by vsozonof          #+#    #+#             */
-/*   Updated: 2023/05/06 16:44:00 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/12 07:12:46 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 int	ft_int_overflow_checker(char *str)
 {
 	if (ft_strlen(str) > 11)
-		return (pr_error("Integer overflow/underflow detected."));
+		return (0);
 	else if (ft_integer_checker(str) != 1)
 		return (0);
 	return (1);
@@ -45,8 +45,8 @@ int	ft_integer_checker(char *str)
 
 	n = ft_atol(str);
 	if (n > INT_MAX)
-		return (pr_error("Integer overflow detected."));
+		return (0);
 	else if (n < INT_MIN)
-		return (pr_error("Integer underflow detected."));
+		return (0);
 	return (1);
 }

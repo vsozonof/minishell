@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/09 13:48:15 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/12 09:34:45 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ typedef struct s_parse
 {
 	t_prompt		*pr;
 	t_env			*env;
-	int				n;
+	int				exited;
 	char			*input;
 	char			*head;
 	char			*new_head;
@@ -76,6 +76,7 @@ typedef struct s_parse
 	int				n_redirs;
 	int				nb_redirs_ac;
 	int				i;
+	int				n;
 	char			**actual_path;
 	int				index_redirs;
 	int				nb_here_doc;
@@ -87,11 +88,15 @@ typedef struct s_parse
 // ! ---------------------------------------------------------------------------
 
 int		main(int argc, char **argv, char *envp[]);
-int		get_input(char **envp);
+int		get_input(t_prompt *prompt, t_data *data);
 int		init_sbase(t_prompt *prompt, char **env);
-void	init_extras(t_prompt *ptr);
+int		init_extras(t_prompt *ptr);
 int		init_str(t_data *data, t_prompt *prompt);
-int		init_str_pipe(t_data *data, t_prompt *prompt);
+int		init_sig(t_prompt *prompt);
+int		init_if_env(t_prompt *ptr, char **env);
+int		init_if_no_env(t_prompt *ptr);
+int		put_env_to_lst(t_env *env, char **envp);
+int		create_side_env(t_prompt *ptr);
 
 // ! ---------------------------------------------------------------------------
 // ?							INPUT PARSING
@@ -130,8 +135,6 @@ void	ft_printlst(t_env *L);
 void	set_status(t_data *data, int status, char *str, char *cmd);
 char	*ft_get_env(t_env *env, char *str);
 t_env	*ft_get_env_node(t_env *env, char *str);
-int		put_env_to_lst(t_env *env, char **envp);
-void	create_side_env(t_prompt *ptr);
 void	add_var_to_env(t_data *data, char *var);
 void	del_var_from_env(t_data *data, char *var);
 int		env_len(t_env *env);
@@ -163,6 +166,7 @@ int		cmd_counter(char **splitted);
 int 	r_word_counter(t_data *data, int i, int j);
 int		are_token_sep_by_wspace(char *str);
 void	extract_redir_no_wspace(t_data *data, int n);
+char	*extract_word(t_data *data, int i, int c);
 
 // ! ---------------------------------------------------------------------------
 // ?							SIGNAL HANDLER
@@ -285,11 +289,7 @@ char	*unset_extract_var_name(char *args, int i);
 int		unset_var_name_skipper(char *args, int i);
 void	do_unset(char *args, t_data *data);
 
-
-int		execute_exit(t_data *data);
-
-// void	execute_export();
-// int		execute_exit();
+void	execute_exit(t_data *data);
 
 // ! ---------------------------------------------------------------------------
 // ?							Utils Free

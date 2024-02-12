@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 04:46:20 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/09 08:41:23 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/12 08:52:12 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void	set_status(t_data *data, int status, char *str, char *cmd)
 {
-	printf("minishell: ");
+	if (cmd || str)
+		printf("minishell: ");
 	if (cmd)
 		printf("%s:", cmd);
 	if (str)

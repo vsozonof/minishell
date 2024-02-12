@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_dup.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 17:10:46 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/09 10:06:07 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/10 15:14:50 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 
 int redirection_dup1(t_data *data, int first, int last)
 {
-	int		i;
-
-	i = 0;
 	fprintf(stderr, "dans ma redirection mon first %d et end %d\n", first, last);
 	if (first == -1)
 	{
@@ -58,10 +55,8 @@ int redirection_dup1_helper(t_data *data, int last)
 
 int redirection_dup_2(t_data *data, int first, int last)
 {
-	char	*path;
 	(void)first;
 	(void)last;
-	path = NULL;
 	if (data->n_redirs == 1)
 	{
 		// if (redirection_here_doc(data, data->input) == 1)
