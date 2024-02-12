@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:29:44 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/12 09:38:18 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/12 09:58:23 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,19 @@
 
 // valgrind --leak-check=full --suppressions=rl_leak_ignore.supp ./minishell
 int	g_status;
+
+void	init_vars(t_prompt *ptr)
+{
+	ptr->user = NULL;
+	ptr->w_d = NULL;
+	ptr->post = NULL;
+	ptr->env = NULL;
+	ptr->name = NULL;
+	ptr->pid = NULL;
+	ptr->nv = NULL;
+	ptr->data->c_status = NULL;
+	ptr->data->i_status = 0;
+}
 
 int	main(int argc, char **argv, char *envp[])
 {
@@ -23,6 +36,7 @@ int	main(int argc, char **argv, char *envp[])
 	(void)argc;
 	(void)argv;
 	prompt.data = &data;
+	init_vars(&prompt);
 	if (!init_sbase(&prompt, envp) || !init_extras(&prompt))
 	{
 		free_end_of_program(&prompt);

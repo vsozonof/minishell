@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 00:49:25 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/09 13:26:57 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/12 13:34:42 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,19 +52,16 @@ void	set_tab_values(t_data *data, int n, int i, int mode)
 	free(file_name);
 }
 
-void	get_redir_infos(t_data *data)
+void	get_redir_infos(t_data *data, int i, int n)
 {
-	int	i;
-	int	n;
-
-	i = ((n = 0));
 	while (data->input[i])
 	{
 		if (!is_in_quotes(data->input, i)
 			&& ((data->input[i] == '<' && data->input[i + 1] != '<')
 				|| (data->input[i] == '>' && data->input[i + 1] != '>')))
 		{
-			set_tab_values(data, n, i, 1);
+			if (data->tab[n])
+				set_tab_values(data, n, i, 1);
 			n++;
 			i++;
 		}
@@ -72,7 +69,8 @@ void	get_redir_infos(t_data *data)
 			&& ((data->input[i] == '<' && data->input[i + 1] == '<')
 				|| (data->input[i] == '>' && data->input[i + 1] == '>')))
 		{
-			set_tab_values(data, n, i, 2);
+			if (data->tab[n])
+				set_tab_values(data, n, i, 2);
 			n++;
 			i += 2;
 		}

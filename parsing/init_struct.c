@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 08:35:01 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/12 09:28:54 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/12 10:50:21 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,29 @@ int	init_sbase(t_prompt *ptr, char **env)
 {
 	if (!init_sig(ptr))
 		return (0);
-	if (env[0])
+	if (getenv("HOME"))
 	{
 		if (!init_if_env(ptr, env))
 			return (0);
 	}
 	else
 	{
-		if (!init_if_no_env(ptr))
+		if (!init_if_no_env(ptr, env))
 			return (0);
 	}
 	return (1);
 }
 
-int	init_if_no_env(t_prompt *ptr)
+int	init_if_no_env(t_prompt *ptr, char **envp)
 {
-	ptr->env = NULL;
+	t_env	*env_l;
+
+	env_l = malloc(sizeof(t_env));
+	if (!env_l)
+		return (set_status(ptr->data, 12, "malloc error.", NULL), 0);
+	if (!put_env_to_lst(env_l, envp))
+		return (set_status(ptr->data, 12, "malloc error.", NULL), 0);
+	ptr->env = env_l;
 	ptr->user = ft_strdup("???");
 	if (!ptr->user)
 		return (set_status(ptr->data, 12, "malloc error.", NULL), 0);
@@ -50,11 +57,12 @@ int	init_if_env(t_prompt *ptr, char **env)
 
 	env_l = malloc(sizeof(t_env));
 	if (!env_l)
-		return (init_if_no_env(ptr));
+		return (set_status(ptr->data, 12, "malloc error.", NULL), 0);
 	else
 	{
 		if (!put_env_to_lst(env_l, env))
-			return (free(env_l), init_if_no_env(ptr));
+			return (set_status(ptr->data, 12, "malloc error.", NULL), 0);
+		ptr->env = env_l;
 		ptr->user = ft_strdup(getenv("LOGNAME"));
 		if (!ptr->user)
 			return (set_status(ptr->data, 12, "malloc error.", NULL), 0);
@@ -65,7 +73,6 @@ int	init_if_env(t_prompt *ptr, char **env)
 		if (!ptr->w_d)
 			return (set_status(ptr->data, 12, "malloc error.", NULL), 0);
 	}
-	ptr->env = env_l;
 	return (1);
 }
 

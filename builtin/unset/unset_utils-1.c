@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 01:20:13 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/30 01:50:58 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/12 10:53:52 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,5 @@ int	unset_var_name_skipper(char *args, int i)
 {
 	while (args[i] && ft_isalnum(args[i]))
 		i++;
-	printf("-> i = %i\n", i);
 	return (i);
 }

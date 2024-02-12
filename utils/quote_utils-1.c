@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 03:12:41 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/08 08:31:57 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/12 13:14:33 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,11 +98,12 @@ void	unquote_command(t_data *data)
 	rest = ft_substr(data->input, (i), (ft_strlen(data->input)));
 	free(data->input);
 	data->input = to_extract;
-	reg_expander(data);
+	reg_expander(data, 0);
 	to_extract = data->input;
 	data->input = rest;
-	reg_expander(data);
+	reg_expander(data, 0);
 	rest = data->input;
-	to_extract = quote_remover_v2(to_extract);
+	if (to_extract && is_there_quotes(to_extract))
+		to_extract = quote_remover_v2(to_extract);
 	data->input = strjoin_and_free(to_extract, rest);
 }

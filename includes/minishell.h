@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/12 09:34:45 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/12 13:32:08 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int		init_extras(t_prompt *ptr);
 int		init_str(t_data *data, t_prompt *prompt);
 int		init_sig(t_prompt *prompt);
 int		init_if_env(t_prompt *ptr, char **env);
-int		init_if_no_env(t_prompt *ptr);
+int		init_if_no_env(t_prompt *ptr, char **envp);
 int		put_env_to_lst(t_env *env, char **envp);
 int		create_side_env(t_prompt *ptr);
 
@@ -115,7 +115,7 @@ void	expand_handler(t_data *data);
 int		expand_is_valid_char(int c);
 int		is_valid_char(int c);
 int		is_valid_char_after_redir(int c);
-void	reg_expander(t_data *data);
+void	reg_expander(t_data *data, int i);
 void	reg_expand_splitter(t_data *data, int i);
 void	reg_expand_joiner(t_data *data);
 void	tilde_expander(t_data *data, int i);
@@ -156,7 +156,7 @@ int		is_valid_redir(char *str, t_data *data);
 int		redir_checker(char *str, int i, t_data *data);
 void	redirection_counter(t_data *data);
 void	redirection_parser(t_data *data);
-void	get_redir_infos(t_data *data);
+void	get_redir_infos(t_data *data, int i, int n);
 void	set_tab_values(t_data *data, int n, int i, int mode);
 char	*file_name_finder(t_data *data, int i, int c);
 int		redirection_and_expand_handler(t_data *data);

@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 04:29:11 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/12 08:59:37 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/12 09:48:36 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,20 @@ void	free_manager(t_data *data, int key)
 
 void	free_end_of_program(t_prompt *p)
 {
-	free(p->user);
-	free(p->w_d);
-	free(p->post);
-	free_env(p->env);
-	free_env_tab(p->nv);
-	free(p->name);
-	free(p->pid);
+	if (p->user)
+		free(p->user);
+	if (p->w_d)
+		free(p->w_d);
+	if (p->post)
+		free(p->post);
+	if (p->env)
+		free_env(p->env);
+	if (p->nv)
+		free_env_tab(p->nv);
+	if (p->name)
+		free(p->name);
+	if (p->pid)
+		free(p->pid);
 	if (p->data->c_status)
 		free(p->data->c_status);
 }
