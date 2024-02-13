@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   single_arg.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 18:55:02 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/09 08:09:18 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/13 15:26:40 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int	single_arg(t_data *data)
 	char	*essaie;
 
 	buf = arg(data->input, data);
+	if (!buf)
+		return (-1);
 	if (data->n_redirs > 0)
 		essaie = ft_strdup(data->redir_tab[0]);
 	else
@@ -74,8 +76,8 @@ int	redirection_single(t_data *data)
 	int		first;
 	int		i;
 
-	first = first_redirect(data, data->input);
-	last = last_redirect(data, data->input);
+	first = first_redirect(data, data->input, 0);
+	last = last_redirect(data, data->input, 0);
 	i = 0;
 	while (data->redir_tab[i])
 	{

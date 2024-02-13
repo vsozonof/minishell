@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_utils-1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 04:25:22 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/09 08:27:38 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/12 10:54:44 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	free_tab(int **tab, int n_redir)
 	int	i;
 
 	i = 0;
-	printf("->->-> %i \n", n_redir);
+	// printf("->->-> %i \n", n_redir);
 	while (i < n_redir)
 	{
 		free(tab[i]);

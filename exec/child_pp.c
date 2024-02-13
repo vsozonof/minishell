@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:10:29 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/08 14:09:48 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/13 15:28:17 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,7 @@ char	*arg(char *str, t_data *data)
 	buf = ft_split(str, ' ');
 	if (data->n_redirs > 0)
 	{
+		// fprintf(stderr, "index_redir %d\n", data->index_redirs);
 		if (data->tab[data->index_redirs])
 		{
 			if (data->tab[data->index_redirs][0] == i)
@@ -140,6 +141,11 @@ char	*arg(char *str, t_data *data)
 		}
 	}
 	tmp = copy_arg(tmp, buf[0]);
+	if (!tmp)
+	{
+		perror("a problem happend with malloc\n");
+		return (ft_freedb(buf), NULL);
+	}
 	ft_freedb(buf);
 	return (tmp);
 }

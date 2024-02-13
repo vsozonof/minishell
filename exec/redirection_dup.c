@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 17:10:46 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/08 15:07:22 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/12 16:10:02 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,16 @@ int redirection_dup1_in(t_data *data, int first, int last)
 
 	i = 0;
 	fprintf(stderr, "dans ma redirection mon first %d et end %d\n", first, last);
-	if (first == -1 && dup2(0, 0) < 0)
-		return (close(data->tab[data->index_redirs][2]), printf("problem with dup2 1"), -1);
+	if (first == -1)
+	{
+		if (dup2(0, 0) < 0)
+			return (close(data->tab[data->index_redirs][2]), printf("problem with dup2 1"), -1);
+	}
 	else
 	{
 		if (dup2(data->tab[first][2], 0) < 0)
-			return (close(data->tab[data->index_redirs][2]), printf("problem with dup2 1"), -1);
+			return (close(data->tab[first][2]), printf("problem with dup2 1"), -1);
+		fprintf(stderr, "je suis juste apres mon first\n");
 	}
 	if (redirection_dup1_out(data, last, i) == -1)
 		return (-1);
@@ -41,6 +45,7 @@ int	redirection_dup1_out(t_data *data, int last, int i)
 	{
 		if (dup2(data->tab[last][2], 1) < 0)
 			return (close(data->tab[data->index_redirs][2]), printf("problem with dup2 1"), -1);
+		fprintf(stderr, "je suis juste apres mon last\n");
 	}
 	while (data->n_redirs > i)
 	{

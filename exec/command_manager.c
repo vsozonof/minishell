@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 18:07:01 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/07 15:43:55 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/13 15:29:46 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,15 @@ int	command_manager(t_data *data)
 	if (check != 0)
 		builtin_manager(data, check);
 	else if (data->n_cmds == 1)
-		single_arg(data);
+	{
+		if (single_arg(data) == -1)
+			return (-1);
+	}
 	else if (data->n_cmds >= 1)
-		pipex_exec(data);
+	{
+		if (pipex_exec(data) == -1)
+			return (-1);
+	}
 	return (0);
 }
 

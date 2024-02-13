@@ -6,20 +6,23 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:10:50 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/08 15:37:44 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/13 12:00:57 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 // cat > test1 > test2 < test3 | wc
 // ls > out > out1 > out2 < Makefile | cat < Makefile
+// cat > test1 > test2 < test3 | wc > test4 < test5 | wc > test6
+// donc la mon probleme est que a ma deuxieme boucle, mon fd est a la pos 0
+// donc il est detecter comme etant au meme endroit que le reste
 // pour la cmd au dessus, il faut que dans out2 il y est un ls
 // et que dans mon terminal il y ait le cat makefile
 // peut etre ls ecrit proprement  dans out2 mais que tout se fait concatener
 // par cat < makefile qui ecrit le makefile dans out2
 // si plsuieurs pipe faire attention au input a la place du pipe
 
-// !!! dnas redirection manager j'ai baisser mon nb_redirs -> retirer
+// !!! dans redirection manager j'ai baisser mon nb_redirs -> retirer
 
 /*
 **	This function takes as parameter: 
@@ -51,32 +54,19 @@ int	pipex_exec(t_data	*data)
 	char	**cmd_argument;
 
 	cmd_argument = NULL;
+	(void)cmd_argument;
 	data->index_redirs = ((i = 0));
 	fprintf(stderr, "je passe par multi\n");
-	while (data->cmds[i])
-	{
-		fprintf(stderr, "data->cmds[%d] = %s\n\n\n", i, data->cmds[i]);
-		i++;
-	}
-	i = 0;
-	while (data->redir_tab && data->redir_tab[i])
-	{
-		fprintf(stderr, "data->redir[%d] = %s\n\n\n", i, data->redir_tab[i]);
-		i++;
-	}
 	i = 0;
 	if (ft_check_access(data, i) == -1)
-		return (-1);
-	i = 0;
-	while (data->actual_path[i])
-	{
-		fprintf(stderr, "data->actual[%d] = %s\n\n\n", i, data->actual_path[i]);
-		i++;
-	}
-	fprintf(stderr, "len_db_tab(data->cmds) %d\n", len_db_tab(data->cmds));
-	i = 0;
+		return (0);
+	if (data->n_redirs > 0)
+		if (set_first_end(data) == -1)
+			return (fprintf(stderr, "problem with malloc\n"), -1);
 	ft_pipex(data, i, cmd_argument);
 	ft_freedb(data->actual_path);
+	free(data->first);
+	free(data->last);
 	return (0);
 }
 
@@ -92,6 +82,7 @@ int	ft_check_access(t_data *data, int i)
 	{
 		buf = arg(data->cmds[i], data);
 		data->actual_path[i] = ft_do_process(data->pr->nv, buf);
+		data->actual_path[i] = NULL;
 		if (!data->actual_path[i])
 		{
 			while (i > 0)
@@ -104,6 +95,55 @@ int	ft_check_access(t_data *data, int i)
 	}
 	data->actual_path[i] = NULL;
 	return (0);
+}
+
+int	set_first_end(t_data *data)
+{
+	int		i;
+	int		count;
+
+	i = ((count = 0));
+	data->first = malloc(sizeof(int) * data->n_redirs);
+	if (!data->first)
+		return (-1);
+	data->last = malloc(sizeof(int) * data->n_redirs);
+	if (!data->last)
+		return (-1);
+	while (data->cmds[i])
+	{
+		// fprintf(stderr, "donc dans ma recherche de redirection j'envois %s\n\n", data->cmds[i]);
+		count += get_act_redir(data, i);
+		// fprintf(stderr, "count = %d\n", count);
+		data->first[i] = first_redirect(data, data->cmds[i], count);
+		data->last[i] = last_redirect(data, data->cmds[i], count);
+		fprintf(stderr, "first = %d last = %d\n\n\n", data->first[i], data->last[i]);
+		i++;
+	}
+	return (0);
+}
+
+int	get_act_redir(t_data *data, int i)
+{
+	int		count;
+	int		j;
+
+	count = ((j = 0));
+	while (i > 0)
+	{
+		j = 0;
+		while (data->cmds[i][j])
+		{
+			if ((data->cmds[i][j] == '>' ||
+			data->cmds[i][j] == '<') &&
+			(data->cmds[i][j + 1] != '>' ||
+			data->cmds[i][j + 1] != '<'))
+				count++;
+			// fprintf(stderr, "act = %c\n", data->cmds[i][j]);
+			j++;
+		}
+		i--;
+	}
+	return (count);
 }
 
 /*

@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:11:05 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/08 10:27:16 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/12 07:47:53 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,8 @@ int	ft_pipex(t_data	*data, int i, char **cmd_argument)
 	pipefd = alloc_pipe(i);
 	if (!pipefd[1] || !pipefd[0])
 		return (free(pipefd), -1);
-	fprintf(stderr, "============DEBUT DE PP\n============");
 	while (i < data->n_cmds)
 	{
-		fprintf(stderr, "JE SUIS A MA %d\n", i);
-		fprintf(stderr, "mon input = %s\n", data->cmds[i]);
 		pid[i] = fork();
 		if (pid[i] < 0)
 			return (printf("erreur de fork\n"), 1);

@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 21:47:57 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/08 15:45:30 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/12 20:37:25 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,64 +29,19 @@ int	check_redirection_now(t_data *data, int i)
 int	redirection_manager(t_data *data, int i)
 {
 	int		token;
-	int		first;
-	int		last;
 
 	fprintf(stderr, "JE PASSE PAR REDIRECTION MANAGER ET i = %d\n", i);
 	fprintf(stderr, "JE PASSE PAR REDIRECTION MANAGER ET cmd = %s\n", data->cmds[i]);
-	first = first_redirect(data, data->cmds[i]);
-	last = last_redirect(data, data->cmds[i]);
+	// first = first_redirect(data, data->cmds[i]);
+	// last = last_redirect(data, data->cmds[i]);
 	token = get_nb_redirs_ac(data->cmds[i]);
-	fprintf(stderr, "voici mon last %d\n", last);
 	fprintf(stderr, "voici mon i dans redirection %d et mon token %d\n", i, token);
+	fprintf(stderr, "donc maintenant a %d voici first %d et last %d\n", i, data->first[i], data->last[i]);
 	if (token > 0)
-		redirection_dup1_in(data, first, last);
+		redirection_dup1_in(data, data->first[i], data->last[i]);
 	// data->n_redirs--;
 	return (0);
 }
-
-int		first_redirect(t_data *data, char *input)
-{
-	int		i;
-	int		check;
-
-	check = -1;
-	i = 0;
-	if (data->n_redirs > 0)
-	{
-		while (i < data->n_redirs && input[i] && input[i] != '|')
-		{
-			if (data->tab[i][1] == 1)
-				check = i;
-			i++;
-		}
-	}
-	return (check);
-} // si token = 0 ya r ,1 <, 2 <<, 3 >
-
-// pour celui la c'est des <
-int		last_redirect(t_data *data, char *input)
-{
-	int		i;
-	int		check;
-
-	check = 0;
-	i = 0;
-	if (data->n_redirs > 0)
-	{
-		fprintf(stderr, "VERIF DE INPUT \n");
-		while (i < data->n_redirs && input[i] != '|' && input[i])
-		{
-			// if (data->tab[i][1] == 4)
-			// 	check = i;
-			fprintf(stderr, "%c\n", input[i]);
-			if (data->tab[i][1] == 3)
-				check = i;
-			i++;
-		}
-	}
-	return (check);
-} // si token = 0 ya r ,1 <, 2 <<, 3 >
 
 // pour celui la c'est des >
 int		is_redirect_actual(char *input)
