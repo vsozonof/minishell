@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 18:07:01 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/12 10:42:13 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/13 08:18:23 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	builtin_manager(t_data *tmp, int token)
 	else if (token == 4)
 		execute_exit(tmp);
 	else if (token == 6)
-		execute_pwd();
+		execute_pwd(tmp);
 	else if (token == 5)
 		execute_export(tmp);
 	else if (token == 7)

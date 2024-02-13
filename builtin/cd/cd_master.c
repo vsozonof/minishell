@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 12:02:25 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/09 03:52:13 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/13 08:10:34 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	execute_cd(t_data *data)
 	else if (n_args(data->input) != 1)
 		return (set_status(data, 1, "too many arguments.", "cd :"));
 	path = cd_extract_arg(data->input);
-	if (!ft_strncmp(path, "..", 2))
+	if (!ft_strncmp(path, "..", 2) && path[2] == '\0')
 	{
 		go_back_one_level(data);
 		free(path);

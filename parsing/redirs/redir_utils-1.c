@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 19:31:35 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/12 13:37:40 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/13 06:56:39 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@ int	redirection_and_expand_handler(t_data *data)
 	if (is_there_backslash(data->input) || is_there_dollar(data->input)
 		|| is_there_quotes(data->input) || is_there_tilde(data->input))
 		expand_handler(data);
+	if (ft_strlen(data->input) == 0)
+	{
+		free(data->input);
+		data->input = NULL;
+	}
 	if (!data->input)
 		return (0);
 	if (is_there_redirs(data->input))

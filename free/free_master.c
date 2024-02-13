@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 04:29:11 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/12 09:48:36 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/13 07:09:36 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,20 @@ void	free_manager(t_data *data, int key)
 {
 	if (key == 1)
 	{
-		free(data->pr->input);
+		if (data->pr->input)
+			free(data->pr->input);
 		if (data->input)
 			free(data->input);
 	}
 	else if (key == 2)
 	{
-		free_cmds(data);
-		free(data->pr->input);
+		if (data->cmds)
+			free_cmds(data);
+		if (data->pr->input)
+			free(data->pr->input);
 	}
+	if (data->cmds)
+		free_cmds(data);
 	if (data->redir_tab)
 		ft_split_free(data->redir_tab);
 	if (data->tab)

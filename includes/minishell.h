@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/12 13:32:08 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/13 08:18:49 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,11 +104,11 @@ int		create_side_env(t_prompt *ptr);
 
 void	input_parser(t_prompt *prompt, t_data *data);
 int		get_cmd(t_data *data);
-int		invalid_character_checker(int c);
-int		is_input_valid(char *str);
+int		invalid_character_checker(int c, t_data *data);
+int		is_input_valid(char *str, t_data *data);
 int		is_piped_input_valid(char *str, t_data *data);
-int		exception_checker(char *str);
-int		exception_checker_2(char *str, int i);
+int		exception_checker(char *str, t_data *data);
+int		exception_checker_2(char *str, int i, t_data *data);
 int		unclosed_quote_detector(char *str);
 
 void	expand_handler(t_data *data);
@@ -154,6 +154,7 @@ int		n_args(char *str);
 int		quote_skipper(char *str, int c);
 int		is_valid_redir(char *str, t_data *data);
 int		redir_checker(char *str, int i, t_data *data);
+int		double_redir_checker(char *str, int i, t_data *data);
 void	redirection_counter(t_data *data);
 void	redirection_parser(t_data *data);
 void	get_redir_infos(t_data *data, int i, int n);
@@ -266,7 +267,7 @@ void	execute_echo(t_data *data);
 int		is_wspace_or_null(char *str, int i);
 int		flag_skipper(char *str);
 
-void	execute_pwd(void);
+void	execute_pwd(t_data *data);
 void	execute_env(t_data *data);
 
 void	execute_export(t_data *data);

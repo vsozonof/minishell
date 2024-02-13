@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 09:14:23 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/12 10:52:58 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/13 05:35:20 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,6 @@ int	get_cmd(t_data *data)
 		i++;
 	data->input = ft_substr(data->pr->input, i, ft_strlen(data->pr->input));
 	if (!data->input)
-	{
-		set_status(data, 12, "malloc error.", NULL);
-		return (0);
-	}
+		return (set_status(data, 12, "malloc error.", NULL), 0);
 	return (data->n_cmds = 1, 1);
 }

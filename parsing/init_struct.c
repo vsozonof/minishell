@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 08:35:01 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/12 10:50:21 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/13 07:01:43 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ int	init_str(t_data *data, t_prompt *prompt)
 	data->pr = prompt;
 	data->env = prompt->env;
 	data->tab = NULL;
+	data->cmds = NULL;
 	return (1);
 }
 

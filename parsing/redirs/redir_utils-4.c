@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 13:42:48 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/12 08:55:05 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/13 06:35:28 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ int	r_word_counter(t_data *data, int i, int j)
 int	is_token(char *str, int i)
 {
 	if (((str[i] == '>' && str[i + 1] != '>')
-			|| (str[i] == '>' && str[i + 1] != '>'))
+			|| (str[i] == '<' && str[i + 1] != '<'))
 		|| (str[i] == '>' && str[i + 1] == '>')
-		|| (str[i] == '>' && str[i + 1] == '>'))
+		|| (str[i] == '<' && str[i + 1] == '<'))
 		return (1);
 	else
 		return (0);
@@ -96,4 +96,17 @@ char	*extract_word(t_data *data, int i, int c)
 	free(data->new_head);
 	data->new_head = rest;
 	return (word);
+}
+
+int	double_redir_checker(char *str, int i, t_data *data)
+{
+	while (str[i] && ft_is_whitespace(str[i]))
+		i++;
+	if (str[i] == '\0')
+		return (set_status(data, 2, "syntax error near `\\n'", NULL), 0);
+	else if (str[i] == '>' || str[i] == '<')
+		return (set_status(data, 2, "syntax error near `\\n'", NULL), 0);
+	else if (str[i] == '|')
+		return (set_status(data, 2, "syntax error near `|'", NULL), 0);
+	return (1);
 }

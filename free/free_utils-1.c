@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 04:25:22 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/12 10:54:06 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/13 07:06:27 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	free_cmds(t_data *data)
 		i++;
 	}
 	free(data->cmds);
+	data->cmds = NULL;
 }
 
 void	free_env(t_env	*env)

@@ -6,37 +6,45 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 10:30:26 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/11 09:22:03 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/13 06:35:30 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+// ! Redirection Checker
+// ? This function will check if the filename
+// ? that follows a redirection token is valid or not
+// * 1. \0
+// * 2. >> ou << |
+// * 3. > ou < |
+// * 4. ><
+// * 5. < >
+// * 6. >> ou << et > >> < <<
+
 int	redir_checker(char *str, int i, t_data *data)
 {
+	if (str[i] == str[i - 1])
+		if (!double_redir_checker(str, (i + 1), data))
+			return (0);
 	while (str[i] && ft_is_whitespace(str[i]))
 		i++;
 	if (str[i] == '\0')
-		return (set_status(data, 2, "parse error near '\\n'", NULL), 0);
-	else if (!is_valid_char_after_redir(str[i]))
-		return (pr_error("syntax error near unexpected token `\\n'"));
+		return (set_status(data, 2, "syntax error near `\\n'", NULL), 0);
+	else if (str[i] == '>' || str[i] == '<')
+		return (set_status(data, 2, "syntax error near `\\n'", NULL), 0);
 	else if ((str[i - 1] == '<' || str[i - 1] == '>')
 		&& (str[i] == '<' || str[i] == '>') && str[i + 1] == '|')
-		return (pr_error("syntax error near unexpected token `|'"));
-	else if ((str[i] == '<' || str[i] == '>')
-		&& (str[i - 1] != '<' || str[i - 1] != '>') && str[i + 1] == '|')
-		return (pr_error("syntax error near unexpected token `|'"));
-	else if (str[i - 1] == '<' && str[i] == '>'
-		&& (i >= 2 && str[i - 2] != '<'))
-		return (pr_error("parse error near '\\n'"));
-	// else if (str[i] == '<' && str[i - 1] == '<')
-	// 	return (pr_error("parse error near '<<'"));
-	// else if (str[i] == '>' && str[i - 1] == '>')
-	// 	return (pr_error("parse error near '>>'"));
-	// else if (str[i] == '<' || (str[i] == '<' && str[i - 1] == '>'))
-	// 	return (pr_error("parse error near '<'"));
-	// else if (str[i] == '>' || (str[i] == '<' && str[i - 1] == '<'))
-	// 	return (pr_error("parse error near '>'"));
+		return (set_status(data, 2, "syntax error near `|'", NULL), 0);
+	else if ((str[i - 1] == '<' || str[i - 1] == '>')
+		&& (str[i] == '|' || str[i + 1] == '|'))
+		return (set_status(data, 2, "syntax error near `|'", NULL), 0);
+	else if (str[i] == '<' && str[i - 1] == '>')
+		return (set_status(data, 2, "syntax error near `<'", NULL), 0);
+	else if (str[i] == '>' && str[i - 1] == '<')
+		return (set_status(data, 2, "syntax error near `\\n'", NULL), 0);
+	else if (str[i] == str[i - 1] && is_token(str, (i + 1)))
+		return (set_status(data, 2, "syntax error near `\\n'", NULL), 0);
 	return (1);
 }
 
