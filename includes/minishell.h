@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/12 20:36:37 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/14 16:05:18 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,9 +197,9 @@ char	*ft_essaie(t_data *data, char *input);
 char	*ft_essaie_helper(char *buf, char *input, int , t_data *data);
 int		redirection_single_chev(t_data *data, char *input);
 int		first_redirect(t_data *data, char *input, int count);
+int		first_redirect_helper(char *input, int j, int i);
 int		last_redirect(t_data *data, char *input, int count);
-int		first_redirect_begin(t_data *data, char *input, int count);
-int		last_redirect_begin(t_data *data, char *input, int count);
+int		last_redirect_helper(char *input, int j, int i);
 int		is_redirect_actual(char *input);
 int		redirection_dup1_in(t_data *data, int first, int last);
 int		redirection_dup1_out(t_data *data, int first, int last);
@@ -224,7 +224,7 @@ int		get_act_redir(t_data *data, int i);
 // ?							Single_Pipe
 // ! ---------------------------------------------------------------------------
 
-int		single_arg(t_data *data);
+int		single_arg(t_data *data, char **cmd_argument);
 int		exec_single(char **cmd_argument, char *fre, t_data *data);
 int		redirection_single(t_data *data);
 char	**espoir(char **cmd_argument);

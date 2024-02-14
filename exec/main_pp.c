@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:10:50 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/14 15:17:45 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/14 15:57:10 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,22 +110,14 @@ int	set_first_end(t_data *data)
 	data->last = malloc(sizeof(int) * data->n_redirs);
 	if (!data->last)
 		return (-1);
-	// data->first[i] = first_redirect_begin(data, data->cmds[i], count);
-	// data->last[i] = last_redirect_begin(data, data->cmds[i], count);
-	// i++;
 	while (data->cmds[i])
 	{
-		// fprintf(stderr, "donc dans ma recherche de redirection j'envois %s\n\n", data->cmds[i]);
-		// fprintf(stderr, "count = %d\n", count);
 		if (i > 0)
 			count = get_act_redir(data, i);
 		data->first[i] = first_redirect(data, data->cmds[i], count);
 		data->last[i] = last_redirect(data, data->cmds[i], count);
-		fprintf(stderr, "mon count est de %d\n", count);
-		fprintf(stderr, "first = %d last = %d\n\n", data->first[i], data->last[i]);
 		i++;
 	}
-	fprintf(stderr, "je sors\n\n\n");
 	return (0);
 }
 
@@ -142,18 +134,13 @@ int	get_act_redir(t_data *data, int i)
 		while (c < i)
 		{
 			j = 0;
-			fprintf(stderr, "donc la mon c %d\n", c);
-			fprintf(stderr, "voici la string actuel %s et donc mon i %d\n\n", data->cmds[c], c);
 			while (data->cmds[c][j])
 			{
-				if ((data->cmds[c][j] == '>' ||
-				data->cmds[c][j] == '<') &&
-				(data->cmds[c][j + 1] != '>' ||
-				data->cmds[c][j + 1] != '<'))
-				{
+				if ((data->cmds[c][j] == '>'
+				|| data->cmds[c][j] == '<')
+				&& (data->cmds[c][j + 1] != '>'
+				|| data->cmds[c][j + 1] != '<'))
 					count++;
-					fprintf(stderr, "voici dans mon count le moment ++ %c\n", data->cmds[c][j]);
-				}// fprintf(stderr, "act = %c\n", data->cmds[i][j]);
 				j++;
 			}
 			c++;

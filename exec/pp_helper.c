@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 14:57:24 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/12 10:33:29 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/14 15:52:02 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	child_process(t_data *data, int **pipefd, int i, char **cmd_argument)
 		cmd_arg = data->cmds[i];
 	fprintf(stderr, "all_cmd = %s\n", cmd_arg);
 	cmd_argument = ft_split(cmd_arg, ' ');
-	fprintf(stderr, "juste avant mon execve mon i = %d et path %s\n", i, data->actual_path[i]);
 	execve(data->actual_path[i], cmd_argument, data->pr->nv);
 	free_all_pipe(pipefd);
 	exit(0);
@@ -40,6 +39,6 @@ int	ft_pipex_helper(t_data *data, int **pipefd, int i)
 	else if (i % 2 == 1)
 		check = child_process_in(pipefd, data, i, 1);
 	if (check == -1)
-		return (-1); // plus tard gerer cas erreur
+		return (-1);
 	return (0);
 }

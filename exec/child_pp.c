@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:10:29 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/13 15:28:17 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/14 15:48:07 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	child_process_in(int **pipefd, t_data *data, int i, int token)
 	}
 	data->nb_redirs_ac = get_nb_redirs_ac(data->cmds[i]);
 	if (check_redirection_now(data, i) == 0)
-		redirection_manager(data, i); // !!!! regler les cas ou ca echoue
+		redirection_manager(data, i);
 	buf = arg(data->cmds[i], data);
 	(void)buf;
 	free(pipefd[0]);
@@ -133,7 +133,6 @@ char	*arg(char *str, t_data *data)
 	buf = ft_split(str, ' ');
 	if (data->n_redirs > 0)
 	{
-		// fprintf(stderr, "index_redir %d\n", data->index_redirs);
 		if (data->tab[data->index_redirs])
 		{
 			if (data->tab[data->index_redirs][0] == i)

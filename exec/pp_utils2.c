@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 15:09:52 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/14 13:55:17 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/14 16:00:12 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	close_all_pipe(int **pipefd, t_data *data)
 {
 	(void)data;
-
 	close(pipefd[0][0]);
 	close(pipefd[0][1]);
 	close(pipefd[1][1]);
@@ -32,7 +31,7 @@ int	len_db_tab(char **str)
 	return (j);
 }
 
-char *copy_arg(char *dest, char *src)
+char	*copy_arg(char *dest, char *src)
 {
 	int	i;
 
@@ -70,7 +69,7 @@ int	ft_count_space(char *buf)
 	int	i;
 	int	c;
 	int	cpt;
-	
+
 	i = ((c = 0));
 	(void)i;
 	cpt = 0;
@@ -81,31 +80,4 @@ int	ft_count_space(char *buf)
 		c++;
 	}
 	return (cpt);
-}
-
-int	len_buf(char *buf, char *input, t_data *data, int act_redir)
-{
-	int		len;
-	int		i;
-	(void)data;
-	(void)act_redir;
-	(void)buf;
-
-	len = ((i = 0));
-	while (input[i])
-	{
-		if (input[i] == ' ' && input[i + 1] == '>')
-		{
-			i += 3;
-			while (ft_isalnum(input[i]))
-				i++;
-			if (!input[i])
-				break;
-		}
-		len++;
-		i++;
-	}
-	if (input[i] == ' ')
-		len--;
-	return (len);
 }
