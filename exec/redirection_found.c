@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 20:37:01 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/13 11:08:44 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/14 14:30:25 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ int		first_redirect(t_data *data, char *input, int count)
 	int		j;
 	int		check;
 
-	i = ((j = 0));
+	i = 0;
+	j = -1;
 	check = -1;
 	fprintf(stderr, "voici l'input %s\n", input);
 	if (data->n_redirs > 0)
@@ -30,6 +31,7 @@ int		first_redirect(t_data *data, char *input, int count)
 			if (input[i] == '<' || input[i] == '>')
 			{
 				j++;
+				fprintf(stderr, "donc la j'ai %c\n", input[i]);
 				if (input[i] == '<')
 					check = j;
 				i++;
@@ -39,10 +41,9 @@ int		first_redirect(t_data *data, char *input, int count)
 			i++;
 		}
 	}
-	if (check == 0)
+	if (check == -1)
 		return (-1);
-	if (check != 0)
-		check += count - 1;
+	check = check + count;
 	return (check);
 } // si token = 0 ya r ,1 <, 2 <<, 3 >
 
@@ -53,7 +54,8 @@ int		last_redirect(t_data *data, char *input, int count)
 	int		j;
 	int		check;
 
-	i = ((j = 0));
+	i = 0;
+	j = -1;
 	check = -1;
 	fprintf(stderr, "voici l'input %s\n", input);
 	if (data->n_redirs > 0)
@@ -74,10 +76,9 @@ int		last_redirect(t_data *data, char *input, int count)
 			i++;
 		}
 	}
-	if (check == 0)
+	if (check == -1)
 		return (-1);
-	if (check != 0)
-		check += count - 1;
+	check = check + count;
 	return (check);
 } // si token = 0 ya r ,1 <, 2 <<, 3 >
 

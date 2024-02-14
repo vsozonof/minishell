@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 15:09:52 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/13 15:29:13 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/14 13:55:17 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ char *copy_arg(char *dest, char *src)
 
 	i = 0;
 	dest = malloc(sizeof(char) * (ft_strlen(src) + 1));
-	dest = NULL;
 	if (!dest)
 		return (NULL);
 	while (src[i])
