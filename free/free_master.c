@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 04:29:11 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/13 07:09:36 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/14 10:10:53 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	free_manager(t_data *data, int key)
 	if (data->redir_tab)
 		ft_split_free(data->redir_tab);
 	if (data->tab)
-		free_tab(data->tab, data->n);
+		free_tab(data->tab);
 }
 
 void	free_end_of_program(t_prompt *p)

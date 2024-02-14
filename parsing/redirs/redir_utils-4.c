@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 13:42:48 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/13 06:35:28 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/14 10:34:39 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ char	*extract_word(t_data *data, int i, int c)
 
 int	double_redir_checker(char *str, int i, t_data *data)
 {
+	printf("double\n");
 	while (str[i] && ft_is_whitespace(str[i]))
 		i++;
 	if (str[i] == '\0')

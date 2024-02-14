@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 19:31:35 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/13 06:56:39 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/14 10:23:28 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void	redirection_parser(t_data *data)
 	int	i;
 
 	i = 0;
-	data->tab = malloc(sizeof (int *) * data->n_redirs);
+	data->tab = malloc(sizeof (int *) * (data->n_redirs + 1));
 	if (!data->tab)
 		return ;
 	data->n = data->n_redirs;
@@ -106,5 +106,6 @@ void	redirection_parser(t_data *data)
 		data->tab[i] = malloc(sizeof (int) * 3);
 		i++;
 	}
+	data->tab[i] = NULL;
 	get_redir_infos(data, 0, 0);
 }

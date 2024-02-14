@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_struct.c                                      :+:      :+:    :+:   */
+/*   init_master.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 08:35:01 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/13 07:01:43 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/14 09:18:05 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,20 +107,5 @@ int	init_str(t_data *data, t_prompt *prompt)
 	data->env = prompt->env;
 	data->tab = NULL;
 	data->cmds = NULL;
-	return (1);
-}
-
-int	init_sig(t_prompt *prompt)
-{
-	struct sigaction	sa_int;
-	struct sigaction	sa_quit;
-
-	ft_memset(&sa_int, 0, sizeof(struct sigaction));
-	ft_memset(&sa_quit, 0, sizeof(struct sigaction));
-	sa_int.sa_handler = handle_signals;
-	sa_quit.sa_handler = handle_signals;
-	if (sigaction(SIGINT, &sa_int, NULL) == -1
-		|| sigaction(SIGQUIT, &sa_quit, NULL) == -1)
-		return (set_status(prompt->data, 1, NULL, "signal error"), 0);
 	return (1);
 }

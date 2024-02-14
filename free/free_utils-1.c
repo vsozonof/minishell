@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 04:25:22 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/13 07:06:27 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/14 10:11:37 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,15 @@ void	free_env_tab(char **env)
 	free(env);
 }
 
-void	free_tab(int **tab, int n_redir)
+void	free_tab(int **tab)
 {
 	int	i;
 
 	i = 0;
-	while (i < n_redir)
+	while (tab[i])
 	{
-		free(tab[i]);
+		if (tab[i])
+			free(tab[i]);
 		i++;
 	}
 	free(tab);

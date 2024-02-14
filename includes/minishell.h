@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/13 08:18:49 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/14 10:21:03 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,11 +163,13 @@ char	*file_name_finder(t_data *data, int i, int c);
 int		redirection_and_expand_handler(t_data *data);
 void	tab_value_setter_double(t_data *data, int n, int i);
 void	extract_redir_cmds(char **splitted, t_data *data);
+void	extract_redir_cmd_finalizer(t_data *data, char **splitted);
 int		cmd_counter(char **splitted);
-int 	r_word_counter(t_data *data, int i, int j);
+int		r_word_counter(t_data *data, int i, int j);
 int		are_token_sep_by_wspace(char *str);
 void	extract_redir_no_wspace(t_data *data, int n);
 char	*extract_word(t_data *data, int i, int c);
+int		get_double_tab_len(char **splitted);
 
 // ! ---------------------------------------------------------------------------
 // ?							SIGNAL HANDLER
@@ -301,6 +303,6 @@ void	free_cmds(t_data *data);
 void	free_env(t_env	*env);
 void	free_env_tab(char **env);
 void	free_end_of_program(t_prompt *p);
-void	free_tab(int **tab, int n_redir);
+void	free_tab(int **tab);
 
 #endif

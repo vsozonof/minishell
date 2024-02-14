@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 00:20:38 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/08 09:56:09 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/14 09:07:40 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int	export_var_value_checker(char *str)
 	{
 		while (str[i] && !ft_is_whitespace(str[i]))
 			i++;
-		
 	}
 	return (0);
 }
