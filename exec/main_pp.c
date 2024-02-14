@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:10:50 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/14 15:57:10 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/14 16:38:03 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	pipex_exec(t_data	*data)
 	fprintf(stderr, "je passe par multi\n");
 	i = 0;
 	if (ft_check_access(data, i) == -1)
-		return (0);
+		return (free_all_fd(data), 0);
 	if (data->n_redirs > 0)
 		if (set_first_end(data) == -1)
 			return (fprintf(stderr, "problem with malloc\n"), -1);

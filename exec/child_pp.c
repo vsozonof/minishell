@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:10:29 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/14 15:48:07 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/14 16:25:07 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,8 @@ char	*arg(char *str, t_data *data)
 	tmp = NULL;
 	i = ft_strlen(str) - 1;
 	buf = ft_split(str, ' ');
+	if (!buf)
+		return (NULL);
 	if (data->n_redirs > 0)
 	{
 		if (data->tab[data->index_redirs])
@@ -142,7 +144,7 @@ char	*arg(char *str, t_data *data)
 	tmp = copy_arg(tmp, buf[0]);
 	if (!tmp)
 	{
-		perror("a problem happend with malloc\n");
+		fprintf(stderr, "a problem happend\n");
 		return (ft_freedb(buf), NULL);
 	}
 	ft_freedb(buf);

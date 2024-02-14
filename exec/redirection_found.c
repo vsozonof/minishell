@@ -6,77 +6,11 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 20:37:01 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/14 16:09:26 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/14 16:12:56 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// int		first_redirect(t_data *data, char *input, int count)
-// {
-// 	int		i;
-// 	int		j;
-// 	int		check;
-
-// 	i = 0;
-// 	j = -1;
-// 	check = -1;
-// 	if (data->n_redirs > 0)
-// 	{
-// 		while (input[i])
-// 		{
-// 			while (ft_is_whitespace(input[i]))
-// 				i++;
-// 			if (input[i] == '<' || input[i] == '>')
-// 			{
-// 				j++;
-// 				if (input[i] == '<')
-// 					check = j;
-// 				i++;
-// 			}
-// 			if (!input[i])
-// 				break;
-// 			i++;
-// 		}
-// 	}
-// 	if (check == -1)
-// 		return (-1);
-// 	check = check + count;
-// 	return (check);
-// }
-
-// int		last_redirect(t_data *data, char *input, int count)
-// {
-// 	int		i;
-// 	int		j;
-// 	int		check;
-
-// 	i = 0;
-// 	j = -1;
-// 	check = -1;
-// 	if (data->n_redirs > 0)
-// 	{
-// 		while (input[i])
-// 		{
-// 			while (ft_is_whitespace(input[i]))
-// 				i++;
-// 			if (input[i] == '<' || input[i] == '>')
-// 			{
-// 				j++;
-// 				if (input[i] == '>')
-// 					check = j;
-// 				i++;
-// 			}
-// 			if (!input[i])
-// 				break;
-// 			i++;
-// 		}
-// 	}
-// 	if (check == -1)
-// 		return (-1);
-// 	check = check + count;
-// 	return (check);
-// }
 
 int	first_redirect(t_data *data, char *input, int count)
 {
