@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:11:05 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/15 12:48:11 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/15 17:05:28 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	ft_pipex(t_data	*data, int i, char **cmd_argument)
 {
 	pid_t		*pid;
 	int			**pipefd;
+	(void)i;
 
 	pid = malloc(sizeof(pid_t) * data->n_cmds);
 	if (!pid)
@@ -31,19 +32,31 @@ int	ft_pipex(t_data	*data, int i, char **cmd_argument)
 	pipefd = alloc_pipe(i);
 	if (!pipefd || !pipefd[1] || !pipefd[0])
 		return (free(pid), free(pipefd), -1);
+	ft_pipex_helper(data, pid, pipefd, cmd_argument);
+	wait_and_free(data, pipefd, pid);
+	return (0);
+}
+
+int	ft_pipex_helper(t_data *data, int *pid, int **pipefd, char **cmd_argument)
+{
+	int		i;
+
+	i = 0;
 	while (i < data->n_cmds)
 	{
 		pid[i] = fork();
 		if (pid[i] < 0)
 			return (printf("erreur de fork\n"), 1);
 		if (pid[i] == 0)
-			child_process(data, pipefd, i, cmd_argument);
+		{
+			if (child_process(data, pipefd, i, cmd_argument) == -1)
+				fprintf(stderr, "ca devrais free\n");// free_all_alloc(data);// free tout dedans
+		}
 		else
 			pipefd = parent_process(pipefd, i);
 		i++;
 		data->i = i;
 	}
-	wait_and_free(data, pipefd, pid);
 	return (0);
 }
 

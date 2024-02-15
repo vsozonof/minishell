@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/15 12:13:06 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/15 16:42:08 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,7 +189,7 @@ char	*arg(char *str, t_data *data);
 char	**ft_get_path(char **env);
 char	*ft_do_process(char *envp[], char *cmd);
 int		child_process_in_or_out(int **pipefd, t_data *data, int i, int token);
-int		child_process_middle(int **pipefd, int token);
+int		child_process_middle(int **pipefd, int token, int verif);
 int		redirection_manager(t_data *data, int i);
 int		check_redirection_now(t_data *data, int i);
 char	*ft_strjoin_help(char **path, char *cmd, int i);
@@ -215,10 +215,11 @@ int		ft_check_access(t_data *data, int i);
 int		ft_check_access(t_data *data, int i);
 void	free_all_fd(t_data *data);
 void	wait_and_free(t_data *data, int **pipefd, int *pid);
-int		ft_pipex_helper(t_data *data, int **pipefd, int i);
+int		ft_pipex_helper_dup(t_data *data, int **pipefd, int i);
 int		child_process(t_data *data, int **pipefd, int i, char **cmd_argument);
 int		set_first_end(t_data *data);
 int		get_act_redir(t_data *data, int i);
+int		ft_pipex_helper(t_data *data, int *pid, int **pipefd, char **cmd_argument);
 
 // ! ---------------------------------------------------------------------------
 // ?							Single_Pipe
@@ -248,6 +249,7 @@ int		verif_arg_fd(char *argv[], int i);
 int		ft_create_fd(char *argv, int flag);
 void	free_all_pipe(int **pipefd);
 int		**alloc_pipe(int i);
+void	free_all_alloc(t_data *data);
 
 // ! ---------------------------------------------------------------------------
 // ?							Builtin && Tools

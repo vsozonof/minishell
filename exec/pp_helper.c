@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 14:57:24 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/15 15:21:25 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/15 16:46:47 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,12 @@ int	child_process(t_data *data, int **pipefd, int i, char **cmd_argument)
 {
 	char	*cmd_arg;
 
-	ft_pipex_helper(data, pipefd, i);
+	if (ft_pipex_helper_dup(data, pipefd, i) == -1)
+	{
+		free(cmd_argument);
+		ft_freedb(data->actual_path);
+		return (-1);
+	}
 	if (check_redirection_now(data, i) == 0)
 		cmd_arg = data->redir_tab[i];
 	else
@@ -35,7 +40,7 @@ int	child_process(t_data *data, int **pipefd, int i, char **cmd_argument)
 	return (0);
 }
 
-int	ft_pipex_helper(t_data *data, int **pipefd, int i)
+int	ft_pipex_helper_dup(t_data *data, int **pipefd, int i)
 {
 	int		check;
 

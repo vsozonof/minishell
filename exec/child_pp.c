@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:10:29 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/14 16:25:07 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/15 17:04:22 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,9 @@ int	check_dup(int pipe, int token, int pipe2)
 int	child_process_in(int **pipefd, t_data *data, int i, int token)
 {
 	char		*buf;
+	int			verif;
 
+	verif = 0;
 	if (i == 0 || i == data->n_cmds -1)
 	{
 		if (child_process_in_or_out(pipefd, data, i, token) == -1)
@@ -50,14 +52,13 @@ int	child_process_in(int **pipefd, t_data *data, int i, int token)
 	}
 	else if (token == 0 || token == 1)
 	{
-		if (child_process_middle(pipefd, token) == -1)
+		if (child_process_middle(pipefd, token, verif) == -1)
 			return (-1);
 	}
 	data->nb_redirs_ac = get_nb_redirs_ac(data->cmds[i]);
 	if (check_redirection_now(data, i) == 0)
 		redirection_manager(data, i);
 	buf = arg(data->cmds[i], data);
-	(void)buf;
 	free(pipefd[0]);
 	free(pipefd[1]);
 	return (0);
@@ -94,11 +95,9 @@ int	child_process_in_or_out(int	**pi, t_data *data, int i, int token)
 	}
 	return (0);
 }
-
-int	child_process_middle(int **pipefd, int token)
+// ATTENTION ICI VERIF N'EST PAS BON
+int	child_process_middle(int **pipefd, int token, int verif)
 {
-	int		verif;
-
 	if (token == 0)
 	{
 		close(pipefd[1][1]);
@@ -117,7 +116,10 @@ int	child_process_middle(int **pipefd, int token)
 		close(pipefd[0][0]);
 		close(pipefd[1][1]);
 		if (verif == -1)
-			return (free_all_pipe(pipefd), -1);
+		{
+			free_all_pipe(pipefd);
+			return (-1);
+		}
 	}
 	return (0);
 }

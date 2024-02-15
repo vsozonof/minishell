@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 14:14:34 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/14 16:37:38 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/15 17:03:43 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,3 +26,14 @@ void	wait_and_free(t_data *data, int **pipefd, int *pid)
 	free_all_fd(data);
 	free(pid);
 }
+
+// void	free_all_alloc(t_data *data)
+// {
+// 	if (data->n_redirs > 0)
+// 	{
+// 		free(data->first);
+// 		free(data->last);
+// 	}
+// 	// free_manager(data, 0);
+// 	//free tout
+// }
