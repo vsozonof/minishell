@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:11:05 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/14 15:55:22 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/15 12:48:11 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,11 @@ int	ft_pipex(t_data	*data, int i, char **cmd_argument)
 	int			**pipefd;
 
 	pid = malloc(sizeof(pid_t) * data->n_cmds);
+	if (!pid)
+		return (fprintf(stderr, "problem with malloc\n"), -1);
 	pipefd = alloc_pipe(i);
-	if (!pipefd[1] || !pipefd[0])
-		return (free(pipefd), -1);
+	if (!pipefd || !pipefd[1] || !pipefd[0])
+		return (free(pid), free(pipefd), -1);
 	while (i < data->n_cmds)
 	{
 		pid[i] = fork();
@@ -82,14 +84,14 @@ int	**alloc_pipe(int i)
 	{
 		pipefd = malloc(sizeof(int *) * 2);
 		if (!pipefd)
-			return (fprintf(stderr, "probleme happend in alloc_pipe"), NULL);
+			return (fprintf(stderr, "probleme happend in alloc_pipe\n"), NULL);
 		pipefd[0] = malloc(sizeof(int) * 2);
 		pipefd[1] = malloc(sizeof(int) * 2);
 		if (!pipefd[0] || !pipefd[1])
 		{
 			free(pipefd[0]);
 			free(pipefd[1]);
-			return (pipefd);
+			return (fprintf(stderr, "problem when creating the pipe"), NULL);
 		}
 		pipe(pipefd[0]);
 		pipe(pipefd[1]);

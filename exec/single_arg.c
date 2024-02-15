@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 18:55:02 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/14 16:26:01 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/15 12:13:01 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	single_arg(t_data *data, char **cmd_argument)
 	char	*buf;
 	char	*fre;
 	char	*essaie;
+	int		check;
 
 	buf = arg(data->input, data);
 	if (!buf)
@@ -26,18 +27,28 @@ int	single_arg(t_data *data, char **cmd_argument)
 	else
 		essaie = data->input;
 	cmd_argument = ft_split(essaie, ' ');
+	if (cmd_argument == NULL)
+		return (free(buf), -1);
 	fre = ft_do_process(data->pr->nv, buf);
+	check = check_fre_cmd(data, buf, cmd_argument, fre);
+	if (check == 1)
+		return (-1);
+	exec_single(cmd_argument, fre, data);
+	if (data->n_redirs > 0)
+		free(essaie);
+	free_single(data, cmd_argument, buf, fre);
+	return (0);
+}
+
+int	check_fre_cmd(t_data *data, char *buf, char **cmd_argument, char *fre)
+{
 	if (!fre || !cmd_argument)
 	{
 		set_status(data, 1, "command not found", buf);
 		free(buf);
 		ft_freedb(cmd_argument);
-		return (0);
+		return (1);
 	}
-	exec_single(cmd_argument, fre, data);
-	if (data->n_redirs > 0)
-		free(essaie);
-	free_single(data, cmd_argument, buf, fre);
 	return (0);
 }
 

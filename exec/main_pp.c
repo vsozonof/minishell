@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:10:50 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/14 16:38:03 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/15 15:19:34 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ int	ft_check_access(t_data *data, int i)
 	while (data->cmds[i])
 	{
 		buf = arg(data->cmds[i], data);
+		if (!data->pr->nv)
+			return (fprintf(stderr, "problem with env\n"), -1);
 		data->actual_path[i] = ft_do_process(data->pr->nv, buf);
 		if (!data->actual_path[i])
 		{

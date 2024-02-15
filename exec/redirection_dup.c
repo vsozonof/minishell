@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 17:10:46 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/14 15:51:19 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/14 18:47:49 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,12 @@ int	redirection_dup1_in(t_data *data, int first, int last)
 	fprintf(stderr, "dans ma redirection mon first %d et end %d\n", first, last);
 	if (first == -1)
 	{
-		if (dup2(0, 0) < 0)
-		{
-			close(data->tab[data->index_redirs][2]);
-			return (printf("problem with dup2 1"), -1);
-		}
+		first++;
+		// if (dup2(0, 0) < 0)
+		// {
+		// 	close(data->tab[data->index_redirs][2]);
+		// 	return (printf("problem with dup2 1"), -1);
+		// }
 	}
 	else
 	{
@@ -42,22 +43,14 @@ int	redirection_dup1_in(t_data *data, int first, int last)
 int	redirection_dup1_out(t_data *data, int last, int i)
 {
 	if (last == -1)
-	{
-		if (dup2(0, 1) < 0)
-		{
-			close(data->tab[data->index_redirs][2]);
-			return (printf("problem with dup2 1"), -1);
-		}
-	}
+		last++;
 	else
 	{
-		fprintf(stderr, "salut\n");
 		if (dup2(data->tab[last][2], 1) < 0)
 		{
 			close(data->tab[data->index_redirs][2]);
 			return (printf("problem with dup2 1"), -1);
 		}
-		fprintf(stderr, "je suis juste apres mon last\n");
 	}
 	while (data->n_redirs > i)
 	{
@@ -66,17 +59,3 @@ int	redirection_dup1_out(t_data *data, int last, int i)
 	}
 	return (0);
 }
-
-// {
-// 	int		i;
-// 	(void)data;
-
-// 	i = 0;
-// 	while (input[i] && input[i + 1])
-// 	{
-// 		if (input[i] == '<' && input[i + 1] == '<')
-// 			return (1);
-// 		i++;
-// 	}
-// 	return (-1);
-// }
