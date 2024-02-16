@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/09 10:05:41 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/14 10:21:03 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ typedef struct s_parse
 {
 	t_prompt		*pr;
 	t_env			*env;
-	int				n;
+	int				exited;
 	char			*input;
 	char			*head;
 	char			*new_head;
@@ -76,6 +76,7 @@ typedef struct s_parse
 	int				n_redirs;
 	int				nb_redirs_ac;
 	int				i;
+	int				n;
 	char			**actual_path;
 	int				index_redirs;
 	int				nb_here_doc;
@@ -87,11 +88,15 @@ typedef struct s_parse
 // ! ---------------------------------------------------------------------------
 
 int		main(int argc, char **argv, char *envp[]);
-int		get_input(char **envp);
+int		get_input(t_prompt *prompt, t_data *data);
 int		init_sbase(t_prompt *prompt, char **env);
-void	init_extras(t_prompt *ptr);
+int		init_extras(t_prompt *ptr);
 int		init_str(t_data *data, t_prompt *prompt);
-int		init_str_pipe(t_data *data, t_prompt *prompt);
+int		init_sig(t_prompt *prompt);
+int		init_if_env(t_prompt *ptr, char **env);
+int		init_if_no_env(t_prompt *ptr, char **envp);
+int		put_env_to_lst(t_env *env, char **envp);
+int		create_side_env(t_prompt *ptr);
 
 // ! ---------------------------------------------------------------------------
 // ?							INPUT PARSING
@@ -99,18 +104,18 @@ int		init_str_pipe(t_data *data, t_prompt *prompt);
 
 void	input_parser(t_prompt *prompt, t_data *data);
 int		get_cmd(t_data *data);
-int		invalid_character_checker(int c);
-int		is_input_valid(char *str);
+int		invalid_character_checker(int c, t_data *data);
+int		is_input_valid(char *str, t_data *data);
 int		is_piped_input_valid(char *str, t_data *data);
-int		exception_checker(char *str);
-int		exception_checker_2(char *str, int i);
+int		exception_checker(char *str, t_data *data);
+int		exception_checker_2(char *str, int i, t_data *data);
 int		unclosed_quote_detector(char *str);
 
 void	expand_handler(t_data *data);
 int		expand_is_valid_char(int c);
 int		is_valid_char(int c);
 int		is_valid_char_after_redir(int c);
-void	reg_expander(t_data *data);
+void	reg_expander(t_data *data, int i);
 void	reg_expand_splitter(t_data *data, int i);
 void	reg_expand_joiner(t_data *data);
 void	tilde_expander(t_data *data, int i);
@@ -130,8 +135,6 @@ void	ft_printlst(t_env *L);
 void	set_status(t_data *data, int status, char *str, char *cmd);
 char	*ft_get_env(t_env *env, char *str);
 t_env	*ft_get_env_node(t_env *env, char *str);
-int		put_env_to_lst(t_env *env, char **envp);
-void	create_side_env(t_prompt *ptr);
 void	add_var_to_env(t_data *data, char *var);
 void	del_var_from_env(t_data *data, char *var);
 int		env_len(t_env *env);
@@ -141,6 +144,7 @@ int		is_there_backslash(char *str);
 int		is_there_quotes(char *str);
 int		is_there_redirs(char *str);
 int		is_there_tilde(char *str);
+int		is_token(char *str, int i);
 int		ispipe(int c);
 int		is_valid_pipe(char *str, t_data *data);
 int		is_in_quotes(char *str, int c);
@@ -150,15 +154,22 @@ int		n_args(char *str);
 int		quote_skipper(char *str, int c);
 int		is_valid_redir(char *str, t_data *data);
 int		redir_checker(char *str, int i, t_data *data);
+int		double_redir_checker(char *str, int i, t_data *data);
 void	redirection_counter(t_data *data);
 void	redirection_parser(t_data *data);
-void	get_redir_infos(t_data *data);
+void	get_redir_infos(t_data *data, int i, int n);
 void	set_tab_values(t_data *data, int n, int i, int mode);
 char	*file_name_finder(t_data *data, int i, int c);
 int		redirection_and_expand_handler(t_data *data);
 void	tab_value_setter_double(t_data *data, int n, int i);
 void	extract_redir_cmds(char **splitted, t_data *data);
+void	extract_redir_cmd_finalizer(t_data *data, char **splitted);
 int		cmd_counter(char **splitted);
+int		r_word_counter(t_data *data, int i, int j);
+int		are_token_sep_by_wspace(char *str);
+void	extract_redir_no_wspace(t_data *data, int n);
+char	*extract_word(t_data *data, int i, int c);
+int		get_double_tab_len(char **splitted);
 
 // ! ---------------------------------------------------------------------------
 // ?							SIGNAL HANDLER
@@ -258,7 +269,7 @@ void	execute_echo(t_data *data);
 int		is_wspace_or_null(char *str, int i);
 int		flag_skipper(char *str);
 
-void	execute_pwd(void);
+void	execute_pwd(t_data *data);
 void	execute_env(t_data *data);
 
 void	execute_export(t_data *data);
@@ -281,11 +292,7 @@ char	*unset_extract_var_name(char *args, int i);
 int		unset_var_name_skipper(char *args, int i);
 void	do_unset(char *args, t_data *data);
 
-
-int		execute_exit(t_data *data);
-
-// void	execute_export();
-// int		execute_exit();
+void	execute_exit(t_data *data);
 
 // ! ---------------------------------------------------------------------------
 // ?							Utils Free
@@ -296,6 +303,6 @@ void	free_cmds(t_data *data);
 void	free_env(t_env	*env);
 void	free_env_tab(char **env);
 void	free_end_of_program(t_prompt *p);
-void	free_tab(int **tab, int n_redir);
+void	free_tab(int **tab);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child_pp.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:10:29 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/09 10:03:21 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/10 15:13:38 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	check_dup(int pipe, int token, int pipe2)
 // regler le probleme des fd
 int	child_process_in(int **pipefd, t_data *data, int i, int token)
 {
-	char		*buf;
+	// char		*buf;
 
 	if (i == 0 || i == data->n_cmds -1)
 	{
@@ -57,7 +57,7 @@ int	child_process_in(int **pipefd, t_data *data, int i, int token)
 	data->nb_redirs_ac = get_nb_redirs_ac(data->cmds[i]);
 	if (check_redirection_now(data, i) == 0)
 		redirection_manager(data, i); // !!!! regler les cas ou ca echoue
-	buf = arg(data->cmds[i], data);
+	// buf = arg(data->cmds[i], data);
 	free(pipefd[0]);
 	free(pipefd[1]);
 	return (0);

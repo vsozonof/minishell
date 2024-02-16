@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+         #
+#    By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/09 23:22:06 by vsozonof          #+#    #+#              #
-#    Updated: 2024/02/08 12:01:09 by tpotilli         ###   ########.fr        #
+#    Updated: 2024/02/14 11:35:25 by vsozonof         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,12 +25,14 @@ SRCS_LIB = libft/libft.a \
 
 SRCS = main.c \
 	   parsing/get_input.c \
-	   parsing/init_struct.c \
+	   parsing/init/init_master.c \
 	   parsing/input_parser.c \
 	   parsing/exception_checker.c \
 	   parsing/redirs/redir_utils-1.c \
 	   parsing/redirs/redir_utils-2.c \
 	   parsing/redirs/redir_utils-3.c \
+	   parsing/redirs/redir_utils-4.c \
+	   parsing/redirs/redir_utils-5.c \
 	   parsing/expand/expand_master.c \
 	   parsing/expand/expand_utils-1.c \
 	   parsing/expand/expand_utils-2.c \
@@ -71,10 +73,9 @@ SRCS = main.c \
 	   builtin/export/export_utils-1.c \
 	   builtin/export/export_utils-2.c \
 	   builtin/export/export_utils-3.c \
-	   builtin/export/export_utils-4.c \
 	   builtin/pwd/pwd_master.c \
 	   builtin/env/env_master.c \
-	   builtin/exit.c \
+	   builtin/exit/exit.c \
 
 OBJS = $(SRCS:.c=.o)
 

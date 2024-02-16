@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   single_arg.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 18:55:02 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/09 10:08:29 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/10 15:12:42 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,7 @@ int	single_arg(t_data *data)
 int	exec_single(char **cmd_argument, char *fre, t_data	*data)
 {
 	int		pid;
-	int		x;
 
-	x = 0;
 	pid = fork();
 	if (pid < 0)
 		return (printf("error in fork\n"), -1);

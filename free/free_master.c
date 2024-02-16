@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 04:29:11 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/09 08:32:54 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/14 10:10:53 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,31 +16,42 @@ void	free_manager(t_data *data, int key)
 {
 	if (key == 1)
 	{
-		free(data->pr->input);
+		if (data->pr->input)
+			free(data->pr->input);
 		if (data->input)
 			free(data->input);
 	}
 	else if (key == 2)
 	{
-		free_cmds(data);
-		free(data->pr->input);
+		if (data->cmds)
+			free_cmds(data);
+		if (data->pr->input)
+			free(data->pr->input);
 	}
-	free(data->c_status);
-	data->c_status = NULL;
+	if (data->cmds)
+		free_cmds(data);
 	if (data->redir_tab)
 		ft_split_free(data->redir_tab);
-	if (data->tab && data->n)
-		free_tab(data->tab, data->n);
+	if (data->tab)
+		free_tab(data->tab);
 }
 
 void	free_end_of_program(t_prompt *p)
 {
-	free(p->w_d);
-	free(p->post);
-	free_env(p->env);
-	free_env_tab(p->nv);
-	free(p->name);
-	free(p->pid);
+	if (p->user)
+		free(p->user);
+	if (p->w_d)
+		free(p->w_d);
+	if (p->post)
+		free(p->post);
+	if (p->env)
+		free_env(p->env);
+	if (p->nv)
+		free_env_tab(p->nv);
+	if (p->name)
+		free(p->name);
+	if (p->pid)
+		free(p->pid);
 	if (p->data->c_status)
 		free(p->data->c_status);
 }

@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 12:48:29 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/09 08:45:44 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/13 07:23:47 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ void	execute_echo(t_data *data)
 	char	*tmp;
 	int		flag;
 
-	data->input = quote_remover_v2(data->input);
+	if (is_there_quotes(data->input))
+		data->input = quote_remover_v2(data->input);
 	to_print = export_extract_arg(data->input);
-	printf("toprint = [%s]\n", to_print);
 	if (!to_print)
 		return (ft_putstr("\n"));
 	if (ft_strnstr(to_print, "-n", 2))
@@ -37,6 +37,7 @@ void	execute_echo(t_data *data)
 		ft_putchar('\n');
 	}
 	free(to_print);
+	set_status(data, 0, NULL, NULL);
 }
 
 int	is_wspace_or_null(char *str, int i)

@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 04:25:22 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/09 08:27:38 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/14 10:11:37 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	free_cmds(t_data *data)
 		i++;
 	}
 	free(data->cmds);
+	data->cmds = NULL;
 }
 
 void	free_env(t_env	*env)
@@ -33,7 +34,8 @@ void	free_env(t_env	*env)
 	while (env)
 	{
 		tmp = env->next;
-		free(env->var);
+		if (env->var)
+			free(env->var);
 		free(env);
 		env = tmp;
 	}
@@ -46,21 +48,22 @@ void	free_env_tab(char **env)
 	i = 0;
 	while (env[i])
 	{
-		free(env[i]);
+		if (env[i])
+			free(env[i]);
 		i++;
 	}
 	free(env);
 }
 
-void	free_tab(int **tab, int n_redir)
+void	free_tab(int **tab)
 {
 	int	i;
 
 	i = 0;
-	printf("->->-> %i \n", n_redir);
-	while (i < n_redir)
+	while (tab[i])
 	{
-		free(tab[i]);
+		if (tab[i])
+			free(tab[i]);
 		i++;
 	}
 	free(tab);

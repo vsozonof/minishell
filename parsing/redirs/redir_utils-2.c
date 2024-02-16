@@ -6,18 +6,45 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 10:30:26 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/09 08:41:12 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/14 10:35:07 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+// ! Redirection Checker
+// ? This function will check if the filename
+// ? that follows a redirection token is valid or not
+// * 1. \0
+// * 2. >> ou << |
+// * 3. > ou < |
+// * 4. ><
+// * 5. < >
+// * 6. >> ou << et > >> < <<
+
 int	redir_checker(char *str, int i, t_data *data)
 {
+	if (str[i] == str[i - 1])
+		return (double_redir_checker(str, (i + 1), data));
+	printf("simple\n");
 	while (str[i] && ft_is_whitespace(str[i]))
 		i++;
 	if (str[i] == '\0')
-		return (set_status(data, 2, "parse error near '\\n'", NULL), 0);
+		return (set_status(data, 2, "A. syntax error near `\\n'", NULL), 0);
+	else if (str[i] == '>' || str[i] == '<')
+		return (set_status(data, 2, "B. syntax error near `\\n'", NULL), 0);
+	else if ((str[i - 1] == '<' || str[i - 1] == '>')
+		&& (str[i] == '<' || str[i] == '>') && str[i + 1] == '|')
+		return (set_status(data, 2, "syntax error near `|'", NULL), 0);
+	else if ((str[i - 1] == '<' || str[i - 1] == '>')
+		&& (str[i] == '|' || str[i + 1] == '|'))
+		return (set_status(data, 2, "syntax error near `|'", NULL), 0);
+	else if (str[i] == '<' && str[i - 1] == '>')
+		return (set_status(data, 2, "syntax error near `<'", NULL), 0);
+	else if (str[i] == '>' && str[i - 1] == '<')
+		return (set_status(data, 2, "C. syntax error near `\\n'", NULL), 0);
+	else if (str[i] == str[i - 1] && is_token(str, (i + 1)))
+		return (set_status(data, 2, "D. syntax error near `\\n'", NULL), 0);
 	return (1);
 }
 
@@ -34,8 +61,6 @@ int	is_there_redirs(char *str)
 
 int	is_valid_char_after_redir(int c)
 {
-	// if (c == '/')
-	// 	return (0);
 	if (ft_isprint(c))
 		return (1);
 	return (0);
@@ -43,66 +68,54 @@ int	is_valid_char_after_redir(int c)
 
 void	extract_redir_cmds(char **splitted, t_data *data)
 {
-	int	i;
-	int	c;
-	int	count;
-	char *tmp;
-	int	j;
+	int		count;
+	int		j;
 
-	j = 0;
-	while (splitted[j])
-		j++;
-	i = ((c = 0));
+	j = get_double_tab_len(splitted);
 	count = cmd_counter(splitted);
+	data->i = 0;
+	data->n = 0;
 	data->redir_tab = malloc(sizeof(char *) * (count + 1));
 	if (!data->redir_tab)
-		return ;
-	while (splitted[c])
+		return ((void)ft_split_free(splitted));
+	while (splitted[data->n])
 	{
-		if (c < j && (splitted[c][0] == '<' || splitted[c][0] == '>'))
-			c += 2;
-		if (c < j && splitted[c][0] == '|')
-			c++;
-		if (c < j && splitted[c][0] != '<' && splitted[c][0] != '>'
-			&& splitted[c][0] != '|')
-		{
-			data->redir_tab[i] = ft_strdup(splitted[c]);
-			if (splitted[c + 1] && (splitted[c + 1][0] != '<' && splitted[c + 1][0] != '>'
-				&& splitted[c + 1][0] != '|'))
-			{
-				tmp = data->redir_tab[i];
-				data->redir_tab[i] = ft_strjoin(data->redir_tab[i], " ");
-				free(tmp);
-				tmp = data->redir_tab[i];
-				data->redir_tab[i] = ft_strjoin(data->redir_tab[i], splitted[c + 1]);
-				free(tmp);
-				c += 2;
-				i++;
-			}
-			else
-			{
-				i++;
-				c++;
-			}
-		}
+		if (data->n < j && (splitted[data->n][0] == '<'
+			|| splitted[data->n][0] == '>'))
+			data->n += 2;
+		if (data->n < j && splitted[data->n][0] == '|')
+			data->n++;
+		if (data->n < j && splitted[data->n][0] != '<'
+			&& splitted[data->n][0] != '>' && splitted[data->n][0] != '|')
+			extract_redir_cmd_finalizer(data, splitted);
 	}
-	data->redir_tab[i] = NULL;
+	data->redir_tab[data->i] = NULL;
+	data->n = 0;
+	data->i = 0;
 	ft_split_free(splitted);
 }
 
-int	cmd_counter(char **splitted)
+void	extract_redir_cmd_finalizer(t_data *data, char **splitted)
 {
-	int	i;
-	int	count;
+	char	*tmp;
 
-	i = 0;
-	count = 0;
-	while (splitted[i])
+	data->redir_tab[data->i] = ft_strdup(splitted[data->n]);
+	if (splitted[data->n + 1] && (splitted[data->n + 1][0] != '<'
+		&& splitted[data->n + 1][0] != '>' && splitted[data->n + 1][0] != '|'))
 	{
-		if (splitted[i][0] == '<' || splitted[i][0] == '>')
-			count -= 2;
-		i++;
-		count++;
+		tmp = data->redir_tab[data->i];
+		data->redir_tab[data->i] = ft_strjoin(data->redir_tab[data->i], " ");
+		free(tmp);
+		tmp = data->redir_tab[data->i];
+		data->redir_tab[data->i] = ft_strjoin(data->redir_tab[data->i],
+				splitted[data->n + 1]);
+		free(tmp);
+		data->n += 2;
+		data->i++;
 	}
-	return (count);
+	else
+	{
+		data->i++;
+		data->n++;
+	}
 }
