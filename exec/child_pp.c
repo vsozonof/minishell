@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:10:29 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/15 17:04:22 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/16 10:16:11 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ int	child_process_in_or_out(int	**pi, t_data *data, int i, int token)
 	}
 	return (0);
 }
+
 // ATTENTION ICI VERIF N'EST PAS BON
 int	child_process_middle(int **pipefd, int token, int verif)
 {
