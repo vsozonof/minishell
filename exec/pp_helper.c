@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 14:57:24 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/08 15:21:36 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/15 16:46:47 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,36 +16,31 @@ int	child_process(t_data *data, int **pipefd, int i, char **cmd_argument)
 {
 	char	*cmd_arg;
 
-	ft_pipex_helper(data, pipefd, i);
+	if (ft_pipex_helper_dup(data, pipefd, i) == -1)
+	{
+		free(cmd_argument);
+		ft_freedb(data->actual_path);
+		return (-1);
+	}
 	if (check_redirection_now(data, i) == 0)
 		cmd_arg = data->redir_tab[i];
 	else
 		cmd_arg = data->cmds[i];
 	fprintf(stderr, "all_cmd = %s\n", cmd_arg);
 	cmd_argument = ft_split(cmd_arg, ' ');
-	int q = 0;
-	if (data->n_redirs > 0)
-	{
-		while (data->redir_tab[q])
-		{
-			fprintf(stderr, "data->aredir_tab[%d] = %s\n", q, data->redir_tab[q]);
-			q++;
-		}
-	}
-	fprintf(stderr, "juste avant mon execve mon i = %d et path %s\n", i, data->actual_path[i]);
-	int	j = 0;
-	while (cmd_argument[j])
-	{
-		fprintf(stderr, "cmd_argument[%d] = %s\n\n", j, cmd_argument[j]);
-		j++;
-	}
+	// if (builtin_checker())
+	// {
+	// 	builtin;
+	// 	exit(0);
+	// }
+	// cree un if qui contiens checker de builtin
 	execve(data->actual_path[i], cmd_argument, data->pr->nv);
 	free_all_pipe(pipefd);
 	exit(0);
 	return (0);
 }
 
-int	ft_pipex_helper(t_data *data, int **pipefd, int i)
+int	ft_pipex_helper_dup(t_data *data, int **pipefd, int i)
 {
 	int		check;
 
@@ -55,6 +50,6 @@ int	ft_pipex_helper(t_data *data, int **pipefd, int i)
 	else if (i % 2 == 1)
 		check = child_process_in(pipefd, data, i, 1);
 	if (check == -1)
-		return (-1); // plus tard gerer cas erreur
+		return (-1);
 	return (0);
 }

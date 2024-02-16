@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/14 10:21:03 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/16 08:37:21 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,9 @@ typedef struct s_parse
 	int				n_redirs;
 	int				nb_redirs_ac;
 	int				i;
-	int				n;
+	int				*first;
+	int				*last;
+	int				index_fd;
 	char			**actual_path;
 	int				index_redirs;
 	int				nb_here_doc;
@@ -197,15 +199,17 @@ char	*arg(char *str, t_data *data);
 char	**ft_get_path(char **env);
 char	*ft_do_process(char *envp[], char *cmd);
 int		child_process_in_or_out(int **pipefd, t_data *data, int i, int token);
-int		child_process_middle(int **pipefd, int token);
+int		child_process_middle(int **pipefd, int token, int verif);
 int		redirection_manager(t_data *data, int i);
 int		check_redirection_now(t_data *data, int i);
 char	*ft_strjoin_help(char **path, char *cmd, int i);
 char	*ft_essaie(t_data *data, char *input);
 char	*ft_essaie_helper(char *buf, char *input, int , t_data *data);
 int		redirection_single_chev(t_data *data, char *input);
-int		first_redirect(t_data *data, char *input);
-int		last_redirect(t_data *data, char *input);
+int		first_redirect(t_data *data, char *input, int count);
+int		first_redirect_helper(char *input, int j, int i);
+int		last_redirect(t_data *data, char *input, int count);
+int		last_redirect_helper(char *input, int j, int i);
 int		is_redirect_actual(char *input);
 int		redirection_dup1(t_data *data, int first, int last);
 int		redirection_dup1_helper(t_data *data, int last);
@@ -222,18 +226,22 @@ int		ft_check_access(t_data *data, int i);
 int		ft_check_access(t_data *data, int i);
 void	free_all_fd(t_data *data);
 void	wait_and_free(t_data *data, int **pipefd, int *pid);
-int		ft_pipex_helper(t_data *data, int **pipefd, int i);
+int		ft_pipex_helper_dup(t_data *data, int **pipefd, int i);
 int		child_process(t_data *data, int **pipefd, int i, char **cmd_argument);
+int		set_first_end(t_data *data);
+int		get_act_redir(t_data *data, int i);
+int		ft_pipex_helper(t_data *data, int *pid, int **pipefd, char **cmd_argument);
 
 // ! ---------------------------------------------------------------------------
 // ?							Single_Pipe
 // ! ---------------------------------------------------------------------------
 
-int		single_arg(t_data *data);
+int		single_arg(t_data *data, char **cmd_argument);
 int		exec_single(char **cmd_argument, char *fre, t_data *data);
 int		redirection_single(t_data *data);
 char	**espoir(char **cmd_argument);
 int		ft_count_space(char *buf);
+int		check_fre_cmd(t_data *data, char *buf, char **cmd_argument, char *fre);
 
 // ! ---------------------------------------------------------------------------
 // ?							Free && utils Exec
@@ -252,6 +260,7 @@ int		verif_arg_fd(char *argv[], int i);
 int		ft_create_fd(char *argv, int flag);
 void	free_all_pipe(int **pipefd);
 int		**alloc_pipe(int i);
+void	free_all_alloc(t_data *data);
 
 // ! ---------------------------------------------------------------------------
 // ?							Builtin && Tools

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+         #
+#    By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/09 23:22:06 by vsozonof          #+#    #+#              #
-#    Updated: 2024/02/14 11:35:25 by vsozonof         ###   ########.fr        #
+#    Updated: 2024/02/16 08:33:24 by tpotilli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,6 +61,7 @@ SRCS = main.c \
 	   exec/single_arg.c \
 	   exec/child_pp.c \
 	   exec/redirection_here.c \
+	   exec/redirection_found.c \
 	   exec/redirection_arg.c \
 	   exec/redirection_dup.c \
 	   exec/here_doc.c \

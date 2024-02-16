@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 12:45:18 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/16 07:56:32 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/16 08:34:55 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@
 // 		i++;
 // 	}
 // 	str = malloc(sizeof(char) * (ft_strlen(buf) + 1));
-	
+
 // 	return (0);
 // }
 
