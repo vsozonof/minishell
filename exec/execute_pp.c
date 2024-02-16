@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 12:31:19 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/06 16:33:08 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/14 15:47:44 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,18 +41,18 @@ char	*ft_do_process(char *envp[], char *cmd)
 	return (NULL);
 }
 
-int		ft_do_process_helper(char *cmd)
+int	ft_do_process_helper(char *cmd)
 {
 	if (access(cmd, X_OK) == 0)
 		return (0);
 	return (-1);
 }
 
-char *ft_strjoin_help(char **path, char *cmd, int i)
+char	*ft_strjoin_help(char **path, char *cmd, int i)
 {
 	char	*buf;
 	char	*buf2;
-	
+
 	buf = ft_strjoin(path[i], "/");
 	if (!buf)
 		return (fprintf(stderr, "ERROR IN PATH\n"), NULL);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_master.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 08:35:01 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/14 09:18:05 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/16 13:44:11 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ int	init_str(t_data *data, t_prompt *prompt)
 	data->to_add = NULL;
 	data->redir_tab = NULL;
 	data->n_redirs = 0;
+	data->nb_here_doc = 0;
 	data->input = prompt->input;
 	data->pr = prompt;
 	data->env = prompt->env;

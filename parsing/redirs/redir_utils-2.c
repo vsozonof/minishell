@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_utils-2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 10:30:26 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/14 10:35:07 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/16 13:30:24 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	redir_checker(char *str, int i, t_data *data)
 {
 	if (str[i] == str[i - 1])
 		return (double_redir_checker(str, (i + 1), data));
-	printf("simple\n");
 	while (str[i] && ft_is_whitespace(str[i]))
 		i++;
 	if (str[i] == '\0')

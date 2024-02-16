@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 12:45:18 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/16 07:56:32 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/14 15:51:42 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@
 // 		i++;
 // 	}
 // 	str = malloc(sizeof(char) * (ft_strlen(buf) + 1));
-	
+
 // 	return (0);
 // }
 
@@ -81,29 +81,29 @@
 // 	return (flag);
 // }
 
-char	*get_name_heredoc()
-{
-    char	*str;
-    int		i;
-	int		fd;
+// char	*get_name_heredoc()
+// {
+//     char	*str;
+//     int		i;
+// 	int		fd;
 
-	fd = open("/dev/random", O_RDONLY);
-	str = NULL;
-	if (!fd)
-		return (fprintf(stderr, "problem with fd in here_doc\n"), NULL);
-	read(fd, str, 14);
-	i = 1;
-	str[0] = '.';
-	while (i < 15)
-	{
-		str[i] = (str[i] % 25) + 'a';
-		i++;
-	}
-    str[16] = '.';
-    str[17] = 't';
-    str[18] = 'x';
-    str[19] = 't';
-    str[20] = '\0';
-	close(fd);
-	return (str);
-}
+// 	fd = open("/dev/random", O_RDONLY);
+// 	str = NULL;
+// 	if (!fd)
+// 		return (fprintf(stderr, "problem with fd in here_doc\n"), NULL);
+// 	read(fd, str, 14);
+// 	i = 1;
+// 	str[0] = '.';
+// 	while (i < 15)
+// 	{
+// 		str[i] = (str[i] % 25) + 'a';
+// 		i++;
+// 	}
+//     str[16] = '.';
+//     str[17] = 't';
+//     str[18] = 'x';
+//     str[19] = 't';
+//     str[20] = '\0';
+// 	close(fd);
+// 	return (str);
+// }

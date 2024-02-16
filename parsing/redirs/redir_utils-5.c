@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   redir_utils-5.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:22:47 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/14 10:23:01 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/16 13:45:23 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "minishell.h"
 
 int	get_double_tab_len(char **splitted)
 {
@@ -35,4 +37,20 @@ int	cmd_counter(char **splitted)
 		count++;
 	}
 	return (count);
+}
+
+void	heredoc_counter(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (data->input[i])
+	{
+		if (data->input[i] == '<' && data->input[i + 1] == '<')
+		{
+			i += 2;
+			data->nb_here_doc++;
+		}
+		i++; 
+	}
 }

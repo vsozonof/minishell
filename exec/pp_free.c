@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:12:21 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/07 11:13:57 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/14 16:37:55 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,12 @@ void	free_all_fd(t_data *data)
 	int		i;
 
 	i = 0;
-	while (data->n_redirs > i)
+	if (data->n_redirs > 0)
 	{
-		close(data->tab[i][2]);
-		i++;
+		while (data->n_redirs > i)
+		{
+			close(data->tab[i][2]);
+			i++;
+		}
 	}
 }

@@ -3,49 +3,62 @@
 /*                                                        :::      ::::::::   */
 /*   single_arg.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 18:55:02 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/10 15:12:42 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/16 14:55:20 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	single_arg(t_data *data)
+int	single_arg(t_data *data, char **cmd_argument)
 {
 	char	*buf;
 	char	*fre;
-	char	**cmd_argument;
 	char	*essaie;
-	int		i;
+	int		check;
 
-	data->index_redirs = ((i = 0));
 	buf = arg(data->input, data);
+	if (!buf)
+		return (-1);
 	if (data->n_redirs > 0)
-		essaie = data->redir_tab[0];
+		essaie = ft_strdup(data->redir_tab[0]);
 	else
 		essaie = data->input;
 	cmd_argument = ft_split(essaie, ' ');
+	if (cmd_argument == NULL)
+		return (free(buf), -1);
 	fre = ft_do_process(data->pr->nv, buf);
+	check = check_fre_cmd(data, buf, cmd_argument, fre);
+	if (check == 1)
+		return (-1);
+	exec_single(cmd_argument, fre, data);
+	if (data->n_redirs > 0)
+		free(essaie);
+	free_single(data, cmd_argument, buf, fre);
+	return (0);
+}
+
+int	check_fre_cmd(t_data *data, char *buf, char **cmd_argument, char *fre)
+{
 	if (!fre || !cmd_argument)
 	{
-		fprintf(stderr, "problem with a command\n");
+		set_status(data, 1, "command not found", buf);
 		free(buf);
 		ft_freedb(cmd_argument);
-		return (0);
+		return (1);
 	}
-	exec_single(cmd_argument, fre, data);
-	// if (data->n_redirs > 0)
-	// 	free(essaie);
-	free_single(data, cmd_argument, buf, fre);
 	return (0);
 }
 
 int	exec_single(char **cmd_argument, char *fre, t_data	*data)
 {
 	int		pid;
+	int		check;
+	int		x;
 
+	x = 0;
 	pid = fork();
 	if (pid < 0)
 		return (printf("error in fork\n"), -1);
@@ -56,8 +69,16 @@ int	exec_single(char **cmd_argument, char *fre, t_data	*data)
 			if (redirection_single(data) == -1)
 				return (-1);
 		}
+		check = builtin_checker(data);
+		fprintf(stderr, "voiic mon check %d\n", check);
+		if (check >= 1 && check <= 7)
+		{
+			builtin_manager(data, check);
+			free(fre);
+			ft_freedb(cmd_argument);
+			exit(0);
+		}
 		execve(fre, cmd_argument, data->pr->nv);
-		fprintf(stderr, "execve fail\n");
 		free(fre);
 		ft_freedb(cmd_argument);
 		exit(0);
@@ -71,10 +92,19 @@ int	redirection_single(t_data *data)
 {
 	int		last;
 	int		first;
+	int		i;
 
-	first = first_redirect(data, data->input);
-	last = last_redirect(data, data->input);
-	redirection_dup1(data, first, last);
+	// heredoc_counter(data);
+	// if (data->nb_here_doc > 0) check les heres doc ici
+	// 	main_here_doc(data);
+	first = first_redirect(data, data->input, 0);
+	last = last_redirect(data, data->input, 0);
+	i = 0;
+	if (data->n_redirs >= 1)
+	{
+		if (redirection_dup1_in(data, first, last) == -1)
+			return (-1);
+	}
 	return (0);
 }
 
@@ -85,13 +115,10 @@ int	redirection_single_chev(t_data *data, char *input)
 
 	i = 0;
 	cpt = data->tab[0][0];
-	// fprintf(stderr, "voici la pos de mon fd %d\n", cpt);
 	while (input[i++])
 	{
 		if (input[i] == ' ')
 			cpt--;
-		// fprintf(stderr, "%d\n", cpt);
-		// fprintf(stderr, " i = %d\n", i);
 		if (input[i] == '>' && cpt > 0)
 			return (1);
 		else if (input[i] == '<' && cpt > 0)
@@ -102,107 +129,3 @@ int	redirection_single_chev(t_data *data, char *input)
 	}
 	return (-1);
 }
-
-/* ancienne versin bonne pour single arg a garder !!!!!!!!!!!!!
-int	redirection_single_chev(t_data *data)
-{
-	int		i;
-	int		cpt;
-
-	i = 0;
-	cpt = data->tab[0][0];
-	// fprintf(stderr, "voici la pos de mon fd %d\n", cpt);
-	while (data->input[i++])
-	{
-		if (data->input[i] == ' ')
-			cpt--;
-		// fprintf(stderr, "%d\n", cpt);
-		// fprintf(stderr, " i = %d\n", i);
-		if (data->input[i] == '>' && cpt > 0)
-			return (1);
-		else if (data->input[i] == '<' && cpt > 0)
-			return (2);
-		else if ((data->input[i] == '>' || data->input[i] == '<')
-			&& cpt == 0)
-			return (0);
-	}
-	return (-1);
-}
-*/
-
-/*if (data->n_redirs > 0)
-	{
-		if (data->tab[data->index_redirs])
-		{
-			if (data->tab[data->index_redirs][0] == i)
-			{
-				if (data->tab[data->index_redirs][1] == 1)
-					return (buf[1]);
-				else if (data->tab[data->index_redirs][1] == 3)
-					return (buf[i--]);
-			}
-		}
-	}
-*/
-
-/*
-
-char	**espoir(char **cmd_argument)
-{
-	int		i;
-	int		j;
-	int		c;
-	char	**buf;
-
-	i = 0;
-	c = 0;
-	buf = malloc(sizeof(char *) * (found_max(cmd_argument) + 1));
-	while (cmd_argument[i + 1])
-	{
-		j = 0;
-		buf[c] = malloc(sizeof(char *) * (ft_strlen(cmd_argument[i]) + 1));
-		while (cmd_argument[i][j])
-		{
-			buf[c][j] = cmd_argument[i][j];
-			j++;
-		}
-		buf[c][j] = '\0';
-		i++;
-		c++;
-	}
-	buf[c] = NULL;
-	return (buf);
-}
-*/
-
-/*
-{
-	char	*buf2;
-	char	**split;
-	int		cpt;
-	int		fd_pos;
-
-	fd_pos = data->tab[0][0];
-	cpt = ft_count_space(buf);
-	int y = 0;
-	while (buf[y] && buf[y] != ' ')
-		y++;
-	split = ft_split(buf, ' ');
-	buf2 = malloc(sizeof(char) * (y + 1));
-	while (split[i])
-	{
-		j = 0;
-		if (i != fd_pos)
-		{
-			while (split[i][j] && split[i][j] != ' ')
-			{
-				buf2[j] = split[i][j];
-				j++;
-			}
-		}
-		i++;
-	}
-	buf2[j] = '\0';
-	return (buf2);
-}
-*/
