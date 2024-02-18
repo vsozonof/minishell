@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 11:37:41 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/16 14:44:32 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/18 18:51:17 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,12 @@ char	*get_name_heredoc(void)
 	int			i;
 	int			fd;
 
-	fd = open("/dev/random", O_RDONLY);
+	fd = open("/dev/urandom", O_RDONLY);
 	str = malloc(sizeof(char) * 21);
-	if (!fd)
+	if (fd == -1)
 		return (fprintf(stderr, "problem with fd in here_doc\n"), NULL);
 	read(fd, str, 14);
-	i = 1;
-	str[0] = '.';
+	i = 0;
 	while (i <= 15)
 	{
 		str[i] = (str[i] % 25) + 'a';
@@ -109,37 +108,39 @@ int	main_here_doc(t_data *data)
 {
 	char	*delimiter;
 	int		i;
+	int		c;
 	int		fd;
 
-	// pour le moment
-	i = 0;
-	printf("N CMDS = %i\n\n\n", data->n_cmds);
+	c = ((i = 0));
+	printf("HEREDOC DETECTED %i\n", data->nb_here_doc);
 	if (data->n_cmds > 1)
 	{
-		while (data->nb_here_doc > i)
+		while (data->cmds[c])
 		{
-			delimiter = extract_delimiter(data->input);
+			if (!hdoc_counter(data->cmds[c]))
+				c++;
+			delimiter = extract_delimiter(data->cmds[c]);
 			fd = heredoc_handler(delimiter, data);
-			input_reformatter(data->cmds[i], data);
+			data->cmds[c] = input_reformatter(data->cmds[c], data);
 			free(delimiter);
-			i++;
 		}
 	}
 	else
 	{
-		delimiter = extract_delimiter(data->input);
-		fd = heredoc_handler(delimiter, data);
-		data->input = input_reformatter(data->input, data);
-		free(delimiter);
+		while (i < data->nb_here_doc)
+		{
+			delimiter = extract_delimiter(data->input);
+			fd = heredoc_handler(delimiter, data);
+			data->input = input_reformatter(data->input, data);
+			free(delimiter);
+			i++;
+		}
 	}
 	close(fd);
 	return (0);
 }
 
-// int	crt_fd_here(t_data *data, int fd, int i)
-// {
-	
-// }
+
 
 char	*input_reformatter(char *str, t_data *data)
 {

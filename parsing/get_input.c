@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 13:42:18 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/13 09:59:25 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/18 17:46:14 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	get_input(t_prompt *prompt, t_data *data)
 			break ;
 	}
 	if (!data->exited)
-		printf("exit\n");
+		printf("A exit\n");
 	clear_history();
 	free_end_of_program(prompt);
 	return (data->i_status);

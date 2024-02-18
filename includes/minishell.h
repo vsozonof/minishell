@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/16 14:35:55 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/18 18:49:22 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,6 +175,7 @@ void	extract_redir_no_wspace(t_data *data, int n);
 char	*extract_word(t_data *data, int i, int c);
 int		get_double_tab_len(char **splitted);
 void	heredoc_counter(t_data *data);
+int		hdoc_counter(char *str);
 
 // ! ---------------------------------------------------------------------------
 // ?							SIGNAL HANDLER
