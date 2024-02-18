@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:10:50 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/15 15:19:34 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/18 19:31:57 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ int	ft_check_access(t_data *data, int i)
 	while (data->cmds[i])
 	{
 		buf = arg(data->cmds[i], data);
+		fprintf(stderr, "voici buf %s et voici cmds %s\n", buf, data->cmds[i]);
 		if (!data->pr->nv)
 			return (fprintf(stderr, "problem with env\n"), -1);
 		data->actual_path[i] = ft_do_process(data->pr->nv, buf);
@@ -100,27 +101,70 @@ int	ft_check_access(t_data *data, int i)
 	return (0);
 }
 
+/*
+**	This function takes as parameter:
+**
+**	data = the structure
+**
+** =====================================================
+** =====================================================
+**
+**	this function set the first redirection and the
+**	final of each pipe
+**
+*/
+
 int	set_first_end(t_data *data)
 {
 	int		i;
+	int		j;
 	int		count;
 
 	i = ((count = 0));
 	data->first = malloc(sizeof(int) * data->n_redirs);
-	if (!data->first)
-		return (-1);
 	data->last = malloc(sizeof(int) * data->n_redirs);
-	if (!data->last)
+	if (!data->first || !data->last)
 		return (-1);
+	data->index_fd = -1;
+	j = 0;
 	while (data->cmds[i])
 	{
 		if (i > 0)
 			count = get_act_redir(data, i);
-		data->first[i] = first_redirect(data, data->cmds[i], count);
-		data->last[i] = last_redirect(data, data->cmds[i], count);
+		fprintf(stderr, "voici mon i %d\n", i);
+		if (check_if_redir(data, i) == 0)
+		{
+			data->first[j] = first_redirect(data, data->cmds[i], count);
+			data->last[j] = last_redirect(data, data->cmds[i], count);
+			fprintf(stderr, "allooooo voici n_redir %d et voici j %d\n", data->n_redirs, j);
+			fprintf(stderr, "donc voici first %d ", data->first[j]);
+			fprintf(stderr, "last %d\n", data->last[j]);
+			j++;
+		}
 		i++;
 	}
 	return (0);
+}
+
+// peut etre modifier la fonction en dessous
+// j'essaye de regler si il n'y a pas de redirection
+// dans un pipe
+int	check_if_redir(t_data *data, int i)
+{
+	int		j;
+
+	j = 0;
+	while (data->cmds[i][j])
+	{
+		// if (is_in_quotes(data->cmds[i], j) > 0)
+		// {
+		if (data->cmds[i][j] == '>'
+		|| data->cmds[i][j] == '<')
+			return (0);
+		// }
+		j++;
+	}
+	return (-1);
 }
 
 int	get_act_redir(t_data *data, int i)

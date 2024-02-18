@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 17:10:46 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/14 18:47:49 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/18 16:23:25 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,11 @@ int	redirection_dup1_in(t_data *data, int first, int last)
 	fprintf(stderr, "dans ma redirection mon first %d et end %d\n", first, last);
 	if (first == -1)
 	{
-		first++;
-		// if (dup2(0, 0) < 0)
-		// {
-		// 	close(data->tab[data->index_redirs][2]);
-		// 	return (printf("problem with dup2 1"), -1);
-		// }
+		if (dup2(0, 0) < 0)
+		{
+			close(data->tab[data->index_redirs][2]);
+			return (printf("problem with dup2 1"), -1);
+		}
 	}
 	else
 	{

@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:11:05 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/15 17:05:28 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/18 19:31:05 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ int	ft_pipex_helper(t_data *data, int *pid, int **pipefd, char **cmd_argument)
 	i = 0;
 	while (i < data->n_cmds)
 	{
+		if (get_nb_redirs_ac(data->cmds[i]) > 0)
+			data->index_fd++;
 		pid[i] = fork();
 		if (pid[i] < 0)
 			return (printf("erreur de fork\n"), 1);

@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 18:55:02 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/16 14:55:20 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/18 14:59:46 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,7 @@ int	exec_single(char **cmd_argument, char *fre, t_data	*data)
 {
 	int		pid;
 	int		check;
-	int		x;
 
-	x = 0;
 	pid = fork();
 	if (pid < 0)
 		return (printf("error in fork\n"), -1);
@@ -92,14 +90,12 @@ int	redirection_single(t_data *data)
 {
 	int		last;
 	int		first;
-	int		i;
 
 	// heredoc_counter(data);
 	// if (data->nb_here_doc > 0) check les heres doc ici
 	// 	main_here_doc(data);
 	first = first_redirect(data, data->input, 0);
 	last = last_redirect(data, data->input, 0);
-	i = 0;
 	if (data->n_redirs >= 1)
 	{
 		if (redirection_dup1_in(data, first, last) == -1)

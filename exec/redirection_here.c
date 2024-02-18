@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 21:47:57 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/14 15:59:27 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/18 19:31:43 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,9 @@ int	redirection_manager(t_data *data, int i)
 	int		token;
 
 	token = get_nb_redirs_ac(data->cmds[i]);
+	fprintf(stderr, "voici index %d\n", data->index_fd);
 	if (token > 0)
-		redirection_dup1_in(data, data->first[i], data->last[i]);
+		redirection_dup1_in(data, data->first[data->index_fd], data->last[data->index_fd]);
 	return (0);
 }
 

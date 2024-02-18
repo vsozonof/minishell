@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/16 14:35:55 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/18 15:11:54 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -233,6 +233,7 @@ int		make_new_fd(t_data *data, int fd);
 char	*input_reformatter(char *str, t_data *data);
 char	*replace_token_with_filename(char *str, t_data *data, int start, int end);
 int		crt_fd_here(t_data *data, int fd, int i);
+int		check_if_redir(t_data *data, int i);
 
 // ! ---------------------------------------------------------------------------
 // ?							Single_Pipe
