@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/18 19:35:27 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/19 14:20:30 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,16 @@ typedef struct s_parse
 	char			*heredoc_fname;
 	struct s_parse	*next;
 }	t_data;
+
+typedef struct s_lst_ch
+{
+	char			*whole_input;
+	char			*cmds;
+	int				*first;
+	int				*last;
+	int				*all_fd;
+	struct s_lst_ch	*next;
+}	t_cha;
 
 // ! ---------------------------------------------------------------------------
 // ?							INITIALIZATION
@@ -188,7 +198,7 @@ void	handle_signals(int signum);
 // ! ---------------------------------------------------------------------------
 
 int		command_manager(t_data *data);
-int		builtin_checker(t_data *tmp);
+int		builtin_checker(char *tmp);
 void	builtin_manager(t_data *tmp, int token);
 
 int		pipex_exec(t_data *data);
@@ -265,6 +275,16 @@ int		ft_create_fd(char *argv, int flag);
 void	free_all_pipe(int **pipefd);
 int		**alloc_pipe(int i);
 void	free_all_alloc(t_data *data);
+
+// ! ---------------------------------------------------------------------------
+// ?							Chain list
+// ! ---------------------------------------------------------------------------
+
+int		init_list_new(t_data *data, t_cha *list);
+t_cha	*ft_init_struct(t_cha *lst);
+t_cha	*ft_first_list(t_cha *lst);
+t_cha	*ft_add_at(t_data *data, t_cha *lst, int pos);
+t_cha	*ft_createcell(t_data *data, int pos);
 
 // ! ---------------------------------------------------------------------------
 // ?							Builtin && Tools

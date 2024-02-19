@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 10:30:26 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/16 13:30:24 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/19 10:19:52 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ void	extract_redir_cmds(char **splitted, t_data *data)
 
 	j = get_double_tab_len(splitted);
 	count = cmd_counter(splitted);
+	printf("%i\n", count);
 	data->i = 0;
 	data->n = 0;
 	data->redir_tab = malloc(sizeof(char *) * (count + 1));

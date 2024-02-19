@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 18:55:02 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/18 19:35:17 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/19 08:55:16 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	check_fre_cmd(t_data *data, char *buf, char **cmd_argument, char *fre)
 int	exec_single(char **cmd_argument, char *fre, t_data	*data)
 {
 	int		pid;
-	int		check;
+	// int		check;
 	// int		x;
 
 	// x = 0;
@@ -69,15 +69,15 @@ int	exec_single(char **cmd_argument, char *fre, t_data	*data)
 			if (redirection_single(data) == -1)
 				return (-1);
 		}
-		check = builtin_checker(data);
-		fprintf(stderr, "voiic mon check %d\n", check);
-		if (check >= 1 && check <= 7)
-		{
-			builtin_manager(data, check);
-			free(fre);
-			ft_freedb(cmd_argument);
-			exit(0);
-		}
+		// check = builtin_checker(data);
+		// fprintf(stderr, "voici mon check %d\n", check);
+		// if (check >= 1 && check <= 7)
+		// {
+		// 	builtin_manager(data, check);
+		// 	free(fre);
+		// 	ft_freedb(cmd_argument);
+		// 	exit(0);
+		// }
 		execve(fre, cmd_argument, data->pr->nv);
 		free(fre);
 		ft_freedb(cmd_argument);

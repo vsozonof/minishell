@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:10:50 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/18 19:31:57 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/19 08:53:28 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@
 **  with the function ft_do_process (we also get the path)
 **  then we go to ft_pipex to start the execution
 */
-
+// pour les commande non valide, mettre u flag dans un tableau qui dit si elles sont executable
 int	pipex_exec(t_data	*data)
 {
 	int		i;
