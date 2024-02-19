@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 12:31:19 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/14 15:47:44 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/19 16:11:25 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,10 @@ char	*ft_do_process(char *envp[], char *cmd)
 	{
 		buf2 = ft_strdup(cmd);
 		return (buf2);
-	}	
+	}
 	path = ft_get_path(envp);
+	if (!path)
+		return (NULL);
 	if (!path)
 		return (NULL);
 	while (path[i++])
@@ -70,7 +72,11 @@ char	**ft_get_path(char **env)
 
 	i = 0;
 	while (ft_strncmp(env[i], "PATH=", 5) != 0)
+	{
+		if (!env[i + 1])
+			break;
 		i++;
+	}
 	if (!env[i])
 		perror("Error: PATH not found");
 	path = ft_split(env[i] + 5, ':');
