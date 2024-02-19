@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 09:14:23 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/19 16:20:47 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/19 21:17:01 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	input_to_lst(t_prompt *pr, t_data *data)
 
 	i = 0;
 	init_str(data, pr);
-	printf("n args = %i\n\n", n_args(data->input));
+	printf("n args = %i\n\n", lexer_counter(data->input));
 	tab = malloc(sizeof(char *) * (n_args(data->input) + 1));
 	if (!tab)
 		return (0);
@@ -68,7 +68,7 @@ char	*input_splitter(t_data *data)
 	if (data->input[c] == 39 || data->input[c] == '"')
 		c += (quote_skipper(data->input, c) - c);
 	else
-		while (data->input[c] && !ft_is_whitespace(data->input[c]))
+		while (data->input[c] && (!ft_is_whitespace(data->input[c]) && is_special_char(data->input[c])))
 			c++;
 	tmp = ft_substr(data->input, c, ft_strlen(data->input));
 	if (!tmp)

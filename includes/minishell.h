@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/19 16:20:53 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/19 21:12:50 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,6 +159,7 @@ char	*input_splitter(t_data *data);
 int		put_input_to_lst(t_input *ptr, char **tab);
 int		input_to_lst(t_prompt *pr, t_data *data);
 int		is_special_char(char c);
+int		lexer_counter(char *str);
 
 void	ft_printlst(t_input *L);
 void	set_status(t_data *data, int status, char *str, char *cmd);
