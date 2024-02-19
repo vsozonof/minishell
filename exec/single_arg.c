@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 18:55:02 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/19 08:55:16 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/19 16:13:06 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,12 @@ int	single_arg(t_data *data, char **cmd_argument)
 		essaie = ft_strdup(data->redir_tab[0]);
 	else
 		essaie = data->input;
+	fre = ft_do_process(data->pr->nv, buf);
+	if (!fre)
+		return (free(buf), -1);
 	cmd_argument = ft_split(essaie, ' ');
 	if (cmd_argument == NULL)
 		return (free(buf), -1);
-	fre = ft_do_process(data->pr->nv, buf);
 	check = check_fre_cmd(data, buf, cmd_argument, fre);
 	if (check == 1)
 		return (-1);
