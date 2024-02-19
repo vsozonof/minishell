@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_master.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 08:35:01 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/16 13:44:11 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/19 14:24:35 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,13 @@ int	init_extras(t_prompt *ptr)
 
 int	init_str(t_data *data, t_prompt *prompt)
 {
+	t_input	*inp;
+
+	inp = malloc(sizeof(t_input));
+	if (!inp)
+		return (0);
+	prompt->inp = inp;
+	data->inp = inp;
 	data->head = NULL;
 	data->new_head = NULL;
 	data->tail = NULL;

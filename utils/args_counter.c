@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 05:05:23 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/18 18:47:07 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/19 16:14:23 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,6 @@ int	n_args(char *str)
 	int	c;
 
 	c = ((i = 0));
-	while (str[i] && ft_is_whitespace(str[i]))
-		i++;
-	while (str[i] && !ft_is_whitespace(str[i]))
-		i++;
 	while (str[i])
 	{
 		if (ft_is_whitespace(str[i]))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/19 14:20:30 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/19 16:20:53 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ extern int	g_status;
 // ! ---------------------------------------------------------------------------
 
 struct		s_parse;
+struct		s_input;
+struct		s_env;
 typedef struct s_struct
 {
 	char			*name;
@@ -49,6 +51,7 @@ typedef struct s_struct
 	char			**nv;
 	struct s_parse	*data;
 	struct s_env	*env;
+	struct s_input	*inp;
 }	t_prompt;
 
 typedef struct s_env
@@ -57,10 +60,17 @@ typedef struct s_env
 	struct s_env	*next;
 }	t_env;
 
+typedef struct s_input
+{
+	char			*str;
+	int				i;
+	struct s_input	*next;
+}	t_input;
 typedef struct s_parse
 {
 	t_prompt		*pr;
 	t_env			*env;
+	t_input			*inp;
 	int				exited;
 	char			*input;
 	char			*head;
@@ -77,6 +87,7 @@ typedef struct s_parse
 	int				nb_redirs_ac;
 	int				i;
 	int				n;
+	int				n_args;
 	int				*first;
 	int				*last;
 	int				index_fd;
@@ -84,7 +95,6 @@ typedef struct s_parse
 	int				index_redirs;
 	int				nb_here_doc;
 	char			*heredoc_fname;
-	struct s_parse	*next;
 }	t_data;
 
 typedef struct s_lst_ch
@@ -145,7 +155,12 @@ void	unquote_command(t_data *data);
 // ?							PARSING UTILS
 // ! ---------------------------------------------------------------------------
 
-void	ft_printlst(t_env *L);
+char	*input_splitter(t_data *data);
+int		put_input_to_lst(t_input *ptr, char **tab);
+int		input_to_lst(t_prompt *pr, t_data *data);
+int		is_special_char(char c);
+
+void	ft_printlst(t_input *L);
 void	set_status(t_data *data, int status, char *str, char *cmd);
 char	*ft_get_env(t_env *env, char *str);
 t_env	*ft_get_env_node(t_env *env, char *str);
@@ -330,6 +345,9 @@ void	execute_exit(t_data *data);
 // ! ---------------------------------------------------------------------------
 // ?							Utils Free
 // ! ---------------------------------------------------------------------------
+
+void	free_master(t_data *data);
+void	free_input_lst(t_input *lst);
 
 void	free_manager(t_data *data, int key);
 void	free_cmds(t_data *data);
