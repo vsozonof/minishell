@@ -6,7 +6,7 @@
 #    By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/09 23:22:06 by vsozonof          #+#    #+#              #
-#    Updated: 2024/02/19 14:22:13 by tpotilli         ###   ########.fr        #
+#    Updated: 2024/02/19 14:27:10 by tpotilli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -78,11 +78,6 @@ SRCS = main.c \
 	   builtin/pwd/pwd_master.c \
 	   builtin/env/env_master.c \
 	   builtin/exit/exit.c \
-	   list/ft_addAt.c \
-	   list/ft_create_cell.c \
-	   list/init_struct.c \
-	   list/ft_first_list.c \
-	   list/first_struct_init.c \
 
 OBJS = $(SRCS:.c=.o)
 

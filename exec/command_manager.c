@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 18:07:01 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/19 14:26:07 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/19 14:27:17 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ int	command_manager(t_data *data)
 	data->index_redirs = ((i = 0));
 	cmd_argument = NULL;
 	list = NULL;
-	// init_list_new(data, list);
-	check = builtin_checker(data);
 	if (data->n_cmds == 1)
 	{
 		if (single_arg(data, cmd_argument) == -1)
