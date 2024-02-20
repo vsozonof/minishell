@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:10:50 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/20 07:54:33 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/20 11:52:33 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,14 +131,10 @@ int	set_first_end(t_data *data)
 	{
 		if (i > 0)
 			count = get_act_redir(data, i);
-		fprintf(stderr, "voici mon i %d\n", i);
 		if (check_if_redir(data, i) == 0)
 		{
 			data->first[j] = first_redirect(data, data->cmds[i], count);
 			data->last[j] = last_redirect(data, data->cmds[i], count);
-			fprintf(stderr, "allooooo voici n_redir %d et voici j %d\n", data->n_redirs, j);
-			fprintf(stderr, "donc voici first %d ", data->first[j]);
-			fprintf(stderr, "last %d\n", data->last[j]);
 			j++;
 		}
 		i++;

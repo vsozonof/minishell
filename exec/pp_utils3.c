@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 16:38:26 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/14 16:01:14 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/20 12:17:35 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@ int	get_nb_redirs_ac(char *input)
 	i = ((nb = 0));
 	while (input[i])
 	{
-		if (input[i] == '>' || input[i] == '<')
+		if (input[i] == '>' && input[i + 1] == '>')
+			nb++;
+		else if (input[i] == '<' && input[i + 1] == '<')
 			nb++;
 		i++;
 	}
@@ -77,4 +79,20 @@ int	len_buf(char *buf, char *input, t_data *data, int act_redir)
 	if (input[i] == ' ')
 		len--;
 	return (len);
+}
+
+void	close_all_redirs(t_data *data)
+{
+	int		i;
+	int		j;
+
+	j = 0;
+	i = get_nb_redirs_ac(data->input);
+	while (j < i)
+	{
+		fprintf(stderr, "donc la %d t je dois atteindre %d\n", j, i);
+		close(data->tab[j][2]);
+		j++;
+	}
+	
 }
