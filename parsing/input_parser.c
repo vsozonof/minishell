@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 09:14:23 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/20 11:32:43 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/20 11:59:32 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@
 // * Flags et Args trouvable dans data.arg / data.flag
 // * Env trouvable dans data.envp
 
-// void	input_parser(t_prompt *pr, t_data *data)
-// {
-// 	if (!input_to_lst(pr, data))
-// 		return (free_master(data));
-// 	ft_printlst(data->inp);
-// 	free_master(data);
+void	input_parser(t_prompt *pr, t_data *data)
+{
+	if (!input_to_lst(pr, data))
+		return (free_master(data));
+	ft_printlst(data->inp);
+	free_master(data);
 	
-// }
+}
 
 int	input_to_lst(t_prompt *pr, t_data *data)
 {
@@ -32,8 +32,7 @@ int	input_to_lst(t_prompt *pr, t_data *data)
 
 	i = 0;
 	init_str(data, pr);
-	printf("n args = %i\n\n", lexer_counter(data->input));
-	tab = malloc(sizeof(char *) * (n_args(data->input) + 1));
+	tab = malloc(sizeof(char *) * (lexer_counter(data->input) + 1));
 	if (!tab)
 		return (0);
 	while (data->input)
@@ -65,7 +64,6 @@ char	*input_splitter(t_data *data)
 		&& ft_is_whitespace(data->input[i]))
 		i++;
 	c = get_next_split(data->input, i);
-	printf("%i\n", c);
 	tmp = ft_substr(data->input, c, ft_strlen(data->input));
 	if (!tmp)
 		return (NULL);
@@ -84,9 +82,17 @@ int	get_next_split(char *str, int i)
 	c = i;
 	if (str[c] == 39 || str[c] == '"')
 		c += (quote_skipper(str, c) - c);
+	else if (token_identifier(str, c))
+		c += token_identifier(str, c);
 	else
-		while (str[c] && (!ft_is_whitespace(str[c])))
+	{
+		while (str[c] && !ft_is_whitespace(str[c]))
+		{
+			if (!is_special_char(str[c]))
+				break ;
 			c++;
+		}
+	}
 	return (c);
 }
 
@@ -124,43 +130,44 @@ int	is_special_char(char c)
 	return (1);
 }
 
-void	input_parser(t_prompt *prompt, t_data *data)
-{
-	init_str(data, prompt);
-	if (!is_piped_input_valid(prompt->input, data))
-		return (free_manager(data, 0));
-	if (is_there_pipe(prompt))
-	{
-		data->cmds = pipes_splitter(prompt->input, '|', data);
-		if (!data->cmds)
-			return (set_status(data, 12, "malloc error.", NULL),
-				free_manager(data, 0));
-	}
-	if (!redirection_and_expand_handler(data))
-		return (free_manager(data, 0));
-	if (is_there_pipe(prompt))
-	{
-		command_manager(data);
-		free_manager(data, 2);
-	}
-	else if (!is_there_pipe(prompt))
-	{
-		if (!get_cmd(data))
-			return (free_manager(data, 0));
-		command_manager(data);
-		free_manager(data, 1);
-	}
-}
 
-int	get_cmd(t_data *data)
-{
-	int	i;
+// void	input_parser(t_prompt *prompt, t_data *data)
+// {
+// 	init_str(data, prompt);
+// 	if (!is_piped_input_valid(prompt->input, data))
+// 		return (free_manager(data, 0));
+// 	if (is_there_pipe(prompt))
+// 	{
+// 		data->cmds = pipes_splitter(prompt->input, '|', data);
+// 		if (!data->cmds)
+// 			return (set_status(data, 12, "malloc error.", NULL),
+// 				free_manager(data, 0));
+// 	}
+// 	if (!redirection_and_expand_handler(data))
+// 		return (free_manager(data, 0));
+// 	if (is_there_pipe(prompt))
+// 	{
+// 		command_manager(data);
+// 		free_manager(data, 2);
+// 	}
+// 	else if (!is_there_pipe(prompt))
+// 	{
+// 		if (!get_cmd(data))
+// 			return (free_manager(data, 0));
+// 		command_manager(data);
+// 		free_manager(data, 1);
+// 	}
+// }
 
-	i = 0;
-	while (data->input[i] && ft_is_whitespace(data->input[i]))
-		i++;
-	data->input = ft_substr(data->pr->input, i, ft_strlen(data->pr->input));
-	if (!data->input)
-		return (set_status(data, 12, "malloc error.", NULL), 0);
-	return (data->n_cmds = 1, 1);
-}
+// int	get_cmd(t_data *data)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	while (data->input[i] && ft_is_whitespace(data->input[i]))
+// 		i++;
+// 	data->input = ft_substr(data->pr->input, i, ft_strlen(data->pr->input));
+// 	if (!data->input)
+// 		return (set_status(data, 12, "malloc error.", NULL), 0);
+// 	return (data->n_cmds = 1, 1);
+// }
