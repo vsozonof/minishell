@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/20 11:22:02 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/20 11:32:39 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -243,7 +243,7 @@ int		last_redirect_helper(char *input, int j, int i);
 int		is_redirect_actual(char *input);
 int		redirection_dup1_in(t_data *data, int first, int last);
 int		redirection_dup1_out(t_data *data, int first, int last);
-void	free_single(t_data *data, char **cmd_argument, char *buf, char *fre);
+void	free_single(t_data *data, char **cmd_argument, char *fre);
 int		ft_do_process_helper(char *cmd);
 int		ft_check_access(t_data *data, int i);
 int		ft_check_access(t_data *data, int i);
@@ -274,6 +274,7 @@ int		redirection_single(t_data *data);
 char	**espoir(char **cmd_argument);
 int		ft_count_space(char *buf);
 int		check_fre_cmd(t_data *data, char *buf, char **cmd_argument, char *fre);
+int		builtin_single(t_data *data);
 
 // ! ---------------------------------------------------------------------------
 // ?							Free && utils Exec
@@ -358,5 +359,7 @@ void	free_env(t_env	*env);
 void	free_env_tab(char **env);
 void	free_end_of_program(t_prompt *p);
 void	free_tab(int **tab);
+void	free_single_struct_and_arg(t_data *data, char **cmd_argument, char *fre);
+void	free_multi_struct_and_arg(t_data *data, char **cmd_argument, int **pipefd);
 
 #endif

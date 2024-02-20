@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:11:05 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/18 19:31:05 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/20 08:20:03 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	ft_pipex(t_data	*data, int i, char **cmd_argument)
 	int			**pipefd;
 	(void)i;
 
-	pid = malloc(sizeof(pid_t) * data->n_cmds);
+	pid = malloc(sizeof(pid_t) * data->n_cmds); //voir comment free le pid dans un child
 	if (!pid)
 		return (fprintf(stderr, "problem with malloc\n"), -1);
 	pipefd = alloc_pipe(i);
@@ -52,7 +52,11 @@ int	ft_pipex_helper(t_data *data, int *pid, int **pipefd, char **cmd_argument)
 		if (pid[i] == 0)
 		{
 			if (child_process(data, pipefd, i, cmd_argument) == -1)
-				fprintf(stderr, "ca devrais free\n");// free_all_alloc(data);// free tout dedans
+			{
+				free(pid);
+				free(pipefd);
+				exit(-1);
+			}
 		}
 		else
 			pipefd = parent_process(pipefd, i);

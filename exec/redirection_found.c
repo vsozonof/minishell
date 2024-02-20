@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 20:37:01 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/18 19:18:47 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/20 09:39:20 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,8 @@ int	last_redirect_helper(char *input, int j, int i)
 		if (input[i] == '<' || input[i] == '>')
 		{
 			j++;
-			if (input[i] == '>')
+			if (input[i] == '>' || (input[i] == '>' &&
+				input[i + 1] == '>'))
 				check = j;
 			i++;
 		}
@@ -91,4 +92,3 @@ int	last_redirect_helper(char *input, int j, int i)
 	}
 	return (check);
 }
-

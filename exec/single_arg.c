@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 18:55:02 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/19 16:27:00 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/20 10:10:54 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	single_arg(t_data *data, char **cmd_argument)
 	char	*essaie;
 	int		check;
 
+	if (builtin_single(data) == -1)
+		return (-1);
 	buf = arg(data->input, data);
 	if (!buf)
 		return (-1);
@@ -29,6 +31,7 @@ int	single_arg(t_data *data, char **cmd_argument)
 	fre = ft_do_process(data->pr->nv, buf);
 	if (!fre)
 		return (free(buf), -1);
+	free(buf);
 	cmd_argument = ft_split(essaie, ' ');
 	if (cmd_argument == NULL)
 		return (free(buf), -1);
@@ -38,7 +41,42 @@ int	single_arg(t_data *data, char **cmd_argument)
 	exec_single(cmd_argument, fre, data);
 	if (data->n_redirs > 0)
 		free(essaie);
-	free_single(data, cmd_argument, buf, fre);
+	free_single(data, cmd_argument, fre);
+	printf("mon programme se finis donc normalement\n");
+	return (0);
+}
+
+int	builtin_single(t_data *data)
+{
+	int	check;
+	int	du1;
+	int	du2;
+
+	check = builtin_checker(data->input);
+	if (check >= 1 && check <= 7)
+	{
+		if (data->n_redirs > 0)
+		{
+			du1 = dup(0);
+			du2 = dup(1);
+			data->first = malloc(sizeof(int) * 1);
+			data->last = malloc(sizeof(int) * 1);
+			data->first[0] = first_redirect(data, data->input, 0);
+			data->last[0] = last_redirect(data, data->input, 0);
+			redirection_dup1_in(data, data->first[0], data->last[0]);
+		}
+		builtin_manager(data, check);
+		if (data->n_redirs > 0)
+		{
+			dup2(du1, 0);
+			dup2(du2, 1);
+			close(du1);
+			close(du2);
+			free(data->first);
+			free(data->last);
+		}
+		return (-1);
+	}
 	return (0);
 }
 
@@ -57,7 +95,6 @@ int	check_fre_cmd(t_data *data, char *buf, char **cmd_argument, char *fre)
 int	exec_single(char **cmd_argument, char *fre, t_data	*data)
 {
 	int		pid;
-	int		check;
 	// int		x;
 
 	// x = 0;
@@ -70,15 +107,6 @@ int	exec_single(char **cmd_argument, char *fre, t_data	*data)
 		{
 			if (redirection_single(data) == -1)
 				return (-1);
-		}
-		check = builtin_checker(data->input);
-		fprintf(stderr, "voici mon check %d\n", check);
-		if (check >= 1 && check <= 7)
-		{
-			builtin_manager(data, check);
-			free(fre);
-			ft_freedb(cmd_argument);
-			exit(0);
 		}
 		execve(fre, cmd_argument, data->pr->nv);
 		free(fre);
