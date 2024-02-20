@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 14:14:34 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/20 09:18:29 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/20 11:41:01 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ void	free_multi_struct_and_arg(t_data *data, char **cmd_argument, int **pipefd)
 {
 	ft_freedb(cmd_argument);
 	(void)pipefd;
-	free_manager(data, 2);
-	free_env_tab(data->pr->nv);
-	free_env(data->env);
+	// free_manager(data, 2);
+	// free_env_tab(data->pr->nv);
+	// free_env(data->env);
 	ft_freedb(data->actual_path);
 }

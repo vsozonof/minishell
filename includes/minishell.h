@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/20 19:11:25 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/20 19:25:55 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,8 @@ typedef struct s_parse
 	int				n_args;
 	int				*first;
 	int				*last;
+	int				*cmd_valid;
+	int				*status_code;
 	int				index_fd;
 	char			**actual_path;
 	int				index_redirs;
@@ -290,6 +292,8 @@ char	*input_reformatter(char *str, t_data *data);
 char	*replace_token_with_filename(char *str, t_data *data, int start, int end);
 int		crt_fd_here(t_data *data, int fd, int i);
 int		check_if_redir(t_data *data, int i);
+int		builtin_multi(t_data *data);
+int		cmd_not_valid(t_data *data);
 
 // ! ---------------------------------------------------------------------------
 // ?							Single_Pipe
@@ -321,7 +325,9 @@ int		ft_create_fd(char *argv, int flag);
 void	free_all_pipe(int **pipefd);
 int		**alloc_pipe(int i);
 void	free_all_alloc(t_data *data);
-
+void	free_single_struct_and_arg(t_data *data, char **cmd_argument, char *fre);
+void	free_multi_struct_and_arg(t_data *data, char **cmd_argument, int **pipefd);
+void	close_all_redirs(t_data *data);
 // ! ---------------------------------------------------------------------------
 // ?							Chain list
 // ! ---------------------------------------------------------------------------
@@ -386,7 +392,5 @@ void	free_env(t_env	*env);
 void	free_env_tab(char **env);
 void	free_end_of_program(t_prompt *p);
 void	free_tab(int **tab);
-void	free_single_struct_and_arg(t_data *data, char **cmd_argument, char *fre);
-void	free_multi_struct_and_arg(t_data *data, char **cmd_argument, int **pipefd);
 
 #endif

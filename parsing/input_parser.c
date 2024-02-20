@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 09:14:23 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/20 19:22:31 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/20 19:25:41 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -249,15 +249,15 @@ int	is_special_char(char c)
 // 	}
 // }
 
-// int	get_cmd(t_data *data)
-// {
-// 	int	i;
+int	get_cmd(t_data *data)
+{
+	int	i;
 
-// 	i = 0;
-// 	while (data->input[i] && ft_is_whitespace(data->input[i]))
-// 		i++;
-// 	data->input = ft_substr(data->pr->input, i, ft_strlen(data->pr->input));
-// 	if (!data->input)
-// 		return (set_status(data, 12, "malloc error.", NULL), 0);
-// 	return (data->n_cmds = 1, 1);
-// }
+	i = 0;
+	while (data->input[i] && ft_is_whitespace(data->input[i]))
+		i++;
+	data->input = ft_substr(data->pr->input, i, ft_strlen(data->pr->input));
+	if (!data->input)
+		return (set_status(data, 12, "malloc error.", NULL), 0);
+	return (data->n_cmds = 1, 1);
+}

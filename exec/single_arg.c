@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 18:55:02 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/20 10:10:54 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/20 13:52:53 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,21 +53,38 @@ int	builtin_single(t_data *data)
 	int	du2;
 
 	check = builtin_checker(data->input);
+	fprintf(stderr, "MON NOMBRE DE REIDRCTION %d\n", data->n_redirs);
 	if (check >= 1 && check <= 7)
 	{
+		fprintf(stderr, "donc voici mon nb de redirs au debut %d\n", data->n_redirs);
 		if (data->n_redirs > 0)
 		{
 			du1 = dup(0);
 			du2 = dup(1);
 			data->first = malloc(sizeof(int) * 1);
 			data->last = malloc(sizeof(int) * 1);
+			fprintf(stderr, "avant les NULL\n");
+			if (!data->first || !data->last)
+			{
+				close_all_redirs(data);
+				dup2(du1, 0);
+				dup2(du2, 1);
+				close(du1);
+				close(du2);
+				free(data->first);
+				free(data->last);
+				return (-1);
+			}
+			fprintf(stderr, "apres les NULL\n");
 			data->first[0] = first_redirect(data, data->input, 0);
 			data->last[0] = last_redirect(data, data->input, 0);
 			redirection_dup1_in(data, data->first[0], data->last[0]);
 		}
 		builtin_manager(data, check);
+		fprintf(stderr, "donc voici mon nb de redirs %d\n", data->n_redirs);
 		if (data->n_redirs > 0)
 		{
+			close_all_redirs(data);
 			dup2(du1, 0);
 			dup2(du2, 1);
 			close(du1);

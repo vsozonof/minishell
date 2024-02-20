@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 14:57:24 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/20 08:38:46 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/20 14:45:14 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,17 @@ int	child_process(t_data *data, int **pipefd, int i, char **cmd_argument)
 	cmd_argument = ft_split(cmd_arg, ' ');
 	if (builtin_checker(data->cmds[i]) > 0)
 	{
+		builtin_multi(data);
 		fprintf(stderr, "voici le pipe actuel %s\n", data->cmds[i]);
 		builtin_manager(data, builtin_checker(data->cmds[i]));
 		free_multi_struct_and_arg(data, cmd_argument, pipefd);
 		return (-1);
 	}
+	// if (data->cmd_valid == -1)
+	// {
+	// 	cmd_not_valid(data);
+	// 	exit(data->status_code);
+	// }
 	// cree un if qui contiens checker de builtin
 	execve(data->actual_path[i], cmd_argument, data->pr->nv);
 	free_all_pipe(pipefd);
@@ -54,3 +60,34 @@ int	ft_pipex_helper_dup(t_data *data, int **pipefd, int i)
 		return (-1);
 	return (0);
 }
+
+int	builtin_multi(t_data *data)
+{
+	int	check;
+
+	check = builtin_checker(data->input);
+	if (check >= 1 && check <= 7)
+	{
+		if (data->n_redirs > 0)
+		{
+			data->first = malloc(sizeof(int) * 1);
+			data->last = malloc(sizeof(int) * 1);
+			data->first[0] = first_redirect(data, data->input, 0);
+			data->last[0] = last_redirect(data, data->input, 0);
+			redirection_dup1_in(data, data->first[0], data->last[0]);
+		}
+		builtin_manager(data, check);
+		if (data->n_redirs > 0)
+		{
+			free(data->first);
+			free(data->last);
+		}
+		return (-1);
+	}
+	return (0);
+}
+
+// int	cmd_not_valid(t_data *data)
+// {
+	
+// }
