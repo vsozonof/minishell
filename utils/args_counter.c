@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 05:05:23 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/20 10:41:08 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/20 19:22:39 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,15 @@ int	n_args(char *str)
 	return (c);
 }
 
-int	lexer_counter(char *str)
+int	lexer_counter(char *str, int i, int c)
 {
-	int	i;
-	int	c;
+	static int	flag;
 
-	c = ((i = 0));
 	while (str[i])
 	{
 		if (ft_is_whitespace(str[i]))
 			i++;
-		else if (str[i] == 39 || str[i] == '"')
+		else if ((str[i] == 39 || str[i] == '"') && !flag)
 		{
 			i += (quote_skipper(str, i) - i);
 			c++;
@@ -55,21 +53,50 @@ int	lexer_counter(char *str)
 		else if (token_identifier(str, i))
 		{
 			i += token_identifier(str, i);
+			flag = 1;
 			c++;
 		}
 		else
 		{
 			c++;
-			while (str[i] && !ft_is_whitespace(str[i])
-				&& is_special_char(str[i]))
-				i++;
+			i = lexer_counter_helper(str, i, flag);
+			flag = 0;
 		}
 	}
 	return (c);
 }
 
+int	lexer_counter_helper(char *str, int i, int flag)
+{
+	if (!flag)
+	{
+		while (str[i] && !ft_is_whitespace(str[i]))
+		{
+			if (token_identifier(str, i))
+				break ;
+			else if (str[i] == '"' || str[i] == 39)
+				i += (quote_skipper(str, i) - i);
+			else
+				i++;
+		}
+	}
+	else
+	{
+		while (str[i])
+		{
+			if (ft_is_whitespace(str[i]) && !is_in_quotes(str, i))
+				break ;
+			else
+				i++;
+		}
+	}
+	return (i);
+}
+
 int	token_identifier(char *str, int i)
 {
+	if (!str)
+		return (-1);
 	if ((str[i] == '>' && str[i + 1] == '>')
 		|| (str[i] == '<' && str[i + 1] == '<'))
 		return (2);

@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/20 11:32:39 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/20 19:11:25 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ extern int	g_status;
 struct		s_parse;
 struct		s_input;
 struct		s_env;
+struct		s_redirs;
+
 typedef struct s_struct
 {
 	char			*name;
@@ -60,12 +62,27 @@ typedef struct s_env
 	struct s_env	*next;
 }	t_env;
 
+typedef struct s_cmd
+{
+	char			*cmd;
+	char			**param;
+	struct s_redirs	*redirs;
+	struct s_cmd	*next;
+}	t_cmd;
+
 typedef struct s_input
 {
 	char			*str;
 	int				i;
 	struct s_input	*next;
 }	t_input;
+
+typedef struct s_redirs
+{
+	int				type;
+	char			*file;
+	struct s_redirs	*next;
+}	t_redir;
 typedef struct s_parse
 {
 	t_prompt		*pr;
@@ -156,12 +173,22 @@ void	unquote_command(t_data *data);
 // ! ---------------------------------------------------------------------------
 
 char	*input_splitter(t_data *data);
+
+void	single_node_handler(t_data *data);
+void	multi_node_handler(t_data *data);
+
+void	format_node(t_cmd *pr);
 int		put_input_to_lst(t_input *ptr, char **tab);
-int		input_to_lst(t_prompt *pr, t_data *data);
+char	**input_to_lst(t_data *data);
 int		is_special_char(char c);
-int		lexer_counter(char *str);
+int		is_unquoted_wspace(char *str, int i);
+int		lexer_counter(char *str, int i, int c);
+int		lexer_counter_helper(char *str, int i, int flag);
 int		get_next_split(char *str, int i);
+int		get_next_split_helper(char *str, int c, int flag);
 int		token_identifier(char *str, int i);
+void	identify_nodes(t_input *p);
+int		node_identifier(char *str);
 
 void	ft_printlst(t_input *L);
 void	set_status(t_data *data, int status, char *str, char *cmd);
