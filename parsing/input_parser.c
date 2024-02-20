@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 09:14:23 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/19 21:17:01 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/20 11:28:04 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,16 +60,12 @@ char	*input_splitter(t_data *data)
 	char	*tmp;
 	char	*ret;
 
-	i = ((c = 0));
+	i = 0;
 	while (data->input[i] && !is_in_quotes(data->input, i)
 		&& ft_is_whitespace(data->input[i]))
 		i++;
-	c = i;
-	if (data->input[c] == 39 || data->input[c] == '"')
-		c += (quote_skipper(data->input, c) - c);
-	else
-		while (data->input[c] && (!ft_is_whitespace(data->input[c]) && is_special_char(data->input[c])))
-			c++;
+	c = get_next_split(data->input, i);
+	printf("%i\n", c);
 	tmp = ft_substr(data->input, c, ft_strlen(data->input));
 	if (!tmp)
 		return (NULL);
@@ -79,6 +75,19 @@ char	*input_splitter(t_data *data)
 	free(data->input);
 	data->input = tmp;
 	return (ret);
+}
+
+int	get_next_split(char *str, int i)
+{
+	int	c;
+
+	c = i;
+	if (str[c] == 39 || str[c] == '"')
+		c += (quote_skipper(str, c) - c);
+	else
+		while (str[c] && (!ft_is_whitespace(str[c])))
+			c++;
+	return (c);
 }
 
 int	put_input_to_lst(t_input *ptr, char **tab)

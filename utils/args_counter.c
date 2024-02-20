@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 05:05:23 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/19 21:12:31 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/20 10:41:08 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ int	lexer_counter(char *str)
 				i++;
 		}
 	}
+	return (c);
 }
 
 int	token_identifier(char *str, int i)

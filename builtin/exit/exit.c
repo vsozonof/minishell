@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 17:52:12 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/13 10:57:03 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/20 11:20:03 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	status_checker(char	*input, t_data *data)
 	while (status[++i])
 		if (!ft_isdigit(status[i]))
 			return (free(status), set_status(data, 2,
-					"Anumeric argument required", "exit"), 2);
+					"numeric argument required", "exit"), 2);
 	if (!ft_int_overflow_checker(status))
 		return (free(status), set_status(data, 2,
 				"numeric argument required", "exit"), 2);
