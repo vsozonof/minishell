@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 11:37:41 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/18 18:51:17 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/20 09:26:41 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,8 +139,6 @@ int	main_here_doc(t_data *data)
 	close(fd);
 	return (0);
 }
-
-
 
 char	*input_reformatter(char *str, t_data *data)
 {

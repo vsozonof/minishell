@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_parser.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 09:14:23 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/19 16:20:47 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/20 07:03:19 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@
 // * Flags et Args trouvable dans data.arg / data.flag
 // * Env trouvable dans data.envp
 
-void	input_parser(t_prompt *pr, t_data *data)
-{
-	if (!input_to_lst(pr, data))
-		return (free_master(data));
-	ft_printlst(data->inp);
-	free_master(data);
+// void	input_parser(t_prompt *pr, t_data *data)
+// {
+// 	if (!input_to_lst(pr, data))
+// 		return (free_master(data));
+// 	ft_printlst(data->inp);
+// 	free_master(data);
 	
-}
+// }
 
 int	input_to_lst(t_prompt *pr, t_data *data)
 {
@@ -115,33 +115,33 @@ int	is_special_char(char c)
 	return (1);
 }
 
-// void	input_parser(t_prompt *prompt, t_data *data)
-// {
-// 	init_str(data, prompt);
-// 	if (!is_piped_input_valid(prompt->input, data))
-// 		return (free_manager(data, 0));
-// 	if (is_there_pipe(prompt))
-// 	{
-// 		data->cmds = pipes_splitter(prompt->input, '|', data);
-// 		if (!data->cmds)
-// 			return (set_status(data, 12, "malloc error.", NULL),
-// 				free_manager(data, 0));
-// 	}
-// 	if (!redirection_and_expand_handler(data))
-// 		return (free_manager(data, 0));
-// 	if (is_there_pipe(prompt))
-// 	{
-// 		command_manager(data);
-// 		free_manager(data, 2);
-// 	}
-// 	else if (!is_there_pipe(prompt))
-// 	{
-// 		if (!get_cmd(data))
-// 			return (free_manager(data, 0));
-// 		command_manager(data);
-// 		free_manager(data, 1);
-// 	}
-// }
+void	input_parser(t_prompt *prompt, t_data *data)
+{
+	init_str(data, prompt);
+	if (!is_piped_input_valid(prompt->input, data))
+		return (free_manager(data, 0));
+	if (is_there_pipe(prompt))
+	{
+		data->cmds = pipes_splitter(prompt->input, '|', data);
+		if (!data->cmds)
+			return (set_status(data, 12, "malloc error.", NULL),
+				free_manager(data, 0));
+	}
+	if (!redirection_and_expand_handler(data))
+		return (free_manager(data, 0));
+	if (is_there_pipe(prompt))
+	{
+		command_manager(data);
+		free_manager(data, 2);
+	}
+	else if (!is_there_pipe(prompt))
+	{
+		if (!get_cmd(data))
+			return (free_manager(data, 0));
+		command_manager(data);
+		free_manager(data, 1);
+	}
+}
 
 int	get_cmd(t_data *data)
 {
