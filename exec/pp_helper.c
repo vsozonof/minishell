@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 14:57:24 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/20 11:58:33 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/20 14:45:14 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,11 @@ int	child_process(t_data *data, int **pipefd, int i, char **cmd_argument)
 		free_multi_struct_and_arg(data, cmd_argument, pipefd);
 		return (-1);
 	}
+	// if (data->cmd_valid == -1)
+	// {
+	// 	cmd_not_valid(data);
+	// 	exit(data->status_code);
+	// }
 	// cree un if qui contiens checker de builtin
 	execve(data->actual_path[i], cmd_argument, data->pr->nv);
 	free_all_pipe(pipefd);
@@ -81,3 +86,8 @@ int	builtin_multi(t_data *data)
 	}
 	return (0);
 }
+
+// int	cmd_not_valid(t_data *data)
+// {
+	
+// }

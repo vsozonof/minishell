@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 12:31:19 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/19 16:11:25 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/20 14:20:35 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,11 @@ char	*ft_do_process(char *envp[], char *cmd)
 int	ft_do_process_helper(char *cmd)
 {
 	if (access(cmd, X_OK) == 0)
+	{
+		// data->status->code[];
 		return (0);
+	}
+	// data->
 	return (-1);
 }
 

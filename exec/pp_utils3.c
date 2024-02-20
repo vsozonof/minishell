@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 16:38:26 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/20 12:17:35 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/20 13:51:27 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,18 @@ int	get_nb_redirs_ac(char *input)
 	i = ((nb = 0));
 	while (input[i])
 	{
-		if (input[i] == '>' && input[i + 1] == '>')
+		if (input[i] == '>')
+		{
+			if (input[i + 1] == '>')
+				i++;
 			nb++;
-		else if (input[i] == '<' && input[i + 1] == '<')
+		}
+		if (input[i] == '<')
+		{
+			if (input[i + 1] == '<')
+				i++;
 			nb++;
+		}
 		i++;
 	}
 	return (nb);
@@ -87,7 +95,9 @@ void	close_all_redirs(t_data *data)
 	int		j;
 
 	j = 0;
-	i = get_nb_redirs_ac(data->input);
+	i = data->n_redirs;
+	fprintf(stderr, "%d\n", data->n_redirs);
+	// fprintf(stderr, "donc la %d t je dois atteindre %d\n", j, i);
 	while (j < i)
 	{
 		fprintf(stderr, "donc la %d t je dois atteindre %d\n", j, i);

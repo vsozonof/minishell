@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/20 12:08:13 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/20 14:03:07 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,8 @@ typedef struct s_parse
 	int				n_args;
 	int				*first;
 	int				*last;
+	int				*cmd_valid;
+	int				*status_code;
 	int				index_fd;
 	char			**actual_path;
 	int				index_redirs;
@@ -265,6 +267,7 @@ char	*replace_token_with_filename(char *str, t_data *data, int start, int end);
 int		crt_fd_here(t_data *data, int fd, int i);
 int		check_if_redir(t_data *data, int i);
 int		builtin_multi(t_data *data);
+int		cmd_not_valid(t_data *data);
 
 // ! ---------------------------------------------------------------------------
 // ?							Single_Pipe
