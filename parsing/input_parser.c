@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 09:14:23 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/21 16:02:59 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/21 16:05:30 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,6 @@ void	extract_redirs(t_input *inp, t_cmd *pr)
 }
 int	set_redir_type(char *token)
 {
-	printf("->-> %s\n", token);
 	if (token[0] == '>' && !token[1])
 		return (1);
 	else if (token[0] == '<' && !token[1])
@@ -233,9 +232,6 @@ void	multi_node_handler(t_data *data)
 	i = -1;
 	while (data->multi_inp[++i])
 		identify_nodes(data->multi_inp[i]);
-	i = -1;
-	while (data->multi_inp[++i])
-		ft_printlst(data->multi_inp[i]);
 }
 
 t_input	**alloc_struct(t_input **ptr, int n)
