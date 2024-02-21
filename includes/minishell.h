@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/21 14:13:04 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/21 15:40:09 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,11 +185,15 @@ void	single_node_handler(t_data *data);
 void	multi_node_handler(t_data *data);
 int		multi_input_to_lst(t_input **ptr, char ***tab, int i, int n);
 t_input	**alloc_struct(t_input **ptr, int n);
+void	alloc_redir_list(t_cmd *pr, int n);
 
 void	format_node(t_cmd *pr, t_input *inp);
 char	*extract_command_name(t_input *inp);
 void	extract_params(t_input *inp, t_cmd *pr);
+void	extract_redirs(t_input *inp, t_cmd *pr);
+int		set_redir_type(char *token);
 int		get_word_count(t_input *inp);
+int		get_redir_count(t_input *inp);
 
 void	node_printer(t_cmd *pr);
 

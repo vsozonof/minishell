@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 09:14:23 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/21 14:15:52 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/21 15:58:04 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,15 @@ void	format_node(t_cmd *pr, t_input *inp)
 	pr->param = malloc (sizeof(char *) * (n + 1));
 	pr->param[n] = NULL;
 	extract_params(inp, pr);
+	n = get_redir_count(inp) + 1;
+	if (n > 1)
+	{
+		pr->redirs = malloc(sizeof(t_redir));
+		if (!pr->redirs)
+			return ;
+		alloc_redir_list(pr, n);
+		extract_redirs(inp, pr);
+	}
 	node_printer(pr);
 }
 
@@ -68,7 +77,89 @@ void	node_printer(t_cmd *pr)
 		i++;
 	}
 	printf("_______________________\n");
+	printf("--------- REDIRS ------\n");
+	t_redir	*nav = pr->redirs;
+	while (nav)
+	{
+		printf("REDIR ID -> %i\n", nav->type);
+		printf("FILNAME  -> %s\n", nav->file);
+		printf("next = %p\n\n", nav->next);
+		nav = nav->next;
+	}
+	printf("_______________________\n");
 }
+
+void	alloc_redir_list(t_cmd *pr, int n)
+{
+	int		i;
+	t_cmd	*nav;
+	t_redir	*p;
+
+	nav = pr;
+	p = pr->redirs;
+	i = 1;
+	while (i < n - 1)
+	{
+		printf("%i --- %i\n", i, n);
+		p->next = malloc(sizeof(t_redir));
+		if (!p)
+			return ;
+		p = p->next;
+		i++;
+	}
+	p = NULL;
+}
+
+void	extract_redirs(t_input *inp, t_cmd *pr)
+{
+	t_input	*nav;
+	t_redir	*red;
+
+	nav = inp;
+	red = pr->redirs;
+	while (nav)
+	{
+		if (nav->i == 1 && red)
+		{
+			red->type = set_redir_type(inp->str);
+			nav = nav->next;
+			red->file = nav->str;
+			red = red->next;
+		}
+		else
+			nav = nav->next;
+	}
+}
+int	set_redir_type(char *token)
+{
+	printf("->-> %s\n", token);
+	if (token[0] == '>' && !token[1])
+		return (1);
+	else if (token[0] == '<' && !token[1])
+		return (2);
+	else if (token[0] == '<' && token[1] == '<' && !token[3])
+		return (3);
+	else if (token[0] == '>' && token[1] == '>' && !token[3])
+		return (4);
+	printf("Error with redir type\n");
+	return (-1);
+}
+int	get_redir_count(t_input *inp)
+{
+	t_input	*nav;
+	int		i;
+
+	i = 0;
+	nav = inp;
+	while (nav)
+	{
+		if (nav->i == 1)
+			i++;
+		nav = nav->next;
+	}
+	return (i);
+}
+
 void	extract_params(t_input *inp, t_cmd *pr)
 {
 	t_input	*nav;
