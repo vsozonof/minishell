@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 05:50:43 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/20 13:52:42 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/21 12:49:34 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	ft_printlst(t_input *L)
 	}
 	while (L)
 	{
-		ft_printf("-> %s\t[%i]\n", L->str, L->i);
+		ft_printf("[%i]-> %s\t[%i]\n", L->index, L->str, L->i);
 		L = L->next;
 	}
 }

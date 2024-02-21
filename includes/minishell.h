@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/20 19:25:55 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/21 14:13:04 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ typedef struct s_struct
 	struct s_parse	*data;
 	struct s_env	*env;
 	struct s_input	*inp;
+	struct s_input	**multi_inp;
 }	t_prompt;
 
 typedef struct s_env
@@ -73,7 +74,9 @@ typedef struct s_cmd
 typedef struct s_input
 {
 	char			*str;
+	char			**cmds;
 	int				i;
+	int				index;
 	struct s_input	*next;
 }	t_input;
 
@@ -88,6 +91,8 @@ typedef struct s_parse
 	t_prompt		*pr;
 	t_env			*env;
 	t_input			*inp;
+	t_input			**multi_inp;
+	t_cmd			*exec;
 	int				exited;
 	char			*input;
 	char			*head;
@@ -178,8 +183,16 @@ char	*input_splitter(t_data *data);
 
 void	single_node_handler(t_data *data);
 void	multi_node_handler(t_data *data);
+int		multi_input_to_lst(t_input **ptr, char ***tab, int i, int n);
+t_input	**alloc_struct(t_input **ptr, int n);
 
-void	format_node(t_cmd *pr);
+void	format_node(t_cmd *pr, t_input *inp);
+char	*extract_command_name(t_input *inp);
+void	extract_params(t_input *inp, t_cmd *pr);
+int		get_word_count(t_input *inp);
+
+void	node_printer(t_cmd *pr);
+
 int		put_input_to_lst(t_input *ptr, char **tab);
 char	**input_to_lst(t_data *data);
 int		is_special_char(char c);

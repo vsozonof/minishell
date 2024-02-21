@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 08:35:01 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/19 14:24:35 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/21 13:35:07 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,12 +97,15 @@ int	init_extras(t_prompt *ptr)
 int	init_str(t_data *data, t_prompt *prompt)
 {
 	t_input	*inp;
+	t_input	**multi_inp;
 
 	inp = malloc(sizeof(t_input));
 	if (!inp)
 		return (0);
-	prompt->inp = inp;
-	data->inp = inp;
+	multi_inp =  NULL;
+	data->exec = NULL;
+	prompt->inp = ((data->inp = inp));
+	prompt->multi_inp = ((data->multi_inp = multi_inp));
 	data->head = NULL;
 	data->new_head = NULL;
 	data->tail = NULL;
