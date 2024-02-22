@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 09:14:23 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/22 09:35:25 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/22 10:02:07 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,14 +108,13 @@ void	alloc_redir_list(t_cmd *pr, int n)
 	i = 1;
 	while (i < n - 1)
 	{
-		printf("%i --- %i\n", i, n);
 		p->next = malloc(sizeof(t_redir));
 		if (!p)
 			return ;
 		p = p->next;
 		i++;
 	}
-	p = NULL;
+	p ->next = NULL;
 }
 
 void	extract_redirs(t_input *inp, t_cmd *pr)
@@ -129,7 +128,7 @@ void	extract_redirs(t_input *inp, t_cmd *pr)
 	{
 		if (nav->i == 1 && red)
 		{
-			red->type = set_redir_type(inp->str);
+			red->type = set_redir_type(nav->str);
 			nav = nav->next;
 			red->file = nav->str;
 			red = red->next;
@@ -140,7 +139,6 @@ void	extract_redirs(t_input *inp, t_cmd *pr)
 }
 int	set_redir_type(char *token)
 {
-	printf("->-> %s\n", token);
 	if (token[0] == '>' && !token[1])
 		return (1);
 	else if (token[0] == '<' && !token[1])
@@ -243,9 +241,6 @@ void	multi_node_handler(t_data *data)
 	i = -1;
 	while (data->multi_inp[++i])
 		identify_nodes(data->multi_inp[i]);
-	i = -1;
-	while (data->multi_inp[++i])
-		ft_printlst(data->multi_inp[i]);
 }
 
 t_input	**alloc_struct(t_input **ptr, int n)

@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 04:29:11 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/19 14:18:18 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/21 16:11:16 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	free_input_lst(t_input *lst)
 		free(lst);
 		lst = tmp;
 	}
+	lst = NULL;
 }
 
 void	free_end_of_program(t_prompt *p)
