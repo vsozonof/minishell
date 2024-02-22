@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 10:18:20 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/22 14:19:23 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/22 14:47:40 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,6 @@ void	format_node(t_cmd *pr, t_input *inp, t_data *data)
 	pr->param = malloc (sizeof(char *) * (n + 1));
 	pr->param[n] = NULL;
 	pr->env = data->pr->nv;
-	pr->n_cmds = 1;
-	pr->n_redirs = get_redir_count(inp);
-	pr->n_all_redirs = pr->n_redirs;
 	extract_params(inp, pr);
 	n = get_redir_count(inp) + 1;
 	if (n > 1)

@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsize.c                                       :+:      :+:    :+:   */
+/*   counters-2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/23 16:52:01 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/22 14:43:11 by vsozonof         ###   ########.fr       */
+/*   Created: 2024/02/22 14:43:45 by vsozonof          #+#    #+#             */
+/*   Updated: 2024/02/22 14:44:41 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-int	ft_lstsize(t_lst *lst)
+int	get_node_len(t_cmd *lst)
 {
 	size_t	i;
+	t_cmd	*nav;
 
 	i = 0;
-	while (lst)
+	nav = lst;
+	while (nav)
 	{
-		lst = lst->next;
+		nav = nav->next;
 		i++;
 	}
 	return (i);

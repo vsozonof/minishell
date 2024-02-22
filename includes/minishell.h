@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/22 14:09:27 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/22 14:47:16 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,6 @@ typedef struct s_cmd
 	char			*cmd;
 	char			**param;
 	char			**env;
-	int				n_redirs;
-	int				n_cmds;
-	int				n_all_redirs;
 	struct s_redirs	*redirs;
 	struct s_cmd	*next;
 }	t_cmd;
@@ -192,6 +189,7 @@ int		multi_input_to_lst(t_input **ptr, char ***tab, int i, int n);
 t_input	**alloc_struct(t_input **ptr, int n);
 void	alloc_redir_list(t_cmd *pr, int n);
 void	alloc_multi_nodes(t_input **inp, t_cmd *pr);
+void	expand_nodes(t_cmd *cmd);
 
 void	format_node(t_cmd *pr, t_input *inp, t_data *data);
 char	*extract_command_name(t_input *inp);
@@ -200,6 +198,7 @@ void	extract_redirs(t_input *inp, t_cmd *pr);
 int		set_redir_type(char *token);
 int		get_word_count(t_input *inp);
 int		get_redir_count(t_input *inp);
+int		get_node_len(t_cmd *lst);
 void	multi_node_formatting(t_input **inp, t_data *data);
 void	multi_format_node(t_cmd *pr, t_input *inp, t_data *data);
 

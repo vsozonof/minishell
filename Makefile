@@ -6,7 +6,7 @@
 #    By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/09 23:22:06 by vsozonof          #+#    #+#              #
-#    Updated: 2024/02/22 10:50:34 by vsozonof         ###   ########.fr        #
+#    Updated: 2024/02/22 14:44:09 by vsozonof         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,9 @@ SRCS = main.c \
 	   parsing/lexer/single_node.c \
 	   parsing/lexer/multi_node.c \
 	   parsing/lexer/splitted_input_identifier.c \
+	   parsing/expand/expand-master.c \
 	   parsing/utils/counters.c \
+	   parsing/utils/counters-2.c \
 	   parsing/utils/bool_utils-1.c \
 	   parsing/utils/bool_utils-2.c \
 	   parsing/utils/pipe_splitter.c \

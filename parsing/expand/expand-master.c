@@ -1,26 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsize.c                                       :+:      :+:    :+:   */
+/*   expand-master.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/23 16:52:01 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/22 14:43:11 by vsozonof         ###   ########.fr       */
+/*   Created: 2024/02/22 14:31:51 by vsozonof          #+#    #+#             */
+/*   Updated: 2024/02/22 14:39:57 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-int	ft_lstsize(t_lst *lst)
+void	expand_nodes(t_cmd *cmd)
 {
-	size_t	i;
-
-	i = 0;
-	while (lst)
-	{
-		lst = lst->next;
-		i++;
-	}
-	return (i);
+	(void)cmd;
+	printf("DEBUT D'EXPAND\n\n");
 }
