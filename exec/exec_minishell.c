@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:43:04 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/22 08:57:59 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/22 12:58:48 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,6 @@
 // n_redires = len du tab
 // tab = redirection/here_doc
 // retirer des initialisation
-// 1 = simple quote vers la gauche
-// 2 = droite
-// 3 = db_gauche
-// 4 = droite
 
 // int	ft_pipex(t_cmd *cmd)
 // {
@@ -48,7 +44,7 @@
 // 			return (printf("erreur de fork\n"), 1);
 // 		if (pid[i] == 0)
 // 		{
-// 			if (child_process(cmd, pipefd) == -1)
+// 			if (child_process(cmd, pipefd, i) == -1)
 // 			{
 // 				// fprintf(stderr, "salut\n");
 // 				// get_and_print_statuscode();
@@ -63,6 +59,7 @@
 // 			fprintf(stderr, "je suis dans le parent (test de retour d'erreur)\n");
 // 			get_and_print_statuscode();
 // 		}
+//		i++;
 // 		cmd = cmd->next;
 // 	}
 // 	return (0);

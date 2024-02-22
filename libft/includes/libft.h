@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 22:14:34 by vsozonoff         #+#    #+#             */
-/*   Updated: 2024/02/13 10:21:28 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/22 12:43:51 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,7 @@ t_list_a	*ft_create_cell_a(int data);
 t_list_b	*ft_create_cell_b(int data);
 t_list_a	*ft_add_at_a(t_list_a *L, int data, int pos);
 t_list_b	*ft_add_at_b(t_list_b *L, int data, int pos);
+long		ft_lstlen_a(t_list_a *L);
 void		ft_add_prev_ptr_a(t_list *stacks);
 void		ft_add_prev_ptr_b(t_list *stacks);
 
