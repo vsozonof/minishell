@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/22 14:47:16 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/22 15:42:30 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ typedef struct s_cmd
 	char			**env;
 	struct s_redirs	*redirs;
 	struct s_cmd	*next;
+	struct s_parse	*data;
 }	t_cmd;
 
 typedef struct s_input
@@ -148,6 +149,8 @@ int		init_if_no_env(t_prompt *ptr, char **envp);
 int		put_env_to_lst(t_env *env, char **envp);
 int		create_side_env(t_prompt *ptr);
 
+void	init_exec_var(t_data *data);
+
 // ! ---------------------------------------------------------------------------
 // ?							INPUT PARSING
 // ! ---------------------------------------------------------------------------
@@ -189,7 +192,7 @@ int		multi_input_to_lst(t_input **ptr, char ***tab, int i, int n);
 t_input	**alloc_struct(t_input **ptr, int n);
 void	alloc_redir_list(t_cmd *pr, int n);
 void	alloc_multi_nodes(t_input **inp, t_cmd *pr);
-void	expand_nodes(t_cmd *cmd);
+void	expand_nodes(t_cmd *cmd, t_data *data);
 
 void	format_node(t_cmd *pr, t_input *inp, t_data *data);
 char	*extract_command_name(t_input *inp);
@@ -198,6 +201,7 @@ void	extract_redirs(t_input *inp, t_cmd *pr);
 int		set_redir_type(char *token);
 int		get_word_count(t_input *inp);
 int		get_redir_count(t_input *inp);
+int		get_n_redir(t_cmd *lst);
 int		get_node_len(t_cmd *lst);
 void	multi_node_formatting(t_input **inp, t_data *data);
 void	multi_format_node(t_cmd *pr, t_input *inp, t_data *data);
