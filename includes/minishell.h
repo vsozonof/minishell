@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/22 15:49:42 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/22 21:05:21 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,13 +185,13 @@ void	unquote_command(t_data *data);
 
 char	*input_splitter(t_data *data);
 
-void	single_node_handler(t_data *data);
+int		single_node_handler(t_data *data);
 void	multi_node_handler(t_data *data, int i);
 int		multi_input_to_lst(t_input **ptr, char ***tab, int i, int n);
 t_input	**alloc_struct(t_input **ptr, int n);
 void	alloc_redir_list(t_cmd *pr, int n);
 void	alloc_multi_nodes(t_input **inp, t_cmd *pr);
-void	expand_nodes(t_cmd *cmd, t_data *data);
+int		expand_nodes(t_input *inp, t_data *data);
 
 void	format_node(t_cmd *pr, t_input *inp, t_data *data);
 char	*extract_command_name(t_input *inp);
@@ -202,6 +202,7 @@ int		get_word_count(t_input *inp);
 int		get_redir_count(t_input *inp);
 int		get_n_redir(t_cmd *lst);
 int		get_node_len(t_cmd *lst);
+int		get_lst_len(t_input *lst);
 void	multi_node_formatting(t_input **inp, t_data *data);
 void	multi_format_node(t_cmd *pr, t_input *inp, t_data *data);
 
@@ -421,6 +422,7 @@ void	free_master(t_data *data);
 void	free_input_lst(t_input *lst);
 void	free_cmd_nodes(t_cmd *nodes);
 void	free_tri_table(char ***tab);
+t_input	*free_at_pos(t_input *L, int pos);
 
 void	free_manager(t_data *data, int key);
 void	free_cmds(t_data *data);

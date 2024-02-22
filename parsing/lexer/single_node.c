@@ -6,27 +6,30 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 10:14:42 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/22 13:57:22 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/22 20:59:48 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	single_node_handler(t_data *data)
+int	single_node_handler(t_data *data)
 {
 	char	**tab;
 	t_cmd	*ptr;
 
 	ptr = malloc(sizeof(t_cmd));
 	if (!ptr)
-		return ;
+		return (0);
 	data->exec = ptr;
 	tab = input_to_lst(data);
 	if (!tab)
-		return (free_master(data));
+		return (free_master(data), 0);
 	put_input_to_lst(data->inp, tab);
 	identify_nodes(data->inp);
+	if (!expand_nodes(data->inp, data))
+		return (0);
 	format_node(ptr, data->inp, data); // j'ajoute data pour l'env	
+	return (1);
 }
 
 int	put_input_to_lst(t_input *ptr, char **tab)

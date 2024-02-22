@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 10:11:25 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/22 14:26:51 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/22 20:06:07 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,8 @@
 void	alloc_redir_list(t_cmd *pr, int n)
 {
 	int		i;
-	t_cmd	*nav;
 	t_redir	*p;
 
-	nav = pr;
 	p = pr->redirs;
 	i = 1;
 	while (i < n - 1)
