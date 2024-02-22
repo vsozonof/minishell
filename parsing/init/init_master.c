@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 08:35:01 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/21 13:35:07 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/22 12:38:10 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ int	init_str(t_data *data, t_prompt *prompt)
 	inp = malloc(sizeof(t_input));
 	if (!inp)
 		return (0);
-	multi_inp =  NULL;
+	multi_inp = NULL;
 	data->exec = NULL;
 	prompt->inp = ((data->inp = inp));
 	prompt->multi_inp = ((data->multi_inp = multi_inp));
@@ -118,5 +118,6 @@ int	init_str(t_data *data, t_prompt *prompt)
 	data->env = prompt->env;
 	data->tab = NULL;
 	data->cmds = NULL;
+	data->inp->cmds = NULL;
 	return (1);
 }

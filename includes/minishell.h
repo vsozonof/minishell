@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/22 11:06:19 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/22 13:14:26 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,6 +191,7 @@ void	multi_node_handler(t_data *data, int i);
 int		multi_input_to_lst(t_input **ptr, char ***tab, int i, int n);
 t_input	**alloc_struct(t_input **ptr, int n);
 void	alloc_redir_list(t_cmd *pr, int n);
+void	alloc_multi_nodes(t_input **inp, t_cmd *pr);
 
 void	format_node(t_cmd *pr, t_input *inp, t_data *data);
 char	*extract_command_name(t_input *inp);
@@ -200,6 +201,7 @@ int		set_redir_type(char *token);
 int		get_word_count(t_input *inp);
 int		get_redir_count(t_input *inp);
 void	multi_node_formatting(t_input **inp, t_data *data);
+void	multi_format_node(t_cmd *pr, t_input *inp, t_data *data);
 
 void	node_printer(t_cmd *pr);
 
@@ -408,6 +410,7 @@ void	execute_exit(t_data *data);
 
 void	free_master(t_data *data);
 void	free_input_lst(t_input *lst);
+void	free_cmd_nodes(t_cmd *nodes);
 
 void	free_manager(t_data *data, int key);
 void	free_cmds(t_data *data);

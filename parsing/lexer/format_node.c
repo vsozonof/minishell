@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 10:18:20 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/22 11:07:14 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/22 13:41:12 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,9 @@ void	format_node(t_cmd *pr, t_input *inp, t_data *data)
 		alloc_redir_list(pr, n);
 		extract_redirs(inp, pr);
 	}
+	else
+		pr->redirs = NULL;
+	pr->next = NULL;
 	node_printer(pr);
 }
 
@@ -50,7 +53,7 @@ void	extract_redirs(t_input *inp, t_cmd *pr)
 		{
 			red->type = set_redir_type(nav->str);
 			nav = nav->next;
-			red->file = nav->str;
+			red->file = ft_strdup(nav->str);
 			red = red->next;
 		}
 		else
@@ -83,7 +86,7 @@ void	extract_params(t_input *inp, t_cmd *pr)
 	{
 		if (nav->i == 0)
 		{
-			pr->param[i] = nav->str;
+			pr->param[i] = ft_strdup(nav->str);
 			i++;
 		}
 		nav = nav->next;
@@ -98,7 +101,7 @@ char	*extract_command_name(t_input *inp)
 	while (nav)
 	{
 		if (nav->i == 0)
-			return (nav->str);
+			return (ft_strdup(nav->str));
 		nav = nav->next;
 	}
 	return (NULL);
