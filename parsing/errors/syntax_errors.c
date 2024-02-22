@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 04:37:37 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/13 05:31:07 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/22 10:39:49 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,33 @@ int	exception_checker_2(char *str, int i, t_data *data)
 	else if (str[i] == ';')
 		return (set_status (data, 2,
 				"syntax error near unexpected token `;'", NULL), 0);
+	return (1);
+}
+
+int	unclosed_quote_detector(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == 39)
+		{
+			i++;
+			while (str[i] && str[i] != 39)
+				i++;
+			if (str[i] != 39)
+				return (pr_error("input error : unclosed single quote."));
+		}
+		else if (str[i] == '"')
+		{
+			i++;
+			while (str[i] && str[i] != '"')
+				i++;
+			if (str[i] != '"')
+				return (pr_error("input error : unclosed double quote."));
+		}
+		i++;
+	}
 	return (1);
 }

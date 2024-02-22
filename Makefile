@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+         #
+#    By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/09 23:22:06 by vsozonof          #+#    #+#              #
-#    Updated: 2024/02/22 09:43:21 by tpotilli         ###   ########.fr        #
+#    Updated: 2024/02/22 10:50:34 by vsozonof         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,10 +24,20 @@ WH=\033[0m
 SRCS_LIB = libft/libft.a \
 
 SRCS = main.c \
-	   parsing/get_input.c \
 	   parsing/init/init_master.c \
+	   parsing/init/alloc_utils-1.c \
 	   parsing/input_parser.c \
-	   parsing/exception_checker.c \
+	   parsing/lexer/format_node.c \
+	   parsing/lexer/input_splitter.c \
+	   parsing/lexer/single_node.c \
+	   parsing/lexer/multi_node.c \
+	   parsing/lexer/splitted_input_identifier.c \
+	   parsing/utils/counters.c \
+	   parsing/utils/bool_utils-1.c \
+	   parsing/utils/bool_utils-2.c \
+	   parsing/utils/pipe_splitter.c \
+	   parsing/errors/syntax_errors.c \
+	   parsing/errors/pipe_errors.c \
 	   parsing/redirs/redir_utils-1.c \
 	   parsing/redirs/redir_utils-2.c \
 	   parsing/redirs/redir_utils-3.c \
@@ -36,9 +46,6 @@ SRCS = main.c \
 	   parsing/expand/expand_master.c \
 	   parsing/expand/expand_utils-1.c \
 	   parsing/expand/expand_utils-2.c \
-	   parsing/pipes/pipe_splitter.c \
-	   parsing/pipes/pipe_utils-1.c \
-	   parsing/pipes/pipe_utils-2.c \
 	   parsing/env/env_utils-1.c \
 	   parsing/env/env_utils-2.c \
 	   free/free_master.c \
