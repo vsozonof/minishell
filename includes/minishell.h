@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/22 15:46:28 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/22 15:49:42 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,12 +115,9 @@ typedef struct s_parse
 	int				i;
 	int				n;
 	int				n_args;
-	int				*first;
-	int				*last;
 	int				*cmd_valid;
 	int				*status_code;
 	int				index_fd;
-	char			**actual_path;
 	int				index_redirs;
 	int				nb_here_doc;
 	char			*heredoc_fname;

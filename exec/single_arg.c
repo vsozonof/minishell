@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 16:09:07 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/22 15:45:46 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/22 15:53:40 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,11 @@ int	exec_single(t_cmd *cmd, char *comd)
 		return (printf("error in fork\n"), -1);
 	else if (pid == 0)
 	{
-		// if (cmd->data->n_redir > 0)
-		// {
-		// 	if (redirection_create(cmd) == 1)
-		// 		return (1);
-		// }
+		if (cmd->n_redir > 0)
+		{
+			if (redirection_create(cmd) == 1)
+				return (1);
+		}
 		error = execve(comd, cmd->param, cmd->env);
 		if (error == -1)
 			fprintf(stderr, "could not execute the command\n");
