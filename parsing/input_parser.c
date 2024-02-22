@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 09:14:23 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/22 15:24:48 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/22 15:46:42 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,19 @@ void	input_parser(t_prompt *pr, t_data *data)
 		single_node_handler(data);
 	else if (is_there_pipe(pr))
 		multi_node_handler(data, 0);
-	expand_nodes(cmd);
-	command_manager(cmd, data);
+	init_exec_var(data);
+	expand_nodes(cmd, data);
+	printf("APRES EXPAND\n");
+	node_printer(data->exec);
+	// command_manager(cmd, data);
 	free_master(data);
 }
 
-
+void	init_exec_var(t_data *data)
+{
+	data->n_redirs = get_n_redir(data->exec);
+	data->n_cmds = get_node_len(data->exec);
+}
 
 
 
