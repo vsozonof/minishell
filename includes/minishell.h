@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/22 13:14:26 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/22 13:47:37 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -272,6 +272,7 @@ void	handle_signals(int signum);
 int		command_manager(t_cmd *cmd, t_data *data);
 int		builtin_checker(char *tmp);
 void	builtin_manager(t_cmd *cmd, int token);
+int		redirection_create(t_cmd *cmd);
 
 int		pipex_exec(t_data *data);
 int		ft_pipex(t_cmd *cmd);
@@ -280,7 +281,7 @@ char	*str_join_free(char *path, char *cmd);
 void	ft_freedb(char **str);
 void	free_pipe_argv(int **pipefd, char	*argv[]);
 int		check_dup(int pipe, int token, int pipe2);
-int		child_process_in(int **pipefd, t_data *data, int i, int token);
+int		child_process_in(int **pipefd, t_cmd *cmd, int i, int token);
 char	*arg(char *str, t_data *data);
 char	**ft_get_path(char **env);
 char	*ft_do_process(char *envp[], char *cmd);
@@ -295,15 +296,13 @@ int		first_redirect_helper(char *input, int j, int i);
 int		last_redirect(t_data *data, char *input, int count);
 int		last_redirect_helper(char *input, int j, int i);
 int		is_redirect_actual(char *input);
-int		redirection_dup1_in(t_cmd *cmd);
-int		redirection_dup1_out(t_cmd *cmd);
 void	free_single(t_data *data, char **cmd_argument, char *fre);
 int		ft_do_process_helper(char *cmd);
 int		ft_check_access(t_data *data, int i);
 int		ft_check_access(t_data *data, int i);
 void	free_all_fd(t_data *data);
 void	wait_and_free(t_data *data, int **pipefd, int *pid);
-int		ft_pipex_helper_dup(t_data *data, int **pipefd, int i);
+int		ft_pipex_helper_dup(t_cmd *cmd, int **pipefd, int i);
 int		child_process(t_data *data, int **pipefd, int i, char **cmd_argument);
 int		ft_pipex_helper(t_data *data, int *pid, int **pipefd, char **cmd_argument);
 char	*get_name_heredoc(void);
@@ -318,11 +317,13 @@ int		check_if_redir(t_data *data, int i);
 int		builtin_multi(t_data *data);
 int		cmd_not_valid(t_data *data);
 
+
+
 // ! ---------------------------------------------------------------------------
 // ?							Single_Pipe
 // ! ---------------------------------------------------------------------------
 
-int		single_arg(t_cmd *cmd, t_data *data);
+int		single_arg(t_cmd *cmd);
 int		exec_single(t_cmd *cmd, char *comd);
 int		redir_builtin(t_cmd *cmd, int check, int du1, int du2);
 int		redirection_single(t_data *data);
@@ -332,13 +333,23 @@ int		check_fre_cmd(t_data *data, char *buf, char **cmd_argument, char *fre);
 int		builtin_single(t_cmd *cmd);
 
 // ! ---------------------------------------------------------------------------
+// ?							Redirection
+// ! ---------------------------------------------------------------------------
+
+int		redirection_create(t_cmd *cmd);
+int		create_file(t_redir *tmp, int file);
+int		other_type_redir(t_redir *tmp, int file);
+int		redirection_dup1_in(int file);
+int		redirection_dup1_out(int file);
+
+// ! ---------------------------------------------------------------------------
 // ?							Free && utils Exec
 // ! ---------------------------------------------------------------------------
 
-int		get_nb_redirs_ac(char *input);
 int		get_kind_redirs_ac(char *input);
 void	close_all_pipe(int **pipefd, t_data *data);
-int		len_db_tab(char **str);
+long	len_list(t_redir *redir);
+
 char	*arg_helper(char **buf, char *tmp, t_data *data, int i);
 char	*copy_arg(char *dest, char *src);
 int		len_buf(char *buf, char *input, t_data *data, int act_redir);
@@ -350,7 +361,7 @@ void	free_all_pipe(int **pipefd);
 int		**alloc_pipe();
 void	free_all_alloc(t_data *data);
 void	free_single_struct_and_arg(t_data *data, char **cmd_argument, char *fre);
-void	free_multi_struct_and_arg(t_data *data, char **cmd_argument, int **pipefd);
+void	free_multi_struct_and_arg(t_data *data, int **pipefd);
 void	close_all_redirs(t_data *data);
 
 // ! ---------------------------------------------------------------------------

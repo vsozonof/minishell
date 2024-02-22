@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:51:54 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/22 08:59:32 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/22 11:15:16 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,12 @@ int	check_dup(int pipe, int token, int pipe2)
 	return (0);
 }
 
-int	child_process_in(int **pipefd, t_cmd *cmd, int token)
+int	child_process_in(int **pipefd, t_cmd *cmd, int i, int token)
 {
 	int			verif;
 
 	verif = 0;
+	// i etant l'endroit ou je suis dans mon ancienne liste
 	if (i == 0 || i == data->n_cmds -1)
 	{
 		if (child_process_in_or_out(pipefd, data, i, token) == -1)
@@ -53,9 +54,8 @@ int	child_process_in(int **pipefd, t_cmd *cmd, int token)
 		if (child_process_middle(pipefd, token, verif) == -1)
 			return (-1);
 	}
-	data->nb_redirs_ac = get_nb_redirs_ac(data->cmds[i]);
-	if (check_redirection_now(data, i) == 0)
-		redirection_manager(data, i);
+	if (check_redirection_now(cmd) == 0)
+		redirection_manager(cmd);
 	free(pipefd[0]);
 	free(pipefd[1]);
 	return (0);
@@ -64,7 +64,7 @@ int	child_process_in(int **pipefd, t_cmd *cmd, int token)
 // if (redirection_manager(pipefd, token, data, i) == -1)
 // 	return (NULL);
 
-int	child_process_in_or_out(int	**pi, t_data *data, int i, int token)
+int	child_process_in_or_out(int	**pi, t_cmd *cmd, int i, int token)
 {
 	int	verif;
 

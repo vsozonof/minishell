@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:28:28 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/22 08:57:47 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/22 13:05:10 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,21 @@ int	ft_create_fd(char	*argv, int flag)
 
 	fd = open(argv, flag, 0644);
 	if (fd < 0)
-		return (printf("problem with fd\n"), -1);
+		return (printf("problem with fd\n"), 1);
 	return (fd);
+}
+
+long	len_list(t_redir *redir)
+{
+	long	len;
+
+	len = 0;
+	while (redir)
+	{
+		len++;
+		redir = redir->next;
+	}
+	return (len);
 }
 
 /*
