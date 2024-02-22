@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 08:35:01 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/22 12:38:10 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/22 13:50:40 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ int	init_str(t_data *data, t_prompt *prompt)
 	multi_inp = NULL;
 	data->exec = NULL;
 	prompt->inp = ((data->inp = inp));
+	prompt->inp->cmds = NULL;
 	prompt->multi_inp = ((data->multi_inp = multi_inp));
 	data->head = NULL;
 	data->new_head = NULL;

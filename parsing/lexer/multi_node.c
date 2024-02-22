@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 10:15:28 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/22 13:41:07 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/22 14:21:11 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ void	multi_node_handler(t_data *data, int i)
 		tab[i] = input_to_lst(data);
 		i++;
 	}
-	tab[i] = NULL;
+	free(data->inp->cmds);
+	data->inp->cmds = ((tab[i] = NULL));
 	data->multi_inp = alloc_struct(data->multi_inp, (data->n_cmds + 1));
 	if (!data->multi_inp)
 		return ;
@@ -64,7 +65,7 @@ int	multi_input_to_lst(t_input **ptr, char ***tab, int i, int n)
 		n = 0;
 		i++;
 	}
-	printf("nav value %p\n\n", nav->next);
+	free_tri_table(tab);
 	return (1);
 }
 
@@ -87,7 +88,9 @@ void	multi_node_formatting(t_input **inp, t_data *data)
 		nav = nav->next;
 		i++;
 	}
-	nav->next = NULL;
+	nav = NULL;
+	free(data->inp);
+	data->inp = NULL;
 }
 
 void	multi_format_node(t_cmd *pr, t_input *inp, t_data *data)

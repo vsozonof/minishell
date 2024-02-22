@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 10:18:20 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/22 13:41:12 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/22 14:19:23 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,13 @@ void	extract_redirs(t_input *inp, t_cmd *pr)
 		{
 			red->type = set_redir_type(nav->str);
 			nav = nav->next;
-			red->file = ft_strdup(nav->str);
-			red = red->next;
+			if (nav)
+			{
+				red->file = ft_strdup(nav->str);
+				red = red->next;
+			}
+			else
+				red->file = NULL;
 		}
 		else
 			nav = nav->next;

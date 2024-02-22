@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/22 13:47:37 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/22 14:09:27 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -422,6 +422,7 @@ void	execute_exit(t_data *data);
 void	free_master(t_data *data);
 void	free_input_lst(t_input *lst);
 void	free_cmd_nodes(t_cmd *nodes);
+void	free_tri_table(char ***tab);
 
 void	free_manager(t_data *data, int key);
 void	free_cmds(t_data *data);

@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 10:14:42 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/22 10:25:27 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/22 13:57:22 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@ void	single_node_handler(t_data *data)
 		return (free_master(data));
 	put_input_to_lst(data->inp, tab);
 	identify_nodes(data->inp);
-	format_node(ptr, data->inp, data); // j'ajoute data pour l'env
-	
+	format_node(ptr, data->inp, data); // j'ajoute data pour l'env	
 }
 
 int	put_input_to_lst(t_input *ptr, char **tab)

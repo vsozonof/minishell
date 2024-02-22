@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 04:29:11 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/22 13:46:00 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/22 14:27:16 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,21 @@ void	free_manager(t_data *data, int key)
 
 void	free_master(t_data *data)
 {
+	int	i;
+
+	i = -1;
 	printf("---------------------\n");
 	printf("----------FREE-------\n");
 	if (data->input)
 		free(data->input);
-	free_input_lst(data->inp);
+	if (data->inp)
+		free_input_lst(data->inp);
+	if (data->multi_inp)
+	{
+		while (data->multi_inp[++i])
+			free_input_lst(data->multi_inp[i]);
+		free(data->multi_inp);
+	}
 	free_cmd_nodes(data->exec);
 }
 void	free_cmd_nodes(t_cmd *nodes)
@@ -53,10 +63,7 @@ void	free_cmd_nodes(t_cmd *nodes)
 
 	while (nodes)
 	{
-		printf("----------\n");
-		printf("FREE NODE CMD\n");
 		free (nodes->cmd);
-		printf("SPLIT-FREE\n");
 		ft_split_free(nodes->param);
 		nav = nodes->redirs;
 		while (nav)
@@ -70,6 +77,26 @@ void	free_cmd_nodes(t_cmd *nodes)
 		nodes = nodes->next;
 		free(tmp2);
 	}
+}
+
+void	free_tri_table(char ***tab)
+{
+	int	i;
+	int	n;
+
+	i = ((n = 0));
+	while (tab[i])
+	{
+		while (tab[i][n])
+		{
+			free(tab[i][n]);
+			n++;
+		}
+		free(tab[i]);
+		i++;
+		n = 0;
+	}
+	free(tab);
 }
 
 void	free_input_lst(t_input *lst)
