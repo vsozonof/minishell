@@ -6,7 +6,7 @@
 #    By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/09 23:22:06 by vsozonof          #+#    #+#              #
-#    Updated: 2024/02/19 14:27:10 by tpotilli         ###   ########.fr        #
+#    Updated: 2024/02/22 09:43:21 by tpotilli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,24 +48,13 @@ SRCS = main.c \
 	   utils/args_counter.c \
 	   signal/signal_master.c \
 	   exec/command_manager.c \
-	   exec/UNUSED_command_overall.c \
-	   exec/execute_pp.c \
-	   exec/main_pp.c \
-	   exec/heredoc.c \
-	   exec/pp_free.c \
-	   exec/pp_free2.c \
-	   exec/pp_utils.c \
-	   exec/pp_utils2.c \
-	   exec/pp_utils3.c \
-	   exec/pp.c \
-	   exec/pp_helper.c \
 	   exec/single_arg.c \
-	   exec/child_pp.c \
-	   exec/redirection_here.c \
-	   exec/redirection_found.c \
-	   exec/redirection_arg.c \
+	   exec/builtin_exec.c \
 	   exec/redirection_dup.c \
+	   exec/do_process.c \
 	   exec/here_doc.c \
+	   exec/exec_utils1.c \
+	   exec/exec_minishell.c \
 	   builtin/unset/unset_master.c \
 	   builtin/unset/unset_utils-1.c \
 	   builtin/cd/cd_master.c \

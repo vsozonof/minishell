@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/21 15:40:09 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/22 09:45:16 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef struct s_cmd
 {
 	char			*cmd;
 	char			**param;
+	char			**env;
 	struct s_redirs	*redirs;
 	struct s_cmd	*next;
 }	t_cmd;
@@ -86,6 +87,7 @@ typedef struct s_redirs
 	char			*file;
 	struct s_redirs	*next;
 }	t_redir;
+
 typedef struct s_parse
 {
 	t_prompt		*pr;
@@ -187,7 +189,7 @@ int		multi_input_to_lst(t_input **ptr, char ***tab, int i, int n);
 t_input	**alloc_struct(t_input **ptr, int n);
 void	alloc_redir_list(t_cmd *pr, int n);
 
-void	format_node(t_cmd *pr, t_input *inp);
+void	format_node(t_cmd *pr, t_input *inp, t_data *data);
 char	*extract_command_name(t_input *inp);
 void	extract_params(t_input *inp, t_cmd *pr);
 void	extract_redirs(t_input *inp, t_cmd *pr);
@@ -261,12 +263,12 @@ void	handle_signals(int signum);
 // ?							Command
 // ! ---------------------------------------------------------------------------
 
-int		command_manager(t_data *data);
+int		command_manager(t_cmd *cmd, t_data *data);
 int		builtin_checker(char *tmp);
-void	builtin_manager(t_data *tmp, int token);
+void	builtin_manager(t_cmd *cmd, int token);
 
 int		pipex_exec(t_data *data);
-int		ft_pipex(t_data	*data, int i, char **cmd_argument);
+int		ft_pipex(t_cmd *cmd);
 int		**parent_process(int **pipefd, int i);
 char	*str_join_free(char *path, char *cmd);
 void	ft_freedb(char **str);
@@ -287,8 +289,8 @@ int		first_redirect_helper(char *input, int j, int i);
 int		last_redirect(t_data *data, char *input, int count);
 int		last_redirect_helper(char *input, int j, int i);
 int		is_redirect_actual(char *input);
-int		redirection_dup1_in(t_data *data, int first, int last);
-int		redirection_dup1_out(t_data *data, int first, int last);
+int		redirection_dup1_in(t_cmd *cmd);
+int		redirection_dup1_out(t_cmd *cmd);
 void	free_single(t_data *data, char **cmd_argument, char *fre);
 int		ft_do_process_helper(char *cmd);
 int		ft_check_access(t_data *data, int i);
@@ -297,8 +299,6 @@ void	free_all_fd(t_data *data);
 void	wait_and_free(t_data *data, int **pipefd, int *pid);
 int		ft_pipex_helper_dup(t_data *data, int **pipefd, int i);
 int		child_process(t_data *data, int **pipefd, int i, char **cmd_argument);
-int		set_first_end(t_data *data);
-int		get_act_redir(t_data *data, int i);
 int		ft_pipex_helper(t_data *data, int *pid, int **pipefd, char **cmd_argument);
 char	*get_name_heredoc(void);
 char	*extract_delimiter(char *input);
@@ -316,13 +316,14 @@ int		cmd_not_valid(t_data *data);
 // ?							Single_Pipe
 // ! ---------------------------------------------------------------------------
 
-int		single_arg(t_data *data, char **cmd_argument);
-int		exec_single(char **cmd_argument, char *fre, t_data *data);
+int		single_arg(t_cmd *cmd, t_data *data);
+int		exec_single(t_cmd *cmd, char *comd);
+int		redir_builtin(t_cmd *cmd, int check, int du1, int du2);
 int		redirection_single(t_data *data);
 char	**espoir(char **cmd_argument);
 int		ft_count_space(char *buf);
 int		check_fre_cmd(t_data *data, char *buf, char **cmd_argument, char *fre);
-int		builtin_single(t_data *data);
+int		builtin_single(t_cmd *cmd);
 
 // ! ---------------------------------------------------------------------------
 // ?							Free && utils Exec
@@ -340,11 +341,12 @@ int		found_max(char **cmd_argument);
 int		verif_arg_fd(char *argv[], int i);
 int		ft_create_fd(char *argv, int flag);
 void	free_all_pipe(int **pipefd);
-int		**alloc_pipe(int i);
+int		**alloc_pipe();
 void	free_all_alloc(t_data *data);
 void	free_single_struct_and_arg(t_data *data, char **cmd_argument, char *fre);
 void	free_multi_struct_and_arg(t_data *data, char **cmd_argument, int **pipefd);
 void	close_all_redirs(t_data *data);
+
 // ! ---------------------------------------------------------------------------
 // ?							Chain list
 // ! ---------------------------------------------------------------------------

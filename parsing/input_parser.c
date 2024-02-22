@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_parser.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 09:14:23 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/21 15:58:04 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/22 09:35:25 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 void	input_parser(t_prompt *pr, t_data *data)
 {
+	t_cmd	*cmd;
+
+	cmd = data->exec;
 	init_str(data, pr);
 	if (!is_piped_input_valid(pr->input, data))
 		return (free_master(data));
@@ -21,6 +24,7 @@ void	input_parser(t_prompt *pr, t_data *data)
 		single_node_handler(data);
 	else if (is_there_pipe(pr))
 		multi_node_handler(data);
+	command_manager(cmd, data);
 	free_master(data);
 }
 
@@ -38,11 +42,11 @@ void	single_node_handler(t_data *data)
 		return (free_master(data));
 	put_input_to_lst(data->inp, tab);
 	identify_nodes(data->inp);
-	format_node(ptr, data->inp);
+	format_node(ptr, data->inp, data); // j'ajoute data pour l'env
 	
 }
 
-void	format_node(t_cmd *pr, t_input *inp)
+void	format_node(t_cmd *pr, t_input *inp, t_data *data)
 {
 	int	n;
 
@@ -50,6 +54,10 @@ void	format_node(t_cmd *pr, t_input *inp)
 	pr->cmd = extract_command_name(inp);
 	pr->param = malloc (sizeof(char *) * (n + 1));
 	pr->param[n] = NULL;
+	pr->env = data->pr->nv;
+	// ajoute un compteur du nombre de cmd total (tous les maillons)
+	// ajoute un compteur du nombre de redirection dans la node
+	// ajoute un compteur du nombre de redir total (tous les maillons)
 	extract_params(inp, pr);
 	n = get_redir_count(inp) + 1;
 	if (n > 1)

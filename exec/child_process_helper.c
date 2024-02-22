@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   child_pp.c                                         :+:      :+:    :+:   */
+/*   child_process_helper.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/22 13:10:29 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/18 19:35:52 by tpotilli         ###   ########.fr       */
+/*   Created: 2024/02/22 08:51:54 by tpotilli          #+#    #+#             */
+/*   Updated: 2024/02/22 08:59:32 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,8 @@ int	check_dup(int pipe, int token, int pipe2)
 	return (0);
 }
 
-// regler le probleme des fd
-int	child_process_in(int **pipefd, t_data *data, int i, int token)
+int	child_process_in(int **pipefd, t_cmd *cmd, int token)
 {
-	// char		*buf;
 	int			verif;
 
 	verif = 0;
@@ -58,7 +56,6 @@ int	child_process_in(int **pipefd, t_data *data, int i, int token)
 	data->nb_redirs_ac = get_nb_redirs_ac(data->cmds[i]);
 	if (check_redirection_now(data, i) == 0)
 		redirection_manager(data, i);
-	// buf = arg(data->cmds[i], data);
 	free(pipefd[0]);
 	free(pipefd[1]);
 	return (0);
@@ -124,148 +121,3 @@ int	child_process_middle(int **pipefd, int token, int verif)
 	}
 	return (0);
 }
-
-/*
-**	This function takes as parameter: 
-**
-**	str = a string
-**	data = the structure
-**
-** =====================================================
-** =====================================================
-**
-**	this function is used to create a new string where
-**	there is no redirection
-**
-*/
-
-char	*arg(char *str, t_data *data)
-{
-	char	**buf;
-	int		i;
-	char	*tmp;
-
-	tmp = NULL;
-	i = ft_strlen(str) - 1;
-	buf = ft_split(str, ' ');
-	if (!buf)
-		return (NULL);
-	if (data->n_redirs > 0)
-	{
-		if (data->tab[data->index_redirs])
-		{
-			if (data->tab[data->index_redirs][0] == i)
-				return (arg_helper(buf, tmp, data, i));
-		}
-	}
-	tmp = copy_arg(tmp, buf[0]);
-	if (!tmp)
-	{
-		fprintf(stderr, "a problem happend\n");
-		return (ft_freedb(buf), NULL);
-	}
-	ft_freedb(buf);
-	return (tmp);
-}
-
-/*
-char	*arg(char *str, t_data *data)
-{
-	char	**buf;
-	char	*tmp;
-	int		i;
-	int		j;
-
-	j = 0;
-	tmp = NULL;
-	i = ft_strlen(str);
-	buf = ft_split(str, ' ');
-	if (data->n_redirs > 0)
-	{
-		if (data->tab[data->index_redirs])
-		{
-			if (data->tab[data->index_redirs][0] == i)
-			{
-				if (data->tab[data->index_redirs][1] == 1)
-				{
-					while (buf[1][j])
-					{
-						tmp[j] = buf[1][j];
-						j++;
-					}
-					free(buf);
-					return (tmp);
-				}
-				else if (data->tab[data->index_redirs][1] == 3)
-				{
-					i--;
-					while (buf[1][j])
-					{
-						tmp[j] = buf[i][j];
-						j++;
-					}
-					free(buf);
-					return (tmp);
-				}
-			}
-		}
-	}
-	fprintf(stderr, "%s\n", buf[0]);
-	while (buf[0][j])
-	{
-		tmp[j] = buf[0][j];
-		j++;
-	}
-	j = 0;
-	while (buf[j])
-	{
-		free()
-	}
-	free(buf);
-	return (tmp);
-}
-*/
-
-/*
-char	*arg(char *str, t_data *data)
-{
-	char	**buf;
-	char	*tmp;
-	int		i;
-
-	i = ft_strlen(str);
-	buf = ft_split(str, ' ');
-	tmp = NULL;
-	if (data->n_redirs > 0)
-	{
-		if (data->tab[data->index_redirs])
-		{
-			if (data->tab[data->index_redirs][0] == i)
-			{
-				if (data->tab[data->index_redirs][1] == 1)
-					ft_copy_tmp(tmp, buf[0]);
-				else if (data->tab[data->index_redirs][1] == 3)
-					ft_copy_tmp(tmp, buf[i--]);
-				free(buf);
-				return (tmp);
-			}
-		}
-	}
-	tmp = ft_copy_tmp(tmp, buf[0]);
-	free(buf);
-	return (buf[0]);
-}
-
-char	*ft_copy_tmp(char *tmp, char *buf)
-{
-	int	i;
-
-	i = 0;
-	while (buf[i])
-	{
-		tmp[i] = buf[i];
-		i++;
-	}
-	return (tmp);
-}
-*/
