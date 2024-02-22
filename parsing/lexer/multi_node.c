@@ -6,18 +6,16 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 10:15:28 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/22 10:16:03 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/22 11:02:23 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	multi_node_handler(t_data *data)
+void	multi_node_handler(t_data *data, int i)
 {
 	char	***tab;
-	int		i;
 
-	i = 0;
 	data->inp->cmds = pipes_splitter(data->input, '|', data);
 	if (!data->inp->cmds)
 		return ;
@@ -39,6 +37,7 @@ void	multi_node_handler(t_data *data)
 	i = -1;
 	while (data->multi_inp[++i])
 		identify_nodes(data->multi_inp[i]);
+	multi_node_formatting(data->pr->multi_inp, data);
 }
 
 int	multi_input_to_lst(t_input **ptr, char ***tab, int i, int n)
@@ -66,4 +65,9 @@ int	multi_input_to_lst(t_input **ptr, char ***tab, int i, int n)
 		i++;
 	}
 	return (1);
+}
+
+void	multi_node_formatting(t_input **inp, t_data *data)
+{
+	
 }

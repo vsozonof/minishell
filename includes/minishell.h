@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/22 09:45:16 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/22 11:06:19 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,9 @@ typedef struct s_cmd
 	char			*cmd;
 	char			**param;
 	char			**env;
+	int				n_redirs;
+	int				n_cmds;
+	int				n_all_redirs;
 	struct s_redirs	*redirs;
 	struct s_cmd	*next;
 }	t_cmd;
@@ -184,7 +187,7 @@ void	unquote_command(t_data *data);
 char	*input_splitter(t_data *data);
 
 void	single_node_handler(t_data *data);
-void	multi_node_handler(t_data *data);
+void	multi_node_handler(t_data *data, int i);
 int		multi_input_to_lst(t_input **ptr, char ***tab, int i, int n);
 t_input	**alloc_struct(t_input **ptr, int n);
 void	alloc_redir_list(t_cmd *pr, int n);
@@ -196,6 +199,7 @@ void	extract_redirs(t_input *inp, t_cmd *pr);
 int		set_redir_type(char *token);
 int		get_word_count(t_input *inp);
 int		get_redir_count(t_input *inp);
+void	multi_node_formatting(t_input **inp, t_data *data);
 
 void	node_printer(t_cmd *pr);
 

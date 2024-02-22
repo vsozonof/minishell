@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 10:18:20 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/22 10:20:40 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/22 11:07:14 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ void	format_node(t_cmd *pr, t_input *inp, t_data *data)
 	pr->param = malloc (sizeof(char *) * (n + 1));
 	pr->param[n] = NULL;
 	pr->env = data->pr->nv;
-	// ajoute un compteur du nombre de cmd total (tous les maillons)
-	// ajoute un compteur du nombre de redirection dans la node
-	// ajoute un compteur du nombre de redir total (tous les maillons)
+	pr->n_cmds = 1;
+	pr->n_redirs = get_redir_count(inp);
+	pr->n_all_redirs = pr->n_redirs;
 	extract_params(inp, pr);
 	n = get_redir_count(inp) + 1;
 	if (n > 1)
