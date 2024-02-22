@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:55:54 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/22 14:20:46 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/22 15:08:18 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ int	ft_pipex_helper_dup(t_cmd *cmd, int **pipefd, int i)
 	int		check;
 
 	check = 0;
+	fprintf(stderr, "voici mon i dans helper dup%d\n", i);
 	if (i % 2 == 0)
 		check = child_process_in(pipefd, cmd, i, 0);
 	else if (i % 2 == 1)

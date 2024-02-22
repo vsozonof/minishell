@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:43:04 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/22 14:37:39 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/22 15:14:39 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_pipex(t_cmd *cmd)
 	pid_t		*pid;
 	int			**pipefd;
 
-	pid = malloc(sizeof(pid_t) * cmd->n_cmds); //voir comment free le pid dans un child
+	pid = malloc(sizeof(pid_t) *cmd->n_cmd); //voir comment free le pid dans un child
 	if (!pid)
 		return (fprintf(stderr, "problem with malloc\n"), -1);
 	pipefd = alloc_pipe();

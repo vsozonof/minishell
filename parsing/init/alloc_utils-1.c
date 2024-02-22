@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 10:11:25 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/22 13:10:41 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/22 14:26:51 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,14 @@ void	alloc_multi_nodes(t_input **inp, t_cmd *pr)
 	t_cmd	*nav;
 
 	nav = pr;
-	i = 0;
+	i = 1;
 	while (inp[i])
 	{
 		nav -> next = malloc(sizeof(t_cmd));
 		if (!nav -> next)
 			return ;
-		nav = nav -> next;
 		i++;
+		nav = nav -> next;
 	}
-	nav -> next = NULL;
+	nav->next = NULL;
 }

@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 10:18:20 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/22 14:24:43 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/22 14:49:26 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,6 @@ void	format_node(t_cmd *pr, t_input *inp, t_data *data)
 	pr->param = malloc (sizeof(char *) * (n + 1));
 	pr->param[n] = NULL;
 	pr->env = data->pr->nv;
-	pr->n_cmds = 1;
-	pr->n_redirs = get_redir_count(inp);
-	pr->n_all_redirs = pr->n_redirs;
 	extract_params(inp, pr);
 	n = get_redir_count(inp) + 1;
 	if (n > 1)
@@ -53,8 +50,13 @@ void	extract_redirs(t_input *inp, t_cmd *pr)
 		{
 			red->type = set_redir_type(nav->str);
 			nav = nav->next;
-			red->file = ft_strdup(nav->str);
-			red = red->next;
+			if (nav)
+			{
+				red->file = ft_strdup(nav->str);
+				red = red->next;
+			}
+			else
+				red->file = NULL;
 		}
 		else
 			nav = nav->next;

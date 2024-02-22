@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:28:28 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/22 14:17:48 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/22 15:14:35 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,16 @@ void	wait_and_free(t_cmd *cmd, int **pipefd, int *pid)
 	int	i;
 
 	i = 0;
-	while (i < cmd->n_cmds)
+	while (i < cmd->n_cmd)
 	{
+		fprintf(stderr, "j'attend i = %d\n", i);
 		waitpid(pid[i], NULL, 0);
 		i++;
 	}
 	free_all_pipe(pipefd);
 	// free_all_fd();
 	free(pid);
+	fprintf(stderr, "je suis bien passer par la\n");
 }
 
 void	free_all_pipe(int **pipefd)

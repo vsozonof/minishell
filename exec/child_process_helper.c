@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:51:54 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/22 14:45:29 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/22 15:16:33 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ int	child_process_in(int **pipefd, t_cmd *cmd, int i, int token)
 
 	verif = 0;
 	// i etant l'endroit ou je suis dans mon ancienne liste
-	if (i == 0 || i == cmd->n_cmds -1)
+	fprintf(stderr, "mon compteur = %d\n", cmd->n_cmd);
+	if (i == 0 || i == cmd->n_cmd -1)
 	{
 		if (child_process_in_or_out(pipefd, cmd, i, token) == -1)
 			return (-1);
@@ -54,10 +55,10 @@ int	child_process_in(int **pipefd, t_cmd *cmd, int i, int token)
 		if (child_process_middle(pipefd, token, verif) == -1)
 			return (-1);
 	}
-	if (len_list(cmd->redirs) > 0)
+	if (cmd->n_redir > 0)
 		verif = redirection_create(cmd);
-	if (verif == 1);
-		fprintf("je suis dans le child_process_in un probleme est survenue\n");
+	if (verif == 1)
+		fprintf(stderr, "je suis dans le child_process_in un probleme est survenue\n");
 	free(pipefd[0]);
 	free(pipefd[1]);
 	return (0);
@@ -79,7 +80,7 @@ int	child_process_in_or_out(int	**pi, t_cmd *cmd, int i, int token)
 			return (close(pi[0][1]), free_all_pipe(pi), -1);
 		close(pi[0][1]);
 	}
-	else if (i == cmd->n_cmds - 1)
+	else if (i == cmd->n_cmd - 1)
 	{
 		close(pi[1][1]);
 		close(pi[0][1]);
