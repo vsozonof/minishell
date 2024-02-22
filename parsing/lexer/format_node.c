@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   format_node.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 10:18:20 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/22 13:41:12 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/22 14:24:43 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	format_node(t_cmd *pr, t_input *inp, t_data *data)
 	else
 		pr->redirs = NULL;
 	pr->next = NULL;
-	node_printer(pr);
+	// node_printer(pr);
 }
 
 void	extract_redirs(t_input *inp, t_cmd *pr)
