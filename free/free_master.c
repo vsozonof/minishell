@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_master.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 04:29:11 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/22 15:14:18 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/22 15:46:23 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ void	free_master(t_data *data)
 	int	i;
 
 	i = -1;
-	printf("---------------------\n");
-	printf("----------FREE-------\n");
+	// printf("---------------------\n");
+	// printf("----------FREE-------\n");
 	if (data->input)
 		free(data->input);
 	if (data->inp)

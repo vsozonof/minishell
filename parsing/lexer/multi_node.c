@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   multi_node.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 10:15:28 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/22 14:21:11 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/22 14:49:22 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,5 +114,5 @@ void	multi_format_node(t_cmd *pr, t_input *inp, t_data *data)
 	}
 	else
 		pr->redirs = NULL;
-	node_printer(pr);
+	// node_printer(pr);
 }

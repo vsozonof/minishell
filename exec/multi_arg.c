@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:36:45 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/22 08:57:37 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/22 14:19:56 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,15 @@ cat > test1 > test2 < test3 | wc > test4 < test5 | wc > test6
 **  with the function ft_do_process (we also get the path)
 **  then we go to ft_pipex to start the execution
 */
+
 // pour les commande non valide, mettre un flag dans liste chainer qui dit si elles sont executable
 
-// int	pipex_exec(t_cmd *cmd)
-// {
-// 	fprintf(stderr, "je passe par multi\n");
-// 	ft_pipex(cmd);
-// 	return (0);
-// }
+int	pipex_exec(t_cmd *cmd)
+{
+	fprintf(stderr, "je passe par multi\n");
+	ft_pipex(cmd);
+	return (0);
+}
 
 // int	ft_check_access(t_data *data, int i)
 // {
