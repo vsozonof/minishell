@@ -1,56 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   args_counter.c                                     :+:      :+:    :+:   */
+/*   alloc_utils-1.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/21 05:05:23 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/22 10:31:05 by vsozonof         ###   ########.fr       */
+/*   Created: 2024/02/22 10:11:25 by vsozonof          #+#    #+#             */
+/*   Updated: 2024/02/22 10:12:00 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	n_args(char *str)
+void	alloc_redir_list(t_cmd *pr, int n)
 {
-	int	i;
-	int	c;
+	int		i;
+	t_cmd	*nav;
+	t_redir	*p;
 
-	c = ((i = 0));
-	while (str[i])
+	nav = pr;
+	p = pr->redirs;
+	i = 1;
+	while (i < n - 1)
 	{
-		if (ft_is_whitespace(str[i]))
-			i++;
-		else if (str[i] == 39 || str[i] == '"')
-		{
-			i += (quote_skipper(str, i) - i);
-			c++;
-		}
-		else
-		{
-			c++;
-			while (str[i] && !ft_is_whitespace(str[i]))
-				i++;
-		}
-	}
-	return (c);
-}
-
-int	hdoc_counter(char *str)
-{
-	int	i;
-	int	n;
-
-	n = ((i = 0));
-	while (str[i])
-	{
-		if (str[i] == '<' && str[i + 1] == '<')
-		{
-			n++;
-			i += 2;
-		}
+		p->next = malloc(sizeof(t_redir));
+		if (!p)
+			return ;
+		p = p->next;
 		i++;
 	}
-	return (n);
+	p ->next = NULL;
+}
+
+t_input	**alloc_struct(t_input **ptr, int n)
+{
+	int	i;
+
+	i = 0;
+	ptr = malloc(sizeof(t_input *) * n);
+	while (i < (n - 1))
+	{
+		ptr[i] = malloc(sizeof(t_input));
+		i++;
+	}
+	ptr[i] = NULL;
+	return (ptr);
 }

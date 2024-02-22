@@ -1,56 +1,50 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   args_counter.c                                     :+:      :+:    :+:   */
+/*   splitted_input_identifier.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/21 05:05:23 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/22 10:31:05 by vsozonof         ###   ########.fr       */
+/*   Created: 2024/02/22 10:23:56 by vsozonof          #+#    #+#             */
+/*   Updated: 2024/02/22 10:24:39 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	n_args(char *str)
+void	identify_nodes(t_input *p)
 {
-	int	i;
-	int	c;
+	t_input	*nav;
+	int		flag;
+	int		i;
 
-	c = ((i = 0));
-	while (str[i])
+	flag = 0;
+	nav = p;
+	i = 0;
+	while (nav)
 	{
-		if (ft_is_whitespace(str[i]))
-			i++;
-		else if (str[i] == 39 || str[i] == '"')
+		if (flag)
 		{
-			i += (quote_skipper(str, i) - i);
-			c++;
+			nav->i = 2;
+			flag = 0;
 		}
 		else
-		{
-			c++;
-			while (str[i] && !ft_is_whitespace(str[i]))
-				i++;
-		}
-	}
-	return (c);
-}
-
-int	hdoc_counter(char *str)
-{
-	int	i;
-	int	n;
-
-	n = ((i = 0));
-	while (str[i])
-	{
-		if (str[i] == '<' && str[i + 1] == '<')
-		{
-			n++;
-			i += 2;
-		}
+			nav->i = node_identifier(nav->str);
+		if (nav->i == 1)
+			flag = 1;
+		nav->index = i;
+		nav = nav->next;
 		i++;
 	}
-	return (n);
+}
+
+int	node_identifier(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (token_identifier(str, i))
+		return (1);
+	else
+		return (0);
 }
