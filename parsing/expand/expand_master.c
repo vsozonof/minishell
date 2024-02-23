@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 02:16:29 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/20 16:24:53 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/23 10:29:45 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ void	reg_expander(t_data *data, int i)
 			reg_expand_splitter(data, i);
 			reg_expand_joiner(data);
 		}
-		else if (i > 0 && !is_in_quotes(data->input, i)
-			&& ft_is_whitespace(data->input[i - 1]) && data->input[i] == '~'
-			&& (ft_is_whitespace(data->input[i + 1]) || !data->input[i + 1]))
+		else if (!is_in_quotes(data->input, i)
+			&& data->input[i] == '~'
+			&& !data->input[i + 1])
 			tilde_expander(data, i);
 		else if ((!is_in_quotes(data->input, i)
 				|| is_in_quotes(data->input, i) == 2)
