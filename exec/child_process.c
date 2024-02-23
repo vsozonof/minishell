@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:55:54 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/23 12:01:20 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/23 14:58:08 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int	child_process(t_data *data, int **pipefd, int i)
 	cmd_arg = ft_do_process(data->exec->env, data->exec->cmd);
 	if (!cmd_arg)
 	{
+		close_all_open_redirs(data->exec->tab, data->n_redirs - 1);
 		//faire des free puis exit
 		exit(0);
 	}

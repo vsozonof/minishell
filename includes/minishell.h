@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/23 14:43:28 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/23 14:57:14 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ typedef struct s_cmd
 	char			*cmd;
 	char			**param;
 	char			**env;
+	int				*tab;
 	struct s_redirs	*redirs;
 	struct s_cmd	*next;
 	struct s_parse	*data;
