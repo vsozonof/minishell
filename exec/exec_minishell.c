@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:43:04 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/22 15:14:39 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/23 11:23:23 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,35 +16,35 @@
 // tab = redirection/here_doc
 // retirer des initialisation
 
-int	ft_pipex(t_cmd *cmd)
+int	ft_pipex(t_data *data)
 {
 	pid_t		*pid;
 	int			**pipefd;
 
-	pid = malloc(sizeof(pid_t) *cmd->n_cmd); //voir comment free le pid dans un child
+	pid = malloc(sizeof(pid_t) *data->n_cmds); //voir comment free le pid dans un child
 	if (!pid)
 		return (fprintf(stderr, "problem with malloc\n"), -1);
 	pipefd = alloc_pipe();
 	if (!pipefd || !pipefd[1] || !pipefd[0])
 		return (free(pid), free(pipefd), -1);
-	ft_pipex_helper(cmd, pid, pipefd);
-	wait_and_free(cmd, pipefd, pid);
+	ft_pipex_helper(data, pid, pipefd);
+	wait_and_free(data, pipefd, pid);
 	return (0);
 }
 
-int	ft_pipex_helper(t_cmd *cmd, int *pid, int **pipefd)
+int	ft_pipex_helper(t_data *data, int *pid, int **pipefd)
 {
 	int		i;
 
 	i = 0;
-	while (cmd) // liste chainee
+	while (data->exec) // liste chainee
 	{
 		pid[i] = fork();
 		if (pid[i] < 0)
 			return (printf("erreur de fork\n"), 1);
 		if (pid[i] == 0)
 		{
-			if (child_process(cmd, pipefd, i) == -1)
+			if (child_process(data, pipefd, i) == -1)
 				fprintf(stderr, "il y a une erreur dans le child\n");
 				// pour le moment ne rien faire
 		}
@@ -55,7 +55,7 @@ int	ft_pipex_helper(t_cmd *cmd, int *pid, int **pipefd)
 			// get_and_print_statuscode();
 		}
 		i++;
-		cmd = cmd->next;
+		data->exec = data->exec->next;
 	}
 	return (0);
 }

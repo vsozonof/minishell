@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:55:54 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/22 15:08:18 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/23 11:25:04 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@
 **
 */
 
-int	child_process(t_cmd *cmd, int **pipefd, int i)
+int	child_process(t_data *data, int **pipefd, int i)
 {
 	char	*cmd_arg;
 	int		error;
 
-	if (ft_pipex_helper_dup(cmd, pipefd, i) == -1)
+	if (ft_pipex_helper_dup(data, pipefd, i) == -1)
 	{
 		//faire des free
 		return (-1);
@@ -52,8 +52,8 @@ int	child_process(t_cmd *cmd, int **pipefd, int i)
 	// 	exit(cmd->status_code);
 	// }
 	// cree un if qui contiens checker de builtin
-	cmd_arg = ft_do_process(cmd->env, cmd->cmd);
-	error = execve(cmd_arg, cmd->param, cmd->env);
+	cmd_arg = ft_do_process(data->exec->env, data->exec->cmd);
+	error = execve(cmd_arg, data->exec->param, data->exec->env);
 	if (error == -1)
 		fprintf(stderr, "could not execute the command\n");
 	// free_end_of_program(data->pr);
@@ -62,16 +62,16 @@ int	child_process(t_cmd *cmd, int **pipefd, int i)
 	return (-1);
 }
 
-int	ft_pipex_helper_dup(t_cmd *cmd, int **pipefd, int i)
+int	ft_pipex_helper_dup(t_data *data, int **pipefd, int i)
 {
 	int		check;
 
 	check = 0;
 	fprintf(stderr, "voici mon i dans helper dup%d\n", i);
 	if (i % 2 == 0)
-		check = child_process_in(pipefd, cmd, i, 0);
+		check = child_process_in(pipefd, data, i, 0);
 	else if (i % 2 == 1)
-		check = child_process_in(pipefd, cmd, i, 1);
+		check = child_process_in(pipefd, data, i, 1);
 	if (check == -1)
 		return (-1);
 	return (0);
