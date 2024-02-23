@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 10:21:29 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/22 10:21:53 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/23 14:22:56 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ char	*input_splitter(t_data *data)
 		&& ft_is_whitespace(data->input[i]))
 		i++;
 	c = get_next_split(data->input, i);
+	printf("hi hi hi hi %i\n", c);
 	if (c == i)
 		return (free(data->input), data->input = NULL, NULL);
 	tmp = ft_substr(data->input, c, ft_strlen(data->input));
@@ -104,6 +105,8 @@ int	get_next_split_helper(char *str, int c, int flag)
 		while (str[c])
 		{
 			if (ft_is_whitespace(str[c]) && !is_in_quotes(str, c))
+				break ;
+			else if (token_identifier(str, c))
 				break ;
 			else
 				c++;

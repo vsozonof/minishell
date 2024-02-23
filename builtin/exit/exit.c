@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 17:52:12 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/20 11:20:03 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/23 14:37:01 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,17 +65,16 @@ int	status_checker(char	*input, t_data *data)
 	return (i_status);
 }
 
-void	execute_exit(t_data *data)
+void	execute_exit(t_data *data, char **param)
 {
 	int	status;
 
-	data->input = quote_remover_v2(data->input);
 	printf("exit\n");
-	if (n_args(data->input) == 0)
+	if ((get_dtab_len(param) - 1) == 0)
 		data->exited = 1;
-	else if (n_args(data->input) == 1)
+	else if ((get_dtab_len(param) - 1) == 1)
 	{
-		status = status_checker(data->input, data);
+		status = status_checker(param[1], data);
 		set_status(data, status, NULL, NULL);
 		data->exited = 1;
 	}

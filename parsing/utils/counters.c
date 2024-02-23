@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 10:26:53 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/23 12:49:29 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/23 14:18:54 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,8 @@ int	lexer_counter_helper(char *str, int i, int flag)
 		while (str[i])
 		{
 			if (ft_is_whitespace(str[i]) && !is_in_quotes(str, i))
+				break ;
+			else if (token_identifier(str, i))
 				break ;
 			else
 				i++;

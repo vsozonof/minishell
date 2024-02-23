@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/23 12:59:22 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/23 14:51:13 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -391,7 +391,7 @@ int		flag_skipper(char *str);
 void	execute_pwd(t_data *data);
 void	execute_env(t_data *data);
 
-void	execute_export(t_data *data);
+void	execute_export(t_data *data, char **param);
 char	*export_extract_arg(char *str);
 void	export_no_args(t_env *env);
 int		export_valid_args_counter(char *str);
@@ -403,7 +403,7 @@ int		export_var_name_checker(char *str);
 int		is_valid_var_first_char(int c);
 int		is_valid_var_char(int c);
 int		is_valid_var_name(char *var);
-char	*export_finalizer(char *args, int i, t_data *data);
+void	export_finalizer(char *args, int i, t_data *data);
 void	do_export(char *var_name, char *var_value, t_data *data);
 
 void	execute_unset(t_data *data);
@@ -411,7 +411,7 @@ char	*unset_extract_var_name(char *args, int i);
 int		unset_var_name_skipper(char *args, int i);
 void	do_unset(char *args, t_data *data);
 
-void	execute_exit(t_data *data);
+void	execute_exit(t_data *data, char **param);
 
 // ! ---------------------------------------------------------------------------
 // ?							Utils Free

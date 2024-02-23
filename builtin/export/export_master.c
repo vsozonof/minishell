@@ -6,54 +6,54 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 12:49:13 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/08 09:56:22 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/23 15:09:15 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	execute_export(t_data *data)
+void	execute_export(t_data *data, char **param)
 {
 	int		i;
-	char	*args;
 
-	i = 0;
-	args = export_extract_arg(data->input);
-	if (!args)
-		return (free(args), export_no_args(data->env));
-	else if (!export_valid_args_counter(args))
-		return (export_error_handler(args, NULL, NULL));
-	else
+	i = 1;
+	while (param[i])
 	{
-		while (args[i])
-		{
-			if (export_is_valid_arg(args, i))
-			{
-				i = export_is_valid_arg(args, i);
-				args = export_finalizer(args, i, data);
-				i = 0;
-			}
-			if ((i + 1) <= (int)ft_strlen(args))
-				i++;
-		}
+		if (!export_valid_args_counter(param[i]))
+			return (export_error_handler(param[i], NULL, NULL));
+		i++;
 	}
-	free(args);
+	i = 1;
+	while (param[i])
+	{
+		// if (export_is_valid_arg(param[i], 0))
+		// {
+			// i = export_is_valid_arg(param[i], 0);
+			export_finalizer(param[i], 0, data);
+		// }
+		i++;
+	}
 }
 
-char	*export_finalizer(char *args, int i, t_data *data)
+void	export_finalizer(char *args, int i, t_data *data)
 {
 	char		*var_name;
 	char		*var_value;
-	char		*new_arg;
 
-	new_arg = ft_substr(args, i, ft_strlen(args));
+	printf("hellllllllllllllllllllllllllllllllllllllo\n");
 	var_name = extract_var_name(args, i);
+	if (!var_name)
+		return ;
+	printf("hellllllllllllllllllllllllllllllllllllllo\n");
 	if (!is_valid_var_first_char(var_name[0]))
-		return (free(var_name), free(args), new_arg);
+		return (free(var_name));
+	printf("hellllllllllllllllllllllllllllllllllllllo\n");
 	var_value = extract_var_value(args, i);
+	if (!var_value)
+		return (free(var_name));
+	printf("hellllllllllllllllllllllllllllllllllllllo\n");
+	printf("%s - %s\n\n", var_name, var_value);
 	do_export(var_name, var_value, data);
-	free(args);
-	return (new_arg);
 }
 
 void	do_export(char *var_name, char *var_value, t_data *data)
