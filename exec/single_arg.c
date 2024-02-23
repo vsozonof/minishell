@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 16:09:07 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/23 14:42:16 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/23 15:22:25 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,6 @@ int	single_arg(t_data *data)
 
 	comd = NULL;
 	fprintf(stderr, "je passe par single\n");
-	// verif = builtin_single(data);
-	// if (verif == 0)
-	// 	return (0);
 	exec_single(data, comd);
 	free(comd);
 	return (0);
@@ -45,6 +42,8 @@ int	exec_single(t_data *data, char *comd)
 			if (!file)
 				return (1);
 		}
+		if (builtin_single(data) == 1)
+			return (fprintf(stderr, "error in builtin\n"));
 		comd = ft_do_process(data->exec->env, data->exec->cmd);
 		if (!comd)
 		{

@@ -5,12 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/02/23 14:51:13 by vsozonof         ###   ########.fr       */
-=======
-/*   Updated: 2024/02/23 14:57:14 by tpotilli         ###   ########.fr       */
->>>>>>> refs/remotes/origin/minishell-final
+/*   Created: 2024/02/23 15:20:19 by tpotilli          #+#    #+#             */
+/*   Updated: 2024/02/23 15:20:23 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
