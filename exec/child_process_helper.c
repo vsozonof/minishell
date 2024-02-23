@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:51:54 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/23 11:25:35 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/23 14:57:24 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,7 @@ int	child_process_in(int **pipefd, t_data *data, int i, int token)
 			return (-1);
 	}
 	if (data->n_redirs > 0)
-		verif = redirection_create(data);
-	if (verif == 1)
-		fprintf(stderr, "je suis dans le child_process_in un probleme est survenue\n");
+		data->exec->tab = redirection_create(data);
 	free(pipefd[0]);
 	free(pipefd[1]);
 	return (0);

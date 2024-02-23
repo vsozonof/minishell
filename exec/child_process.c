@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:55:54 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/23 11:25:04 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/23 14:58:08 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,14 @@ int	child_process(t_data *data, int **pipefd, int i)
 	// 	free_multi_struct_and_arg(cmd, pipefd);
 	// 	return (-1);
 	// }
-	// if (cmd->cmd_valid == -1)
-	// {
-	// 	cmd_not_valid(cmd);
-	// 	exit(cmd->status_code);
-	// }
 	// cree un if qui contiens checker de builtin
 	cmd_arg = ft_do_process(data->exec->env, data->exec->cmd);
+	if (!cmd_arg)
+	{
+		close_all_open_redirs(data->exec->tab, data->n_redirs - 1);
+		//faire des free puis exit
+		exit(0);
+	}
 	error = execve(cmd_arg, data->exec->param, data->exec->env);
 	if (error == -1)
 		fprintf(stderr, "could not execute the command\n");

@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:29:51 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/22 08:30:05 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/23 14:30:44 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,17 @@ char	*ft_do_process(char *envp[], char *cmd)
 	int		i;
 	char	**path;
 	char	*buf2;
+	int		result;
 
 	i = 0;
-	if (ft_do_process_helper(cmd) == 0)
+	result = ft_do_process_helper(cmd);
+	if (result == 0)
 	{
 		buf2 = ft_strdup(cmd);
 		return (buf2);
 	}
+	else if (result == -2)
+		return (NULL);
 	path = ft_get_path(envp);
 	if (!path)
 		return (NULL);
@@ -40,10 +44,16 @@ char	*ft_do_process(char *envp[], char *cmd)
 	ft_split_free(path);
 	return (NULL);
 }
+
 //X_OK Tests whether the file can be accessed for execution.
 // -> verifie si on a les droits
 int	ft_do_process_helper(char *cmd)
 {
+	int		i;
+
+	i = 0;
+	if (!cmd)
+		return (-2);
 	if (access(cmd, X_OK) == 0)
 	{
 		// data->status->code[];

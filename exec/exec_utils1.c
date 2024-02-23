@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:28:28 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/23 11:21:10 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/23 14:40:31 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	ft_create_fd(char	*argv, int flag)
 
 	fd = open(argv, flag, 0644);
 	if (fd < 0)
-		return (printf("problem with fd\n"), 1);
+		return (-1);
 	return (fd);
 }
 
@@ -74,6 +74,19 @@ void	free_all_pipe(int **pipefd)
 	free(pipefd[1]);
 	free(pipefd[0]);
 	free(pipefd);
+}
+
+void	close_all_open_redirs(int *file, int i)
+{
+	// if (i == 0)
+	// 	close(file[i]);
+	while (i >= 0)
+	{
+		fprintf(stderr, "voici mon i %d\n", i);
+		close(file[i]);
+		i--;
+	}
+	free(file);
 }
 
 // void	free_all_fd(t_data *data)
