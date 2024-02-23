@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 10:26:53 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/22 10:30:52 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/23 12:49:29 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	get_word_count(t_input *inp)
 	nav = inp;
 	while (nav)
 	{
-		if (nav->i == 0)
+		if (nav->i == 0 && ft_strlen(nav->str) != 0)
 			i++;
 		nav = nav->next;
 	}

@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/02/23 12:08:46 by vsozonof         ###   ########.fr       */
-=======
-/*   Updated: 2024/02/23 11:35:44 by tpotilli         ###   ########.fr       */
->>>>>>> refs/remotes/origin/minishell-final
+/*   Updated: 2024/02/23 12:59:22 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,6 +201,7 @@ int		get_redir_count(t_input *inp);
 int		get_n_redir(t_cmd *lst);
 int		get_node_len(t_cmd *lst);
 int		get_lst_len(t_input *lst);
+int		get_dtab_len(char **str);
 void	multi_node_formatting(t_input **inp, t_data *data);
 void	multi_format_node(t_cmd *pr, t_input *inp, t_data *data);
 
@@ -379,7 +376,7 @@ t_cha	*ft_createcell(t_data *data, int pos);
 // ?							Builtin && Tools
 // ! ---------------------------------------------------------------------------
 
-void	execute_cd(t_data *data);
+void	execute_cd(char **param, t_data *data);
 char	*cd_extract_arg(char *str);
 int		quoted_arg_util(char *str, int c);
 void	change_directory(t_data *data, char *path);
