@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:29:44 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/23 11:31:54 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/23 11:56:03 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,13 @@ int	get_input(t_prompt *prompt, t_data *data)
 		prompt->input = readline("\n$> ");
 		if (prompt->input)
 		{
-			add_history(prompt->input);
 			if (!is_input_valid(prompt->input, prompt->data))
 				free(prompt->input);
 			else
+			{
+				add_history(prompt->input);
 				input_parser(prompt, data);
+			}
 		}
 		else
 			break ;
