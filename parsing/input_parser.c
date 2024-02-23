@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_parser.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 09:14:23 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/22 21:00:48 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/23 11:38:59 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 
 void	input_parser(t_prompt *pr, t_data *data)
 {
-	// t_cmd	*cmd;
-
-	// cmd = data->exec;
 	init_str(data, pr);
 	if (!is_piped_input_valid(pr->input, data))
 		return (free_master(data));
@@ -29,8 +26,8 @@ void	input_parser(t_prompt *pr, t_data *data)
 		multi_node_handler(data, 0);
 	init_exec_var(data);
 	printf("APRES EXPAND\n");
-	node_printer(data->exec);
-	// command_manager(cmd, data);
+	// node_printer(data->exec);
+	command_manager(data);
 	free_master(data);
 }
 

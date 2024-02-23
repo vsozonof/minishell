@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:51:54 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/22 15:16:33 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/23 11:25:35 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,16 @@ int	check_dup(int pipe, int token, int pipe2)
 	return (0);
 }
 
-int	child_process_in(int **pipefd, t_cmd *cmd, int i, int token)
+int	child_process_in(int **pipefd, t_data *data, int i, int token)
 {
 	int			verif;
 
 	verif = 0;
 	// i etant l'endroit ou je suis dans mon ancienne liste
-	fprintf(stderr, "mon compteur = %d\n", cmd->n_cmd);
-	if (i == 0 || i == cmd->n_cmd -1)
+	fprintf(stderr, "mon compteur = %d\n", data->n_cmds);
+	if (i == 0 || i == data->n_cmds -1)
 	{
-		if (child_process_in_or_out(pipefd, cmd, i, token) == -1)
+		if (child_process_in_or_out(pipefd, data, i, token) == -1)
 			return (-1);
 	}
 	else if (token == 0 || token == 1)
@@ -55,8 +55,8 @@ int	child_process_in(int **pipefd, t_cmd *cmd, int i, int token)
 		if (child_process_middle(pipefd, token, verif) == -1)
 			return (-1);
 	}
-	if (cmd->n_redir > 0)
-		verif = redirection_create(cmd);
+	if (data->n_redirs > 0)
+		verif = redirection_create(data);
 	if (verif == 1)
 		fprintf(stderr, "je suis dans le child_process_in un probleme est survenue\n");
 	free(pipefd[0]);
@@ -67,7 +67,7 @@ int	child_process_in(int **pipefd, t_cmd *cmd, int i, int token)
 // if (redirection_manager(pipefd, token, data, i) == -1)
 // 	return (NULL);
 
-int	child_process_in_or_out(int	**pi, t_cmd *cmd, int i, int token)
+int	child_process_in_or_out(int	**pi, t_data *data, int i, int token)
 {
 	int	verif;
 
@@ -80,7 +80,7 @@ int	child_process_in_or_out(int	**pi, t_cmd *cmd, int i, int token)
 			return (close(pi[0][1]), free_all_pipe(pi), -1);
 		close(pi[0][1]);
 	}
-	else if (i == cmd->n_cmd - 1)
+	else if (i == data->n_cmds - 1)
 	{
 		close(pi[1][1]);
 		close(pi[0][1]);

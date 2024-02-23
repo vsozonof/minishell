@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:36:45 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/22 14:19:56 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/23 11:22:45 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ cat > test1 > test2 < test3 | wc > test4 < test5 | wc > test6
 
 // pour les commande non valide, mettre un flag dans liste chainer qui dit si elles sont executable
 
-int	pipex_exec(t_cmd *cmd)
+int	pipex_exec(t_data *data)
 {
 	fprintf(stderr, "je passe par multi\n");
-	ft_pipex(cmd);
+	ft_pipex(data);
 	return (0);
 }
 

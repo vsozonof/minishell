@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/22 21:05:21 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/23 11:35:44 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -272,24 +272,24 @@ void	handle_signals(int signum);
 // ?							Command
 // ! ---------------------------------------------------------------------------
 
-int		command_manager(t_cmd *cmd, t_data *data);
+int		command_manager(t_data *data);
 int		builtin_checker(char *tmp);
-void	builtin_manager(t_cmd *cmd, int token);
-int		redirection_create(t_cmd *cmd);
-int		pipex_exec(t_cmd *cmd);
-int		ft_pipex(t_cmd *cmd);
-int		ft_pipex_helper(t_cmd *cmd, int *pid, int **pipefd);
-int		ft_pipex_helper_dup(t_cmd *cmd, int **pipefd, int i);
-int		child_process(t_cmd *cmd, int **pipefd, int i);
+void	builtin_manager(int token);
+int		redirection_create(t_data *data);
+int		pipex_exec(t_data *data);
+int		ft_pipex(t_data *data);
+int		ft_pipex_helper(t_data *data, int *pid, int **pipefd);
+int		ft_pipex_helper_dup(t_data *data, int **pipefd, int i);
+int		child_process(t_data *data, int **pipefd, int i);
 int		**parent_process(int **pipefd, int i);
-int		child_process_in_or_out(int **pipefd, t_cmd *cmd, int i, int token);
+int		child_process_in_or_out(int **pipefd, t_data *data, int i, int token);
 int		child_process_middle(int **pipefd, int token, int verif);
 
 char	*str_join_free(char *path, char *cmd);
 void	ft_freedb(char **str);
 void	free_pipe_argv(int **pipefd, char	*argv[]);
 int		check_dup(int pipe, int token, int pipe2);
-int		child_process_in(int **pipefd, t_cmd *cmd, int i, int token);
+int		child_process_in(int **pipefd, t_data *data, int i, int token);
 char	*arg(char *str, t_data *data);
 char	**ft_get_path(char **env);
 char	*ft_do_process(char *envp[], char *cmd);
@@ -320,22 +320,22 @@ int		cmd_not_valid(t_data *data);
 // ?							Single_Pipe
 // ! ---------------------------------------------------------------------------
 
-int		single_arg(t_cmd *cmd);
-int		exec_single(t_cmd *cmd, char *comd);
-int		redir_builtin(t_cmd *cmd, int check, int du1, int du2);
+int		single_arg(t_data *data);
+int		exec_single(t_data *data, char *comd);
+int		redir_builtin(int check, int du1, int du2);
 int		redirection_single(t_data *data);
 char	**espoir(char **cmd_argument);
 int		ft_count_space(char *buf);
 int		check_fre_cmd(t_data *data, char *buf, char **cmd_argument, char *fre);
-int		builtin_single(t_cmd *cmd);
+int		builtin_single(t_data *data);
 
 // ! ---------------------------------------------------------------------------
 // ?							Redirection
 // ! ---------------------------------------------------------------------------
 
-int		redirection_create(t_cmd *cmd);
-int		create_file(t_redir *tmp, int file);
-int		other_type_redir(t_redir *tmp, int file);
+int		redirection_create(t_data *data);
+int		create_file(t_data *data, int file);
+int		other_type_redir(t_data *data, int file);
 int		redirection_dup1_in(int file);
 int		redirection_dup1_out(int file);
 
@@ -343,12 +343,12 @@ int		redirection_dup1_out(int file);
 // ?							Free && utils Exec
 // ! ---------------------------------------------------------------------------
 
-void	wait_and_free(t_cmd *cmd, int **pipefd, int *pid);
+void	wait_and_free(t_data *data, int **pipefd, int *pid);
 int		get_kind_redirs_ac(char *input);
 void	close_all_pipe(int **pipefd, t_data *data);
 long	len_list(t_redir *redir);
 void	free_all_pipe(int **pipefd);
-void	free_all_fd(t_cmd *cmd);
+void	free_all_fd(t_data *data);
 
 char	*arg_helper(char **buf, char *tmp, t_data *data, int i);
 char	*copy_arg(char *dest, char *src);

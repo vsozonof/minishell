@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:15:17 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/22 13:43:22 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/23 11:37:15 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,34 +21,35 @@
 // 3 = db_gauche <<
 // 4 = droite >>
 
-int	redirection_create(t_cmd *cmd)
+int	redirection_create(t_data *data)
 {
 	int		file;
 
 	file = 0;
-	while (cmd->redirs)
+	while (data->exec->redirs)
 	{
-		file = create_file(cmd->redirs, file);
+		fprintf(stderr, "fd = %d\n", data->exec->redirs->type);
+		file = create_file(data, file);
 		if (file == 1)
 			return (1);
-		cmd->redirs = cmd->redirs->next;
+		data->exec->redirs = data->exec->redirs->next;
 	}
 	return (0);
 }
 
-int	create_file(t_redir *tmp, int file)
+int	create_file(t_data *data, int file)
 {
-	if (tmp->type == 2)
+	if (data->exec->redirs->type == 2)
 	{
-		file = ft_create_fd(tmp->file, O_RDONLY);
+		file = ft_create_fd(data->exec->redirs->file, O_RDONLY);
 		if (file == 1)
 			return (1);
 		if (redirection_dup1_in(file) == 1)
 			return (1);
 	}
-	else if (tmp->type == 1)
+	else if (data->exec->redirs->type == 1)
 	{
-		file = ft_create_fd(tmp->file, O_WRONLY | O_CREAT | O_TRUNC);
+		file = ft_create_fd(data->exec->redirs->file, O_WRONLY | O_CREAT | O_TRUNC);
 		if (file == 1)
 			return (1);
 		if (redirection_dup1_out(file) == 1)
@@ -56,25 +57,25 @@ int	create_file(t_redir *tmp, int file)
 	}
 	else
 	{
-		if (other_type_redir(tmp, file) == 1)
+		if (other_type_redir(data, file) == 1)
 			return (1);
 	}
 	return (0);
 }
 
-int	other_type_redir(t_redir *tmp, int file)
+int	other_type_redir(t_data *data, int file)
 {
-	if (tmp->type == 3)
+	if (data->exec->redirs->type == 3)
 	{
-		file = ft_create_fd(tmp->file, O_RDONLY);
+		file = ft_create_fd(data->exec->redirs->file, O_RDONLY);
 		if (file == 1)
 			return (1);
 		if (redirection_dup1_in(file) == 1)
 			return 1;
 	}
-	else if (tmp->type == 4)
+	else if (data->exec->redirs->type == 4)
 	{
-		file = ft_create_fd(tmp->file, O_WRONLY | O_APPEND);
+		file = ft_create_fd(data->exec->redirs->file, O_WRONLY | O_APPEND);
 		if (file == 1)
 			return (1);
 		if (redirection_dup1_out(file) == 1)
