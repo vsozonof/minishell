@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 09:14:23 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/23 10:40:15 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/23 11:18:17 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 
 void	input_parser(t_prompt *pr, t_data *data)
 {
-	t_cmd	*cmd;
-
-	cmd = data->exec;
 	init_str(data, pr);
 	if (!is_piped_input_valid(pr->input, data))
 		return (free_master(data));
@@ -30,7 +27,7 @@ void	input_parser(t_prompt *pr, t_data *data)
 	init_exec_var(data);
 	printf("APRES EXPAND\n");
 	node_printer(data->exec);
-	command_manager(cmd, data);
+	// command_manager(data->exec, data);
 	free_master(data);
 }
 
@@ -38,7 +35,6 @@ void	init_exec_var(t_data *data)
 {
 	data->n_redirs = get_n_redir(data->exec);
 	data->n_cmds = get_node_len(data->exec);
-	printf("_-_____->->->_>>>> %i", data->n_cmds);
 }
 
 

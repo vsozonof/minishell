@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 14:31:51 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/23 10:16:09 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/23 11:18:08 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,14 @@ int	expand_nodes(t_input *inp, t_data *data)
 		if (!data->input)
 			nav->str = ft_strdup("");
 		else
-			nav->str = ft_strdup(data->input);
+		{
+			if (is_there_quotes(data->input))
+				data->input = quote_remover_v2(data->input);
+			if (!data->input)
+				nav->str = ft_strdup("");
+			else
+				nav->str = ft_strdup(data->input);
+		}
 		free(data->input);
 		data->input = NULL;
 		nav = nav->next;
