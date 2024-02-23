@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/22 21:05:21 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/23 12:08:46 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,6 @@ typedef struct s_cmd
 	char			*cmd;
 	char			**param;
 	char			**env;
-	int				n_cmd;
-	int				n_redir;
 	struct s_redirs	*redirs;
 	struct s_cmd	*next;
 	struct s_parse	*data;
@@ -385,7 +383,7 @@ void	go_back_one_level(t_data *data);
 void	update_vars(t_data *data);
 void	error_handling(int err, char *str, t_data *data);
 
-void	execute_echo(t_data *data);
+void	execute_echo(char **param, t_data *data);
 int		is_wspace_or_null(char *str, int i);
 int		flag_skipper(char *str);
 
