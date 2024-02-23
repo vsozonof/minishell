@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 09:14:23 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/23 14:43:48 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/23 14:48:02 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	input_parser(t_prompt *pr, t_data *data)
 		multi_node_handler(data, 0);
 	init_exec_var(data);
 	node_printer(data->exec);
-	// command_manager(data->exec, data);
+	command_manager(data);
 	free_master(data);
 }
 
