@@ -3,34 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   cd_master.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 12:02:25 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/22 09:55:50 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/23 13:05:13 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	execute_cd(t_data *data)
+void	execute_cd(char **param, t_data *data)
 {
 	char	*path;
 
-	data->input = quote_remover_v2(data->input);
-	if (n_args(data->input) == 0)
+	if ((get_dtab_len(param) - 1) == 0)
 	{
 		if (!ft_get_env_node(data->env, "HOME"))
 			return (set_status(data, 1, "HOME not set.", "cd :"));
-		change_directory(data, ft_get_env(data->env, "HOME"));
+		path = ft_get_env(data->env, "HOME");
+		change_directory(data, path);
+		free(path);
 		return (set_status(data, 0, NULL, NULL));
 	}
-	else if (n_args(data->input) != 1)
+	else if ((get_dtab_len(param) - 1) != 1)
 		return (set_status(data, 1, "too many arguments.", "cd :"));
-	path = cd_extract_arg(data->input);
+	path = param[1];
 	if (!ft_strncmp(path, "..", 2) && path[2] == '\0')
 	{
 		go_back_one_level(data);
-		free(path);
 		return (set_status(data, 0, NULL, NULL));
 	}
 	else
@@ -48,6 +48,7 @@ void	go_back_one_level(t_data *data)
 		i--;
 	path = ft_substr(data->pr->w_d, 0, i + 1);
 	change_directory(data, path);
+	free(path);
 }
 
 void	change_directory(t_data *data, char *path)
@@ -57,7 +58,7 @@ void	change_directory(t_data *data, char *path)
 		if (chdir(path) == 0)
 		{
 			update_vars(data);
-			return (free(path));
+			return ;
 		}
 		else
 			error_handling(errno, path, data);

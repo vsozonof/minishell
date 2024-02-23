@@ -6,71 +6,34 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 12:48:29 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/13 07:23:47 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/23 12:17:50 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	execute_echo(t_data *data)
+void	execute_echo(char **param, t_data *data)
 {
-	char	*to_print;
-	char	*tmp;
+	int		i;
 	int		flag;
+	int		wr;
 
-	if (is_there_quotes(data->input))
-		data->input = quote_remover_v2(data->input);
-	to_print = export_extract_arg(data->input);
-	if (!to_print)
-		return (ft_putstr("\n"));
-	if (ft_strnstr(to_print, "-n", 2))
+	i = 0;
+	wr = ((flag = 0));
+	while (param[++i])
 	{
-		flag = flag_skipper(to_print);
-		tmp = ft_substr(to_print, flag, ft_strlen(to_print));
-		free(to_print);
-		to_print = tmp;
-		ft_putstr_fd(to_print, 1);
+		if (ft_strnstr(param[i], "-n", 2) && !wr)
+			flag = 1;
+		else
+		{
+			wr = 1;
+			if (param[i + 1])
+				printf("%s ", param[i]);
+			else
+				printf("%s", param[i]);
+		}
 	}
-	else
-	{
-		ft_putstr_fd(to_print, 1);
-		ft_putchar('\n');
-	}
-	free(to_print);
+	if (!flag)
+		printf("\n");
 	set_status(data, 0, NULL, NULL);
-}
-
-int	is_wspace_or_null(char *str, int i)
-{
-	if (ft_is_whitespace(str[i]) || !str[i])
-		return (1);
-	else
-		return (0);
-}
-
-int	flag_skipper(char *str)
-{
-	int	i;
-
-	i = -1;
-	while (str[++i])
-		if (str[i] == '-')
-			break ;
-	while (str[i])
-	{
-		if (str[i] == '-')
-			i++;
-		else
-			break ;
-		if (str[i] != 'n')
-			break ;
-		while (str[i] && str[i] == 'n')
-			i++;
-		if (!ft_is_whitespace(str[i]))
-			break ;
-		else
-			while (str[i] && ft_is_whitespace(str[i]))
-				i++;
-	}
-	return (i);
 }

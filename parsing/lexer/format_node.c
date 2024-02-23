@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   format_node.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 10:18:20 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/22 14:49:26 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/23 12:51:51 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	extract_params(t_input *inp, t_cmd *pr)
 	i = 0;
 	while (nav)
 	{
-		if (nav->i == 0)
+		if (nav->i == 0 && ft_strlen(nav->str) != 0)
 		{
 			pr->param[i] = ft_strdup(nav->str);
 			i++;
@@ -102,7 +102,7 @@ char	*extract_command_name(t_input *inp)
 	nav = inp;
 	while (nav)
 	{
-		if (nav->i == 0)
+		if (nav->i == 0 && ft_strlen(nav->str) != 0)
 			return (ft_strdup(nav->str));
 		nav = nav->next;
 	}

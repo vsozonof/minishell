@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:35:12 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/23 14:31:12 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/23 14:43:28 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,6 @@ typedef struct s_cmd
 	char			*cmd;
 	char			**param;
 	char			**env;
-	int				n_cmd;
-	int				n_redir;
 	struct s_redirs	*redirs;
 	struct s_cmd	*next;
 	struct s_parse	*data;
@@ -203,6 +201,7 @@ int		get_redir_count(t_input *inp);
 int		get_n_redir(t_cmd *lst);
 int		get_node_len(t_cmd *lst);
 int		get_lst_len(t_input *lst);
+int		get_dtab_len(char **str);
 void	multi_node_formatting(t_input **inp, t_data *data);
 void	multi_format_node(t_cmd *pr, t_input *inp, t_data *data);
 
@@ -377,7 +376,7 @@ t_cha	*ft_createcell(t_data *data, int pos);
 // ?							Builtin && Tools
 // ! ---------------------------------------------------------------------------
 
-void	execute_cd(t_data *data);
+void	execute_cd(char **param, t_data *data);
 char	*cd_extract_arg(char *str);
 int		quoted_arg_util(char *str, int c);
 void	change_directory(t_data *data, char *path);
@@ -385,7 +384,7 @@ void	go_back_one_level(t_data *data);
 void	update_vars(t_data *data);
 void	error_handling(int err, char *str, t_data *data);
 
-void	execute_echo(t_data *data);
+void	execute_echo(char **param, t_data *data);
 int		is_wspace_or_null(char *str, int i);
 int		flag_skipper(char *str);
 
