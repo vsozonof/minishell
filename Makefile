@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+         #
+#    By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/09 23:22:06 by vsozonof          #+#    #+#              #
-#    Updated: 2024/02/22 14:48:44 by tpotilli         ###   ########.fr        #
+#    Updated: 2024/02/23 11:37:10 by vsozonof         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,11 +40,6 @@ SRCS = main.c \
 	   parsing/utils/pipe_splitter.c \
 	   parsing/errors/syntax_errors.c \
 	   parsing/errors/pipe_errors.c \
-	   parsing/redirs/redir_utils-1.c \
-	   parsing/redirs/redir_utils-2.c \
-	   parsing/redirs/redir_utils-3.c \
-	   parsing/redirs/redir_utils-4.c \
-	   parsing/redirs/redir_utils-5.c \
 	   parsing/expand/expand_master.c \
 	   parsing/expand/expand_utils-1.c \
 	   parsing/expand/expand_utils-2.c \
