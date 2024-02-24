@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 00:20:38 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/14 09:07:40 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/24 18:02:36 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,26 +48,17 @@ int	export_var_name_checker(char *str)
 
 char	*extract_var_name(char *str, int i)
 {
-	int	c;
-
-	while (i > 0 && str[i] != '=')
-		i--;
-	c = i;
-	while (c > 0 && !ft_is_whitespace(str[c - 1]))
-		c--;
-	return (ft_substr(str, c, (i - c)));
+	while (str[i] && str[i] != '=')
+		i++;
+	return (ft_substr(str, 0, i));
 }
 
 char	*extract_var_value(char *str, int i)
 {
-	int	c;
-
-	c = i;
-	while (c > 0 && str[c - 1] != '=')
-		c--;
-	if (i - c == 0)
-		return (NULL);
-	return (ft_substr(str, c, (i - c)));
+	while (str[i] && str[i] != '=')
+		i++;
+	i++;
+	return (ft_substr(str, i, ft_strlen(str)));
 }
 
 char	*export_extract_arg(char *str)

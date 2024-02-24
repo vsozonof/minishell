@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 10:21:29 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/23 14:22:56 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/24 17:24:03 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ char	*input_splitter(t_data *data)
 		&& ft_is_whitespace(data->input[i]))
 		i++;
 	c = get_next_split(data->input, i);
-	printf("hi hi hi hi %i\n", c);
 	if (c == i)
 		return (free(data->input), data->input = NULL, NULL);
 	tmp = ft_substr(data->input, c, ft_strlen(data->input));

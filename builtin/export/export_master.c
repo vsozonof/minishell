@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 12:49:13 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/23 15:09:15 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/24 17:53:30 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,7 @@ void	execute_export(t_data *data, char **param)
 	i = 1;
 	while (param[i])
 	{
-		// if (export_is_valid_arg(param[i], 0))
-		// {
-			// i = export_is_valid_arg(param[i], 0);
-			export_finalizer(param[i], 0, data);
-		// }
+		export_finalizer(param[i], 0, data);
 		i++;
 	}
 }
@@ -40,18 +36,14 @@ void	export_finalizer(char *args, int i, t_data *data)
 	char		*var_name;
 	char		*var_value;
 
-	printf("hellllllllllllllllllllllllllllllllllllllo\n");
 	var_name = extract_var_name(args, i);
 	if (!var_name)
 		return ;
-	printf("hellllllllllllllllllllllllllllllllllllllo\n");
-	if (!is_valid_var_first_char(var_name[0]))
-		return (free(var_name));
-	printf("hellllllllllllllllllllllllllllllllllllllo\n");
+	printf("varnam = %s\n", var_name);
 	var_value = extract_var_value(args, i);
+	printf("varval = %s\n", var_value);
 	if (!var_value)
 		return (free(var_name));
-	printf("hellllllllllllllllllllllllllllllllllllllo\n");
 	printf("%s - %s\n\n", var_name, var_value);
 	do_export(var_name, var_value, data);
 }

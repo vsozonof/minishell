@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   do_process.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:29:51 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/23 14:30:44 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/24 17:22:41 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ char	*ft_do_process(char *envp[], char *cmd)
 // -> verifie si on a les droits
 int	ft_do_process_helper(char *cmd)
 {
-	int		i;
+	// int		i;
 
-	i = 0;
+	// i = 0;
 	if (!cmd)
 		return (-2);
 	if (access(cmd, X_OK) == 0)
