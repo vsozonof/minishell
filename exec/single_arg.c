@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 16:09:07 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/23 15:22:25 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/25 12:09:32 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,10 @@ int	exec_single(t_data *data, char *comd)
 			if (!file)
 				return (1);
 		}
-		if (builtin_single(data) == 1)
-			return (fprintf(stderr, "error in builtin\n"));
+		if (builtin_single(data) == 0)
+		{
+			exit(0);
+		}
 		comd = ft_do_process(data->exec->env, data->exec->cmd);
 		if (!comd)
 		{

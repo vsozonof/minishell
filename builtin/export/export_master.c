@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   export_master.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 12:49:13 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/24 17:53:30 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/25 12:07:31 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	execute_export(t_data *data, char **param)
+void	execute_export(char **param, t_data *data)
 {
 	int		i;
 

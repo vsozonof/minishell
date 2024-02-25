@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   input_parser.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 09:14:23 by vsozonof          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/02/25 13:35:14 by vsozonof         ###   ########.fr       */
+=======
+/*   Updated: 2024/02/25 10:38:43 by tpotilli         ###   ########.fr       */
+>>>>>>> refs/remotes/origin/minishell-final
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +30,17 @@ void	input_parser(t_prompt *pr, t_data *data)
 		multi_node_handler(data, 0);
 	node_printer(data->exec);
 	init_exec_var(data);
+<<<<<<< HEAD
 	node_printer(data->exec);
 	// command_manager(data);
 	free_master(data);
+=======
+	// node_printer(data->exec);
+	// execute_export(data, data->exec->param);
+	// execute_env(data);
+	command_manager(data);
+	// free_master(data);
+>>>>>>> refs/remotes/origin/minishell-final
 }
 
 void	init_exec_var(t_data *data)
