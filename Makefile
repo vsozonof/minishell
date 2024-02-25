@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+         #
+#    By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/09 23:22:06 by vsozonof          #+#    #+#              #
-#    Updated: 2024/02/23 11:37:10 by vsozonof         ###   ########.fr        #
+#    Updated: 2024/02/25 13:44:40 by tpotilli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,6 +58,7 @@ SRCS = main.c \
 	   exec/do_process.c \
 	   exec/here_doc.c \
 	   exec/exec_utils1.c \
+	   exec/exec_utils2.c \
 	   exec/exec_minishell.c \
 	   exec/multi_arg.c \
 	   exec/child_process.c \

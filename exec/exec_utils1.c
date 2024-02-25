@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:28:28 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/23 14:40:31 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/25 13:57:08 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,6 @@ void	free_all_pipe(int **pipefd)
 
 void	close_all_open_redirs(int *file, int i)
 {
-	// if (i == 0)
-	// 	close(file[i]);
 	while (i >= 0)
 	{
 		fprintf(stderr, "voici mon i %d\n", i);
