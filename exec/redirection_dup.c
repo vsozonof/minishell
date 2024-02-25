@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:15:17 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/25 19:10:00 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/25 19:20:26 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@
 // 3 = db_gauche <<
 // 4 = droite >>
 
-int	*redirection_create(t_data *data)
+int	*redirection_create(t_cmd *cmd, t_data *data)
 {
 	int			file;
 	int			*file_tab;
 	t_redir		*nav;
 	int			i;
 
-	nav = data->exec->redirs;
+	nav = cmd->redirs;
 	file = ((i = 0));
 	file_tab = malloc(sizeof(int) * data->n_redirs);
 	if (!file_tab)

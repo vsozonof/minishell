@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:55:54 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/25 19:14:57 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/25 19:19:35 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	child_process(t_data *data, int **pipefd, int i, t_cmd *cmd)
 	if (ft_pipex_helper_dup(data, pipefd, i) == -1)
 		free_problem(data, NULL);
 	if (data->n_redirs > 0)
-		file = redirection_create(cmd->data);
+		file = redirection_create(cmd, data);
 	// if (builtin_checker(cmd->param) > 0)
 	// {
 	// 	builtin_multi(cmd);

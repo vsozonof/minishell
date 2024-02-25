@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 16:09:07 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/25 17:44:24 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/25 19:18:12 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ int	single_arg(t_data *data)
 
 	comd = NULL;
 	fprintf(stderr, "je passe par single\n");
-	exec_single(data, comd);
+	exec_single(data, comd, data->exec);
 	free(comd);
 	return (0);
 }
 
-int	exec_single(t_data *data, char *comd)
+int	exec_single(t_data *data, char *comd, t_cmd *cmd)
 {
 	int		pid;
 	int		error;
@@ -37,7 +37,7 @@ int	exec_single(t_data *data, char *comd)
 	else if (pid == 0)
 	{
 		if (data->n_redirs > 0)
-			file = redirection_create(data);
+			file = redirection_create(cmd, data);
 		builtin_single(data, file);
 		comd = ft_do_process(data->exec->env, data->exec->cmd);
 		if (!comd)

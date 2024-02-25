@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:20:19 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/25 19:03:23 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/25 19:19:11 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -249,7 +249,6 @@ int		quote_skipper(char *str, int c);
 int		is_valid_redir(char *str, t_data *data);
 int		redir_checker(char *str, int i, t_data *data);
 int		double_redir_checker(char *str, int i, t_data *data);
-void	redirection_counter(t_data *data);
 void	redirection_parser(t_data *data);
 void	get_redir_infos(t_data *data, int i, int n);
 void	set_tab_values(t_data *data, int n, int i, int mode);
@@ -326,7 +325,7 @@ int		cmd_not_valid(t_data *data);
 // ! ---------------------------------------------------------------------------
 
 int		single_arg(t_data *data);
-int		exec_single(t_data *data, char *comd);
+int		exec_single(t_data *data, char *comd, t_cmd *cmd);
 int		redir_builtin(int check, int du1, int du2);
 int		redirection_single(t_data *data);
 char	**espoir(char **cmd_argument);
@@ -338,7 +337,7 @@ int		builtin_single(t_data *data, int *file);
 // ?							Redirection
 // ! ---------------------------------------------------------------------------
 
-int		*redirection_create(t_data *data);
+int		*redirection_create(t_cmd *cmd, t_data *data);
 int		create_file(t_redir *nav, int file);
 int		other_type_redir(t_redir *nav, int file);
 int		redirection_dup1_in(int file);
