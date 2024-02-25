@@ -6,20 +6,20 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 09:41:34 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/25 17:32:08 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/25 19:29:21 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	builtin_single(t_data *data, int *file)
+int	builtin_single(t_cmd *cmd, t_data *data, int *file)
 {
 	int	check;
 
-	check = builtin_checker(data->exec->cmd);
+	check = builtin_checker(cmd->cmd);
 	if (check >= 1 && check <= 7)
 	{
-		builtin_manager(data, check);
+		builtin_manager(data, check, cmd);
 		free_problem(data, file);
 	}
 	return (1);
@@ -47,20 +47,20 @@ int	builtin_checker(char *tmp)
 	return (token);
 }
 
-void	builtin_manager(t_data *data, int token)
+void	builtin_manager(t_data *data, int token, t_cmd *cmd)
 {
 	if (token == 1)
-		execute_cd(data->exec->param, data);
+		execute_cd(cmd->param, data);
 	else if (token == 2)
-		execute_echo(data->exec->param, data);
+		execute_echo(cmd->param, data);
 	else if (token == 3)
 		execute_env(data);
 	else if (token == 4)
-		execute_exit(data->exec->param, data);
+		execute_exit(cmd->param, data);
 	else if (token == 6)
 		execute_pwd(data);
 	else if (token == 5)
-		execute_export(data->exec->param, data);
+		execute_export(cmd->param, data);
 	else if (token == 7)
 		execute_unset(data);
 }

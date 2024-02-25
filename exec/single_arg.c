@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 16:09:07 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/25 19:18:12 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/25 19:30:25 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	exec_single(t_data *data, char *comd, t_cmd *cmd)
 	{
 		if (data->n_redirs > 0)
 			file = redirection_create(cmd, data);
-		builtin_single(data, file);
+		builtin_single(cmd, data, file);
 		comd = ft_do_process(data->exec->env, data->exec->cmd);
 		if (!comd)
 			free_problem(data, file);

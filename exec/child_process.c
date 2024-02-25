@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:55:54 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/25 19:19:35 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/25 19:28:32 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,18 +35,11 @@ int	child_process(t_data *data, int **pipefd, int i, t_cmd *cmd)
 	int		error;
 	int		*file;
 
-	fprintf(stderr, "mon cmd = %s, n_redir %d\n", cmd->cmd, data->n_redirs);
 	if (ft_pipex_helper_dup(data, pipefd, i) == -1)
 		free_problem(data, NULL);
 	if (data->n_redirs > 0)
 		file = redirection_create(cmd, data);
-	// if (builtin_checker(cmd->param) > 0)
-	// {
-	// 	builtin_multi(cmd);
-	// 	builtin_manager(cmd, builtin_checker(cmd->param));
-	// 	free_multi_struct_and_arg(cmd, pipefd);
-	// 	return (-1);
-	// }
+	builtin_single(cmd, data, file);
 	// cree un if qui contiens checker de builtin
 	cmd_arg = ft_do_process(cmd->env, cmd->cmd);
 	if (!cmd_arg)

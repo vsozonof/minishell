@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:20:19 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/25 19:19:11 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/25 19:29:53 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -278,7 +278,7 @@ void	handle_signals(int signum);
 
 int		command_manager(t_data *data);
 int		builtin_checker(char *tmp);
-void	builtin_manager(t_data *data, int token);
+void	builtin_manager(t_data *data, int token, t_cmd *cmd);
 int		pipex_exec(t_data *data);
 int		ft_pipex(t_data *data);
 int		ft_pipex_helper(t_data *data, int *pid, int **pipefd, int i);
@@ -331,7 +331,7 @@ int		redirection_single(t_data *data);
 char	**espoir(char **cmd_argument);
 int		ft_count_space(char *buf);
 int		check_fre_cmd(t_data *data, char *buf, char **cmd_argument, char *fre);
-int		builtin_single(t_data *data, int *file);
+int		builtin_single(t_cmd *cmd, t_data *data, int *file);
 
 // ! ---------------------------------------------------------------------------
 // ?							Redirection
