@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 10:18:20 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/23 12:51:51 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/25 12:03:23 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,9 @@ int	set_redir_type(char *token)
 		return (1);
 	else if (token[0] == '<' && !token[1])
 		return (2);
-	else if (token[0] == '<' && token[1] == '<' && !token[3])
+	else if (token[0] == '<' && token[1] == '<' && !token[2])
 		return (3);
-	else if (token[0] == '>' && token[1] == '>' && !token[3])
+	else if (token[0] == '>' && token[1] == '>' && !token[2])
 		return (4);
 	printf("Error with redir type\n");
 	return (-1);

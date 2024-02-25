@@ -6,9 +6,10 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:20:19 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/25 13:43:56 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/25 14:00:00 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -207,6 +208,10 @@ void	multi_node_formatting(t_input **inp, t_data *data);
 void	multi_format_node(t_cmd *pr, t_input *inp, t_data *data);
 
 void	node_printer(t_cmd *pr);
+
+void	heredoc_finder(t_cmd *node);
+void	do_heredoc(char *delimiter, t_redir *redir_node);
+char	*get_tmp_filename(void);
 
 int		put_input_to_lst(t_input *ptr, char **tab);
 char	**input_to_lst(t_data *data);
