@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:15:17 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/25 14:57:45 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/25 19:10:00 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	*redirection_create(t_data *data)
 		if (file_tab[i] == -1 || nav->file == NULL)
 		{
 			fprintf(stderr, "%s : No such file or directory\n", nav->file);
-			free_problem(data, file_tab);
+			redir_failed(data, file_tab, i);
 		}
 		i++;
 		nav = nav->next;

@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:55:54 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/23 14:58:08 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/25 19:14:57 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,17 @@
 **
 */
 
-int	child_process(t_data *data, int **pipefd, int i)
+int	child_process(t_data *data, int **pipefd, int i, t_cmd *cmd)
 {
 	char	*cmd_arg;
 	int		error;
+	int		*file;
 
+	fprintf(stderr, "mon cmd = %s, n_redir %d\n", cmd->cmd, data->n_redirs);
 	if (ft_pipex_helper_dup(data, pipefd, i) == -1)
-	{
-		//faire des free
-		return (-1);
-	}
+		free_problem(data, NULL);
+	if (data->n_redirs > 0)
+		file = redirection_create(cmd->data);
 	// if (builtin_checker(cmd->param) > 0)
 	// {
 	// 	builtin_multi(cmd);
@@ -47,19 +48,13 @@ int	child_process(t_data *data, int **pipefd, int i)
 	// 	return (-1);
 	// }
 	// cree un if qui contiens checker de builtin
-	cmd_arg = ft_do_process(data->exec->env, data->exec->cmd);
+	cmd_arg = ft_do_process(cmd->env, cmd->cmd);
 	if (!cmd_arg)
-	{
-		close_all_open_redirs(data->exec->tab, data->n_redirs - 1);
-		//faire des free puis exit
-		exit(0);
-	}
-	error = execve(cmd_arg, data->exec->param, data->exec->env);
+		free_problem(data, file);
+	error = execve(cmd_arg, cmd->param, cmd->env);
 	if (error == -1)
 		fprintf(stderr, "could not execute the command\n");
-	// free_end_of_program(data->pr);
-	// free_all_pipe(pipefd);
-	exit(2);
+	free_problem(data, file);
 	return (-1);
 }
 
@@ -68,41 +63,11 @@ int	ft_pipex_helper_dup(t_data *data, int **pipefd, int i)
 	int		check;
 
 	check = 0;
-	fprintf(stderr, "voici mon i dans helper dup%d\n", i);
-	if (i % 2 == 0)
-		check = child_process_in(pipefd, data, i, 0);
-	else if (i % 2 == 1)
-		check = child_process_in(pipefd, data, i, 1);
+	check = child_process_in(pipefd, data, i);
 	if (check == -1)
 		return (-1);
 	return (0);
 }
-
-// int	builtin_multi(t_data *data)
-// {
-// 	int	check;
-
-// 	check = builtin_checker(data->input);
-// 	if (check >= 1 && check <= 7)
-// 	{
-// 		if (data->n_redirs > 0)
-// 		{
-// 			data->first = malloc(sizeof(int) * 1);
-// 			data->last = malloc(sizeof(int) * 1);
-// 			data->first[0] = first_redirect(data, data->input, 0);
-// 			data->last[0] = last_redirect(data, data->input, 0);
-// 			redirection_dup1_in(data, data->first[0], data->last[0]);
-// 		}
-// 		builtin_manager(data, check);
-// 		if (data->n_redirs > 0)
-// 		{
-// 			free(data->first);
-// 			free(data->last);
-// 		}
-// 		return (-1);
-// 	}
-// 	return (0);
-// }
 
 int		get_and_print_statuscode()
 {

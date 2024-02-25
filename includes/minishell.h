@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:20:19 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/25 14:44:59 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/25 19:03:23 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -282,21 +282,21 @@ int		builtin_checker(char *tmp);
 void	builtin_manager(t_data *data, int token);
 int		pipex_exec(t_data *data);
 int		ft_pipex(t_data *data);
-int		ft_pipex_helper(t_data *data, int *pid, int **pipefd);
+int		ft_pipex_helper(t_data *data, int *pid, int **pipefd, int i);
 int		ft_pipex_helper_dup(t_data *data, int **pipefd, int i);
-int		child_process(t_data *data, int **pipefd, int i);
+int		child_process(t_data *data, int **pipefd, int i, t_cmd *cmd);
 int		**parent_process(int **pipefd, int i);
 int		child_process_in_or_out(int **pipefd, t_data *data, int i, int token);
 int		child_process_middle(int **pipefd, int token, int verif);
 char	*ft_do_process(char *envp[], char *cmd);
 char	*ft_do_process_helper(char *cmd);
 int		ft_do_process_checker(char *cmd);
+int		child_process_in(int **pipefd, t_data *data, int i);
 
 char	*str_join_free(char *path, char *cmd);
 void	ft_freedb(char **str);
 void	free_pipe_argv(int **pipefd, char	*argv[]);
 int		check_dup(int pipe, int token, int pipe2);
-int		child_process_in(int **pipefd, t_data *data, int i, int token);
 char	*arg(char *str, t_data *data);
 char	**ft_get_path(char **env);
 int		redirection_manager(t_data *data, int i);
@@ -356,6 +356,8 @@ void	free_all_pipe(int **pipefd);
 void	free_all_fd(t_data *data, int i);
 void	close_all_open_redirs(int *file, int i);
 void	free_problem(t_data *data, int *file);
+void	redir_failed(t_data *data, int *file, int i);
+void	free_problem_cmd_not_found(t_data *data, int *file);
 
 char	*arg_helper(char **buf, char *tmp, t_data *data, int i);
 char	*copy_arg(char *dest, char *src);

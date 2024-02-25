@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 16:09:07 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/25 14:51:16 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/25 17:44:24 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,12 @@ int	exec_single(t_data *data, char *comd)
 		return (printf("error in fork\n"), -1);
 	else if (pid == 0)
 	{
-		fprintf(stderr, "n redir %d\n", data->n_redirs);
 		if (data->n_redirs > 0)
 			file = redirection_create(data);
 		builtin_single(data, file);
-		fprintf(stderr, "JE SUIS AVANT LE PATH DE LA CMD\n");
 		comd = ft_do_process(data->exec->env, data->exec->cmd);
 		if (!comd)
-		{
-			fprintf(stderr, "%s: command not found\n", data->exec->cmd);
 			free_problem(data, file);
-		}
 		error = execve(comd, data->exec->param, data->exec->env);
 		if (error == -1)
 			fprintf(stderr, "could not execute the command\n");

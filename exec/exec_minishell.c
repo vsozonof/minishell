@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:43:04 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/23 11:23:23 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/25 19:01:07 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,33 +20,38 @@ int	ft_pipex(t_data *data)
 {
 	pid_t		*pid;
 	int			**pipefd;
+	int			i;
 
-	pid = malloc(sizeof(pid_t) *data->n_cmds); //voir comment free le pid dans un child
+	i = 0;
+	pid = malloc(sizeof(pid_t) * data->n_cmds); //voir comment free le pid dans un child
 	if (!pid)
 		return (fprintf(stderr, "problem with malloc\n"), -1);
 	pipefd = alloc_pipe();
-	if (!pipefd || !pipefd[1] || !pipefd[0])
-		return (free(pid), free(pipefd), -1);
-	ft_pipex_helper(data, pid, pipefd);
+	if (!pipefd)
+		return (fprintf(stderr, "problem with malloc\n"), free(pid), free(pipefd), -1);
+	else if (!pipefd[1])
+		return (fprintf(stderr, "problem with malloc\n"), free(pid), free(pipefd), free(pipefd[0]), -1);
+	else if (!pipefd[0])
+		return (fprintf(stderr, "problem with malloc\n"), free(pid), free(pipefd), free(pipefd[1]), -1);
+	ft_pipex_helper(data, pid, pipefd, i);
 	wait_and_free(data, pipefd, pid);
 	return (0);
 }
 
-int	ft_pipex_helper(t_data *data, int *pid, int **pipefd)
+int	ft_pipex_helper(t_data *data, int *pid, int **pipefd, int i)
 {
-	int		i;
+	t_cmd	*cmd;
 
-	i = 0;
-	while (data->exec) // liste chainee
+	cmd = data->exec;
+	while (cmd)
 	{
 		pid[i] = fork();
 		if (pid[i] < 0)
 			return (printf("erreur de fork\n"), 1);
 		if (pid[i] == 0)
 		{
-			if (child_process(data, pipefd, i) == -1)
+			if (child_process(data, pipefd, i, cmd) == -1)
 				fprintf(stderr, "il y a une erreur dans le child\n");
-				// pour le moment ne rien faire
 		}
 		else
 		{
@@ -55,12 +60,11 @@ int	ft_pipex_helper(t_data *data, int *pid, int **pipefd)
 			// get_and_print_statuscode();
 		}
 		i++;
-		data->exec = data->exec->next;
+		cmd = cmd->next;
 	}
 	return (0);
 }
 
-// /*
 // **	This function takes as parameter: 
 // **
 // **	pipefd: an array of pipe
@@ -73,7 +77,6 @@ int	ft_pipex_helper(t_data *data, int *pid, int **pipefd)
 // **	so we check i we are pair or not
 // **	then we close our pipe and alloc it again
 // **
-// */
 
 int	**parent_process(int **pipefd, int i)
 {

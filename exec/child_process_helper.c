@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:51:54 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/23 14:57:24 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/25 19:02:29 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,16 @@ int	check_dup(int pipe, int token, int pipe2)
 	return (0);
 }
 
-int	child_process_in(int **pipefd, t_data *data, int i, int token)
+int	child_process_in(int **pipefd, t_data *data, int i)
 {
 	int			verif;
+	int			token;
 
 	verif = 0;
-	// i etant l'endroit ou je suis dans mon ancienne liste
-	fprintf(stderr, "mon compteur = %d\n", data->n_cmds);
+	if (i % 2 == 0)
+		token = 0;
+	else if (i % 2 == 1)
+		token = 1;
 	if (i == 0 || i == data->n_cmds -1)
 	{
 		if (child_process_in_or_out(pipefd, data, i, token) == -1)
@@ -55,8 +58,6 @@ int	child_process_in(int **pipefd, t_data *data, int i, int token)
 		if (child_process_middle(pipefd, token, verif) == -1)
 			return (-1);
 	}
-	if (data->n_redirs > 0)
-		data->exec->tab = redirection_create(data);
 	free(pipefd[0]);
 	free(pipefd[1]);
 	return (0);

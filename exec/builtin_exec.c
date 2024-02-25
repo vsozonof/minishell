@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 09:41:34 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/25 14:51:10 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/25 17:32:08 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 int	builtin_single(t_data *data, int *file)
 {
 	int	check;
-	// int	du1;
-	// int	du2;
 
 	check = builtin_checker(data->exec->cmd);
 	if (check >= 1 && check <= 7)
