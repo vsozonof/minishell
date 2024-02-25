@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:15:17 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/23 14:32:24 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/25 13:54:39 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,42 +23,44 @@
 
 int	*redirection_create(t_data *data)
 {
-	int		file;
-	int		*file_tab;
-	int		i;
+	int			file;
+	int			*file_tab;
+	t_redir		*nav;
+	int			i;
 
+	nav = data->exec->redirs;
 	file = ((i = 0));
 	file_tab = malloc(sizeof(int) * data->n_redirs);
-	while (data->exec->redirs)
+	while (nav)
 	{
-		fprintf(stderr, "fd = %d\n", data->exec->redirs->type);
-		file_tab[i] = create_file(data, file);
-		if (file_tab[i] == -1)
+		file_tab[i] = create_file(nav, file);
+		if (file_tab[i] == -1 || nav->file == NULL)
 		{
-			fprintf(stderr, "%s : No such file or directory\n", data->exec->redirs->file);
+			fprintf(stderr, "%s : No such file or directory\n", nav->file);
 			close_all_open_redirs(file_tab, i - 1);
+			free_master(data);
+			free_end_of_program(data->pr);
 			exit(0);
 		}
 		i++;
-		data->exec->redirs = data->exec->redirs->next;
+		nav = nav->next;
 	}
 	return (file_tab);
 }
 
-int	create_file(t_data *data, int file)
+int	create_file(t_redir *nav, int file)
 {
-	fprintf(stderr, "type = %d\n", data->exec->redirs->type);
-	if (data->exec->redirs->type == 2)
+	if (nav->type == 2)
 	{
-		file = ft_create_fd(data->exec->redirs->file, O_RDONLY);
+		file = ft_create_fd(nav->file, O_RDONLY);
 		if (file == -1)
 			return (-1);
 		if (redirection_dup1_in(file) == -1)
 			return (-1);
 	}
-	else if (data->exec->redirs->type == 1)
+	else if (nav->type == 1)
 	{
-		file = ft_create_fd(data->exec->redirs->file, O_WRONLY | O_CREAT | O_TRUNC);
+		file = ft_create_fd(nav->file, O_WRONLY | O_CREAT | O_TRUNC);
 		if (file == -1)
 			return (-1);
 		if (redirection_dup1_out(file) == -1)
@@ -66,26 +68,25 @@ int	create_file(t_data *data, int file)
 	}
 	else
 	{
-		if (other_type_redir(data, file) == -1)
+		if (other_type_redir(nav, file) == -1)
 			return (-1);
 	}
-	fprintf(stderr, "voici mon file %d\n", file);
 	return (file);
 }
 
-int	other_type_redir(t_data *data, int file)
+int	other_type_redir(t_redir *nav, int file)
 {
-	if (data->exec->redirs->type == 3)
+	if (nav->type == 3)
 	{
-		file = ft_create_fd(data->exec->redirs->file, O_RDONLY);
+		file = ft_create_fd(nav->file, O_RDONLY);
 		if (file == -1)
 			return (-1);
 		if (redirection_dup1_in(file) == -1)
 			return (-1);
 	}
-	else if (data->exec->redirs->type == 4)
+	else if (nav->type == 4)
 	{
-		file = ft_create_fd(data->exec->redirs->file, O_WRONLY | O_APPEND);
+		file = ft_create_fd(nav->file, O_WRONLY | O_APPEND);
 		if (file == -1)
 			return (-1);
 		if (redirection_dup1_out(file) == -1)

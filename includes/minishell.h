@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:20:19 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/25 12:07:05 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/25 13:43:56 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -284,7 +284,8 @@ int		**parent_process(int **pipefd, int i);
 int		child_process_in_or_out(int **pipefd, t_data *data, int i, int token);
 int		child_process_middle(int **pipefd, int token, int verif);
 char	*ft_do_process(char *envp[], char *cmd);
-int		ft_do_process_helper(char *cmd);
+char	*ft_do_process_helper(char *cmd);
+int		ft_do_process_checker(char *cmd);
 
 char	*str_join_free(char *path, char *cmd);
 void	ft_freedb(char **str);
@@ -333,8 +334,8 @@ int		builtin_single(t_data *data);
 // ! ---------------------------------------------------------------------------
 
 int		*redirection_create(t_data *data);
-int		create_file(t_data *data, int file);
-int		other_type_redir(t_data *data, int file);
+int		create_file(t_redir *nav, int file);
+int		other_type_redir(t_redir *nav, int file);
 int		redirection_dup1_in(int file);
 int		redirection_dup1_out(int file);
 
@@ -349,6 +350,7 @@ long	len_list(t_redir *redir);
 void	free_all_pipe(int **pipefd);
 void	free_all_fd(t_data *data, int i);
 void	close_all_open_redirs(int *file, int i);
+void	free_problem(t_data *data, int *file);
 
 char	*arg_helper(char **buf, char *tmp, t_data *data, int i);
 char	*copy_arg(char *dest, char *src);
