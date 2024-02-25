@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:20:19 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/25 14:00:40 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/25 14:44:59 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -332,7 +332,7 @@ int		redirection_single(t_data *data);
 char	**espoir(char **cmd_argument);
 int		ft_count_space(char *buf);
 int		check_fre_cmd(t_data *data, char *buf, char **cmd_argument, char *fre);
-int		builtin_single(t_data *data);
+int		builtin_single(t_data *data, int *file);
 
 // ! ---------------------------------------------------------------------------
 // ?							Redirection

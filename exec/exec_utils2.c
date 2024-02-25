@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 13:42:38 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/25 13:57:13 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/25 14:49:55 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,4 +19,5 @@ void	free_problem(t_data *data, int *file)
 		close_all_open_redirs(file, data->n_redirs - 1);
 	free_master(data);
 	free_end_of_program(data->pr);
+	exit(0);
 }

@@ -6,13 +6,13 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 09:41:34 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/25 12:08:57 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/25 14:51:10 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	builtin_single(t_data *data)
+int	builtin_single(t_data *data, int *file)
 {
 	int	check;
 	// int	du1;
@@ -22,7 +22,7 @@ int	builtin_single(t_data *data)
 	if (check >= 1 && check <= 7)
 	{
 		builtin_manager(data, check);
-		return (0);
+		free_problem(data, file);
 	}
 	return (1);
 }

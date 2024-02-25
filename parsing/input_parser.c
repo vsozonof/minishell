@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_parser.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 09:14:23 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/25 14:08:31 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/25 14:28:02 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ void	input_parser(t_prompt *pr, t_data *data)
 	}
 	else if (is_there_pipe(pr))
 		multi_node_handler(data, 0);
-	node_printer(data->exec);
+	// node_printer(data->exec);
 	init_exec_var(data);
-	node_printer(data->exec);
+	// node_printer(data->exec);
 	command_manager(data);
 	free_master(data);
 }
@@ -68,7 +68,7 @@ void	do_heredoc(char *delimiter, t_redir *redir_node)
 	int		fd;
 
 	tmp_fname = get_tmp_filename();
-	fd = open(tmp_fname, O_APPEND | O_WRONLY | O_CREAT, 0644);
+	fd = open(tmp_fname, O_CREAT | O_WRONLY, 0644);
 	while (42)
 	{
 		heredoc_input = readline("> ");
@@ -95,7 +95,7 @@ char	*get_tmp_filename(void)
 	str = malloc(sizeof(char) * 21);
 	if (!fd)
 		return (fprintf(stderr, "problem with fd in here_doc\n"), NULL);
-	read(fd, str, 14);
+	read(fd, str, 16);
 	i = 1;
 	str[0] = '.';
 	while (i <= 15)

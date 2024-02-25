@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:15:17 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/25 13:54:39 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/25 14:57:45 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,18 @@ int	*redirection_create(t_data *data)
 	nav = data->exec->redirs;
 	file = ((i = 0));
 	file_tab = malloc(sizeof(int) * data->n_redirs);
+	if (!file_tab)
+	{
+		fprintf(stderr, "a problem append with a malloc\n");
+		free_problem(data, NULL);
+	}
 	while (nav)
 	{
 		file_tab[i] = create_file(nav, file);
 		if (file_tab[i] == -1 || nav->file == NULL)
 		{
 			fprintf(stderr, "%s : No such file or directory\n", nav->file);
-			close_all_open_redirs(file_tab, i - 1);
-			free_master(data);
-			free_end_of_program(data->pr);
-			exit(0);
+			free_problem(data, file_tab);
 		}
 		i++;
 		nav = nav->next;
@@ -83,6 +85,7 @@ int	other_type_redir(t_redir *nav, int file)
 			return (-1);
 		if (redirection_dup1_in(file) == -1)
 			return (-1);
+		unlink(nav->file);
 	}
 	else if (nav->type == 4)
 	{
