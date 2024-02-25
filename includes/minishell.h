@@ -6,11 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:20:19 by tpotilli          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/02/25 13:15:03 by vsozonof         ###   ########.fr       */
-=======
-/*   Updated: 2024/02/25 12:07:05 by tpotilli         ###   ########.fr       */
->>>>>>> refs/remotes/origin/minishell-final
+/*   Updated: 2024/02/25 13:57:29 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
