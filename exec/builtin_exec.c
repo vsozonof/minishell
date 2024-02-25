@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 09:41:34 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/23 11:18:31 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/25 12:08:57 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,9 @@ int	builtin_single(t_data *data)
 	// int	du2;
 
 	check = builtin_checker(data->exec->cmd);
-	fprintf(stderr, "voici mon check %d\n", check);
 	if (check >= 1 && check <= 7)
 	{
-		// if (cmd->nb_redir > 0)
-		// {
-		// 	if (redir_builtin(cmd, check, du1, du2) == 1)
-		// 		return (1);
-		// }
-		// builtin_manager(cmd, check);
+		builtin_manager(data, check);
 		return (0);
 	}
 	return (1);
@@ -55,23 +49,23 @@ int	builtin_checker(char *tmp)
 	return (token);
 }
 
-// void	builtin_manager(t_data *data, int token)
-// {
-// 	if (token == 1)
-// 		execute_cd(cmd);
-// 	else if (token == 2)
-// 		execute_echo(cmd);
-// 	else if (token == 3)
-// 		execute_env(cmd);
-// 	else if (token == 4)
-// 		execute_exit(cmd);
-// 	else if (token == 6)
-// 		execute_pwd(cmd);
-// 	else if (token == 5)
-// 		execute_export(cmd);
-// 	else if (token == 7)
-// 		execute_unset(cmd);
-// }
+void	builtin_manager(t_data *data, int token)
+{
+	if (token == 1)
+		execute_cd(data->exec->param, data);
+	else if (token == 2)
+		execute_echo(data->exec->param, data);
+	else if (token == 3)
+		execute_env(data);
+	else if (token == 4)
+		execute_exit(data->exec->param, data);
+	else if (token == 6)
+		execute_pwd(data);
+	else if (token == 5)
+		execute_export(data->exec->param, data);
+	else if (token == 7)
+		execute_unset(data);
+}
 
 // int	redir_builtin(t_data *data, int check, int du1, int du2)
 // {

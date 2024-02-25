@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:20:19 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/23 15:20:23 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/25 12:07:05 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -274,7 +274,7 @@ void	handle_signals(int signum);
 
 int		command_manager(t_data *data);
 int		builtin_checker(char *tmp);
-void	builtin_manager(int token);
+void	builtin_manager(t_data *data, int token);
 int		pipex_exec(t_data *data);
 int		ft_pipex(t_data *data);
 int		ft_pipex_helper(t_data *data, int *pid, int **pipefd);
@@ -392,7 +392,7 @@ int		flag_skipper(char *str);
 void	execute_pwd(t_data *data);
 void	execute_env(t_data *data);
 
-void	execute_export(t_data *data, char **param);
+void	execute_export(char **param, t_data *data);
 char	*export_extract_arg(char *str);
 void	export_no_args(t_env *env);
 int		export_valid_args_counter(char *str);
@@ -412,7 +412,7 @@ char	*unset_extract_var_name(char *args, int i);
 int		unset_var_name_skipper(char *args, int i);
 void	do_unset(char *args, t_data *data);
 
-void	execute_exit(t_data *data, char **param);
+void	execute_exit(char **param, t_data *data);
 
 // ! ---------------------------------------------------------------------------
 // ?							Utils Free

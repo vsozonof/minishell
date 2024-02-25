@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 17:52:12 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/23 14:37:01 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/25 12:07:46 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	status_checker(char	*input, t_data *data)
 	return (i_status);
 }
 
-void	execute_exit(t_data *data, char **param)
+void	execute_exit(char **param, t_data *data)
 {
 	int	status;
 
