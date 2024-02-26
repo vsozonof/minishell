@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 13:42:38 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/26 18:09:41 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/26 18:24:23 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	free_problem(t_data *data, int *file, t_cmd *cmd)
 	free_end_of_program(data->pr);
 	exit(0);
 }
-
+// regler problem pid demain
 void	redir_failed(t_data *data, int *file, int i)
 {
 	close_open_redirs(file, i - 1);
