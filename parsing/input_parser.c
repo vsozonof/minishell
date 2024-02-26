@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 09:14:23 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/26 16:15:43 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/26 17:54:48 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@ void	input_parser(t_prompt *pr, t_data *data)
 			return (free_master(data));
 	}
 	if (!is_there_pipe(pr))
-		single_node_handler(data);
+	{
+		if (!single_node_handler(data))
+			return (free_master(data));
+	}
 	else if (is_there_pipe(pr))
 		multi_node_handler(data, 0);
 	if (!init_exec_var(data))
@@ -41,6 +44,8 @@ int	init_exec_var(t_data *data)
 	data->n_cmds = get_node_len(data->exec);
 	data->here_doc_fd
 		= malloc(sizeof(int) * get_heredoc_counter(data->exec) + 1);
+	if (!data->here_doc_fd)
+		return (set_status(data, 12, "malloc error", NULL), 0);
 	ft_memset(data->here_doc_fd, -1, sizeof(data->here_doc_fd));
 	if (!heredoc_finder(data->exec, data))
 		return (0);

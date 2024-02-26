@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 08:35:01 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/26 12:32:43 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/26 17:41:20 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,19 +35,19 @@ int	init_if_no_env(t_prompt *ptr, char **envp)
 
 	env_l = malloc(sizeof(t_env));
 	if (!env_l)
-		return (set_status(ptr->data, 12, "malloc error.", NULL), 0);
+		return (set_status(ptr->data, 12, "malloc error.", "malloc"), 0);
 	if (!put_env_to_lst(env_l, envp))
-		return (set_status(ptr->data, 12, "malloc error.", NULL), 0);
+		return (set_status(ptr->data, 12, "malloc error.", "malloc"), 0);
 	ptr->env = env_l;
 	ptr->user = ft_strdup("???");
 	if (!ptr->user)
-		return (set_status(ptr->data, 12, "malloc error.", NULL), 0);
+		return (set_status(ptr->data, 12, "malloc error.", "malloc"), 0);
 	ptr->post = ft_strdup("???");
 	if (!ptr->post)
-		return (set_status(ptr->data, 12, "malloc error.", NULL), 0);
+		return (set_status(ptr->data, 12, "malloc error.", "malloc"), 0);
 	ptr->w_d = getcwd(NULL, 0);
 	if (!ptr->w_d)
-		return (set_status(ptr->data, 12, "malloc error.", NULL), 0);
+		return (set_status(ptr->data, 12, "malloc error.", "malloc"), 0);
 	return (1);
 }
 
@@ -57,21 +57,21 @@ int	init_if_env(t_prompt *ptr, char **env)
 
 	env_l = malloc(sizeof(t_env));
 	if (!env_l)
-		return (set_status(ptr->data, 12, "malloc error.", NULL), 0);
+		return (set_status(ptr->data, 12, "malloc error.", "malloc"), 0);
 	else
 	{
 		if (!put_env_to_lst(env_l, env))
-			return (set_status(ptr->data, 12, "malloc error.", NULL), 0);
+			return (set_status(ptr->data, 12, "malloc error.", "malloc"), 0);
 		ptr->env = env_l;
 		ptr->user = ft_strdup(getenv("LOGNAME"));
 		if (!ptr->user)
-			return (set_status(ptr->data, 12, "malloc error.", NULL), 0);
+			return (set_status(ptr->data, 12, "malloc error.", "malloc"), 0);
 		ptr->post = ft_substr(getenv("SESSION_MANAGER"), 6, 12);
 		if (!ptr->post)
-			return (set_status(ptr->data, 12, "malloc error.", NULL), 0);
+			return (set_status(ptr->data, 12, "malloc error.", "malloc"), 0);
 		ptr->w_d = getcwd(NULL, 0);
 		if (!ptr->w_d)
-			return (set_status(ptr->data, 12, "malloc error.", NULL), 0);
+			return (set_status(ptr->data, 12, "malloc error.", "malloc"), 0);
 	}
 	return (1);
 }
@@ -80,14 +80,14 @@ int	init_extras(t_prompt *ptr)
 {
 	ptr->name = ft_strdup("minishell");
 	if (!ptr->name)
-		return (set_status(ptr->data, 12, "malloc error.", NULL), 0);
+		return (set_status(ptr->data, 12, "malloc error.", "malloc"), 0);
 	ptr->pid = ft_itoa((int)getpid());
 	if (!ptr->pid)
-		return (set_status(ptr->data, 12, "malloc error.", NULL), 0);
+		return (set_status(ptr->data, 12, "malloc error.", "malloc"), 0);
 	ptr->data->i_status = 0;
 	ptr->data->c_status = ft_itoa(ptr->data->i_status);
 	if (!ptr->data->c_status)
-		return (set_status(ptr->data, 12, "malloc error.", NULL), 0);
+		return (set_status(ptr->data, 12, "malloc error.", "malloc"), 0);
 	ptr->data->exited = 0;
 	if (!create_side_env(ptr))
 		return (0);
@@ -101,7 +101,7 @@ int	init_str(t_data *data, t_prompt *prompt)
 
 	inp = alloc_input_struct();
 	if (!inp)
-		return (0);
+		return (set_status(data, 12, "malloc error", "malloc"), 0);
 	multi_inp = NULL;
 	data->exec = NULL;
 	prompt->inp = ((data->inp = inp));

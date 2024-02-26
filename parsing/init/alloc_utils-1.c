@@ -6,13 +6,13 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 10:11:25 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/26 12:32:54 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/26 18:17:22 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	alloc_redir_list(t_cmd *pr, int n)
+int	alloc_redir_list(t_cmd *pr, int n)
 {
 	int		i;
 	t_redir	*p;
@@ -23,11 +23,12 @@ void	alloc_redir_list(t_cmd *pr, int n)
 	{
 		p->next = malloc(sizeof(t_redir));
 		if (!p->next)
-			return ;
+			return (0);
 		p = p->next;
 		i++;
 	}
 	p -> next = NULL;
+	return (1);
 }
 
 t_input	**alloc_struct(t_input **ptr, int n)

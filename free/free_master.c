@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 04:29:11 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/26 09:50:43 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/26 17:44:28 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ void	free_input_lst(t_input *lst)
 
 void	free_end_of_program(t_prompt *p)
 {
+	clear_history();
 	if (p->user)
 		free(p->user);
 	if (p->w_d)

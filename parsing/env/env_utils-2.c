@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 22:20:24 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/12 09:27:49 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/26 17:30:58 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ int	create_side_env(t_prompt *ptr)
 	tmp = ptr->env;
 	ptr->nv = malloc(sizeof(char *) * (env_len(ptr->env) + 1));
 	if (!ptr->nv)
-		return (set_status(ptr->data, 12, "malloc error.", NULL), 0);
+		return (set_status(ptr->data, 12, "malloc error.", "malloc"), 0);
 	while (tmp)
 	{
 		ptr->nv[i] = ft_strdup(tmp->var);
 		if (!ptr->nv[i])
-			return (set_status(ptr->data, 12, "malloc error.", NULL), 0);
+			return (set_status(ptr->data, 12, "malloc error.", "malloc"), 0);
 		i++;
 		tmp = tmp->next;
 	}

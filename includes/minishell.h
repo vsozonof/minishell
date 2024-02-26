@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:20:19 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/26 16:15:48 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/26 18:23:07 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,11 +185,11 @@ t_input	**alloc_struct(t_input **ptr, int n);
 t_env	*ft_get_env_node(t_env *env, char *str);
 
 void	multi_node_handler(t_data *data, int i);
-void	alloc_redir_list(t_cmd *pr, int n);
+int		alloc_redir_list(t_cmd *pr, int n);
 void	alloc_multi_nodes(t_input **inp, t_cmd *pr);
-void	format_node(t_cmd *pr, t_input *inp, t_data *data);
-void	extract_params(t_input *inp, t_cmd *pr);
-void	extract_redirs(t_input *inp, t_cmd *pr);
+int		format_node(t_cmd *pr, t_input *inp, t_data *data);
+int		extract_params(t_input *inp, t_cmd *pr);
+int		extract_redirs(t_input *inp, t_cmd *pr);
 void	multi_node_formatting(t_input **inp, t_data *data);
 void	multi_format_node(t_cmd *pr, t_input *inp, t_data *data);
 void	node_printer(t_cmd *pr);
@@ -200,7 +200,7 @@ void	del_var_from_env(t_data *data, char *var);
 
 char	*input_splitter(t_data *data);
 char	*extract_command_name(t_input *inp);
-char	*get_tmp_filename(void);
+char	*get_tmp_filename(t_data *data);
 char	**input_to_lst(t_data *data);
 char	**pipes_splitter(char const *s, char c, t_data *data);
 char	*ft_get_env(t_env *env, char *str);
@@ -219,7 +219,7 @@ int		get_dtab_len(char **str);
 int		heredoc_finder(t_cmd *node, t_data *data);
 int		do_heredoc(char *delimiter, t_redir *redir_node, t_data *data);
 int		do_heredoc_extra(char *delimiter, int fd);
-int		put_input_to_lst(t_input *ptr, char **tab);
+int		put_input_to_lst(t_input *ptr, char **tab, t_data *data);
 int		is_special_char(char c);
 int		lexer_counter(char *str, int i, int c);
 int		lexer_counter_helper(char *str, int i, int flag);
@@ -241,6 +241,7 @@ int		syntax_error_finder(t_data *data, char *str);
 int		wspace_after_redir_checker(t_data *data, char *str, int i);
 int		token_after_redir_checker(t_data *data, char *str, int i);
 int		redir_error_finder(t_data *data, char *str, int i);
+int		format_node_extra(t_cmd *pr, t_input *inp, t_data *data, int n);
 
 // ! ---------------------------------------------------------------------------
 // ?							SIGNAL HANDLER
