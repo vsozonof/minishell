@@ -6,7 +6,7 @@
 #    By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/09 23:22:06 by vsozonof          #+#    #+#              #
-#    Updated: 2024/02/26 09:58:58 by vsozonof         ###   ########.fr        #
+#    Updated: 2024/02/26 11:44:37 by vsozonof         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,7 @@ SRCS = main.c \
 	   parsing/errors/syntax_errors.c \
 	   parsing/errors/pipe_errors.c \
 	   parsing/errors/exit_status.c \
+	   parsing/errors/redir_syntax_error.c \
 	   parsing/expand/expand_master.c \
 	   parsing/expand/expand_utils-0.c \
 	   parsing/expand/expand_utils-1.c \

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exception_checker.c                                :+:      :+:    :+:   */
+/*   syntax_errors.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 04:37:37 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/22 10:39:49 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/26 11:44:15 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,9 @@ int	is_input_valid(char *str, t_data *data)
 		return (0);
 	else if (!exception_checker(str, data))
 		return (0);
-	else if (!unclosed_quote_detector(str))
+	else if (!unclosed_quote_detector(str, data))
+		return (0);
+	else if (!syntax_error_finder(data, str))
 		return (0);
 	return (1);
 }
@@ -84,7 +86,7 @@ int	exception_checker_2(char *str, int i, t_data *data)
 	return (1);
 }
 
-int	unclosed_quote_detector(char *str)
+int	unclosed_quote_detector(char *str, t_data *data)
 {
 	int	i;
 
@@ -97,7 +99,7 @@ int	unclosed_quote_detector(char *str)
 			while (str[i] && str[i] != 39)
 				i++;
 			if (str[i] != 39)
-				return (pr_error("input error : unclosed single quote."));
+				return (set_status(data, 2, "unclosed single quote", NULL), 0);
 		}
 		else if (str[i] == '"')
 		{
@@ -105,7 +107,7 @@ int	unclosed_quote_detector(char *str)
 			while (str[i] && str[i] != '"')
 				i++;
 			if (str[i] != '"')
-				return (pr_error("input error : unclosed double quote."));
+				return (set_status(data, 2, "unclosed double quote", NULL), 0);
 		}
 		i++;
 	}

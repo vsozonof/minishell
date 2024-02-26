@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 09:27:48 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/26 09:18:12 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/26 12:01:02 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,13 @@ void	handle_signals(int signum)
 		tmp = getenv("SESSION_MANAGER");
 		ptr.post = ft_substr(tmp, 6, 12);
 		ptr.w_d = getcwd(NULL, 0);
-		printf("\n%s at %s in: %s\n", ptr.user, ptr.post, ptr.w_d);
-		rl_on_new_line();
-		rl_replace_line("", 1);
-		rl_redisplay();
+		if (g_status != 2)
+		{
+			printf("\n%s at %s in: %s\n", ptr.user, ptr.post, ptr.w_d);
+			rl_on_new_line();
+			rl_replace_line("", 1);
+			rl_redisplay();
+		}
 		if (g_status == 2)
 			close(STDIN_FILENO);
 		g_status = 1;
