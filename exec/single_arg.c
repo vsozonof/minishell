@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 16:09:07 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/26 12:12:02 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/26 12:20:16 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	single_arg(t_data *data)
 	char	*comd;
 
 	comd = NULL;
+	if (data->exec->cmd == NULL)
+		return (0);
 	exec_single(data, comd, data->exec);
 	free(comd);
 	return (0);

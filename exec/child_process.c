@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:55:54 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/26 12:16:34 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/26 12:18:30 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,14 +99,14 @@ int		get_and_print_statuscode(int *pid, int i)
 		if (statusCode != 0)
 		{
 			write(2, "failure status code: \n", 23);
-			write(2, &statusCode + 125, 3);
+			write(2, &statusCode, 3);
 			write(2, "\n", 1);
 		}
 		statusCode = WIFSIGNALED(wstatus);
 		if (statusCode != 0)
 		{
 			write(2, "failure with a signal is unknown\n", 34);
-			write(2, &statusCode + 125, 3);
+			write(2, &statusCode, 3);
 			write(2, "\n", 1);
 		}
 	}
