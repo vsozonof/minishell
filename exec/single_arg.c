@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 16:09:07 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/25 19:30:25 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/26 09:55:26 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int	single_arg(t_data *data)
 {
 	char	*comd;
-	// int		verif;
 
 	comd = NULL;
 	fprintf(stderr, "je passe par single\n");
@@ -27,7 +26,6 @@ int	single_arg(t_data *data)
 int	exec_single(t_data *data, char *comd, t_cmd *cmd)
 {
 	int		pid;
-	int		error;
 	int		*file;
 
 	file = NULL;
@@ -35,19 +33,33 @@ int	exec_single(t_data *data, char *comd, t_cmd *cmd)
 	if (pid < 0)
 		return (printf("error in fork\n"), -1);
 	else if (pid == 0)
-	{
-		if (data->n_redirs > 0)
-			file = redirection_create(cmd, data);
-		builtin_single(cmd, data, file);
-		comd = ft_do_process(data->exec->env, data->exec->cmd);
-		if (!comd)
-			free_problem(data, file);
-		error = execve(comd, data->exec->param, data->exec->env);
-		if (error == -1)
-			fprintf(stderr, "could not execute the command\n");
-		exit(0);
-	}
+		child_process_single(data, cmd, file, comd);
 	else if (pid > 0)
 		waitpid(pid, NULL, 0);
 	return (0);
+}
+
+int	child_process_single(t_data *data, t_cmd *cmd, int *file, char *comd)
+{
+	int	error;
+
+	if (data->n_redirs > 0)
+	{
+		file = redirection_create(cmd, data);
+		if (!file)
+			exit(0);
+	}
+	if (builtin_single(cmd, data, file) == -1)
+		exit(data->i_status);
+	comd = ft_do_process(data->exec->env, data->exec->cmd);
+	if (!comd)
+	{
+		free_problem(data, file, cmd);
+		exit(0);
+	}
+	error = execve(comd, data->exec->param, data->exec->env);
+	if (error == -1)
+		fprintf(stderr, "could not execute the command\n");
+	exit(0);
+	return (-1);
 }

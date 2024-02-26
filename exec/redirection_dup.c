@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:15:17 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/25 19:20:26 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/26 08:28:50 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,12 @@ int	*redirection_create(t_cmd *cmd, t_data *data)
 
 	nav = cmd->redirs;
 	file = ((i = 0));
-	file_tab = malloc(sizeof(int) * data->n_redirs);
+	file_tab = malloc(sizeof(int) * len_list(nav));
 	if (!file_tab)
 	{
 		fprintf(stderr, "a problem append with a malloc\n");
-		free_problem(data, NULL);
+		free_problem(data, NULL, cmd);
+		return (NULL);
 	}
 	while (nav)
 	{
@@ -43,6 +44,7 @@ int	*redirection_create(t_cmd *cmd, t_data *data)
 		{
 			fprintf(stderr, "%s : No such file or directory\n", nav->file);
 			redir_failed(data, file_tab, i);
+			return (NULL);
 		}
 		i++;
 		nav = nav->next;
@@ -89,7 +91,7 @@ int	other_type_redir(t_redir *nav, int file)
 	}
 	else if (nav->type == 4)
 	{
-		file = ft_create_fd(nav->file, O_WRONLY | O_APPEND);
+		file = ft_create_fd(nav->file, O_WRONLY | O_APPEND | O_CREAT);
 		if (file == -1)
 			return (-1);
 		if (redirection_dup1_out(file) == -1)

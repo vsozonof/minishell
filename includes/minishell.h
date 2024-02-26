@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:20:19 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/26 10:06:02 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/26 10:07:14 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -259,6 +259,7 @@ char	*ft_do_process(char *envp[], char *cmd);
 char	*ft_do_process_helper(char *cmd);
 int		ft_do_process_checker(char *cmd);
 int		child_process_in(int **pipefd, t_data *data, int i);
+int		child_process_helper(t_data *data, t_cmd *cmd, int *file);
 
 char	*str_join_free(char *path, char *cmd);
 void	ft_freedb(char **str);
@@ -300,6 +301,7 @@ char	**espoir(char **cmd_argument);
 int		ft_count_space(char *buf);
 int		check_fre_cmd(t_data *data, char *buf, char **cmd_argument, char *fre);
 int		builtin_single(t_cmd *cmd, t_data *data, int *file);
+int		child_process_single(t_data *data, t_cmd *cmd, int *file, char *comd);
 
 // ! ---------------------------------------------------------------------------
 // ?							Redirection
@@ -321,10 +323,11 @@ void	close_all_pipe(int **pipefd, t_data *data);
 long	len_list(t_redir *redir);
 void	free_all_pipe(int **pipefd);
 void	free_all_fd(t_data *data, int i);
-void	close_all_open_redirs(int *file, int i);
-void	free_problem(t_data *data, int *file);
+void	close_all_open_redirs(int *file, t_cmd *cmd);
+void	free_problem(t_data *data, int *file, t_cmd *cmd);
 void	redir_failed(t_data *data, int *file, int i);
-void	free_problem_cmd_not_found(t_data *data, int *file);
+void	free_problem_cmd_not_found(t_data *data, int *file, t_cmd *cmd);
+void	close_open_redirs(int *file, int i);
 
 char	*arg_helper(char **buf, char *tmp, t_data *data, int i);
 char	*copy_arg(char *dest, char *src);

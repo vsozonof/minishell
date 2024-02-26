@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:28:28 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/25 13:57:08 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/26 10:00:15 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,12 @@ void	wait_and_free(t_data *data, int **pipefd, int *pid)
 	i = 0;
 	while (i < data->n_cmds)
 	{
-		fprintf(stderr, "j'attend i = %d\n", i);
 		waitpid(pid[i], NULL, 0);
 		i++;
 	}
 	free_all_pipe(pipefd);
 	// free_all_fd();
 	free(pid);
-	fprintf(stderr, "je suis bien passer par la\n");
 }
 
 void	free_all_pipe(int **pipefd)
@@ -74,17 +72,6 @@ void	free_all_pipe(int **pipefd)
 	free(pipefd[1]);
 	free(pipefd[0]);
 	free(pipefd);
-}
-
-void	close_all_open_redirs(int *file, int i)
-{
-	while (i >= 0)
-	{
-		fprintf(stderr, "voici mon i %d\n", i);
-		close(file[i]);
-		i--;
-	}
-	free(file);
 }
 
 // void	free_all_fd(t_data *data)
