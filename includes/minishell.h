@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:20:19 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/26 10:07:14 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/26 11:37:54 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,7 +159,7 @@ int		is_input_valid(char *str, t_data *data);
 int		is_piped_input_valid(char *str, t_data *data);
 int		exception_checker(char *str, t_data *data);
 int		exception_checker_2(char *str, int i, t_data *data);
-int		unclosed_quote_detector(char *str);
+int		unclosed_quote_detector(char *str, t_data *data);
 int		expand_is_valid_char(int c);
 int		is_valid_char(int c);
 
@@ -228,11 +228,16 @@ int		env_len(t_env *env);
 int		is_there_pipe(t_prompt *prompt);
 int		is_there_quotes(char *str);
 int		is_there_tilde(char *str);
+int		is_there_redirs(t_prompt *prompt);
 int		ispipe(int c);
 int		is_valid_pipe(char *str, t_data *data);
 int		is_in_quotes(char *str, int c);
 int		is_pipe_content_valid(char *str, t_data *data);
 int		quote_skipper(char *str, int c);
+int		syntax_error_finder(t_data *data, char *str);
+int		wspace_after_redir_checker(t_data *data, char *str, int i);
+int		token_after_redir_checker(t_data *data, char *str, int i);
+int		redir_error_finder(t_data *data, char *str, int i);
 
 // ! ---------------------------------------------------------------------------
 // ?							SIGNAL HANDLER
