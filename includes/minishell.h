@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:20:19 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/26 15:59:32 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/26 16:04:04 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -348,6 +348,7 @@ int		is_valid_var_char(int c);
 int		is_valid_var_name(char *var);
 int		unset_var_name_skipper(char *args, int i);
 
+void	echo_printer(char *param);
 void	execute_cd(char **param, t_data *data);
 void	change_directory(t_data *data, char *path);
 void	go_back_one_level(t_data *data);
