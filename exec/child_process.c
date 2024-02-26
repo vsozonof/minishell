@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child_process.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:55:54 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/26 10:07:06 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/26 11:55:40 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ int	child_process(t_data *data, int **pipefd, int i, t_cmd *cmd)
 	{
 		file = redirection_create(cmd, data);
 		if (!file)
-			return (-1);
+			return (free(pipefd), -1);
 	}
 	if (builtin_single(cmd, data, file) == -1)
-		return (-1);
+		return (free(pipefd), -1);
 	if (child_process_helper(data, cmd, file) == -1)
 		return (-1);
 	// cree un if qui contiens checker de builtin
@@ -66,7 +66,7 @@ int	child_process_helper(t_data *data, t_cmd *cmd, int *file)
 	}
 	error = execve(cmd_arg, cmd->param, cmd->env);
 	if (error == -1)
-		fprintf(stderr, "could not execute the command\n");
+		write(2, "could not execute the command\n", 31);
 	free_problem(data, file, cmd);
 	return (-1);
 }
@@ -75,28 +75,35 @@ int	ft_pipex_helper_dup(t_data *data, int **pipefd, int i)
 {
 	int		check;
 
-	check = 0;
 	check = child_process_in(pipefd, data, i);
 	if (check == -1)
 		return (-1);
 	return (0);
 }
 
-int		get_and_print_statuscode()
+int		get_and_print_statuscode(int *pid, int i)
 {
 	int		wstatus;
 	int		statusCode;
 
-	wait(&wstatus);
+	waitpid(pid[i], &wstatus, 0);
 	statusCode = -1;
 	if (WIFEXITED(wstatus))
 	{
 		statusCode = WEXITSTATUS(wstatus);
 		if (statusCode != 0)
-			fprintf(stderr, "failure status code: %d\n", (statusCode + 155));
+		{
+			write(2, "failure status code: \n", 23);
+			write(2, &statusCode + 125, 3);
+			write(2, "\n", 1);
+		}
 		statusCode = WIFSIGNALED(wstatus);
 		if (statusCode != 0)
-			fprintf(stderr, "failure with a signal is unknown %d\n", (statusCode + 155));
+		{
+			write(2, "failure with a signal is unknown\n", 34);
+			write(2, &statusCode + 125, 3);
+			write(2, "\n", 1);
+		}
 	}
 	return (statusCode);
 }

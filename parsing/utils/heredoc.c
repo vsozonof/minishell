@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 11:37:41 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/26 09:39:40 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/26 10:25:25 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ char	*get_tmp_filename(void)
 	fd = open("/dev/random", O_RDONLY);
 	str = malloc(sizeof(char) * 21);
 	if (!fd)
-		return (fprintf(stderr, "problem with fd in here_doc\n"), NULL);
+		return (write(2, "problem with fd in here_doc\n", 29), NULL);
 	read(fd, str, 16);
 	i = 1;
 	str[0] = '.';

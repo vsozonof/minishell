@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 16:09:07 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/26 09:55:26 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/26 10:24:58 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int	single_arg(t_data *data)
 	char	*comd;
 
 	comd = NULL;
-	fprintf(stderr, "je passe par single\n");
 	exec_single(data, comd, data->exec);
 	free(comd);
 	return (0);
@@ -59,7 +58,7 @@ int	child_process_single(t_data *data, t_cmd *cmd, int *file, char *comd)
 	}
 	error = execve(comd, data->exec->param, data->exec->env);
 	if (error == -1)
-		fprintf(stderr, "could not execute the command\n");
+		write(2, "could not execute the command\n", 31);
 	exit(0);
 	return (-1);
 }

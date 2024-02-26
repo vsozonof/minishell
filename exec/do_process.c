@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:29:51 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/25 13:18:05 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/26 10:29:22 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,10 @@ char	*ft_strjoin_help(char **path, char *cmd, int i)
 
 	buf = ft_strjoin(path[i], "/");
 	if (!buf)
-		return (fprintf(stderr, "ERROR IN PATH\n"), NULL);
+		return (write(2, "Error in path\n", 15), NULL);
 	buf2 = ft_strjoin(buf, cmd);
 	if (!buf2)
-		return (fprintf(stderr, "ERROR IN PATH\n"), NULL);
+		return (write(2, "Error in path\n", 15), NULL);
 	free(buf);
 	return (buf2);
 }

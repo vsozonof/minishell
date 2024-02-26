@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:36:45 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/25 17:47:01 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/26 10:23:11 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ cat > test1 > test2 < test3 | wc > test4 < test5 | wc > test6
 
 int	pipex_exec(t_data *data)
 {
-	fprintf(stderr, "je passe par multi\n");
 	ft_pipex(data);
 	return (0);
 }

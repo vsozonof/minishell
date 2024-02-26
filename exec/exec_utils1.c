@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:28:28 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/26 10:00:15 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/26 11:55:43 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,23 +74,6 @@ void	free_all_pipe(int **pipefd)
 	free(pipefd);
 }
 
-// void	free_all_fd(t_data *data)
-// {
-// 	t_cmd	*ptr;
-// 	int		j;
-
-// 	ptr = cmd;
-// 	while (ptr)
-// 	{
-// 		j = 0;
-// 		while (j < ptr->n_redirs)
-// 		{
-// 			close(ptr->redirs->);
-// 		}
-// 		ptr = ptr->next;
-// 	}
-// }
-
 /*
 **	This function takes as parameter: 
 **
@@ -116,14 +99,14 @@ int	**alloc_pipe()
 	{
 		pipefd = malloc(sizeof(int *) * 2);
 		if (!pipefd)
-			return (fprintf(stderr, "probleme happend in alloc_pipe\n"), NULL);
+			return (write(2, "probleme happend in alloc_pipe\n", 32), NULL);
 		pipefd[0] = malloc(sizeof(int) * 2);
 		pipefd[1] = malloc(sizeof(int) * 2);
 		if (!pipefd[0] || !pipefd[1])
 		{
 			free(pipefd[0]);
 			free(pipefd[1]);
-			return (fprintf(stderr, "problem when creating the pipe"), NULL);
+			return (write(2, "probleme when creating the pipe\n", 33), NULL);
 		}
 		pipe(pipefd[0]);
 		pipe(pipefd[1]);

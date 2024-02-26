@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:20:19 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/26 11:37:54 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/26 12:11:35 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -265,6 +265,7 @@ char	*ft_do_process_helper(char *cmd);
 int		ft_do_process_checker(char *cmd);
 int		child_process_in(int **pipefd, t_data *data, int i);
 int		child_process_helper(t_data *data, t_cmd *cmd, int *file);
+int		get_and_print_statuscode(int *pid, int i);
 
 char	*str_join_free(char *path, char *cmd);
 void	ft_freedb(char **str);
@@ -317,6 +318,7 @@ int		create_file(t_redir *nav, int file);
 int		other_type_redir(t_redir *nav, int file);
 int		redirection_dup1_in(int file);
 int		redirection_dup1_out(int file);
+int		*creating_file(t_redir *nav, t_data *data, t_cmd *cmd);
 
 // ! ---------------------------------------------------------------------------
 // ?							Free && utils Exec

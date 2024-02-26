@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 13:42:38 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/26 09:46:00 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/26 10:52:01 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ void	redir_failed(t_data *data, int *file, int i)
 
 void	free_problem_cmd_not_found(t_data *data, int *file, t_cmd *cmd)
 {
-	fprintf(stderr, "%s: command not found\n", data->exec->cmd);
+	write(2, data->exec->cmd, ft_strlen(data->exec->cmd));
+	write(2, ": command not found\n", 21);
 	if (data->n_redirs > 0)
 		close_all_open_redirs(file, cmd);
 	free_master(data);
@@ -48,7 +49,6 @@ void	close_all_open_redirs(int *file, t_cmd *cmd)
 	i = 0;
 	while (len_list(cmd->redirs) > i)
 	{
-		fprintf(stderr, "voici mon i %d\n", i);
 		close(file[i]);
 		i++;
 	}
@@ -59,7 +59,6 @@ void	close_open_redirs(int *file, int i)
 {
 	while (i >= 0)
 	{
-		fprintf(stderr, "voici mon i %d\n", i);
 		close(file[i]);
 		i--;
 	}
