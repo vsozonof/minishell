@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 12:48:29 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/23 12:17:50 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/26 14:57:09 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,20 @@ void	execute_echo(char **param, t_data *data)
 		{
 			wr = 1;
 			if (param[i + 1])
-				printf("%s ", param[i]);
+				echo_printer(param[i]);
 			else
-				printf("%s", param[i]);
+				ft_putstr_fd(param[i], 1);
+			if (errno == ENOSPC)
+				set_status(data, 2, "no space left on device.", "echo");
 		}
 	}
 	if (!flag)
 		printf("\n");
 	set_status(data, 0, NULL, NULL);
+}
+
+void	echo_printer(char *param)
+{
+	ft_putstr_fd(param, 1);
+	write(1, " ", 1);
 }
