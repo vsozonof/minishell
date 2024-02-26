@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:55:54 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/26 12:05:14 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/26 12:16:34 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,11 @@ int	child_process_helper(t_data *data, t_cmd *cmd, int *file, int **pipefd)
 	if (error == -1)
 		write(2, "could not execute the command\n", 31);
 	free_problem(data, file, cmd);
+	free(cmd_arg);
+	free(pipefd);
 	return (-1);
 }
-
+// / | fa.
 int	ft_pipex_helper_dup(t_data *data, int **pipefd, int i)
 {
 	int		check;
