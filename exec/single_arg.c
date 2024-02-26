@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 16:09:07 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/26 10:24:58 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/26 12:12:02 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ int	child_process_single(t_data *data, t_cmd *cmd, int *file, char *comd)
 	error = execve(comd, data->exec->param, data->exec->env);
 	if (error == -1)
 		write(2, "could not execute the command\n", 31);
+	free_problem(data, file, cmd);
+	free(comd);
 	exit(0);
 	return (-1);
 }

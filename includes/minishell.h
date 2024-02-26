@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:20:19 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/26 11:23:12 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/26 12:00:12 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -259,7 +259,7 @@ char	*ft_do_process(char *envp[], char *cmd);
 char	*ft_do_process_helper(char *cmd);
 int		ft_do_process_checker(char *cmd);
 int		child_process_in(int **pipefd, t_data *data, int i);
-int		child_process_helper(t_data *data, t_cmd *cmd, int *file);
+int		child_process_helper(t_data *data, t_cmd *cmd, int *file, int **pipefd);
 int		get_and_print_statuscode(int *pid, int i);
 
 char	*str_join_free(char *path, char *cmd);

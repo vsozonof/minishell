@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:55:54 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/26 11:55:40 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/26 12:05:14 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,13 @@ int	child_process(t_data *data, int **pipefd, int i, t_cmd *cmd)
 	}
 	if (builtin_single(cmd, data, file) == -1)
 		return (free(pipefd), -1);
-	if (child_process_helper(data, cmd, file) == -1)
+	if (child_process_helper(data, cmd, file, pipefd) == -1)
 		return (-1);
 	// cree un if qui contiens checker de builtin
 	return (0);
 }
 
-int	child_process_helper(t_data *data, t_cmd *cmd, int *file)
+int	child_process_helper(t_data *data, t_cmd *cmd, int *file, int **pipefd)
 {
 	char	*cmd_arg;
 	int		error;
@@ -61,6 +61,7 @@ int	child_process_helper(t_data *data, t_cmd *cmd, int *file)
 	cmd_arg = ft_do_process(cmd->env, cmd->cmd);
 	if (!cmd_arg)
 	{
+		free(pipefd);
 		free_problem(data, file, cmd);
 		return (-1);
 	}
@@ -88,6 +89,8 @@ int		get_and_print_statuscode(int *pid, int i)
 
 	waitpid(pid[i], &wstatus, 0);
 	statusCode = -1;
+	fprintf(stderr, "voici mon status: %d\n", wstatus);
+	fprintf(stderr, "voici mon status: %d\n", WIFEXITED(wstatus));
 	if (WIFEXITED(wstatus))
 	{
 		statusCode = WEXITSTATUS(wstatus);
