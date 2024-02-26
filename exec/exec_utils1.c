@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:28:28 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/26 15:54:06 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/26 16:46:56 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ long	len_list(t_redir *redir)
 	return (len);
 }
 
-void	wait_and_free(t_data *data, int **pipefd, int *pid)
+void	wait_and_free(t_data *data, int **pipefd, int *pid, char *cmd)
 {
 	int	i;
 
@@ -58,8 +58,8 @@ void	wait_and_free(t_data *data, int **pipefd, int *pid)
 		waitpid(pid[i], NULL, 0);
 		i++;
 	}
+	get_and_print_statuscode(pid, i, data, cmd);
 	free_all_pipe(pipefd);
-	// free_all_fd();
 	free(pid);
 }
 
