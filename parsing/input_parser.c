@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 09:14:23 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/26 14:16:16 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/26 16:15:43 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,10 @@ int	init_exec_var(t_data *data)
 {
 	data->n_redirs = get_n_redir(data->exec);
 	data->n_cmds = get_node_len(data->exec);
-	if (!heredoc_finder(data->exec))
+	data->here_doc_fd
+		= malloc(sizeof(int) * get_heredoc_counter(data->exec) + 1);
+	ft_memset(data->here_doc_fd, -1, sizeof(data->here_doc_fd));
+	if (!heredoc_finder(data->exec, data))
 		return (0);
 	return (1);
 }

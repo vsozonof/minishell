@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:20:19 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/26 16:04:04 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/26 16:15:48 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,9 +214,10 @@ int		get_redir_count(t_input *inp);
 int		get_n_redir(t_cmd *lst);
 int		get_node_len(t_cmd *lst);
 int		get_lst_len(t_input *lst);
+int		get_heredoc_counter(t_cmd *node);
 int		get_dtab_len(char **str);
-int		heredoc_finder(t_cmd *node);
-int		do_heredoc(char *delimiter, t_redir *redir_node);
+int		heredoc_finder(t_cmd *node, t_data *data);
+int		do_heredoc(char *delimiter, t_redir *redir_node, t_data *data);
 int		do_heredoc_extra(char *delimiter, int fd);
 int		put_input_to_lst(t_input *ptr, char **tab);
 int		is_special_char(char c);
@@ -271,6 +272,7 @@ int		get_and_print_statuscode(int *pid, int i);
 int		builtin_multi(t_cmd *cmd, t_data *data, int *file);
 void    ft_siginal(int sig);
 void	close_redir_parent(t_data *data);
+
 
 int		check_dup(int pipe, int token, int pipe2);
 char	**ft_get_path(char **env);

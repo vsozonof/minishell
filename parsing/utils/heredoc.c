@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 11:37:41 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/26 15:39:39 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/26 16:17:01 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	heredoc_finder(t_cmd *node)
+int	heredoc_finder(t_cmd *node, t_data *data)
 {
 	t_redir	*nav1;
 	t_cmd	*nav2;
@@ -25,7 +25,7 @@ int	heredoc_finder(t_cmd *node)
 		{
 			if (nav1->type == 3)
 			{
-				if (!do_heredoc(nav1->file, nav1))
+				if (!do_heredoc(nav1->file, nav1, data))
 					return (0);
 				nav1 = nav1->next;
 			}
@@ -37,13 +37,17 @@ int	heredoc_finder(t_cmd *node)
 	return (1);
 }
 
-int	do_heredoc(char *delimiter, t_redir *redir_node)
+int	do_heredoc(char *delimiter, t_redir *redir_node, t_data *data)
 {
-	char	*tmp_fname;
-	int		fd;
+	char			*tmp_fname;
+	int				fd;
+	int static		n;
 
+	n = 0;
 	tmp_fname = get_tmp_filename();
 	fd = open(tmp_fname, O_CREAT | O_WRONLY, 0644);
+	data->here_doc_fd[n] = fd;
+	n++;
 	g_status = 2;
 	if (!(do_heredoc_extra(delimiter, fd)))
 	{
