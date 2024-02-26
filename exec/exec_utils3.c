@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 15:48:51 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/26 16:11:28 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/26 17:17:08 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 // 			{
 // 				if (cmd->redirs->type == 3)
 // 				{
-// 					close(cmd->redirs);
+// 					close(cmd->redirs)
 // 					unlink(cmd->redirs->file);
 // 				}
 // 				cmd->redirs = cmd->redirs->next;

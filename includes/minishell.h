@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:20:19 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/26 18:23:07 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/26 18:25:46 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ typedef struct s_parse
 	int				i;
 	int				n;
 	int				*here_doc_fd;
+	pid_t			*pid;
 	int				n_args;
 	int				*cmd_valid;
 	int				*status_code;
@@ -258,9 +259,9 @@ int		builtin_checker(char *tmp);
 void	builtin_manager(t_data *data, int token, t_cmd *cmd);
 int		pipex_exec(t_data *data);
 int		ft_pipex(t_data *data);
-int		ft_pipex_helper(t_data *data, int *pid, int **pipefd, int i);
+char	*ft_pipex_helper(t_data *data, int **pipefd, int i);
 int		ft_pipex_helper_dup(t_data *data, int **pipefd, int i);
-int		child_process(t_data *data, int **pipefd, int i, t_cmd *cmd);
+int		child_process(t_data *data, int **pipefd, t_cmd *cmd);
 int		**parent_process(int **pipefd, int i);
 int		child_process_in_or_out(int **pipefd, t_data *data, int i, int token);
 int		child_process_middle(int **pipefd, int token, int verif);
@@ -269,7 +270,7 @@ char	*ft_do_process_helper(char *cmd);
 int		ft_do_process_checker(char *cmd);
 int		child_process_in(int **pipefd, t_data *data, int i);
 int		child_process_helper(t_data *data, t_cmd *cmd, int *file, int **pipefd);
-int		get_and_print_statuscode(int *pid, int i);
+int		get_and_print_statuscode(t_data *data, char *cmd);
 int		builtin_multi(t_cmd *cmd, t_data *data, int *file);
 void    ft_siginal(int sig);
 void	close_redir_parent(t_data *data);
@@ -309,7 +310,7 @@ int		*creating_file(t_redir *nav, t_data *data, t_cmd *cmd);
 // ?							Free && utils Exec
 // ! ---------------------------------------------------------------------------
 
-void	wait_and_free(t_data *data, int **pipefd, int *pid);
+void	wait_and_free(t_data *data, int **pipefd, int *pid, char *cmd);
 int		get_kind_redirs_ac(char *input);
 void	close_all_pipe(int **pipefd, t_data *data);
 long	len_list(t_redir *redir);

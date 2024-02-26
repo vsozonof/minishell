@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:55:54 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/26 14:20:27 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/26 18:10:21 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@
 **
 */
 
-int	child_process(t_data *data, int **pipefd, int i, t_cmd *cmd)
+int	child_process(t_data *data, int **pipefd, t_cmd *cmd)
 {
 	int		*file;
 
 	file = NULL;
-	if (ft_pipex_helper_dup(data, pipefd, i) == -1)
+	if (ft_pipex_helper_dup(data, pipefd, data->i) == -1)
 	{
 		free_problem(data, NULL, NULL);
 		return (-1);
