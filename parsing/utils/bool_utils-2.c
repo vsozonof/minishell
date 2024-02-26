@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 10:49:44 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/26 11:53:10 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/26 12:14:53 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,15 @@ int	is_there_redirs(t_prompt *prompt)
 {
 	int	i;
 
-	i = -1;
-	while (prompt->input[++i])
+	i = 0;
+	if (!prompt->input[i])
+		return (0);
+	while (prompt->input[i])
+	{
 		if ((prompt->input[i] == '>' || prompt->input[i] == '<')
 			&& !is_in_quotes(prompt->input, i))
 			return (1);
+		i++;
+	}
 	return (0);
 }
