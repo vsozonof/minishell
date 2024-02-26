@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 06:15:38 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/26 12:40:36 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/26 13:55:40 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,17 +69,22 @@ int	is_pipe_content_valid(char *str, t_data *data)
 	{
 		while (str[i] && !ispipe(str[i]))
 			i++;
+		if (!str[i])
+			return (1);
 		if (ispipe(str[i]))
 			i++;
+		if (!str[i])
+			return (set_status(data, 2,
+					"Asyntax error near unexpected token `|'", NULL), 0);
 		while (str[i] && ft_is_whitespace(str[i]))
 			i++;
+		printf("->D %i - %c\n", i, str[i]);
 		if (str[i] == '\0')
-			return (0);
+			return (set_status(data, 2,
+					"syntax error near unexpected token `|'", NULL), 0);
 		else if (ispipe(str[i]) && !is_in_quotes(str, i))
-		{
-			set_status(data, 2, "syntax error near unexpected token `|'", NULL);
-			return (0);
-		}
+			return (set_status(data, 2,
+					"Csyntax error near unexpected token `|'", NULL), 0);
 	}
 	return (1);
 }
