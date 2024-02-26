@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:15:17 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/26 08:28:50 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/26 11:23:03 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,24 +30,35 @@ int	*redirection_create(t_cmd *cmd, t_data *data)
 
 	nav = cmd->redirs;
 	file = ((i = 0));
-	file_tab = malloc(sizeof(int) * len_list(nav));
+	file_tab = creating_file(nav, data, cmd);
 	if (!file_tab)
-	{
-		fprintf(stderr, "a problem append with a malloc\n");
-		free_problem(data, NULL, cmd);
 		return (NULL);
-	}
 	while (nav)
 	{
 		file_tab[i] = create_file(nav, file);
 		if (file_tab[i] == -1 || nav->file == NULL)
 		{
-			fprintf(stderr, "%s : No such file or directory\n", nav->file);
+			write(2, nav->file, ft_strlen(nav->file));
+			write(2, ": No such file or directory\n", 29);
 			redir_failed(data, file_tab, i);
 			return (NULL);
 		}
 		i++;
 		nav = nav->next;
+	}
+	return (file_tab);
+}
+
+int	*creating_file(t_redir *nav, t_data *data, t_cmd *cmd)
+{
+	int	*file_tab;
+
+	file_tab = malloc(sizeof(int) * len_list(nav));
+	if (!file_tab)
+	{
+		write(2, "a problem append with a malloc\n", 32);
+		free_problem(data, NULL, cmd);
+		return (NULL);
 	}
 	return (file_tab);
 }

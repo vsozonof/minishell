@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:43:04 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/26 09:40:35 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/26 11:35:39 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,14 @@ int	ft_pipex(t_data *data)
 	i = 0;
 	pid = malloc(sizeof(pid_t) * data->n_cmds);
 	if (!pid)
-		return (fprintf(stderr, "problem with malloc\n"), -1);
+		return (write(2, "problem with malloc\n", 21), -1);
 	pipefd = alloc_pipe();
 	if (!pipefd)
-		return (fprintf(stderr, "problem with malloc\n"), free(pid), free(pipefd), -1);
+		return (write(2, "problem with malloc\n", 21), free(pid), free(pipefd), -1);
 	else if (!pipefd[1])
-		return (fprintf(stderr, "problem with malloc\n"), free(pid), free(pipefd), free(pipefd[0]), -1);
+		return (write(2, "problem with malloc\n", 21), free(pid), free(pipefd), free(pipefd[0]), -1);
 	else if (!pipefd[0])
-		return (fprintf(stderr, "problem with malloc\n"), free(pid), free(pipefd), free(pipefd[1]), -1);
+		return (write(2, "problem with malloc\n", 21), free(pid), free(pipefd), free(pipefd[1]), -1);
 	ft_pipex_helper(data, pid, pipefd, i);
 	wait_and_free(data, pipefd, pid);
 	return (0);
@@ -53,16 +53,14 @@ int	ft_pipex_helper(t_data *data, int *pid, int **pipefd, int i)
 			if (child_process(data, pipefd, i, cmd) == -1)
 			{
 				free(pid);
-				free(pipefd);
+				// free(pipefd);
 				exit(0);
 			}
-				fprintf(stderr, "il y a une erreur dans le child\n");
 		}
 		else
 		{
 			pipefd = parent_process(pipefd, i);
-			// fprintf(stderr, "je suis dans le parent (test de retour d'erreur)\n");
-			// get_and_print_statuscode();
+			get_and_print_statuscode(pid, i);
 		}
 		i++;
 		cmd = cmd->next;
