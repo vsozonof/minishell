@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:20:19 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/26 14:57:02 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/26 15:07:09 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -267,34 +267,12 @@ int		ft_do_process_checker(char *cmd);
 int		child_process_in(int **pipefd, t_data *data, int i);
 int		child_process_helper(t_data *data, t_cmd *cmd, int *file, int **pipefd);
 int		get_and_print_statuscode(int *pid, int i);
+int		builtin_multi(t_cmd *cmd, t_data *data, int *file);
 
-char	*str_join_free(char *path, char *cmd);
-void	ft_freedb(char **str);
-void	free_pipe_argv(int **pipefd, char	*argv[]);
 int		check_dup(int pipe, int token, int pipe2);
-char	*arg(char *str, t_data *data);
 char	**ft_get_path(char **env);
-int		redirection_manager(t_data *data, int i);
 char	*ft_strjoin_help(char **path, char *cmd, int i);
-int		redirection_single_chev(t_data *data, char *input);
-int		first_redirect(t_data *data, char *input, int count);
-int		first_redirect_helper(char *input, int j, int i);
-int		last_redirect(t_data *data, char *input, int count);
-int		last_redirect_helper(char *input, int j, int i);
-int		is_redirect_actual(char *input);
-void	free_single(t_data *data, char **cmd_argument, char *fre);
-int		ft_check_access(t_data *data, int i);
 char	*get_name_heredoc(void);
-char	*extract_delimiter(char *input);
-int		heredoc_handler(char *delimiter, t_data *data);
-int		main_here_doc(t_data *data);
-int		make_new_fd(t_data *data, int fd);
-char	*input_reformatter(char *str, t_data *data);
-char	*replace_token_with_filename(char *str, t_data *data, int start, int end);
-int		crt_fd_here(t_data *data, int fd, int i);
-int		check_if_redir(t_data *data, int i);
-int		builtin_multi(t_data *data);
-int		cmd_not_valid(t_data *data);
 
 // ! ---------------------------------------------------------------------------
 // ?							Single_Pipe

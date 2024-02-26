@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 16:09:07 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/26 15:03:25 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/26 15:06:58 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,16 @@ int	exec_single(t_data *data, char *comd, t_cmd *cmd)
 	int		*file;
 
 	file = NULL;
+	if (data->n_redirs > 0)
+	{
+		file = redirection_create(cmd, data);
+		if (!file)
+			return (0);
+	}
+	if (data->exec->cmd == NULL)
+		return (free_problem(data, file, cmd), 0);
+	if (builtin_single(cmd, data, file) == -1)
+		return (0);
 	pid = fork();
 	if (pid < 0)
 		return (printf("error in fork\n"), -1);
@@ -42,28 +52,17 @@ int	child_process_single(t_data *data, t_cmd *cmd, int *file, char *comd)
 {
 	int	error;
 
-	if (data->n_redirs > 0)
-	{
-		file = redirection_create(cmd, data);
-		if (!file)
-			exit(0);
-	}
-	if (data->exec->cmd == NULL)
-	{
-		free_problem(data, file, cmd);
-		exit(0);
-	}
-	if (builtin_single(cmd, data, file) == -1)
-		exit(data->i_status);
 	comd = ft_do_process(data->exec->env, data->exec->cmd);
 	if (!comd)
 	{
 		free_problem(data, file, cmd);
 		exit(0);
 	}
+	fprintf(stderr, "avant exec\n");
 	error = execve(comd, data->exec->param, data->exec->env);
 	if (error == -1)
 		write(2, "could not execute the command\n", 31);
+	fprintf(stderr, "apres exec\n");
 	free_problem(data, file, cmd);
 	free(comd);
 	exit(0);

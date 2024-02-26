@@ -6,13 +6,28 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 09:41:34 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/26 09:57:50 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/26 14:22:15 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 int	builtin_single(t_cmd *cmd, t_data *data, int *file)
+{
+	int	check;
+
+	check = builtin_checker(cmd->cmd);
+	if (check >= 1 && check <= 7)
+	{
+		builtin_manager(data, check, cmd);
+		if (data->n_redirs > 0 && file != NULL)
+			close_all_open_redirs(file, cmd);
+		return (-1);
+	}
+	return (1);
+}
+
+int	builtin_multi(t_cmd *cmd, t_data *data, int *file)
 {
 	int	check;
 

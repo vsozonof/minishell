@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:43:04 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/26 12:36:19 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/26 14:14:15 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,7 @@ int	ft_pipex_helper(t_data *data, int *pid, int **pipefd, int i)
 			}
 		}
 		else
-		{
 			pipefd = parent_process(pipefd, i);
-			get_and_print_statuscode(pid, i);
-		}
 		i++;
 		cmd = cmd->next;
 	}
