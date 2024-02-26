@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 13:42:38 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/26 10:52:01 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/26 15:47:01 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,18 @@ void	free_problem_cmd_not_found(t_data *data, int *file, t_cmd *cmd)
 void	close_all_open_redirs(int *file, t_cmd *cmd)
 {
 	int		i;
+	t_redir	*re;
 
 	i = 0;
+	re = cmd->redirs;
+	fprintf(stderr, "ASF;GESLF;SDLF;'\n");
 	while (len_list(cmd->redirs) > i)
 	{
 		close(file[i]);
+		fprintf(stderr, "type = %d\n", re->type);
+		if (re->type == 3)
+			unlink(re->file);
+		re = re->next;
 		i++;
 	}
 	free(file);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 23:29:44 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/26 12:16:53 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/26 15:19:16 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,14 @@ int	g_status = 0;
 
 int	get_input(t_prompt *prompt, t_data *data)
 {
+	struct sigaction    sa;
+
 	while (!data->exited)
 	{
+		
+		ft_memset(&sa, 0, sizeof(sa));
+		sa.sa_handler = &handle_signals;
+		sigaction(SIGINT, &sa, NULL);
 		printf("%s at %s in: %s", prompt->user, prompt->post, prompt->w_d);
 		prompt->input = readline("\n$> ");
 		if (prompt->input)

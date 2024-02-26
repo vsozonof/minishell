@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 09:27:48 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/26 14:48:43 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/26 15:20:36 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	handle_signals(int signum)
 		ptr.w_d = getcwd(NULL, 0);
 		if (g_status != 2)
 		{
-			// printf("\n%s at %s in: %s\n", ptr.user, ptr.post, ptr.w_d);
+			printf("\n%s at %s in: %s\n", ptr.user, ptr.post, ptr.w_d);
 			rl_on_new_line();
 			rl_replace_line("", 1);
 			rl_redisplay();
@@ -52,4 +52,11 @@ int	init_sig(t_prompt *prompt)
 		|| sigaction(SIGQUIT, &sa_quit, NULL) == -1)
 		return (set_status(prompt->data, 1, NULL, "signal error"), 0);
 	return (1);
+}
+
+void    ft_siginal(int signal)
+{
+    (void)signal;
+    printf("\n");
+    rl_on_new_line();
 }

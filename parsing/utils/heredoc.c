@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 11:37:41 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/26 10:25:25 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/26 15:39:39 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,12 @@ int	do_heredoc_extra(char *delimiter, int fd)
 	int		dup_save;
 	char	*heredoc_input;
 
+	dup_save = dup(0);
 	while (42)
 	{
-		dup_save = dup(0);
 		heredoc_input = readline("> ");
-		dup2(dup_save, 0);
 		if (g_status == 1)
-			return (0);
+			return (dup2(dup_save, 0), close(dup_save), 0);
 		if (!heredoc_input)
 			break ;
 		if (!ft_strncmp(heredoc_input, delimiter, ft_strlen(delimiter)))
@@ -78,6 +77,7 @@ int	do_heredoc_extra(char *delimiter, int fd)
 		write(fd, "\n", 1);
 		free(heredoc_input);
 	}
+	close(dup_save);
 	return (1);
 }
 

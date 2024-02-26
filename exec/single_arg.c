@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 16:09:07 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/26 14:45:04 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/26 15:20:33 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,13 @@ int	single_arg(t_data *data)
 
 int	exec_single(t_data *data, char *comd, t_cmd *cmd)
 {
-	int		pid;
-	int		*file;
+	int					pid;
+	int					*file;
+	struct sigaction    sa;
 
+	ft_memset(&sa, 0, sizeof(sa));
+	sa.sa_handler = &ft_siginal;
+	sigaction(SIGINT, &sa, NULL);
 	file = NULL;
 	if (data->n_redirs > 0)
 	{

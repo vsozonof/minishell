@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:20:19 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/26 14:21:40 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/26 15:59:32 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ typedef struct s_parse
 	int				nb_redirs_ac;
 	int				i;
 	int				n;
+	int				*here_doc_fd;
 	int				n_args;
 	int				*cmd_valid;
 	int				*status_code;
@@ -268,6 +269,8 @@ int		child_process_in(int **pipefd, t_data *data, int i);
 int		child_process_helper(t_data *data, t_cmd *cmd, int *file, int **pipefd);
 int		get_and_print_statuscode(int *pid, int i);
 int		builtin_multi(t_cmd *cmd, t_data *data, int *file);
+void    ft_siginal(int sig);
+void	close_redir_parent(t_data *data);
 
 int		check_dup(int pipe, int token, int pipe2);
 char	**ft_get_path(char **env);

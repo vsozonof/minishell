@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:15:17 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/26 11:23:03 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/26 15:40:23 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,12 +93,10 @@ int	other_type_redir(t_redir *nav, int file)
 {
 	if (nav->type == 3)
 	{
-		file = ft_create_fd(nav->file, O_RDONLY);
 		if (file == -1)
 			return (-1);
 		if (redirection_dup1_in(file) == -1)
 			return (-1);
-		unlink(nav->file);
 	}
 	else if (nav->type == 4)
 	{
