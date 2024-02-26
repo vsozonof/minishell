@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipe_utils-1.c                                     :+:      :+:    :+:   */
+/*   pipe_errors.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 06:15:38 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/22 10:42:18 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/26 12:40:36 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,9 @@ int	is_pipe_content_valid(char *str, t_data *data)
 			i++;
 		while (str[i] && ft_is_whitespace(str[i]))
 			i++;
-		if (ispipe(str[i]) && !is_in_quotes(str, i))
+		if (str[i] == '\0')
+			return (0);
+		else if (ispipe(str[i]) && !is_in_quotes(str, i))
 		{
 			set_status(data, 2, "syntax error near unexpected token `|'", NULL);
 			return (0);

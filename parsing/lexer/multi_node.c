@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 10:15:28 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/26 09:49:54 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/26 12:37:38 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	multi_node_handler(t_data *data, int i)
 	data->inp->cmds = pipes_splitter(data->input, '|', data);
 	if (!data->inp->cmds)
 		return ;
+	printf("%s - %s - %s\n", data->inp->cmds[0], data->inp->cmds[1], data->inp->cmds[2]);
 	tab = malloc(sizeof(char **) * (data->n_cmds + 1));
 	if (!tab)
 		return ;

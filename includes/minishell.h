@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:20:19 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/26 12:12:37 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/26 12:31:22 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,6 +149,7 @@ int		init_if_no_env(t_prompt *ptr, char **envp);
 int		put_env_to_lst(t_env *env, char **envp);
 int		init_exec_var(t_data *data);
 int		create_side_env(t_prompt *ptr);
+t_input	*alloc_input_struct(void);
 
 // ! ---------------------------------------------------------------------------
 // ?							INPUT PARSING
