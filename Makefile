@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+         #
+#    By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/09 23:22:06 by vsozonof          #+#    #+#              #
-#    Updated: 2024/02/25 13:44:40 by tpotilli         ###   ########.fr        #
+#    Updated: 2024/02/26 09:58:58 by vsozonof         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,31 +32,29 @@ SRCS = main.c \
 	   parsing/lexer/single_node.c \
 	   parsing/lexer/multi_node.c \
 	   parsing/lexer/splitted_input_identifier.c \
-	   parsing/expand/expand-master.c \
 	   parsing/utils/counters.c \
 	   parsing/utils/counters-2.c \
 	   parsing/utils/bool_utils-1.c \
 	   parsing/utils/bool_utils-2.c \
 	   parsing/utils/pipe_splitter.c \
+	   parsing/utils/heredoc.c \
 	   parsing/errors/syntax_errors.c \
 	   parsing/errors/pipe_errors.c \
+	   parsing/errors/exit_status.c \
 	   parsing/expand/expand_master.c \
+	   parsing/expand/expand_utils-0.c \
 	   parsing/expand/expand_utils-1.c \
 	   parsing/expand/expand_utils-2.c \
 	   parsing/env/env_utils-1.c \
 	   parsing/env/env_utils-2.c \
 	   free/free_master.c \
 	   free/free_utils-1.c \
-	   utils/exit_status.c \
-	   utils/quote_utils-1.c \
-	   utils/args_counter.c \
 	   signal/signal_master.c \
 	   exec/command_manager.c \
 	   exec/single_arg.c \
 	   exec/builtin_exec.c \
 	   exec/redirection_dup.c \
 	   exec/do_process.c \
-	   exec/here_doc.c \
 	   exec/exec_utils1.c \
 	   exec/exec_utils2.c \
 	   exec/exec_minishell.c \

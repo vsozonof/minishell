@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 10:15:28 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/23 11:23:32 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/26 09:49:54 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	multi_node_formatting(t_input **inp, t_data *data)
 	i = 0;
 	ptr = malloc(sizeof(t_cmd));
 	if (!ptr)
-		return ; // a check
+		return ;
 	data->exec = ptr;
 	alloc_multi_nodes(inp, ptr);
 	nav = ptr;
@@ -117,5 +117,4 @@ void	multi_format_node(t_cmd *pr, t_input *inp, t_data *data)
 	}
 	else
 		pr->redirs = NULL;
-	// node_printer(pr);
 }

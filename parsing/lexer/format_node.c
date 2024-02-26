@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 10:18:20 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/25 12:03:23 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/26 09:49:10 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void	format_node(t_cmd *pr, t_input *inp, t_data *data)
 	else
 		pr->redirs = NULL;
 	pr->next = NULL;
-	// node_printer(pr);
 }
 
 void	extract_redirs(t_input *inp, t_cmd *pr)

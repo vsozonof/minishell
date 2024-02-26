@@ -6,33 +6,11 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 23:35:58 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/05 11:09:33 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/26 09:44:57 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	is_there_dollar(char *str)
-{
-	int	i;
-
-	i = -1;
-	while (str[++i])
-		if (str[i] == '$' && is_in_quotes(str, i) != 1)
-			return (1);
-	return (0);
-}
-
-int	is_there_backslash(char *str)
-{
-	int	i;
-
-	i = -1;
-	while (str[++i])
-		if (str[i] == '\\' && is_in_quotes(str, i) != 1)
-			return (1);
-	return (0);
-}
 
 int	is_valid_char(int c)
 {
@@ -78,22 +56,22 @@ void	quote_flagger(char *str, int i, int q_flag)
 		if (q_flag == 0 && str[i] == 39)
 		{
 			q_flag = 1;
-			str[i] = ']';
+			str[i] = 27;
 		}
 		else if (q_flag == 1 && str[i] == 39)
 		{
 			q_flag = 0;
-			str[i] = ']';
+			str[i] = 27;
 		}
 		if (q_flag == 0 && str[i] == '"')
 		{
 			q_flag = 2;
-			str[i] = ']';
+			str[i] = 27;
 		}
 		else if (q_flag == 2 && str[i] == '"')
 		{
 			q_flag = 0;
-			str[i] = ']';
+			str[i] = 27;
 		}
 	}
 }

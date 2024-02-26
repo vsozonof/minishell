@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 09:27:48 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/14 09:18:12 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/26 09:18:12 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@ void	handle_signals(int signum)
 		rl_on_new_line();
 		rl_replace_line("", 1);
 		rl_redisplay();
+		if (g_status == 2)
+			close(STDIN_FILENO);
+		g_status = 1;
 		free(ptr.post);
 	}
 	else if (signum == SIGQUIT)

@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 04:25:22 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/22 20:39:49 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/26 10:00:24 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,30 +67,4 @@ void	free_tab(int **tab)
 		i++;
 	}
 	free(tab);
-}
-
-t_input	*free_at_pos(t_input *L, int pos)
-{
-	t_input		*prec;
-	t_input		*cur;
-	int			i;
-
-	cur = L;
-	prec = L;
-	i = 0;
-	if (pos == 0)
-	{
-		L = L->next;
-		free(cur);
-		return (NULL);
-	}
-	while (i < pos)
-	{
-		i++;
-		prec = cur;
-		cur = cur->next;
-	}
-	prec->next = cur->next;
-	free(cur);
-	return (L);
 }

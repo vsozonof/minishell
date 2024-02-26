@@ -3,46 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   free_master.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 04:29:11 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/22 15:46:23 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/26 09:50:43 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	free_manager(t_data *data, int key)
-{
-	if (key == 1)
-	{
-		if (data->pr->input)
-			free(data->pr->input);
-		if (data->input)
-			free(data->input);
-	}
-	else if (key == 2)
-	{
-		if (data->cmds)
-			free_cmds(data);
-		if (data->pr->input)
-			free(data->pr->input);
-	}
-	if (data->cmds)
-		free_cmds(data);
-	if (data->redir_tab)
-		ft_split_free(data->redir_tab);
-	if (data->tab)
-		free_tab(data->tab);
-}
 
 void	free_master(t_data *data)
 {
 	int	i;
 
 	i = -1;
-	// printf("---------------------\n");
-	// printf("----------FREE-------\n");
 	if (data->input)
 		free(data->input);
 	if (data->inp)
@@ -55,6 +29,7 @@ void	free_master(t_data *data)
 	}
 	free_cmd_nodes(data->exec);
 }
+
 void	free_cmd_nodes(t_cmd *nodes)
 {
 	t_redir	*tmp1;

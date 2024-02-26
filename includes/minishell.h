@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:20:19 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/25 19:29:53 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/26 10:06:02 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <errno.h>
+# include <termcap.h>
 
 # ifndef G_STATUS
 #  define G_STATUS
@@ -146,57 +147,65 @@ int		init_sig(t_prompt *prompt);
 int		init_if_env(t_prompt *ptr, char **env);
 int		init_if_no_env(t_prompt *ptr, char **envp);
 int		put_env_to_lst(t_env *env, char **envp);
+int		init_exec_var(t_data *data);
 int		create_side_env(t_prompt *ptr);
-
-void	init_exec_var(t_data *data);
 
 // ! ---------------------------------------------------------------------------
 // ?							INPUT PARSING
 // ! ---------------------------------------------------------------------------
 
-void	input_parser(t_prompt *prompt, t_data *data);
-int		get_cmd(t_data *data);
 int		invalid_character_checker(int c, t_data *data);
 int		is_input_valid(char *str, t_data *data);
 int		is_piped_input_valid(char *str, t_data *data);
 int		exception_checker(char *str, t_data *data);
 int		exception_checker_2(char *str, int i, t_data *data);
 int		unclosed_quote_detector(char *str);
-
-void	expand_handler(t_data *data);
 int		expand_is_valid_char(int c);
 int		is_valid_char(int c);
-int		is_valid_char_after_redir(int c);
+
+void	input_parser(t_prompt *prompt, t_data *data);
 void	reg_expander(t_data *data, int i);
 void	reg_expand_splitter(t_data *data, int i);
 void	reg_expand_joiner(t_data *data);
 void	tilde_expander(t_data *data, int i);
 void	backslash_expander(t_data *data, int i);
 void	search_and_split(t_data *data, int i);
+void	quote_flagger(char *str, int i, int q_flag);
+
 char	*quote_remover(t_data *data);
 char	*quote_remover_v2(char *str);
-int		empty_quote_handler(char *str);
-void	quote_flagger(char *str, int i, int q_flag);
-void	unquote_command(t_data *data);
 
 // ! ---------------------------------------------------------------------------
 // ?							PARSING UTILS
 // ! ---------------------------------------------------------------------------
 
-char	*input_splitter(t_data *data);
-
-int		single_node_handler(t_data *data);
-void	multi_node_handler(t_data *data, int i);
-int		multi_input_to_lst(t_input **ptr, char ***tab, int i, int n);
 t_input	**alloc_struct(t_input **ptr, int n);
+t_env	*ft_get_env_node(t_env *env, char *str);
+
+void	multi_node_handler(t_data *data, int i);
 void	alloc_redir_list(t_cmd *pr, int n);
 void	alloc_multi_nodes(t_input **inp, t_cmd *pr);
-int		expand_nodes(t_input *inp, t_data *data);
-
 void	format_node(t_cmd *pr, t_input *inp, t_data *data);
-char	*extract_command_name(t_input *inp);
 void	extract_params(t_input *inp, t_cmd *pr);
 void	extract_redirs(t_input *inp, t_cmd *pr);
+void	multi_node_formatting(t_input **inp, t_data *data);
+void	multi_format_node(t_cmd *pr, t_input *inp, t_data *data);
+void	node_printer(t_cmd *pr);
+void	identify_nodes(t_input *p);
+void	set_status(t_data *data, int status, char *str, char *cmd);
+void	add_var_to_env(t_data *data, char *var);
+void	del_var_from_env(t_data *data, char *var);
+
+char	*input_splitter(t_data *data);
+char	*extract_command_name(t_input *inp);
+char	*get_tmp_filename(void);
+char	**input_to_lst(t_data *data);
+char	**pipes_splitter(char const *s, char c, t_data *data);
+char	*ft_get_env(t_env *env, char *str);
+
+int		single_node_handler(t_data *data);
+int		multi_input_to_lst(t_input **ptr, char ***tab, int i, int n);
+int		expand_nodes(t_input *inp, t_data *data);
 int		set_redir_type(char *token);
 int		get_word_count(t_input *inp);
 int		get_redir_count(t_input *inp);
@@ -204,67 +213,26 @@ int		get_n_redir(t_cmd *lst);
 int		get_node_len(t_cmd *lst);
 int		get_lst_len(t_input *lst);
 int		get_dtab_len(char **str);
-void	multi_node_formatting(t_input **inp, t_data *data);
-void	multi_format_node(t_cmd *pr, t_input *inp, t_data *data);
-
-void	node_printer(t_cmd *pr);
-
-void	heredoc_finder(t_cmd *node);
-void	do_heredoc(char *delimiter, t_redir *redir_node);
-char	*get_tmp_filename(void);
-
+int		heredoc_finder(t_cmd *node);
+int		do_heredoc(char *delimiter, t_redir *redir_node);
+int		do_heredoc_extra(char *delimiter, int fd);
 int		put_input_to_lst(t_input *ptr, char **tab);
-char	**input_to_lst(t_data *data);
 int		is_special_char(char c);
-int		is_unquoted_wspace(char *str, int i);
 int		lexer_counter(char *str, int i, int c);
 int		lexer_counter_helper(char *str, int i, int flag);
 int		get_next_split(char *str, int i);
 int		get_next_split_helper(char *str, int c, int flag);
 int		token_identifier(char *str, int i);
-void	identify_nodes(t_input *p);
 int		node_identifier(char *str);
-
-void	ft_printlst(t_input *L);
-void	set_status(t_data *data, int status, char *str, char *cmd);
-char	*ft_get_env(t_env *env, char *str);
-t_env	*ft_get_env_node(t_env *env, char *str);
-void	add_var_to_env(t_data *data, char *var);
-void	del_var_from_env(t_data *data, char *var);
 int		env_len(t_env *env);
 int		is_there_pipe(t_prompt *prompt);
-int		is_there_dollar(char *str);
-int		is_there_backslash(char *str);
 int		is_there_quotes(char *str);
-int		is_there_redirs(char *str);
 int		is_there_tilde(char *str);
-int		is_token(char *str, int i);
 int		ispipe(int c);
 int		is_valid_pipe(char *str, t_data *data);
 int		is_in_quotes(char *str, int c);
 int		is_pipe_content_valid(char *str, t_data *data);
-char	**pipes_splitter(char const *s, char c, t_data *data);
-int		n_args(char *str);
 int		quote_skipper(char *str, int c);
-int		is_valid_redir(char *str, t_data *data);
-int		redir_checker(char *str, int i, t_data *data);
-int		double_redir_checker(char *str, int i, t_data *data);
-void	redirection_parser(t_data *data);
-void	get_redir_infos(t_data *data, int i, int n);
-void	set_tab_values(t_data *data, int n, int i, int mode);
-char	*file_name_finder(t_data *data, int i, int c);
-int		redirection_and_expand_handler(t_data *data);
-void	tab_value_setter_double(t_data *data, int n, int i);
-void	extract_redir_cmds(char **splitted, t_data *data);
-void	extract_redir_cmd_finalizer(t_data *data, char **splitted);
-int		cmd_counter(char **splitted);
-int		r_word_counter(t_data *data, int i, int j);
-int		are_token_sep_by_wspace(char *str);
-void	extract_redir_no_wspace(t_data *data, int n);
-char	*extract_word(t_data *data, int i, int c);
-int		get_double_tab_len(char **splitted);
-void	heredoc_counter(t_data *data);
-int		hdoc_counter(char *str);
 
 // ! ---------------------------------------------------------------------------
 // ?							SIGNAL HANDLER
@@ -372,54 +340,37 @@ void	free_multi_struct_and_arg(t_data *data, int **pipefd);
 void	close_all_redirs(t_data *data);
 
 // ! ---------------------------------------------------------------------------
-// ?							Chain list
+// ?							  Builtins
 // ! ---------------------------------------------------------------------------
 
-int		init_list_new(t_data *data, t_cha *list);
-t_cha	*ft_init_struct(t_cha *lst);
-t_cha	*ft_first_list(t_cha *lst);
-t_cha	*ft_add_at(t_data *data, t_cha *lst, int pos);
-t_cha	*ft_createcell(t_data *data, int pos);
-
-// ! ---------------------------------------------------------------------------
-// ?							Builtin && Tools
-// ! ---------------------------------------------------------------------------
-
-void	execute_cd(char **param, t_data *data);
-char	*cd_extract_arg(char *str);
-int		quoted_arg_util(char *str, int c);
-void	change_directory(t_data *data, char *path);
-void	go_back_one_level(t_data *data);
-void	update_vars(t_data *data);
-void	error_handling(int err, char *str, t_data *data);
-
-void	execute_echo(char **param, t_data *data);
-int		is_wspace_or_null(char *str, int i);
-int		flag_skipper(char *str);
-
-void	execute_pwd(t_data *data);
-void	execute_env(t_data *data);
-
-void	execute_export(char **param, t_data *data);
 char	*export_extract_arg(char *str);
-void	export_no_args(t_env *env);
-int		export_valid_args_counter(char *str);
-int		export_is_valid_arg(char *str, int i);
-void	export_error_handler(char *str, char *to_check, char *rest);
 char	*extract_var_name(char *str, int i);
 char	*extract_var_value(char *str, int i);
+char	*unset_extract_var_name(char *args, int i);
+
+int		export_valid_args_counter(char *str);
+int		export_is_valid_arg(char *str, int i);
 int		export_var_name_checker(char *str);
 int		is_valid_var_first_char(int c);
 int		is_valid_var_char(int c);
 int		is_valid_var_name(char *var);
+int		unset_var_name_skipper(char *args, int i);
+
+void	execute_cd(char **param, t_data *data);
+void	change_directory(t_data *data, char *path);
+void	go_back_one_level(t_data *data);
+void	update_vars(t_data *data);
+void	error_handling(int err, char *str, t_data *data);
+void	execute_echo(char **param, t_data *data);
+void	execute_pwd(t_data *data);
+void	execute_env(t_data *data);
+void	execute_export(char **param, t_data *data);
+void	export_no_args(t_env *env);
+void	export_error_handler(char *str, char *to_check, char *rest);
 void	export_finalizer(char *args, int i, t_data *data);
 void	do_export(char *var_name, char *var_value, t_data *data);
-
 void	execute_unset(t_data *data);
-char	*unset_extract_var_name(char *args, int i);
-int		unset_var_name_skipper(char *args, int i);
 void	do_unset(char *args, t_data *data);
-
 void	execute_exit(char **param, t_data *data);
 
 // ! ---------------------------------------------------------------------------
@@ -430,9 +381,6 @@ void	free_master(t_data *data);
 void	free_input_lst(t_input *lst);
 void	free_cmd_nodes(t_cmd *nodes);
 void	free_tri_table(char ***tab);
-t_input	*free_at_pos(t_input *L, int pos);
-
-void	free_manager(t_data *data, int key);
 void	free_cmds(t_data *data);
 void	free_env(t_env	*env);
 void	free_env_tab(char **env);

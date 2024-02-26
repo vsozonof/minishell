@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 10:14:42 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/23 10:14:21 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/26 09:48:53 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,8 @@ int	single_node_handler(t_data *data)
 		return (free_master(data), 0);
 	put_input_to_lst(data->inp, tab);
 	identify_nodes(data->inp);
-	if (!expand_nodes(data->inp, data))
-		return (0);
-	format_node(ptr, data->inp, data); // j'ajoute data pour l'env	
+	expand_nodes(data->inp, data);
+	format_node(ptr, data->inp, data);
 	return (1);
 }
 

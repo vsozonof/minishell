@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child_process.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:55:54 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/25 19:28:32 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/26 06:22:33 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int	child_process(t_data *data, int **pipefd, int i, t_cmd *cmd)
 	int		error;
 	int		*file;
 
+	file = NULL;
 	if (ft_pipex_helper_dup(data, pipefd, i) == -1)
 		free_problem(data, NULL);
 	if (data->n_redirs > 0)

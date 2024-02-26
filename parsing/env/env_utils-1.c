@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 05:50:43 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/21 12:49:34 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/26 09:47:45 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,18 +76,4 @@ int	put_env_to_lst(t_env *env, char **envp)
 		i++;
 	}
 	return (1);
-}
-
-void	ft_printlst(t_input *L)
-{
-	if (L == NULL)
-	{
-		printf("La liste est vide.\n");
-		return ;
-	}
-	while (L)
-	{
-		ft_printf("[%i]-> %s\t[%i]\n", L->index, L->str, L->i);
-		L = L->next;
-	}
 }

@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 02:54:33 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/01/30 12:10:39 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/26 09:43:18 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char	*quote_remover_v2(char *str)
 
 	i = 0;
 	quote_flagger(str, -1, 0);
-	splitted = ft_split(str, ']');
+	splitted = ft_split(str, 27);
 	if (!splitted[i])
 		return (free(splitted), free(str), NULL);
 	tmp = strjoin_and_free(splitted[i], splitted[i + 1]);
