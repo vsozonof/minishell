@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:55:54 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/25 19:28:32 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/26 09:23:06 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,23 +31,42 @@
 
 int	child_process(t_data *data, int **pipefd, int i, t_cmd *cmd)
 {
-	char	*cmd_arg;
-	int		error;
 	int		*file;
 
+	file = NULL;
 	if (ft_pipex_helper_dup(data, pipefd, i) == -1)
-		free_problem(data, NULL);
+	{
+		free_problem(data, NULL, NULL);
+		return (-1);
+	}
 	if (data->n_redirs > 0)
+	{
 		file = redirection_create(cmd, data);
+		if (!file)
+			return (-1);
+	}
 	builtin_single(cmd, data, file);
+	if (child_process_helper(data, cmd, file) == -1)
+		return (-1);
 	// cree un if qui contiens checker de builtin
+	return (0);
+}
+
+int	child_process_helper(t_data *data, t_cmd *cmd, int *file)
+{
+	char	*cmd_arg;
+	int		error;
+	
 	cmd_arg = ft_do_process(cmd->env, cmd->cmd);
 	if (!cmd_arg)
-		free_problem(data, file);
+	{
+		free_problem(data, file, cmd);
+		return (-1);
+	}
 	error = execve(cmd_arg, cmd->param, cmd->env);
 	if (error == -1)
 		fprintf(stderr, "could not execute the command\n");
-	free_problem(data, file);
+	free_problem(data, file, cmd);
 	return (-1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 09:41:34 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/25 19:29:21 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/26 09:46:27 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	builtin_single(t_cmd *cmd, t_data *data, int *file)
 	if (check >= 1 && check <= 7)
 	{
 		builtin_manager(data, check, cmd);
-		free_problem(data, file);
+		free_problem(data, file, cmd);
 	}
 	return (1);
 }
