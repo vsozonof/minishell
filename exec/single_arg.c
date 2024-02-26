@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 16:09:07 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/26 12:20:16 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/26 12:27:09 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ int	single_arg(t_data *data)
 	char	*comd;
 
 	comd = NULL;
-	if (data->exec->cmd == NULL)
-		return (0);
 	exec_single(data, comd, data->exec);
 	free(comd);
 	return (0);
@@ -49,6 +47,11 @@ int	child_process_single(t_data *data, t_cmd *cmd, int *file, char *comd)
 		file = redirection_create(cmd, data);
 		if (!file)
 			exit(0);
+	}
+	if (data->exec->cmd == NULL)
+	{
+		free_problem(data, file, cmd);
+		exit(0);
 	}
 	if (builtin_single(cmd, data, file) == -1)
 		exit(data->i_status);

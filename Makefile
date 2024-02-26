@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+         #
+#    By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/09 23:22:06 by vsozonof          #+#    #+#              #
-#    Updated: 2024/02/26 11:44:37 by vsozonof         ###   ########.fr        #
+#    Updated: 2024/02/26 12:33:51 by tpotilli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,6 +62,7 @@ SRCS = main.c \
 	   exec/multi_arg.c \
 	   exec/child_process.c \
 	   exec/child_process_helper.c \
+	   exec/status_code.c \
 	   builtin/unset/unset_master.c \
 	   builtin/unset/unset_utils-1.c \
 	   builtin/cd/cd_master.c \
