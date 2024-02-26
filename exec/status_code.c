@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 12:33:24 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/26 16:51:53 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/26 17:31:39 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,11 @@ int		get_and_print_statuscode(t_data *data, char *cmd)
 		statusCode = WEXITSTATUS(wstatus);
 	else if (WIFSIGNALED(wstatus))
 		statusCode = 128 + WTERMSIG(wstatus);
+	fprintf(stderr, "statuscode = %d\n", statusCode);
 	if (statusCode == 131)
 		write(2, "Quit (core dumped)\n", 20);
 	if (statusCode == 126)
-		set_status(data, statusCode, "Permission denied", cmd);
+		set_status(data, statusCode, "Permission denied", cmd); // bon message mais le $? pas bon
 	if (statusCode == 127)
 		set_status(data, statusCode, "Command not found", cmd);
 	if (statusCode == 128)
