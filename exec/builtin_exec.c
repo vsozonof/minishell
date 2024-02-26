@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 09:41:34 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/26 09:46:27 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/26 09:57:50 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	builtin_single(t_cmd *cmd, t_data *data, int *file)
 	{
 		builtin_manager(data, check, cmd);
 		free_problem(data, file, cmd);
+		return (-1);
 	}
 	return (1);
 }
@@ -32,7 +33,7 @@ int	builtin_checker(char *tmp)
 	token = 0;
 	if (ft_strncmp(tmp, "cd", 2) == 0)
 		token = 1;
-	if (ft_strncmp(tmp, "echo", 4) == 0)
+	else if (ft_strncmp(tmp, "echo", 4) == 0)
 		token = 2;
 	else if (ft_strncmp(tmp, "env", 3) == 0)
 		token = 3;
@@ -40,7 +41,7 @@ int	builtin_checker(char *tmp)
 		token = 4;
 	else if (ft_strncmp(tmp, "export", 6) == 0)
 		token = 5;
-	if (ft_strncmp(tmp, "pwd", 3) == 0)
+	else if (ft_strncmp(tmp, "pwd", 3) == 0)
 		token = 6;
 	else if (ft_strncmp(tmp, "unset", 5) == 0)
 		token = 7;

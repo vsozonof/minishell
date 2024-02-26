@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:55:54 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/26 09:23:06 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/26 09:59:36 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ int	child_process(t_data *data, int **pipefd, int i, t_cmd *cmd)
 		if (!file)
 			return (-1);
 	}
-	builtin_single(cmd, data, file);
+	if (builtin_single(cmd, data, file) == -1)
+		return (-1);
 	if (child_process_helper(data, cmd, file) == -1)
 		return (-1);
 	// cree un if qui contiens checker de builtin
