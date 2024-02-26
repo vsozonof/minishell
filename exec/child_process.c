@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:55:54 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/26 12:18:30 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/26 12:33:34 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,11 @@ int	child_process(t_data *data, int **pipefd, int i, t_cmd *cmd)
 		if (!file)
 			return (free(pipefd), -1);
 	}
+	if (data->exec->cmd == NULL)
+	{
+		free_problem(data, NULL, NULL);
+		return (free(pipefd), 0);
+	}
 	if (builtin_single(cmd, data, file) == -1)
 		return (free(pipefd), -1);
 	if (child_process_helper(data, cmd, file, pipefd) == -1)
@@ -73,7 +78,7 @@ int	child_process_helper(t_data *data, t_cmd *cmd, int *file, int **pipefd)
 	free(pipefd);
 	return (-1);
 }
-// / | fa.
+
 int	ft_pipex_helper_dup(t_data *data, int **pipefd, int i)
 {
 	int		check;
@@ -82,33 +87,4 @@ int	ft_pipex_helper_dup(t_data *data, int **pipefd, int i)
 	if (check == -1)
 		return (-1);
 	return (0);
-}
-
-int		get_and_print_statuscode(int *pid, int i)
-{
-	int		wstatus;
-	int		statusCode;
-
-	waitpid(pid[i], &wstatus, 0);
-	statusCode = -1;
-	fprintf(stderr, "voici mon status: %d\n", wstatus);
-	fprintf(stderr, "voici mon status: %d\n", WIFEXITED(wstatus));
-	if (WIFEXITED(wstatus))
-	{
-		statusCode = WEXITSTATUS(wstatus);
-		if (statusCode != 0)
-		{
-			write(2, "failure status code: \n", 23);
-			write(2, &statusCode, 3);
-			write(2, "\n", 1);
-		}
-		statusCode = WIFSIGNALED(wstatus);
-		if (statusCode != 0)
-		{
-			write(2, "failure with a signal is unknown\n", 34);
-			write(2, &statusCode, 3);
-			write(2, "\n", 1);
-		}
-	}
-	return (statusCode);
 }
