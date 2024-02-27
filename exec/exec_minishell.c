@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:43:04 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/27 09:23:30 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/27 13:29:13 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,41 +18,49 @@
 
 int	ft_pipex(t_data *data)
 {
-	int			**pipefd;
 	int			i;
 	char		*cmd;
-	pid_t		*pid;
 
 	i = ((data->i = 0));
-	pid = malloc(sizeof(pid_t) * data->n_cmds);
-	if (!pid)
+	data->pipefd = NULL;
+	data->pid = malloc(sizeof(pid_t) * data->n_cmds);
+	fprintf(stderr, "%lu\n %d\n", sizeof(pid_t), data->n_cmds);
+	if (!data->pid)
 		return (write(2, "problem with malloc\n", 21), -1);
-	pipefd = alloc_pipe();
-	if (!pipefd)
-		return (write(2, "problem with malloc\n", 21), free(pid), free(pipefd), -1);
-	else if (!pipefd[1])
-		return (write(2, "problem with malloc\n", 21), free(pid), free(pipefd), free(pipefd[0]), -1);
-	else if (!pipefd[0])
-		return (write(2, "problem with malloc\n", 21), free(pid), free(pipefd), free(pipefd[1]), -1);
-	cmd = ft_pipex_helper(data, pipefd, i, pid);
-	wait_and_free(data, pipefd, pid, cmd);
-	return (0);
+	data->pipefd = alloc_pipe();
+	if (!data->pipefd)
+		return (write(2, "problem with malloc\n", 21), free(data->pid), free(data->pipefd), -1);
+	else if (!data->pipefd[1])
+		return (write(2, "problem with malloc\n", 21), free(data->pid), free(data->pipefd), free(data->pipefd[0]), -1);
+	else if (!data->pipefd[0])
+		return (write(2, "problem with malloc\n", 21), free(data->pid), free(data->pipefd), free(data->pipefd[1]), -1);
+	cmd = ft_pipex_helper(data, i);
+	i = wait_and_free(data);
+	return (i);
 }
 
-char	*ft_pipex_helper(t_data *data, int **pipefd, int i, pid_t *pid)
+char	*ft_pipex_helper(t_data *data, int i)
 {
-	t_cmd	*cmd;
+	t_cmd				*cmd;
+	struct sigaction    sa;
 
 	cmd = data->exec;
+	ft_memset(&sa, 0, sizeof(sa));
+	sa.sa_handler = SIG_IGN;
+	sigaction(SIGINT, &sa, NULL);
+	sa.sa_handler = &handle_signals;
+	sigaction(SIGQUIT, &sa, NULL);
 	while (cmd)
 	{
-		pid[i] = fork();
-		if (pid[i] < 0)
+		data->pid[i] = fork();
+		if (data->pid[i] < 0)
 			return (printf("erreur de fork\n"), NULL);
-		if (pid[i] == 0)
-			child_process(data, pipefd, cmd);
+		if (data->pid[i] == 0)
+			child_process(data, cmd);
 		else
-			pipefd = parent_process(pipefd, i);
+		{
+			data->pipefd = parent_process(data, i);
+		}
 		i++;
 		data->i = i;
 		cmd = cmd->next;
@@ -73,23 +81,23 @@ char	*ft_pipex_helper(t_data *data, int **pipefd, int i, pid_t *pid)
 // **	then we close our pipe and alloc it again
 // **
 
-int	**parent_process(int **pipefd, int i)
+int	**parent_process(t_data *data, int i)
 {
 	if (i % 2 == 0)
 	{
-		if (!pipefd[0] || !pipefd[1])
-			return (free(pipefd[0]), free(pipefd[1]), free(pipefd), NULL);
-		close(pipefd[1][1]);
-		close(pipefd[1][0]);
-		pipe(pipefd[1]);
+		if (!data->pipefd[0] || !data->pipefd[1])
+			return (free(data->pipefd[0]), free(data->pipefd[1]), free(data->pipefd), NULL);
+		close(data->pipefd[1][1]);
+		close(data->pipefd[1][0]);
+		pipe(data->pipefd[1]);
 	}
 	else
 	{
-		if (!pipefd[0] || !pipefd[1])
-			return (free(pipefd[0]), free(pipefd[1]), free(pipefd), NULL);
-		close(pipefd[0][0]);
-		close(pipefd[0][1]);
-		pipe(pipefd[0]);
+		if (!data->pipefd[0] || !data->pipefd[1])
+			return (free(data->pipefd[0]), free(data->pipefd[1]), free(data->pipefd), NULL);
+		close(data->pipefd[0][0]);
+		close(data->pipefd[0][1]);
+		pipe(data->pipefd[0]);
 	}
-	return (pipefd);
+	return (data->pipefd);
 }

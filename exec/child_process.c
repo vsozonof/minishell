@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:55:54 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/26 18:10:21 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/27 13:10:29 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@
 **
 */
 
-int	child_process(t_data *data, int **pipefd, t_cmd *cmd)
+int	child_process(t_data *data, t_cmd *cmd)
 {
 	int		*file;
 
 	file = NULL;
-	if (ft_pipex_helper_dup(data, pipefd, data->i) == -1)
+	if (ft_pipex_helper_dup(data, data->i) == -1)
 	{
 		free_problem(data, NULL, NULL);
 		return (-1);
@@ -43,47 +43,50 @@ int	child_process(t_data *data, int **pipefd, t_cmd *cmd)
 	{
 		file = redirection_create(cmd, data);
 		if (!file)
-			return (free(pipefd), -1);
+		{
+			fprintf(stderr, "je free les redir\n");
+			exit(0);
+		}
 	}
 	if (data->exec->cmd == NULL)
-	{
-		free_problem(data, NULL, NULL);
-		return (free(pipefd), 0);
-	}
+		free_problem(data, NULL, NULL); // voir pour free pipefd pour ce cas particulier
 	if (builtin_multi(cmd, data, file) == -1)
-		return (free(pipefd), -1);
-	if (child_process_helper(data, cmd, file, pipefd) == -1)
+		return (-1);
+	if (child_process_helper(data, cmd, file) == -1)
 		return (-1);
 	// cree un if qui contiens checker de builtin
 	return (0);
 }
 
-int	child_process_helper(t_data *data, t_cmd *cmd, int *file, int **pipefd)
+int	child_process_helper(t_data *data, t_cmd *cmd, int *file)
 {
 	char	*cmd_arg;
-	int		error;
+	struct sigaction    sa;
 	
-	cmd_arg = ft_do_process(cmd->env, cmd->cmd);
+	cmd_arg = ft_do_process(cmd->env, cmd->cmd, data);
 	if (!cmd_arg)
 	{
-		free(pipefd);
+		free(data->pipefd);
 		free_problem(data, file, cmd);
 		return (-1);
 	}
-	error = execve(cmd_arg, cmd->param, cmd->env);
-	if (error == -1)
-		write(2, "could not execute the command\n", 31);
+	cmd = data->exec;
+	ft_memset(&sa, 0, sizeof(sa));
+	sa.sa_handler = SIG_DFL;
+	sigaction(SIGINT, &sa, NULL);
+	sigaction(SIGQUIT, &sa, NULL);
+	execve(cmd_arg, cmd->param, cmd->env);
 	free_problem(data, file, cmd);
 	free(cmd_arg);
-	free(pipefd);
+	free(data->pipefd);
 	return (-1);
 }
 
-int	ft_pipex_helper_dup(t_data *data, int **pipefd, int i)
+int	ft_pipex_helper_dup(t_data *data, int i)
 {
 	int		check;
 
-	check = child_process_in(pipefd, data, i);
+	check = child_process_in(data, i);
 	if (check == -1)
 		return (-1);
 	return (0);

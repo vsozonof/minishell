@@ -1,34 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   command_manager.c                                  :+:      :+:    :+:   */
+/*   exec_single_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/21 16:02:04 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/27 13:47:58 by tpotilli         ###   ########.fr       */
+/*   Created: 2024/02/27 12:05:48 by tpotilli          #+#    #+#             */
+/*   Updated: 2024/02/27 12:26:26 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	command_manager(t_data *data)
+void	free_problem_single(t_data *data, int *file, t_cmd *cmd)
 {
-	int	*file;
-
-	file = NULL;
-	if (data->n_cmds > 1)
-		pipex_exec(data);
-	else
-	{
-		data->du1 = dup(0);
-		data->du2 = dup(1);
-		file = single_arg(data);
-		dup2(data->du1, 0);
-		dup2(data->du2, 1);
-		close(data->du1);
-		close(data->du2);
-	}
-	// close_redir_parent(data);
-	return (0);
+	if (data->n_redirs > 0 && file != NULL)
+		close_all_open_redirs(file, cmd);
+	// if (pipefd != NULL)
+	// 	free_pipe(pipefd, i);
+	if (len_cmd(data->exec) > 1)
+		free(data->pid);
+	//free(pipefd)
+	close(data->du1);
+	close(data->du2);
+	free_master(data);
+	free_end_of_program(data->pr);
+	exit(0);
 }

@@ -6,13 +6,13 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:29:51 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/26 10:29:22 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/27 11:27:16 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*ft_do_process(char *envp[], char *cmd)
+char	*ft_do_process(char *envp[], char *cmd, t_data *data)
 {
 	int		i;
 	char	**path;
@@ -28,13 +28,18 @@ char	*ft_do_process(char *envp[], char *cmd)
 	while (path[i++])
 	{
 		buf2 = ft_strjoin_help(path, cmd, i);
-		if (access(buf2, X_OK) == 0)
+		if (access(buf2, F_OK) == 0)
 		{
-			ft_split_free(path);
-			return (buf2);
+			if (access(buf2, X_OK) == 0)
+			{
+				ft_split_free(path);
+				return (buf2);
+			}
+			set_status(data, 0, "Permission denied", cmd);
 		}
 		free(buf2);
 	}
+	set_status(data, 0, "Command not found", cmd);
 	ft_split_free(path);
 	return (NULL);
 }

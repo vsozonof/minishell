@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 09:27:48 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/26 16:04:13 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/27 10:42:53 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,4 @@ int	init_sig(t_prompt *prompt)
 		|| sigaction(SIGQUIT, &sa_quit, NULL) == -1)
 		return (set_status(prompt->data, 1, NULL, "signal error"), 0);
 	return (1);
-}
-
-void    ft_siginal(int signal)
-{
-    (void)signal;
-    printf("\n");
-    rl_on_new_line();
 }

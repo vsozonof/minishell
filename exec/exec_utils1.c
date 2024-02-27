@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:28:28 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/26 17:17:44 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/27 11:40:46 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,20 +48,67 @@ long	len_list(t_redir *redir)
 	return (len);
 }
 
-void	wait_and_free(t_data *data, int **pipefd, int *pid, char *cmd)
+long	len_cmd(t_cmd *cmd)
+{
+	long	len;
+
+	len = 0;
+	while (cmd)
+	{
+		len++;
+		cmd = cmd->next;
+	}
+	return (len);
+}
+
+int	wait_and_free(t_data *data)
+{
+	int	i;
+	int	cpt1;
+	int	status;
+	int	tmp;
+
+	i = cpt1 = 0;
+	while (42)
+	{
+		if (data->n_cmds == i)
+			i = 0;
+		if (waitpid(data->pid[i], &status , WNOHANG) > 0)
+		{
+			cpt1++;
+			if (cpt1 == data->n_cmds - 1)
+				tmp = status;
+		}
+		if (cpt1 == data->n_cmds)
+			break ;
+		i++;
+	}
+	waitpid(data->pid[i], NULL, 0);
+	while (i < data->n_cmds)
+	{
+		waitpid(data->pid[i], NULL, 0);
+		i++;
+	}
+	return (tmp);
+}
+
+/*
+void	wait_and_free(t_data *data, char *cmd)
 {
 	int	i;
 
 	i = 0;
+	waitpid(data->pid[i], NULL, 0);
 	while (i < data->n_cmds)
 	{
-		waitpid(pid[i], NULL, 0);
+		waitpid(data->pid[i], NULL, 0);
 		i++;
 	}
 	get_and_print_statuscode(data, cmd);
-	free_all_pipe(pipefd);
-	free(pid);
+	free_all_pipe(data->pipefd);
+	free(data->pid);
 }
+*/
 
 void	free_all_pipe(int **pipefd)
 {

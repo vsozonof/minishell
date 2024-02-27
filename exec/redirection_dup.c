@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:15:17 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/26 15:40:23 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/27 13:47:03 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ int	*redirection_create(t_cmd *cmd, t_data *data)
 		{
 			write(2, nav->file, ft_strlen(nav->file));
 			write(2, ": No such file or directory\n", 29);
-			redir_failed(data, file_tab, i);
+			if (data->n_redirs > 0 && file_tab != NULL)
+				close_all_open_redirs(file_tab, data->exec);
 			return (NULL);
 		}
 		i++;
@@ -52,13 +53,20 @@ int	*redirection_create(t_cmd *cmd, t_data *data)
 int	*creating_file(t_redir *nav, t_data *data, t_cmd *cmd)
 {
 	int	*file_tab;
+	int	i;
 
+	i = 0;
 	file_tab = malloc(sizeof(int) * len_list(nav));
 	if (!file_tab)
 	{
 		write(2, "a problem append with a malloc\n", 32);
 		free_problem(data, NULL, cmd);
 		return (NULL);
+	}
+	while (i < len_list(nav))
+	{
+		file_tab[i] = -1;
+		i++;
 	}
 	return (file_tab);
 }

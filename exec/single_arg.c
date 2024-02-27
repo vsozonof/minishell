@@ -6,70 +6,84 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 16:09:07 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/27 09:27:16 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/27 14:08:04 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	single_arg(t_data *data)
+int	*single_arg(t_data *data)
 {
 	char	*comd;
+	int		*file;
 
 	comd = NULL;
-	exec_single(data, comd, data->exec);
-	// fprintf(stderr, "e probleme viens de la\n");
-	// get_and_print_statuscode(data, data->exec->cmd);
-	free(comd);
-	return (0);
+	file = NULL;
+	if (data->exec->cmd == NULL)
+		return (free_problem(data, file, data->exec), file);
+	if (builtin_checker(data->exec->cmd) > 0
+		&& builtin_checker(data->exec->cmd) < 8)
+	{
+		if (data->n_redirs > 0)
+		{
+			file = redirection_create(data->exec, data);
+			if (!file)
+				return (NULL);
+		}
+		builtin_single(data->exec, data, file);
+		return (NULL);
+	}
+	exec_single(data, comd, data->exec, file);
+	if (data->n_redirs > 0 && file != NULL)
+		close_all_open_redirs(file, data->exec);
+	// if (data->n_redirs > 0 && file != NULL)
+	// 	close_all_open_redirs(file, data->exec);
+	return (file);
 }
 
-int	exec_single(t_data *data, char *comd, t_cmd *cmd)
+int	exec_single(t_data *data, char *comd, t_cmd *cmd, int *file)
 {
 	int					pid;
-	int					*file;
 	struct sigaction    sa;
 
-	ft_memset(&sa, 0, sizeof(sa));
-	sa.sa_handler = &ft_siginal;
-	sigaction(SIGINT, &sa, NULL);
-	file = NULL;
-	if (data->n_redirs > 0)
-	{
-		file = redirection_create(cmd, data);
-		if (!file)
-			return (0);
-	}
-	if (data->exec->cmd == NULL)
-		return (free_problem(data, file, cmd), 0);
-	if (builtin_single(cmd, data, file) == -1)
-		return (0);
 	pid = fork();
 	if (pid < 0)
 		return (printf("error in fork\n"), -1);
 	else if (pid == 0)
 		child_process_single(data, cmd, file, comd);
 	else if (pid > 0)
+	{
+		ft_memset(&sa, 0, sizeof(sa));
+		sa.sa_handler = SIG_IGN;
+		sigaction(SIGINT, &sa, NULL);
 		waitpid(pid, NULL, 0);
+	}
+	free(comd);
 	return (0);
 }
 
 int	child_process_single(t_data *data, t_cmd *cmd, int *file, char *comd)
 {
-	int	error;
-
-	comd = ft_do_process(data->exec->env, data->exec->cmd);
+	if (data->n_redirs > 0)
+	{
+		fprintf(stderr, "je passe par redir\n");
+		file = redirection_create(data->exec, data);
+		if (!file)
+		{
+			free_problem_single(data, file, cmd);
+			exit(0);
+		}
+	}
+	comd = ft_do_process(data->exec->env, data->exec->cmd, data);
 	if (!comd)
 	{
-		free_problem(data, file, cmd);
+		free_problem_single(data, file, cmd);
 		exit(0);
 	}
-	fprintf(stderr, "avant exec\n");
-	error = execve(comd, data->exec->param, data->exec->env);
-	if (error == -1)
-		write(2, "could not execute the command\n", 31);
-	fprintf(stderr, "apres exec\n");
-	free_problem(data, file, cmd);
+	// close(data->du1);
+	// close(data->du2);
+	execve(comd, data->exec->param, data->exec->env);
+	free_problem_single(data, file, cmd);
 	free(comd);
 	exit(0);
 	return (-1);

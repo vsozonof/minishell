@@ -6,7 +6,7 @@
 #    By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/09 23:22:06 by vsozonof          #+#    #+#              #
-#    Updated: 2024/02/26 15:54:43 by tpotilli         ###   ########.fr        #
+#    Updated: 2024/02/27 12:06:42 by tpotilli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,6 +59,7 @@ SRCS = main.c \
 	   exec/exec_utils1.c \
 	   exec/exec_utils2.c \
 	   exec/exec_utils3.c \
+	   exec/exec_single_utils.c \
 	   exec/exec_minishell.c \
 	   exec/multi_arg.c \
 	   exec/child_process.c \

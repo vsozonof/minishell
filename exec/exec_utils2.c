@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 13:42:38 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/27 09:21:40 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/27 14:04:45 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@ void	free_problem(t_data *data, int *file, t_cmd *cmd)
 		close_all_open_redirs(file, cmd);
 	// if (pipefd != NULL)
 	// 	free_pipe(pipefd, i);
+	if (len_cmd(data->exec) > 1)
+		free(data->pid);
+	//free(pipefd)
 	free_master(data);
 	free_end_of_program(data->pr);
 	exit(0);
@@ -26,6 +29,7 @@ void	free_problem(t_data *data, int *file, t_cmd *cmd)
 void	redir_failed(t_data *data, int *file, int i)
 {
 	close_open_redirs(file, i - 1);
+	free(data->pid);
 	free_master(data);
 	free_end_of_program(data->pr);
 	exit(0);
@@ -49,10 +53,15 @@ void	close_all_open_redirs(int *file, t_cmd *cmd)
 
 	i = 0;
 	re = cmd->redirs;
-	fprintf(stderr, "ASF;GESLF;SDLF;'\n");
+	fprintf(stderr, "JE VIENS CLOSE\n");
 	while (len_list(cmd->redirs) > i)
 	{
-		close(file[i]);
+		fprintf(stderr, "fd = %d\n", file[i]);
+		if (file[i] > -1)
+		{
+			fprintf(stderr, "je free le fd\n");
+			close(file[i]);
+		}
 		fprintf(stderr, "type = %d\n", re->type);
 		if (re->type == 3)
 			unlink(re->file);

@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:20:19 by tpotilli          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/02/27 09:22:50 by tpotilli         ###   ########.fr       */
-=======
-/*   Updated: 2024/02/26 18:25:46 by vsozonof         ###   ########.fr       */
->>>>>>> refs/remotes/origin/minishell-final
+/*   Updated: 2024/02/27 12:32:10 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +99,11 @@ typedef struct s_parse
 	t_input			*inp;
 	t_input			**multi_inp;
 	t_cmd			*exec;
+	pid_t			*pid;
+	int				**pipefd;
+	char			*save_cmd;
+	int				du1;
+	int				du2;
 	int				exited;
 	char			*input;
 	char			*head;
@@ -120,7 +121,6 @@ typedef struct s_parse
 	int				i;
 	int				n;
 	int				*here_doc_fd;
-	pid_t			*pid;
 	int				n_args;
 	int				*cmd_valid;
 	int				*status_code;
@@ -263,20 +263,19 @@ int		builtin_checker(char *tmp);
 void	builtin_manager(t_data *data, int token, t_cmd *cmd);
 int		pipex_exec(t_data *data);
 int		ft_pipex(t_data *data);
-char	*ft_pipex_helper(t_data *data, int **pipefd, int i, pid_t *pid);
-int		ft_pipex_helper_dup(t_data *data, int **pipefd, int i);
-int		child_process(t_data *data, int **pipefd, t_cmd *cmd);
-int		**parent_process(int **pipefd, int i);
-int		child_process_in_or_out(int **pipefd, t_data *data, int i, int token);
-int		child_process_middle(int **pipefd, int token, int verif);
-char	*ft_do_process(char *envp[], char *cmd);
+char	*ft_pipex_helper(t_data *data, int i);
+int		ft_pipex_helper_dup(t_data *data, int i);
+int		child_process(t_data *data, t_cmd *cmd);
+int		**parent_process(t_data *data, int i);
+int		child_process_in_or_out(t_data *data, int i, int token);
+int		child_process_middle(t_data *data, int token, int verif);
+char	*ft_do_process(char *envp[], char *cmd, t_data *data);
 char	*ft_do_process_helper(char *cmd);
 int		ft_do_process_checker(char *cmd);
-int		child_process_in(int **pipefd, t_data *data, int i);
-int		child_process_helper(t_data *data, t_cmd *cmd, int *file, int **pipefd);
-int		get_and_print_statuscode(t_data *data, char *cmd);
+int		child_process_in(t_data *data, int i);
+int		child_process_helper(t_data *data, t_cmd *cmd, int *file);
+int		get_and_print_statuscode(t_data *data, int status);
 int		builtin_multi(t_cmd *cmd, t_data *data, int *file);
-void    ft_siginal(int sig);
 void	close_redir_parent(t_data *data);
 
 
@@ -289,8 +288,8 @@ char	*get_name_heredoc(void);
 // ?							Single_Pipe
 // ! ---------------------------------------------------------------------------
 
-int		single_arg(t_data *data);
-int		exec_single(t_data *data, char *comd, t_cmd *cmd);
+int		*single_arg(t_data *data);
+int		exec_single(t_data *data, char *comd, t_cmd *cmd, int *file);
 int		redir_builtin(int check, int du1, int du2);
 int		redirection_single(t_data *data);
 char	**espoir(char **cmd_argument);
@@ -314,7 +313,7 @@ int		*creating_file(t_redir *nav, t_data *data, t_cmd *cmd);
 // ?							Free && utils Exec
 // ! ---------------------------------------------------------------------------
 
-void	wait_and_free(t_data *data, int **pipefd, int *pid, char *cmd);
+int		wait_and_free(t_data *data);
 int		get_kind_redirs_ac(char *input);
 void	close_all_pipe(int **pipefd, t_data *data);
 long	len_list(t_redir *redir);
@@ -325,6 +324,8 @@ void	free_problem(t_data *data, int *file, t_cmd *cmd);
 void	redir_failed(t_data *data, int *file, int i);
 void	free_problem_cmd_not_found(t_data *data, int *file, t_cmd *cmd);
 void	close_open_redirs(int *file, int i);
+long	len_cmd(t_cmd *cmd);
+void	free_problem_single(t_data *data, int *file, t_cmd *cmd);
 
 char	*arg_helper(char **buf, char *tmp, t_data *data, int i);
 char	*copy_arg(char *dest, char *src);

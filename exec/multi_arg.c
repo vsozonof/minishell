@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:36:45 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/26 10:23:11 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/27 11:28:45 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,13 @@ cat > test1 > test2 < test3 | wc > test4 < test5 | wc > test6
 
 int	pipex_exec(t_data *data)
 {
-	ft_pipex(data);
+	int		i;
+
+	i = ft_pipex(data);
+	get_and_print_statuscode(data, i);
+	free_all_pipe(data->pipefd);
+	free(data->pid);
+	// free(data->save_cmd);
 	return (0);
 }
 
