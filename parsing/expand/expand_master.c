@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expand-master.c                                    :+:      :+:    :+:   */
+/*   expand_master.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 14:31:51 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/26 09:36:35 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/26 18:04:53 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int	expand_nodes(t_input *inp, t_data *data)
 			else
 				nav->str = ft_strdup(data->input);
 		}
+		if (!nav->str)
+			return (set_status(data, 12, "malloc error", "malloc"), 0);
 		free(data->input);
 		data->input = NULL;
 		nav = nav->next;

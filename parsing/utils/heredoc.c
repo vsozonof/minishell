@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 11:37:41 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/26 16:17:01 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/26 17:29:34 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,10 @@ int	do_heredoc(char *delimiter, t_redir *redir_node, t_data *data)
 	int static		n;
 
 	n = 0;
-	tmp_fname = get_tmp_filename();
+	tmp_fname = get_tmp_filename(data);
 	fd = open(tmp_fname, O_CREAT | O_WRONLY, 0644);
+	if (fd == -1)
+		return (set_status(data, 2, "error detected", "open"), 0);
 	data->here_doc_fd[n] = fd;
 	n++;
 	g_status = 2;
@@ -85,16 +87,18 @@ int	do_heredoc_extra(char *delimiter, int fd)
 	return (1);
 }
 
-char	*get_tmp_filename(void)
+char	*get_tmp_filename(t_data *data)
 {
 	char		*str;
 	int			i;
 	int			fd;
 
 	fd = open("/dev/random", O_RDONLY);
-	str = malloc(sizeof(char) * 21);
 	if (!fd)
-		return (write(2, "problem with fd in here_doc\n", 29), NULL);
+		return (set_status(data, 2, "error detected", "open"), NULL);
+	str = malloc(sizeof(char) * 21);
+	if (!str)
+		return (set_status(data, 12, "malloc error", "malloc"), NULL);
 	read(fd, str, 16);
 	i = 1;
 	str[0] = '.';

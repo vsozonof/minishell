@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 11:43:50 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/26 12:09:50 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/26 17:49:32 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	redir_error_finder(t_data *data, char *str, int i)
 		return (wspace_after_redir_checker(data, str, i));
 	else if (str[i] == '>' || str[i] == '<')
 		return (token_after_redir_checker(data, str, i));
-	return (0);
+	return (1);
 }
 
 int	token_after_redir_checker(t_data *data, char *str, int i)
