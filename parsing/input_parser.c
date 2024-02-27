@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_parser.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 09:14:23 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/27 12:22:47 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/27 18:24:00 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,10 @@ void	input_parser(t_prompt *pr, t_data *data)
 			return (free_master(data));
 	}
 	else if (is_there_pipe(pr))
-		multi_node_handler(data, 0);
+	{
+		if (!multi_node_handler(data, 0))
+			return (free_master(data));
+	}
 	if (!init_exec_var(data))
 		return (free_master(data));
 	command_manager(data);
