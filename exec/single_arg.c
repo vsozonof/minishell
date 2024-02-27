@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 16:09:07 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/27 18:38:58 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/27 18:44:43 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ int	child_process_single(t_data *data, t_cmd *cmd, int *file, char *comd)
 {
 	if (data->n_redirs > 0)
 	{
-		fprintf(stderr, "je passe par redir\n");
 		file = redirection_create(data->exec, data);
 		if (!file)
 		{
@@ -80,6 +79,6 @@ int	child_process_single(t_data *data, t_cmd *cmd, int *file, char *comd)
 	execve(comd, data->exec->param, data->exec->env);
 	free_problem_single(data, file, cmd);
 	free(comd);
-	exit(0);
+	exit(1);
 	return (-1);
 }

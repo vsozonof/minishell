@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 15:48:51 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/26 17:17:08 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/27 18:44:41 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 // 	t_cmd	*cmd;
 
 // 	cmd = data->exec;
-// 	fprintf(stderr, "je casse la?\n");
 // 	while (cmd)
 // 	{
 // 		if (len_list(cmd->redirs))
