@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 16:09:07 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/27 14:08:04 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/27 15:51:23 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	child_process_single(t_data *data, t_cmd *cmd, int *file, char *comd)
 		if (!file)
 		{
 			free_problem_single(data, file, cmd);
-			exit(0);
+			exit(1);
 		}
 	}
 	comd = ft_do_process(data->exec->env, data->exec->cmd, data);

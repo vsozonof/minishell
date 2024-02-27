@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:29:51 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/27 11:27:16 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/27 16:03:32 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,7 @@ char	*ft_do_process(char *envp[], char *cmd, t_data *data)
 		if (access(buf2, F_OK) == 0)
 		{
 			if (access(buf2, X_OK) == 0)
-			{
-				ft_split_free(path);
-				return (buf2);
-			}
+				return (ft_split_free(path), buf2);
 			set_status(data, 0, "Permission denied", cmd);
 		}
 		free(buf2);
@@ -65,8 +62,11 @@ int	ft_do_process_checker(char *cmd)
 {
 	if (!cmd)
 		return (-2);
-	if (access(cmd, X_OK) == 0)
-		return (0);
+	if (access(cmd, F_OK) == 0)
+	{
+		if (access(cmd, X_OK) == 0)
+			return (0);
+	}
 	return (-1);
 }
 
