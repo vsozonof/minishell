@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 10:11:25 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/26 18:17:22 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/27 19:08:31 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,19 @@ t_input	**alloc_struct(t_input **ptr, int n)
 	return (ptr);
 }
 
-void	alloc_multi_nodes(t_input **inp, t_cmd *pr)
+t_cmd	*alloc_node(t_cmd *pr)
+{
+	pr = malloc(sizeof(t_cmd));
+	if (!pr)
+		return (NULL);
+	pr->cmd = NULL;
+	pr->param = NULL;
+	pr->next = NULL;
+	pr->redirs = NULL;
+	return (pr);
+}
+
+int	alloc_multi_nodes(t_input **inp, t_cmd *pr)
 {
 	int		i;
 	t_cmd	*nav;
@@ -57,11 +69,14 @@ void	alloc_multi_nodes(t_input **inp, t_cmd *pr)
 	{
 		nav -> next = malloc(sizeof(t_cmd));
 		if (!nav -> next)
-			return ;
+			return (0);
+		nav->cmd = NULL;
+		nav->param = NULL;
 		i++;
 		nav = nav -> next;
 	}
 	nav->next = NULL;
+	return (1);
 }
 
 t_input	*alloc_input_struct()
