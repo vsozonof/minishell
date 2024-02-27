@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 10:18:20 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/27 19:05:41 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/27 19:24:51 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,5 +126,5 @@ char	*extract_command_name(t_input *inp)
 			return (ft_strdup(nav->str));
 		nav = nav->next;
 	}
-	return (NULL);
+	return (ft_strdup(""));
 }
