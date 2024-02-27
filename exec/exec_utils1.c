@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:28:28 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/27 16:31:54 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/27 17:04:19 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,24 +87,6 @@ int	wait_and_free(t_data *data)
 	fprintf(stderr, "tmp - %d\n", tmp);
 	return (tmp);
 }
-
-/*
-void	wait_and_free(t_data *data, char *cmd)
-{
-	int	i;
-
-	i = 0;
-	waitpid(data->pid[i], NULL, 0);
-	while (i < data->n_cmds)
-	{
-		waitpid(data->pid[i], NULL, 0);
-		i++;
-	}
-	get_and_print_statuscode(data, cmd);
-	free_all_pipe(data->pipefd);
-	free(data->pid);
-}
-*/
 
 void	free_all_pipe(int **pipefd)
 {

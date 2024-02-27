@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 12:33:24 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/27 16:40:11 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/27 17:40:53 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,10 @@
 
 int		get_and_print_statuscode(t_data *data, int status)
 {
-	int		wstatus;
-
-	wstatus = 0;
-	if (WIFEXITED(wstatus))
-		status = WEXITSTATUS(wstatus);
-	else if (WIFSIGNALED(wstatus))
-		status = 128 + WTERMSIG(wstatus);
-	fprintf(stderr, "status = %d\n", status);
+	if (WIFEXITED(status))
+		status = WEXITSTATUS(status);
+	else if (WIFSIGNALED(status))
+		status = 128 + WTERMSIG(status);
 	if (status == 131)
 	{
 		write(2, "Quit (core dumped)\n", 20);
@@ -30,6 +26,8 @@ int		get_and_print_statuscode(t_data *data, int status)
 	if (status == 126)
 		set_status(data, status, NULL, NULL);
 	if (status == 127)
+		set_status(data, status, NULL, NULL);
+	if (status == 1)
 		set_status(data, status, NULL, NULL);
 	return (status);
 }

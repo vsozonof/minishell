@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 13:42:38 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/27 16:31:11 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/27 17:41:21 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	free_problem(t_data *data, int *file, t_cmd *cmd)
 		free(data->pid);
 	free_master(data);
 	free_end_of_program(data->pr);
-	fprintf(stderr, "voici mon status %d\n", status);
 	exit(status);
 }
 
