@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 16:09:07 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/27 15:51:23 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/27 18:38:58 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ int	*single_arg(t_data *data)
 	exec_single(data, comd, data->exec, file);
 	if (data->n_redirs > 0 && file != NULL)
 		close_all_open_redirs(file, data->exec);
-	// if (data->n_redirs > 0 && file != NULL)
-	// 	close_all_open_redirs(file, data->exec);
 	return (file);
 }
 
@@ -45,6 +43,7 @@ int	exec_single(t_data *data, char *comd, t_cmd *cmd, int *file)
 {
 	int					pid;
 	struct sigaction    sa;
+	int					status;
 
 	pid = fork();
 	if (pid < 0)
@@ -56,7 +55,8 @@ int	exec_single(t_data *data, char *comd, t_cmd *cmd, int *file)
 		ft_memset(&sa, 0, sizeof(sa));
 		sa.sa_handler = SIG_IGN;
 		sigaction(SIGINT, &sa, NULL);
-		waitpid(pid, NULL, 0);
+		waitpid(pid, &status, 0);
+		get_and_print_statuscode(data, status);
 	}
 	free(comd);
 	return (0);
@@ -76,12 +76,7 @@ int	child_process_single(t_data *data, t_cmd *cmd, int *file, char *comd)
 	}
 	comd = ft_do_process(data->exec->env, data->exec->cmd, data);
 	if (!comd)
-	{
 		free_problem_single(data, file, cmd);
-		exit(0);
-	}
-	// close(data->du1);
-	// close(data->du2);
 	execve(comd, data->exec->param, data->exec->env);
 	free_problem_single(data, file, cmd);
 	free(comd);

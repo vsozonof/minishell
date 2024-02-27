@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:29:51 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/27 17:42:56 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/27 18:36:44 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,11 @@ char	*ft_do_process(char *envp[], char *cmd, t_data *data)
 	char	*buf2;
 
 	i = 0;
-	buf2 = ft_do_process_helper(cmd);
+	buf2 = ft_do_process_helper(cmd, data);
 	if (buf2 != NULL)
 		return (buf2);
+	if (data->status_code == 126)
+		return (NULL);
 	path = ft_get_path(envp);
 	if (!path)
 		return (NULL);
@@ -45,13 +47,13 @@ char	*ft_do_process(char *envp[], char *cmd, t_data *data)
 	return (NULL);
 }
 
-char	*ft_do_process_helper(char *cmd)
+char	*ft_do_process_helper(char *cmd, t_data *data)
 {
 	int		result;
 	char	*buf2;
 
 	buf2 = NULL;
-	result = ft_do_process_checker(cmd);
+	result = ft_do_process_checker(cmd, data);
 	if (result == 0)
 	{
 		buf2 = ft_strdup(cmd);
@@ -62,7 +64,7 @@ char	*ft_do_process_helper(char *cmd)
 
 //X_OK Tests whether the file can be accessed for execution.
 // -> verifie si on a les droits
-int	ft_do_process_checker(char *cmd)
+int	ft_do_process_checker(char *cmd, t_data *data)
 {
 	if (!cmd)
 		return (-2);
@@ -70,6 +72,9 @@ int	ft_do_process_checker(char *cmd)
 	{
 		if (access(cmd, X_OK) == 0)
 			return (0);
+		set_status(data, 0, "Permission denied", cmd);
+		data->status_code = 126;
+		return (-2);
 	}
 	return (-1);
 }

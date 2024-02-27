@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:20:19 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/27 18:27:34 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/27 18:40:05 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -268,8 +268,8 @@ int		**parent_process(t_data *data, int i);
 int		child_process_in_or_out(t_data *data, int i, int token);
 int		child_process_middle(t_data *data, int token, int verif);
 char	*ft_do_process(char *envp[], char *cmd, t_data *data);
-char	*ft_do_process_helper(char *cmd);
-int		ft_do_process_checker(char *cmd);
+char	*ft_do_process_helper(char *cmd, t_data *data);
+int		ft_do_process_checker(char *cmd, t_data *data);
 int		child_process_in(t_data *data, int i);
 int		child_process_helper(t_data *data, t_cmd *cmd, int *file);
 int		get_and_print_statuscode(t_data *data, int status);
