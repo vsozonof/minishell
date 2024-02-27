@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:43:04 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/27 18:45:01 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/27 19:13:55 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,13 @@ int	ft_pipex(t_data *data)
 	i = ((data->i = 0));
 	data->pipefd = NULL;
 	data->pid = malloc(sizeof(pid_t) * data->n_cmds);
-	data->pid = NULL;
 	if (!data->pid)
 		return (write(2, "problem with malloc\n", 21), -1);
 	data->pipefd = alloc_pipe();
 	if (!data->pipefd)
 		return (write(2, "problem with malloc\n", 21), free(data->pid), free(data->pipefd), -1);
-	else if (!data->pipefd[1])
-		return (write(2, "problem with malloc\n", 21), free(data->pid), free(data->pipefd), free(data->pipefd[0]), -1);
+	if (!data->pipefd[1])
+		return (write(2, "problem with malloc\n", 21), free(data->pid), free(data->pipefd), -1);
 	else if (!data->pipefd[0])
 		return (write(2, "problem with malloc\n", 21), free(data->pid), free(data->pipefd), free(data->pipefd[1]), -1);
 	cmd = ft_pipex_helper(data, i);
