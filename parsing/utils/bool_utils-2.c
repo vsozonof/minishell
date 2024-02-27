@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 10:49:44 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/26 16:10:07 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/27 20:55:08 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,18 @@ int	get_heredoc_counter(t_cmd *node)
 		pr = pr -> next;
 	}
 	return (i);
+}
+
+int	set_redir_type(char *token)
+{
+	if (token[0] == '>' && !token[1])
+		return (1);
+	else if (token[0] == '<' && !token[1])
+		return (2);
+	else if (token[0] == '<' && token[1] == '<' && !token[2])
+		return (3);
+	else if (token[0] == '>' && token[1] == '>' && !token[2])
+		return (4);
+	printf("Error with redir type\n");
+	return (-1);
 }

@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 09:14:23 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/27 18:44:00 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/27 20:58:58 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	input_parser(t_prompt *pr, t_data *data)
 		if (!multi_node_handler(data, 0))
 			return (free_master(data));
 	}
+	node_printer(data->exec);
 	if (!init_exec_var(data))
 		return (free_master(data));
 	command_manager(data);
@@ -56,33 +57,33 @@ int	init_exec_var(t_data *data)
 	return (1);
 }
 
-// void	node_printer(t_cmd *pr)
-// {
-// 	while (pr)
-// 	{
-// 		printf("_______________________\n");
-// 		printf("CMD = \t [%s]\n", pr->cmd);
-// 		printf("_______________________\n");
-// 		int i = 0;
-// 		printf("_______________________\n");
-// 		printf("-------- PARAMS -------\n");
-// 		while (pr->param[i])
-// 		{
-// 			printf("[%i] -> %s\n", i, pr->param[i]);
-// 			i++;
-// 		}
-// 		printf("[%i] -> %s\n", i, pr->param[i]);
-// 		printf("_______________________\n");
-// 		printf("--------- REDIRS ------\n");
-// 		t_redir	*nav = pr->redirs;
-// 		while (nav)
-// 		{
-// 			printf("REDIR ID -> %i\n", nav->type);
-// 			printf("FILNAME  -> %s\n", nav->file);
-// 			printf("next = %p\n\n", nav->next);
-// 			nav = nav->next;
-// 		}
-// 		printf("_______________________\n");
-// 		pr = pr -> next;
-// 	}
-// }
+void	node_printer(t_cmd *pr)
+{
+	while (pr)
+	{
+		printf("_______________________\n");
+		printf("CMD = \t [%s]\n", pr->cmd);
+		printf("_______________________\n");
+		int i = 0;
+		printf("_______________________\n");
+		printf("-------- PARAMS -------\n");
+		while (pr->param[i])
+		{
+			printf("[%i] -> %s\n", i, pr->param[i]);
+			i++;
+		}
+		printf("[%i] -> %s\n", i, pr->param[i]);
+		printf("_______________________\n");
+		printf("--------- REDIRS ------\n");
+		t_redir	*nav = pr->redirs;
+		while (nav)
+		{
+			printf("REDIR ID -> %i\n", nav->type);
+			printf("FILNAME  -> %s\n", nav->file);
+			printf("next = %p\n\n", nav->next);
+			nav = nav->next;
+		}
+		printf("_______________________\n");
+		pr = pr -> next;
+	}
+}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_exec.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 09:41:34 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/27 15:12:58 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/27 21:06:41 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,19 +47,26 @@ int	builtin_checker(char *tmp)
 	int		token;
 
 	token = 0;
-	if (ft_strncmp(tmp, "cd", 2) == 0)
+	if (ft_strncmp(tmp, "cd", 2) == 0
+		&& (tmp[2] == '\0' || ft_is_whitespace(tmp[2])))
 		token = 1;
-	else if (ft_strncmp(tmp, "echo", 4) == 0)
+	else if (ft_strncmp(tmp, "echo", 4) == 0
+		&& (tmp[4] == '\0' || ft_is_whitespace(tmp[4])))
 		token = 2;
-	else if (ft_strncmp(tmp, "env", 3) == 0)
+	else if (ft_strncmp(tmp, "env", 3) == 0
+		&& (tmp[3] == '\0' || ft_is_whitespace(tmp[3])))
 		token = 3;
-	else if (ft_strncmp(tmp, "exit", 4) == 0)
+	else if (ft_strncmp(tmp, "exit", 4) == 0
+		&& (tmp[4] == '\0' || ft_is_whitespace(tmp[4])))
 		token = 4;
-	else if (ft_strncmp(tmp, "export", 6) == 0)
+	else if (ft_strncmp(tmp, "export", 6) == 0
+		&& (tmp[6] == '\0' || ft_is_whitespace(tmp[6])))
 		token = 5;
-	else if (ft_strncmp(tmp, "pwd", 3) == 0)
+	if (ft_strncmp(tmp, "pwd", 3) == 0
+		&& (tmp[3] == '\0' || ft_is_whitespace(tmp[3])))
 		token = 6;
-	else if (ft_strncmp(tmp, "unset", 5) == 0)
+	else if (ft_strncmp(tmp, "unset", 5) == 0
+		&& (tmp[5] == '\0' || ft_is_whitespace(tmp[5])))
 		token = 7;
 	return (token);
 }
