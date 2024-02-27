@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:55:54 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/27 23:48:33 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/28 00:09:10 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,13 @@
 **
 */
 
-int	child_process(t_data *data, t_cmd *cmd)
+int	child_process(t_data *data, t_cmd *cmd, int *file)
 {
-	int		*file;
-
-	file = NULL;
 	if (ft_pipex_helper_dup(data, data->i) == -1)
 		return (free_problem(data, NULL, NULL), -1);
 	if (data->n_redirs > 0)
 	{
-		file = redirection_create(cmd, data);
+		file = redirection_create(cmd, data, file);
 		if (!file)
 		{
 			free(data->pipefd);
@@ -63,9 +60,9 @@ int	child_process(t_data *data, t_cmd *cmd)
 int	child_process_helper(t_data *data, t_cmd *cmd, int *file)
 {
 	char				*cmd_arg;
-	struct sigaction    sa;
+	struct sigaction	sa;
 
-	cmd_arg = ft_do_process(cmd->env, cmd->cmd, data, 0);
+	cmd_arg = ft_do_process(cmd->env, cmd->cmd, data);
 	if (!cmd_arg)
 	{
 		free(data->pipefd);

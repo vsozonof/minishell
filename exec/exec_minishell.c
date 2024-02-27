@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:43:04 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/27 23:47:26 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/28 00:04:20 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	ft_pipex(t_data *data)
 {
 	int			i;
 	char		*cmd;
+	int			*file;
 
 	i = ((data->i = 0));
 	data->pipefd = NULL;
@@ -33,7 +34,8 @@ int	ft_pipex(t_data *data)
 		return (free_pipe_begin(data, 1), -1);
 	if (!data->pipefd[0])
 		return (free_pipe_begin(data, 2), -1);
-	cmd = ft_pipex_helper(data, i);
+	file = NULL;
+	cmd = ft_pipex_helper(data, i, file);
 	i = wait_and_free(data);
 	return (i);
 }
@@ -66,7 +68,7 @@ void	free_pipe_begin(t_data *data, int token)
 	}
 }
 
-char	*ft_pipex_helper(t_data *data, int i)
+char	*ft_pipex_helper(t_data *data, int i, int *file)
 {
 	t_cmd				*cmd;
 	struct sigaction	sa;
@@ -83,7 +85,7 @@ char	*ft_pipex_helper(t_data *data, int i)
 		if (data->pid[i] < 0)
 			return (printf("erreur de fork\n"), NULL);
 		if (data->pid[i] == 0)
-			child_process(data, cmd);
+			child_process(data, cmd, file);
 		else
 			data->pipefd = parent_process(data, i);
 		i++;

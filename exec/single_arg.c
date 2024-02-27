@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 16:09:07 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/27 23:38:17 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/28 00:09:14 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	*single_arg(t_data *data)
 	{
 		if (data->n_redirs > 0)
 		{
-			file = redirection_create(data->exec, data);
+			file = redirection_create(data->exec, data, file);
 			if (!file)
 				return (NULL);
 		}
@@ -67,7 +67,7 @@ int	child_process_single(t_data *data, t_cmd *cmd, int *file, char *comd)
 	(void)file;
 	if (data->n_redirs > 0)
 	{
-		file = redirection_create(data->exec, data);
+		file = redirection_create(data->exec, data, file);
 		if (!file)
 		{
 			free_problem_single(data, file, cmd);
@@ -81,7 +81,7 @@ int	child_process_single(t_data *data, t_cmd *cmd, int *file, char *comd)
 		data->i_status = 127;
 		free_problem_single(data, NULL, NULL);
 	}
-	comd = ft_do_process(data->exec->env, data->exec->cmd, data, 0);
+	comd = ft_do_process(data->exec->env, data->exec->cmd, data);
 	if (!comd)
 		free_problem_single(data, file, cmd);
 	execve(comd, data->exec->param, data->exec->env);

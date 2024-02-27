@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 10:11:25 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/27 19:08:31 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/27 23:28:15 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int	alloc_multi_nodes(t_input **inp, t_cmd *pr)
 	return (1);
 }
 
-t_input	*alloc_input_struct()
+t_input	*alloc_input_struct(void)
 {
 	t_input	*inp;
 

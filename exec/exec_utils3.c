@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 15:48:51 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/27 23:25:48 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/28 00:09:57 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,22 @@ int	*creating_file(t_redir *nav, t_data *data, t_cmd *cmd)
 		i++;
 	}
 	return (file_tab);
+}
+
+char	**ft_get_path(char **env)
+{
+	int		i;
+	char	**path;
+
+	i = 0;
+	while (ft_strncmp(env[i], "PATH=", 5) != 0)
+	{
+		if (!env[i + 1])
+			break ;
+		i++;
+	}
+	if (!env[i])
+		perror("Error: PATH not found");
+	path = ft_split(env[i] + 5, ':');
+	return (path);
 }

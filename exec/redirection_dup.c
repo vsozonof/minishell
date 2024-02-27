@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:15:17 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/27 23:37:04 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/28 00:02:09 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,9 @@
 // 3 = db_gauche <<
 // 4 = droite >>
 
-int	*redirection_create(t_cmd *cmd, t_data *data)
+int	*redirection_create(t_cmd *cmd, t_data *data, int *file_tab)
 {
 	int			file;
-	int			*file_tab;
 	t_redir		*nav;
 	int			i;
 
@@ -42,7 +41,7 @@ int	*redirection_create(t_cmd *cmd, t_data *data)
 			write(2, ": No such file or directory\n", 29);
 			data->i_status = 1;
 			if (data->n_redirs > 0 && file_tab != NULL)
-				close_all_open_redirs(file_tab, data->exec);
+				close_all_open_redirs(file_tab, cmd);
 			return (NULL);
 		}
 		i++;

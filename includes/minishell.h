@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:20:19 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/27 23:35:54 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/28 00:10:47 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -246,7 +246,6 @@ int		wspace_after_redir_checker(t_data *data, char *str, int i);
 int		token_after_redir_checker(t_data *data, char *str, int i);
 int		redir_error_finder(t_data *data, char *str, int i);
 int		format_node_extra(t_cmd *pr, t_input *inp, t_data *data, int n);
-void	node_printer(t_cmd *pr);					
 
 // ! ---------------------------------------------------------------------------
 // ?							SIGNAL HANDLER
@@ -263,13 +262,13 @@ int		builtin_checker(char *tmp);
 void	builtin_manager(t_data *data, int token, t_cmd *cmd);
 int		pipex_exec(t_data *data);
 int		ft_pipex(t_data *data);
-char	*ft_pipex_helper(t_data *data, int i);
+char	*ft_pipex_helper(t_data *data, int i, int *file);
 int		ft_pipex_helper_dup(t_data *data, int i);
-int		child_process(t_data *data, t_cmd *cmd);
+int		child_process(t_data *data, t_cmd *cmd, int *file);
 int		**parent_process(t_data *data, int i);
 int		child_process_in_or_out(t_data *data, int i, int token);
 int		child_process_middle(t_data *data, int token, int verif);
-char	*ft_do_process(char *envp[], char *cmd, t_data *data, int i);
+char	*ft_do_process(char *envp[], char *cmd, t_data *data);
 char	*ft_do_process_helper(char *cmd, t_data *data);
 int		ft_do_process_checker(char *cmd, t_data *data);
 int		child_process_in(t_data *data, int i);
@@ -280,6 +279,7 @@ int		check_dup(int pipe, int token, int pipe2);
 char	**ft_get_path(char **env);
 char	*ft_strjoin_help(char **path, char *cmd, int i);
 void	free_pipe_begin(t_data *data, int token);
+char	*do_process_2(char **path, char *buf2, char *cmd, t_data *data);
 
 // ! ---------------------------------------------------------------------------
 // ?							Single_Pipe
@@ -294,7 +294,7 @@ int		child_process_single(t_data *data, t_cmd *cmd, int *file, char *comd);
 // ?							Redirection
 // ! ---------------------------------------------------------------------------
 
-int		*redirection_create(t_cmd *cmd, t_data *data);
+int		*redirection_create(t_cmd *cmd, t_data *data, int *file_tab);
 int		create_file(t_redir *nav, int file);
 int		other_type_redir(t_redir *nav, int file);
 int		redirection_dup1_in(int file);

@@ -6,13 +6,13 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:29:51 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/27 22:46:44 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/28 00:10:57 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*ft_do_process(char *envp[], char *cmd, t_data *data, int i)
+char	*ft_do_process(char *envp[], char *cmd, t_data *data)
 {
 	char	**path;
 	char	*buf2;
@@ -25,6 +25,20 @@ char	*ft_do_process(char *envp[], char *cmd, t_data *data, int i)
 	path = ft_get_path(envp);
 	if (!path)
 		return (NULL);
+	buf2 = do_process_2(path, buf2, cmd, data);
+	if (buf2 != NULL)
+		return (buf2);
+	set_status(data, 0, "Command not found\n", cmd);
+	data->i_status = 127;
+	ft_split_free(path);
+	return (NULL);
+}
+
+char	*do_process_2(char **path, char *buf2, char *cmd, t_data *data)
+{
+	int		i;
+
+	i = 0;
 	while (path[i++])
 	{
 		buf2 = ft_strjoin_help(path, cmd, i);
@@ -39,9 +53,6 @@ char	*ft_do_process(char *envp[], char *cmd, t_data *data, int i)
 		}
 		free(buf2);
 	}
-	set_status(data, 0, "Command not found\n", cmd);
-	data->i_status = 127;
-	ft_split_free(path);
 	return (NULL);
 }
 
@@ -95,22 +106,4 @@ char	*ft_strjoin_help(char **path, char *cmd, int i)
 		return (write(2, "Error in path\n", 15), NULL);
 	free(buf);
 	return (buf2);
-}
-
-char	**ft_get_path(char **env)
-{
-	int		i;
-	char	**path;
-
-	i = 0;
-	while (ft_strncmp(env[i], "PATH=", 5) != 0)
-	{
-		if (!env[i + 1])
-			break ;
-		i++;
-	}
-	if (!env[i])
-		perror("Error: PATH not found");
-	path = ft_split(env[i] + 5, ':');
-	return (path);
 }

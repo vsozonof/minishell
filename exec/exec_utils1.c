@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:28:28 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/27 23:49:18 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/28 00:01:24 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,12 @@ int	wait_and_free(t_data *data)
 	int	status;
 	int	tmp;
 
-	i = cpt1 = 0;
+	i = ((cpt1 = 0));
 	while (42)
 	{
 		if (data->n_cmds == i)
 			i = 0;
-		if (waitpid(data->pid[i], &status , WNOHANG) > 0)
+		if (waitpid(data->pid[i], &status, WNOHANG) > 0)
 		{
 			cpt1++;
 			if (cpt1 == data->n_cmds - 1)
