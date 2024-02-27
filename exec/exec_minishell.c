@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:43:04 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/27 13:29:13 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/27 14:55:29 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,7 @@ char	*ft_pipex_helper(t_data *data, int i)
 		if (data->pid[i] == 0)
 			child_process(data, cmd);
 		else
-		{
 			data->pipefd = parent_process(data, i);
-		}
 		i++;
 		data->i = i;
 		cmd = cmd->next;

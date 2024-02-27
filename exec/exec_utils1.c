@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:28:28 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/27 11:40:46 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/27 15:31:00 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,12 +81,6 @@ int	wait_and_free(t_data *data)
 		}
 		if (cpt1 == data->n_cmds)
 			break ;
-		i++;
-	}
-	waitpid(data->pid[i], NULL, 0);
-	while (i < data->n_cmds)
-	{
-		waitpid(data->pid[i], NULL, 0);
 		i++;
 	}
 	return (tmp);

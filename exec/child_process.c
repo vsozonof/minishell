@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:55:54 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/27 13:10:29 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/27 15:11:01 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,15 @@ int	child_process(t_data *data, t_cmd *cmd)
 		file = redirection_create(cmd, data);
 		if (!file)
 		{
-			fprintf(stderr, "je free les redir\n");
+			free(data->pipefd);
+			free_problem(data, file, cmd);
 			exit(0);
 		}
 	}
 	if (data->exec->cmd == NULL)
 		free_problem(data, NULL, NULL); // voir pour free pipefd pour ce cas particulier
 	if (builtin_multi(cmd, data, file) == -1)
-		return (-1);
+		exit(0);
 	if (child_process_helper(data, cmd, file) == -1)
 		return (-1);
 	// cree un if qui contiens checker de builtin
