@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 04:29:11 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/26 17:44:28 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/27 18:21:04 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	free_master(t_data *data)
 		free(data->multi_inp);
 	}
 	free_cmd_nodes(data->exec);
+	free(data->here_doc_fd);
 }
 
 void	free_cmd_nodes(t_cmd *nodes)
