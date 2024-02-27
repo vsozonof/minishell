@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 10:14:42 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/26 18:19:47 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/27 19:05:53 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ int	single_node_handler(t_data *data)
 	char	**tab;
 	t_cmd	*ptr;
 
-	ptr = malloc(sizeof(t_cmd));
+	ptr = NULL;
+	ptr = alloc_node(ptr);
 	if (!ptr)
 		return (set_status(data, 12, "malloc error", "malloc"), 0);
 	data->exec = ptr;

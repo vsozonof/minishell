@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:20:19 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/27 19:09:29 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/27 19:11:00 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,6 +157,7 @@ int		put_env_to_lst(t_env *env, char **envp);
 int		init_exec_var(t_data *data);
 int		create_side_env(t_prompt *ptr);
 t_input	*alloc_input_struct(void);
+t_cmd	*alloc_node(t_cmd *pr);
 
 // ! ---------------------------------------------------------------------------
 // ?							INPUT PARSING
@@ -189,7 +190,7 @@ char	*quote_remover_v2(char *str);
 
 t_input	**alloc_struct(t_input **ptr, int n);
 t_env	*ft_get_env_node(t_env *env, char *str);
-void	alloc_multi_nodes(t_input **inp, t_cmd *pr);
+int		alloc_multi_nodes(t_input **inp, t_cmd *pr);
 void	multi_node_formatting(t_input **inp, t_data *data);
 void	multi_format_node(t_cmd *pr, t_input *inp, t_data *data);
 void	identify_nodes(t_input *p);
