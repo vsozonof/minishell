@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:55:54 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/27 21:47:32 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/27 22:08:17 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ int	child_process_helper(t_data *data, t_cmd *cmd, int *file)
 		free(data->pipefd);
 		free_problem(data, file, cmd);
 	}
-	// cmd = data->exec;
 	ft_memset(&sa, 0, sizeof(sa));
 	sa.sa_handler = SIG_DFL;
 	sigaction(SIGINT, &sa, NULL);
