@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 16:02:04 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/27 18:37:27 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/27 21:17:28 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	command_manager(t_data *data)
 	int	*file;
 
 	file = NULL;
-	data->status_code = 0;
+	data->i_status = 0;
 	if (data->n_cmds > 1)
 		pipex_exec(data);
 	else
