@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:36:45 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/27 11:28:45 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/27 18:46:01 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,11 @@ int	pipex_exec(t_data *data)
 	int		i;
 
 	i = ft_pipex(data);
+	if (i == -1)
+	{
+		get_and_print_statuscode(data, i);
+		return (-1);
+	}
 	get_and_print_statuscode(data, i);
 	free_all_pipe(data->pipefd);
 	free(data->pid);
