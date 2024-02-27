@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:20:19 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/26 18:14:09 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/27 09:22:50 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -258,7 +258,7 @@ int		builtin_checker(char *tmp);
 void	builtin_manager(t_data *data, int token, t_cmd *cmd);
 int		pipex_exec(t_data *data);
 int		ft_pipex(t_data *data);
-char	*ft_pipex_helper(t_data *data, int **pipefd, int i);
+char	*ft_pipex_helper(t_data *data, int **pipefd, int i, pid_t *pid);
 int		ft_pipex_helper_dup(t_data *data, int **pipefd, int i);
 int		child_process(t_data *data, int **pipefd, t_cmd *cmd);
 int		**parent_process(int **pipefd, int i);

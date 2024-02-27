@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 13:42:38 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/26 18:24:23 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/27 09:21:40 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	free_problem(t_data *data, int *file, t_cmd *cmd)
 		close_all_open_redirs(file, cmd);
 	// if (pipefd != NULL)
 	// 	free_pipe(pipefd, i);
-	free(data->pid);
 	free_master(data);
 	free_end_of_program(data->pr);
 	exit(0);
@@ -27,7 +26,6 @@ void	free_problem(t_data *data, int *file, t_cmd *cmd)
 void	redir_failed(t_data *data, int *file, int i)
 {
 	close_open_redirs(file, i - 1);
-	free(data->pid);
 	free_master(data);
 	free_end_of_program(data->pr);
 	exit(0);

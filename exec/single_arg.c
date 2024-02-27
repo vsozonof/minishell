@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 16:09:07 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/26 17:35:14 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/27 09:27:16 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ int	single_arg(t_data *data)
 
 	comd = NULL;
 	exec_single(data, comd, data->exec);
-	get_and_print_statuscode(data, data->exec->cmd);
+	// fprintf(stderr, "e probleme viens de la\n");
+	// get_and_print_statuscode(data, data->exec->cmd);
 	free(comd);
 	return (0);
 }
