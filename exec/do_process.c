@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:29:51 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/27 19:17:30 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/27 21:47:53 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*ft_do_process(char *envp[], char *cmd, t_data *data)
 	buf2 = ft_do_process_helper(cmd, data);
 	if (buf2 != NULL)
 		return (buf2);
-	if (data->status_code == 126)
+	if (data->i_status == 126)
 		return (NULL);
 	path = ft_get_path(envp);
 	if (!path)
@@ -36,13 +36,13 @@ char	*ft_do_process(char *envp[], char *cmd, t_data *data)
 				return (ft_split_free(path), buf2);
 			set_status(data, 0, "Permission denied\n", cmd);
 			ft_split_free(path);
-			data->status_code = 1;
+			data->i_status = 1;
 			return (NULL);
 		}
 		free(buf2);
 	}
 	set_status(data, 0, "Command not found\n", cmd);
-	data->status_code = 127;
+	data->i_status = 127;
 	ft_split_free(path);
 	return (NULL);
 }
@@ -58,7 +58,7 @@ char	*ft_do_process_helper(char *cmd, t_data *data)
 	if (stat(cmd, &S_ISDIR) == 0)
 	{
 		set_status(data, 0, "No such file or directory\n", cmd);
-		data->status_code = 126;
+		data->i_status = 126;
 		return (NULL);
 	}
 	if (result == 0)
@@ -80,7 +80,7 @@ int	ft_do_process_checker(char *cmd, t_data *data)
 		if (access(cmd, X_OK) == 0)
 			return (0);
 		set_status(data, 0, "Permission denied\n", cmd);
-		data->status_code = 126;
+		data->i_status = 126;
 		return (-2);
 	}
 	return (-1);

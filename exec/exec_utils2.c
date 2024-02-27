@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 13:42:38 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/27 18:44:39 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/27 21:16:03 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	free_problem(t_data *data, int *file, t_cmd *cmd)
 {
 	int		status;
 
-	status = data->status_code;
+	status = data->i_status;
 	if (data->n_redirs > 0 && file != NULL)
 		close_all_open_redirs(file, cmd);
 	if (len_cmd(data->exec) > 1)

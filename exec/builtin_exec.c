@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 09:41:34 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/27 15:12:58 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/27 21:47:46 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ int	builtin_multi(t_cmd *cmd, t_data *data, int *file)
 		builtin_manager(data, check, cmd);
 		free(data->pipefd);
 		free_problem(data, file, cmd);
-		return (-1);
 	}
 	return (1);
 }
