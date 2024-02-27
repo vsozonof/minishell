@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:55:54 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/27 18:30:42 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/27 19:36:22 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,14 @@ int	child_process(t_data *data, t_cmd *cmd)
 			exit(1);
 		}
 	}
-	if (data->exec->cmd == NULL)
+	if (data->exec->cmd == NULL
+		|| ft_strlen(data->exec->cmd) == 0)
+	{
+		set_status(data, 0, "Command not found\n", cmd->cmd);
+		data->status_code = 127;
+		free(data->pipefd);
 		free_problem(data, NULL, NULL); // voir pour free pipefd pour ce cas particulier
+	}
 	if (builtin_multi(cmd, data, file) == -1)
 		exit(0);
 	if (child_process_helper(data, cmd, file) == -1)
@@ -65,6 +71,7 @@ int	child_process_helper(t_data *data, t_cmd *cmd, int *file)
 	if (!cmd_arg)
 	{
 		free(data->pipefd);
+		fprintf(stderr, "%d", data->status_code);
 		free_problem(data, file, cmd);
 	}
 	cmd = data->exec;

@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 16:09:07 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/27 18:44:43 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/27 19:37:26 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,13 @@ int	child_process_single(t_data *data, t_cmd *cmd, int *file, char *comd)
 			free_problem_single(data, file, cmd);
 			exit(1);
 		}
+	}
+	if (data->exec->cmd == NULL
+		|| ft_strlen(data->exec->cmd) == 0)
+	{
+		set_status(data, 0, "Command not found\n", cmd->cmd);
+		data->status_code = 127;
+		free_problem_single(data, NULL, NULL); // voir pour free pipefd pour ce cas particulier
 	}
 	comd = ft_do_process(data->exec->env, data->exec->cmd, data);
 	if (!comd)
