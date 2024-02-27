@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 04:37:37 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/26 17:46:37 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/27 18:38:47 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,10 @@ int	is_input_valid(char *str, t_data *data)
 
 int	invalid_character_checker(int c, t_data *data)
 {
-	if (c == '\0' || c == ':')
-		return (set_status(data, 1, NULL, NULL), 0);
+	if (c == '\0')
+		return (0);
+	else if (c == ':')
+		return (set_status(data, 0, NULL, NULL), 0);
 	else if (c == '!')
 		return (set_status(data, 1, NULL, NULL), 0);
 	else

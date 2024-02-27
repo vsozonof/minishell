@@ -6,23 +6,20 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 10:15:28 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/26 12:37:38 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/27 18:28:07 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	multi_node_handler(t_data *data, int i)
+int	multi_node_handler(t_data *data, int i)
 {
 	char	***tab;
 
 	data->inp->cmds = pipes_splitter(data->input, '|', data);
-	if (!data->inp->cmds)
-		return ;
-	printf("%s - %s - %s\n", data->inp->cmds[0], data->inp->cmds[1], data->inp->cmds[2]);
 	tab = malloc(sizeof(char **) * (data->n_cmds + 1));
-	if (!tab)
-		return ;
+	if (!tab || !data->inp->cmds)
+		return (set_status(data, 12, "malloc error", "malloc"), 0);
 	while (data->inp->cmds[i])
 	{
 		free(data->input);
@@ -34,12 +31,13 @@ void	multi_node_handler(t_data *data, int i)
 	data->inp->cmds = ((tab[i] = NULL));
 	data->multi_inp = alloc_struct(data->multi_inp, (data->n_cmds + 1));
 	if (!data->multi_inp)
-		return ;
+		return (set_status(data, 12, "malloc error", "malloc"), 0);
 	multi_input_to_lst(data->multi_inp, tab, 0, 0);
 	i = -1;
 	while (data->multi_inp[++i])
 		identify_nodes(data->multi_inp[i]);
 	multi_node_formatting(data->multi_inp, data);
+	return (1);
 }
 
 int	multi_input_to_lst(t_input **ptr, char ***tab, int i, int n)

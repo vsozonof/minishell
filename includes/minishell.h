@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:20:19 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/27 16:13:54 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/27 18:27:34 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,16 +188,9 @@ char	*quote_remover_v2(char *str);
 
 t_input	**alloc_struct(t_input **ptr, int n);
 t_env	*ft_get_env_node(t_env *env, char *str);
-
-void	multi_node_handler(t_data *data, int i);
-int		alloc_redir_list(t_cmd *pr, int n);
 void	alloc_multi_nodes(t_input **inp, t_cmd *pr);
-int		format_node(t_cmd *pr, t_input *inp, t_data *data);
-int		extract_params(t_input *inp, t_cmd *pr);
-int		extract_redirs(t_input *inp, t_cmd *pr);
 void	multi_node_formatting(t_input **inp, t_data *data);
 void	multi_format_node(t_cmd *pr, t_input *inp, t_data *data);
-void	node_printer(t_cmd *pr);
 void	identify_nodes(t_input *p);
 void	set_status(t_data *data, int status, char *str, char *cmd);
 void	add_var_to_env(t_data *data, char *var);
@@ -210,6 +203,11 @@ char	**input_to_lst(t_data *data);
 char	**pipes_splitter(char const *s, char c, t_data *data);
 char	*ft_get_env(t_env *env, char *str);
 
+int		multi_node_handler(t_data *data, int i);
+int		alloc_redir_list(t_cmd *pr, int n);
+int		format_node(t_cmd *pr, t_input *inp, t_data *data);
+int		extract_params(t_input *inp, t_cmd *pr);
+int		extract_redirs(t_input *inp, t_cmd *pr);
 int		single_node_handler(t_data *data);
 int		multi_input_to_lst(t_input **ptr, char ***tab, int i, int n);
 int		expand_nodes(t_input *inp, t_data *data);
