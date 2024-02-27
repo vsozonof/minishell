@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:20:19 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/27 19:11:00 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/27 21:05:50 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -247,6 +247,7 @@ int		wspace_after_redir_checker(t_data *data, char *str, int i);
 int		token_after_redir_checker(t_data *data, char *str, int i);
 int		redir_error_finder(t_data *data, char *str, int i);
 int		format_node_extra(t_cmd *pr, t_input *inp, t_data *data, int n);
+void	node_printer(t_cmd *pr);					
 
 // ! ---------------------------------------------------------------------------
 // ?							SIGNAL HANDLER
