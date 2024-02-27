@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:55:54 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/27 16:04:23 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/27 16:19:34 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,15 +58,14 @@ int	child_process(t_data *data, t_cmd *cmd)
 
 int	child_process_helper(t_data *data, t_cmd *cmd, int *file)
 {
-	char	*cmd_arg;
+	char				*cmd_arg;
 	struct sigaction    sa;
-	
+
 	cmd_arg = ft_do_process(cmd->env, cmd->cmd, data);
 	if (!cmd_arg)
 	{
 		free(data->pipefd);
 		free_problem(data, file, cmd);
-		return (-1);
 	}
 	cmd = data->exec;
 	ft_memset(&sa, 0, sizeof(sa));

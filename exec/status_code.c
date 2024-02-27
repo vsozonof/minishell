@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 12:33:24 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/27 15:27:31 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/27 16:40:11 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int		get_and_print_statuscode(t_data *data, int status)
 {
 	int		wstatus;
 
-	status = ((wstatus = 0));
+	wstatus = 0;
 	if (WIFEXITED(wstatus))
 		status = WEXITSTATUS(wstatus);
 	else if (WIFSIGNALED(wstatus))

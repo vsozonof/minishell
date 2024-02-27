@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:20:19 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/27 12:32:10 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/27 16:13:54 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ typedef struct s_parse
 	pid_t			*pid;
 	int				**pipefd;
 	char			*save_cmd;
+	int				status_code;
 	int				du1;
 	int				du2;
 	int				exited;
@@ -123,7 +124,6 @@ typedef struct s_parse
 	int				*here_doc_fd;
 	int				n_args;
 	int				*cmd_valid;
-	int				*status_code;
 	int				index_fd;
 	int				index_redirs;
 	int				nb_here_doc;

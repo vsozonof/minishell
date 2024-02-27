@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:28:28 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/27 15:31:00 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/27 16:31:54 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ int	wait_and_free(t_data *data)
 		if (waitpid(data->pid[i], &status , WNOHANG) > 0)
 		{
 			cpt1++;
+			fprintf(stderr, "voici status dans waitpid %d\n", status);
 			if (cpt1 == data->n_cmds - 1)
 				tmp = status;
 		}
@@ -83,6 +84,7 @@ int	wait_and_free(t_data *data)
 			break ;
 		i++;
 	}
+	fprintf(stderr, "tmp - %d\n", tmp);
 	return (tmp);
 }
 

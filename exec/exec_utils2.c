@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 13:42:38 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/27 15:09:26 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/27 16:31:11 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,19 @@
 //wc > test1 < test2 | cat < test3 > test4 | sleep5
 void	free_problem(t_data *data, int *file, t_cmd *cmd)
 {
+	int		status;
+
+	status = data->status_code;
 	if (data->n_redirs > 0 && file != NULL)
 		close_all_open_redirs(file, cmd);
-	// if (pipefd != NULL)
-	// 	free_pipe(pipefd, i);
 	if (len_cmd(data->exec) > 1)
 		free(data->pid);
-	//free(pipefd)
 	free_master(data);
 	free_end_of_program(data->pr);
-	exit(0);
+	fprintf(stderr, "voici mon status %d\n", status);
+	exit(status);
 }
-// regler problem pid demain
+
 void	redir_failed(t_data *data, int *file, int i)
 {
 	close_open_redirs(file, i - 1);
