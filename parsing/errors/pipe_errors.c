@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_errors.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 06:15:38 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/27 09:36:50 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/27 23:27:54 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ int	is_pipe_content_valid(char *str, t_data *data)
 					"Asyntax error near unexpected token `|'", NULL), 0);
 		while (str[i] && ft_is_whitespace(str[i]))
 			i++;
-		// printf("->D %i - %c\n", i, str[i]);
 		if (str[i] == '\0')
 			return (set_status(data, 2,
 					"syntax error near unexpected token `|'", NULL), 0);
