@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 16:09:07 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/27 21:16:56 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/27 23:38:17 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	*single_arg(t_data *data)
 int	exec_single(t_data *data, char *comd, t_cmd *cmd, int *file)
 {
 	int					pid;
-	struct sigaction    sa;
+	struct sigaction	sa;
 	int					status;
 
 	pid = fork();
@@ -64,6 +64,7 @@ int	exec_single(t_data *data, char *comd, t_cmd *cmd, int *file)
 
 int	child_process_single(t_data *data, t_cmd *cmd, int *file, char *comd)
 {
+	(void)file;
 	if (data->n_redirs > 0)
 	{
 		file = redirection_create(data->exec, data);
@@ -78,9 +79,9 @@ int	child_process_single(t_data *data, t_cmd *cmd, int *file, char *comd)
 	{
 		set_status(data, 0, "Command not found\n", cmd->cmd);
 		data->i_status = 127;
-		free_problem_single(data, NULL, NULL); // voir pour free pipefd pour ce cas particulier
+		free_problem_single(data, NULL, NULL);
 	}
-	comd = ft_do_process(data->exec->env, data->exec->cmd, data);
+	comd = ft_do_process(data->exec->env, data->exec->cmd, data, 0);
 	if (!comd)
 		free_problem_single(data, file, cmd);
 	execve(comd, data->exec->param, data->exec->env);

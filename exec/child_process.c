@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:55:54 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/27 22:08:17 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/27 23:48:33 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,11 @@ int	child_process(t_data *data, t_cmd *cmd)
 		set_status(data, 0, "Command not found\n", cmd->cmd);
 		data->i_status = 127;
 		free(data->pipefd);
-		free_problem(data, NULL, NULL); // voir pour free pipefd pour ce cas particulier
+		free_problem(data, NULL, NULL);
 	}
 	builtin_multi(cmd, data, file);
 	if (child_process_helper(data, cmd, file) == -1)
 		return (-1);
-	// cree un if qui contiens checker de builtin
 	return (0);
 }
 
@@ -66,7 +65,7 @@ int	child_process_helper(t_data *data, t_cmd *cmd, int *file)
 	char				*cmd_arg;
 	struct sigaction    sa;
 
-	cmd_arg = ft_do_process(cmd->env, cmd->cmd, data);
+	cmd_arg = ft_do_process(cmd->env, cmd->cmd, data, 0);
 	if (!cmd_arg)
 	{
 		free(data->pipefd);

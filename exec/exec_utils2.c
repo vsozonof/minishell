@@ -6,12 +6,12 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 13:42:38 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/27 21:16:03 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/27 23:19:39 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-//wc > test1 < test2 | cat < test3 > test4 | sleep5
+
 void	free_problem(t_data *data, int *file, t_cmd *cmd)
 {
 	int		status;
@@ -35,15 +35,30 @@ void	redir_failed(t_data *data, int *file, int i)
 	exit(0);
 }
 
-void	free_problem_cmd_not_found(t_data *data, int *file, t_cmd *cmd)
+int	**alloc_pipe(void)
 {
-	write(2, data->exec->cmd, ft_strlen(data->exec->cmd));
-	write(2, ": command not found\n", 21);
-	if (data->n_redirs > 0)
-		close_all_open_redirs(file, cmd);
-	free_master(data);
-	free_end_of_program(data->pr);
-	// exit(0);
+	int		**pipefd;
+	int		i;
+
+	i = 0;
+	pipefd = NULL;
+	if (i == 0)
+	{
+		pipefd = malloc(sizeof(int *) * 2);
+		if (!pipefd)
+			return (write(2, "probleme happend in alloc_pipe\n", 32), NULL);
+		pipefd[0] = malloc(sizeof(int) * 2);
+		pipefd[1] = malloc(sizeof(int) * 2);
+		if (!pipefd[0] || !pipefd[1])
+		{
+			free(pipefd[0]);
+			free(pipefd[1]);
+			return (write(2, "probleme when creating the pipe\n", 33), NULL);
+		}
+		pipe(pipefd[0]);
+		pipe(pipefd[1]);
+	}
+	return (pipefd);
 }
 
 void	close_all_open_redirs(int *file, t_cmd *cmd)

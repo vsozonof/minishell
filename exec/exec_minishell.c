@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:43:04 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/27 19:34:33 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/27 23:47:26 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,20 +28,48 @@ int	ft_pipex(t_data *data)
 		return (write(2, "problem with malloc\n", 21), -1);
 	data->pipefd = alloc_pipe();
 	if (!data->pipefd)
-		return (write(2, "problem with malloc\n", 21), free(data->pid), free(data->pipefd), -1);
+		return (free_pipe_begin(data, 0), -1);
 	if (!data->pipefd[1])
-		return (write(2, "problem with malloc\n", 21), free(data->pid), free(data->pipefd), -1);
+		return (free_pipe_begin(data, 1), -1);
 	if (!data->pipefd[0])
-		return (write(2, "problem with malloc\n", 21), free(data->pid), free(data->pipefd), -1);
+		return (free_pipe_begin(data, 2), -1);
 	cmd = ft_pipex_helper(data, i);
 	i = wait_and_free(data);
 	return (i);
 }
 
+void	free_pipe_begin(t_data *data, int token)
+{
+	write(2, "problem with malloc\n", 21);
+	if (token == 0)
+	{
+		free(data->pid);
+		free(data->pipefd);
+	}
+	else if (token == 1)
+	{
+		close(data->pipefd[0][0]);
+		close(data->pipefd[0][1]);
+		free(data->pipefd[0]);
+		free(data->pipefd[1]);
+		free(data->pid);
+		free(data->pipefd);
+	}
+	else if (token == 2)
+	{
+		close(data->pipefd[1][0]);
+		close(data->pipefd[1][1]);
+		free(data->pipefd[0]);
+		free(data->pipefd[1]);
+		free(data->pid);
+		free(data->pipefd);
+	}
+}
+
 char	*ft_pipex_helper(t_data *data, int i)
 {
 	t_cmd				*cmd;
-	struct sigaction    sa;
+	struct sigaction	sa;
 
 	cmd = data->exec;
 	ft_memset(&sa, 0, sizeof(sa));
@@ -83,7 +111,10 @@ int	**parent_process(t_data *data, int i)
 	if (i % 2 == 0)
 	{
 		if (!data->pipefd[0] || !data->pipefd[1])
-			return (free(data->pipefd[0]), free(data->pipefd[1]), free(data->pipefd), NULL);
+		{
+			free(data->pipefd[0]);
+			return (free(data->pipefd[1]), free(data->pipefd), NULL);
+		}
 		close(data->pipefd[1][1]);
 		close(data->pipefd[1][0]);
 		pipe(data->pipefd[1]);
@@ -91,7 +122,10 @@ int	**parent_process(t_data *data, int i)
 	else
 	{
 		if (!data->pipefd[0] || !data->pipefd[1])
-			return (free(data->pipefd[0]), free(data->pipefd[1]), free(data->pipefd), NULL);
+		{
+			free(data->pipefd[0]);
+			return (free(data->pipefd[1]), free(data->pipefd), NULL);
+		}
 		close(data->pipefd[0][0]);
 		close(data->pipefd[0][1]);
 		pipe(data->pipefd[0]);

@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:20:19 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/27 21:05:50 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/27 23:35:54 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -270,20 +269,17 @@ int		child_process(t_data *data, t_cmd *cmd);
 int		**parent_process(t_data *data, int i);
 int		child_process_in_or_out(t_data *data, int i, int token);
 int		child_process_middle(t_data *data, int token, int verif);
-char	*ft_do_process(char *envp[], char *cmd, t_data *data);
+char	*ft_do_process(char *envp[], char *cmd, t_data *data, int i);
 char	*ft_do_process_helper(char *cmd, t_data *data);
 int		ft_do_process_checker(char *cmd, t_data *data);
 int		child_process_in(t_data *data, int i);
 int		child_process_helper(t_data *data, t_cmd *cmd, int *file);
 int		get_and_print_statuscode(t_data *data, int status);
 int		builtin_multi(t_cmd *cmd, t_data *data, int *file);
-void	close_redir_parent(t_data *data);
-
-
 int		check_dup(int pipe, int token, int pipe2);
 char	**ft_get_path(char **env);
 char	*ft_strjoin_help(char **path, char *cmd, int i);
-char	*get_name_heredoc(void);
+void	free_pipe_begin(t_data *data, int token);
 
 // ! ---------------------------------------------------------------------------
 // ?							Single_Pipe
@@ -291,11 +287,6 @@ char	*get_name_heredoc(void);
 
 int		*single_arg(t_data *data);
 int		exec_single(t_data *data, char *comd, t_cmd *cmd, int *file);
-int		redir_builtin(int check, int du1, int du2);
-int		redirection_single(t_data *data);
-char	**espoir(char **cmd_argument);
-int		ft_count_space(char *buf);
-int		check_fre_cmd(t_data *data, char *buf, char **cmd_argument, char *fre);
 int		builtin_single(t_cmd *cmd, t_data *data, int *file);
 int		child_process_single(t_data *data, t_cmd *cmd, int *file, char *comd);
 
@@ -327,19 +318,8 @@ void	free_problem_cmd_not_found(t_data *data, int *file, t_cmd *cmd);
 void	close_open_redirs(int *file, int i);
 long	len_cmd(t_cmd *cmd);
 void	free_problem_single(t_data *data, int *file, t_cmd *cmd);
-
-char	*arg_helper(char **buf, char *tmp, t_data *data, int i);
-char	*copy_arg(char *dest, char *src);
-int		len_buf(char *buf, char *input, t_data *data, int act_redir);
-int		len_fd_tab(char	**str, int i);
-int		found_max(char **cmd_argument);
-int		verif_arg_fd(char *argv[], int i);
 int		ft_create_fd(char *argv, int flag);
-int		**alloc_pipe();
-void	free_all_alloc(t_data *data);
-void	free_single_struct_and_arg(t_data *data, char **cmd_argument, char *fre);
-void	free_multi_struct_and_arg(t_data *data, int **pipefd);
-void	close_all_redirs(t_data *data);
+int		**alloc_pipe(void);
 
 // ! ---------------------------------------------------------------------------
 // ?							  Builtins

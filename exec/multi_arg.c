@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:36:45 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/27 18:46:01 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/27 23:22:10 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ int	pipex_exec(t_data *data)
 	get_and_print_statuscode(data, i);
 	free_all_pipe(data->pipefd);
 	free(data->pid);
-	// free(data->save_cmd);
 	return (0);
 }
 

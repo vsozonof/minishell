@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:28:28 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/27 18:44:35 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/27 23:49:18 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,29 +110,3 @@ void	free_all_pipe(int **pipefd)
 **	this function will allocate two array of pipe
 **
 */
-
-int	**alloc_pipe()
-{
-	int		**pipefd;
-	int		i;
-
-	i = 0;
-	pipefd = NULL;
-	if (i == 0)
-	{
-		pipefd = malloc(sizeof(int *) * 2);
-		if (!pipefd)
-			return (write(2, "probleme happend in alloc_pipe\n", 32), NULL);
-		pipefd[0] = malloc(sizeof(int) * 2);
-		pipefd[1] = malloc(sizeof(int) * 2);
-		if (!pipefd[0] || !pipefd[1])
-		{
-			free(pipefd[0]);
-			free(pipefd[1]);
-			return (write(2, "probleme when creating the pipe\n", 33), NULL);
-		}
-		pipe(pipefd[0]);
-		pipe(pipefd[1]);
-	}
-	return (pipefd);
-}

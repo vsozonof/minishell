@@ -6,13 +6,13 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 12:33:24 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/27 17:40:53 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/27 23:19:50 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		get_and_print_statuscode(t_data *data, int status)
+int	get_and_print_statuscode(t_data *data, int status)
 {
 	if (WIFEXITED(status))
 		status = WEXITSTATUS(status);

@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 16:02:04 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/27 21:17:28 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/27 23:21:48 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,5 @@ int	command_manager(t_data *data)
 		close(data->du1);
 		close(data->du2);
 	}
-	// close_redir_parent(data);
 	return (0);
 }

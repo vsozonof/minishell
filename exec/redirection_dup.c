@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:15:17 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/27 21:47:56 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/27 23:37:04 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,27 +47,6 @@ int	*redirection_create(t_cmd *cmd, t_data *data)
 		}
 		i++;
 		nav = nav->next;
-	}
-	return (file_tab);
-}
-
-int	*creating_file(t_redir *nav, t_data *data, t_cmd *cmd)
-{
-	int	*file_tab;
-	int	i;
-
-	i = 0;
-	file_tab = malloc(sizeof(int) * len_list(nav));
-	if (!file_tab)
-	{
-		write(2, "a problem append with a malloc\n", 32);
-		free_problem(data, NULL, cmd);
-		return (NULL);
-	}
-	while (i < len_list(nav))
-	{
-		file_tab[i] = -1;
-		i++;
 	}
 	return (file_tab);
 }

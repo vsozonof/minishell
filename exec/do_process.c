@@ -6,19 +6,17 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:29:51 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/27 22:22:10 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/27 22:46:44 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*ft_do_process(char *envp[], char *cmd, t_data *data)
+char	*ft_do_process(char *envp[], char *cmd, t_data *data, int i)
 {
-	int		i;
 	char	**path;
 	char	*buf2;
 
-	i = 0;
 	buf2 = ft_do_process_helper(cmd, data);
 	if (buf2 != NULL)
 		return (buf2);
@@ -51,11 +49,11 @@ char	*ft_do_process_helper(char *cmd, t_data *data)
 {
 	int			result;
 	char		*buf2;
-	struct stat	S_ISDIR;
+	struct stat	s_isidr;
 
 	buf2 = NULL;
 	result = ft_do_process_checker(cmd, data);
-	if (stat(cmd, &S_ISDIR) == 0)
+	if (stat(cmd, &s_isidr) == 0)
 	{
 		set_status(data, 0, "No such file or directory\n", cmd);
 		data->i_status = 126;
@@ -69,8 +67,6 @@ char	*ft_do_process_helper(char *cmd, t_data *data)
 	return (NULL);
 }
 
-//X_OK Tests whether the file can be accessed for execution.
-// -> verifie si on a les droits
 int	ft_do_process_checker(char *cmd, t_data *data)
 {
 	if (!cmd)
@@ -110,7 +106,7 @@ char	**ft_get_path(char **env)
 	while (ft_strncmp(env[i], "PATH=", 5) != 0)
 	{
 		if (!env[i + 1])
-			break;
+			break ;
 		i++;
 	}
 	if (!env[i])
