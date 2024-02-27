@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:15:17 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/28 00:02:09 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/28 00:58:31 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,8 @@ int	create_file(t_redir *nav, int file)
 	}
 	else
 	{
-		if (other_type_redir(nav, file) == -1)
+		file = other_type_redir(nav, file);
+		if (file == -1)
 			return (-1);
 	}
 	return (file);
