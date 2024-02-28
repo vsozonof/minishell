@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 16:09:07 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/28 00:09:14 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/28 01:55:05 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,34 @@ int	*single_arg(t_data *data)
 		return (NULL);
 	}
 	exec_single(data, comd, data->exec, file);
-	if (data->n_redirs > 0 && file != NULL)
-		close_all_open_redirs(file, data->exec);
+	if (data->n_redirs > 0)
+		redir_here(data, file);
 	return (file);
+}
+
+void	redir_here(t_data *data, int *file)
+{
+	t_redir	*redir;
+	int		i;
+
+	i = 0;
+	redir = data->exec->redirs;
+	if (file == NULL)
+	{
+		while (redir)
+		{
+			if (redir->type == 3)
+			{
+				close(data->here_doc_fd[data->index_here_doc]);
+				data->index_here_doc++;
+				unlink(redir->file);
+			}
+			i++;
+			redir = redir->next;
+		}
+	}
+	if (file != NULL)
+		close_all_open_redirs(file, data->exec);
 }
 
 int	exec_single(t_data *data, char *comd, t_cmd *cmd, int *file)
@@ -64,28 +89,24 @@ int	exec_single(t_data *data, char *comd, t_cmd *cmd, int *file)
 
 int	child_process_single(t_data *data, t_cmd *cmd, int *file, char *comd)
 {
-	(void)file;
 	if (data->n_redirs > 0)
 	{
 		file = redirection_create(data->exec, data, file);
 		if (!file)
-		{
-			free_problem_single(data, file, cmd);
-			exit(1);
-		}
+			free_problem_single(data, file);
 	}
 	if (data->exec->cmd == NULL
 		|| ft_strlen(data->exec->cmd) == 0)
 	{
 		set_status(data, 0, "Command not found\n", cmd->cmd);
 		data->i_status = 127;
-		free_problem_single(data, NULL, NULL);
+		free_problem_single(data, file);
 	}
 	comd = ft_do_process(data->exec->env, data->exec->cmd, data);
 	if (!comd)
-		free_problem_single(data, file, cmd);
+		free_problem_single(data, file);
 	execve(comd, data->exec->param, data->exec->env);
-	free_problem_single(data, file, cmd);
+	free_problem_single(data, file);
 	free(comd);
 	exit(1);
 	return (-1);

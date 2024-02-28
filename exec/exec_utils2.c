@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 13:42:38 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/28 00:00:35 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/28 01:53:05 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,11 @@ void	close_all_open_redirs(int *file, t_cmd *cmd)
 	while (len_list(cmd->redirs) > i)
 	{
 		if (file[i] > -1)
+		{
 			close(file[i]);
-		if (re->type == 3)
-			unlink(re->file);
+			if (re->type == 3)
+				unlink(re->file);
+		}
 		re = re->next;
 		i++;
 	}
