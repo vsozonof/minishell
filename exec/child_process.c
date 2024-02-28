@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:55:54 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/28 00:09:10 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/28 02:47:50 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 int	child_process(t_data *data, t_cmd *cmd, int *file)
 {
 	if (ft_pipex_helper_dup(data, data->i) == -1)
-		return (free_problem(data, NULL, NULL), -1);
+		return (free_problem(data, NULL, cmd), -1);
 	if (data->n_redirs > 0)
 	{
 		file = redirection_create(cmd, data, file);
@@ -43,13 +43,18 @@ int	child_process(t_data *data, t_cmd *cmd, int *file)
 			exit(1);
 		}
 	}
-	if (data->exec->cmd == NULL
-		|| ft_strlen(data->exec->cmd) == 0)
+	if (cmd->cmd == NULL
+		|| ft_strlen(cmd->cmd) == 0)
 	{
+		if (len_list(cmd->redirs) > 0)
+		{
+			free(data->pipefd);
+			free_problem(data, file, cmd);
+		}
 		set_status(data, 0, "Command not found\n", cmd->cmd);
 		data->i_status = 127;
 		free(data->pipefd);
-		free_problem(data, NULL, NULL);
+		free_problem(data, NULL, cmd);
 	}
 	builtin_multi(cmd, data, file);
 	if (child_process_helper(data, cmd, file) == -1)
