@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:43:04 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/28 05:39:35 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/28 06:40:18 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ char	*ft_pipex_helper(t_data *data, int i, int *file)
 	{
 		data->pid[i] = fork();
 		if (data->pid[i] < 0)
-			return (printf("erreur de fork\n"), NULL);
+			return (write(2, "erreur de fork\n", 16), NULL);
 		if (data->pid[i] == 0)
 			child_process(data, cmd, file);
 		else
