@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 13:42:38 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/28 01:19:11 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/28 01:53:05 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ void	close_all_open_redirs(int *file, t_cmd *cmd)
 
 	i = 0;
 	re = cmd->redirs;
-	fprintf(stderr, "je passe par close redir\n");
 	while (len_list(cmd->redirs) > i)
 	{
 		if (file[i] > -1)

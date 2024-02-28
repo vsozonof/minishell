@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:20:19 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/28 01:36:49 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/28 01:53:37 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -319,7 +319,7 @@ void	redir_failed(t_data *data, int *file, int i);
 void	free_problem_cmd_not_found(t_data *data, int *file, t_cmd *cmd);
 void	close_open_redirs(int *file, int i);
 long	len_cmd(t_cmd *cmd);
-void	free_problem_single(t_data *data, int *file, t_cmd *cmd);
+void	free_problem_single(t_data *data, int *file);
 int		ft_create_fd(char *argv, int flag);
 int		**alloc_pipe(void);
 void	unlink_here_doc(t_data *data);
