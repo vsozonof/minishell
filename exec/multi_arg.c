@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:36:45 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/27 23:22:10 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/28 04:45:32 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	pipex_exec(t_data *data)
 {
 	int		i;
 
+	data->index_here_doc = 0;
 	i = ft_pipex(data);
 	if (i == -1)
 	{

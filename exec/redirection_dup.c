@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:15:17 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/28 03:47:01 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/28 06:35:24 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,10 @@ int	create_file(t_redir *nav, int file, t_data *data)
 
 int	other_type_redir(t_redir *nav, int file, t_data *data)
 {
+	(void)data;
 	if (nav->type == 3)
 	{
-		file = data->here_doc_fd[data->index_here_doc];
-		data->index_here_doc++;
+		file = open(nav->file, O_RDONLY);
 		if (file == -1)
 			return (-1);
 		if (redirection_dup1_in(file) == -1)
@@ -101,11 +101,10 @@ int	other_type_redir(t_redir *nav, int file, t_data *data)
 
 int	redirection_dup1_in(int file)
 {
-	fprintf(stderr, "file = %d\n", file);
 	if (dup2(file, 0) < 0)
 	{
 		close(file);
-		return (printf("problem with dup2 infile"), -1);
+		return (write(2, "problem with dup2 infile\n", 26), -1);
 	}
 	return (0);
 }
@@ -115,7 +114,7 @@ int	redirection_dup1_out(int file)
 	if (dup2(file, 1) < 0)
 	{
 		close(file);
-		return (printf("problem with dup2 1"), -1);
+		return (write(2, "problem with dup2 outfile\n", 27), -1);
 	}
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 11:37:41 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/26 17:29:34 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/28 06:27:17 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ int	do_heredoc(char *delimiter, t_redir *redir_node, t_data *data)
 	}
 	free(delimiter);
 	redir_node->file = tmp_fname;
+	redir_node->fd = fd;
 	return (1);
 }
 

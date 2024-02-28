@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 16:09:07 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/28 03:47:47 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/28 05:44:38 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	*single_arg(t_data *data)
 
 	comd = NULL;
 	file = NULL;
+	data->index_here_doc = 0;
 	if (data->exec->cmd == NULL)
 		return (free_problem(data, file, data->exec), file);
 	if (builtin_checker(data->exec->cmd) > 0
@@ -34,7 +35,6 @@ int	*single_arg(t_data *data)
 		return (NULL);
 	}
 	exec_single(data, comd, data->exec, file);
-	fprintf(stderr, "apres enfant\n");
 	if (data->n_redirs > 0)
 		redir_here(data, file);
 	return (file);
@@ -47,6 +47,7 @@ void	redir_here(t_data *data, int *file)
 
 	i = 0;
 	redir = data->exec->redirs;
+	data->index_here_doc = 0;
 	if (file == NULL)
 	{
 		while (redir)
@@ -73,7 +74,7 @@ int	exec_single(t_data *data, char *comd, t_cmd *cmd, int *file)
 
 	pid = fork();
 	if (pid < 0)
-		return (printf("error in fork\n"), -1);
+		return (write(2, "error in fork\n", 15), -1);
 	else if (pid == 0)
 		child_process_single(data, cmd, file, comd);
 	else if (pid > 0)

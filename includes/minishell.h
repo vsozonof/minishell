@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:20:19 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/28 02:49:12 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/28 06:37:59 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ typedef struct s_input
 typedef struct s_redirs
 {
 	int				type;
+	int				fd;
 	char			*file;
 	struct s_redirs	*next;
 }	t_redir;
@@ -281,6 +282,7 @@ char	**ft_get_path(char **env);
 char	*ft_strjoin_help(char **path, char *cmd, int i);
 void	free_pipe_begin(t_data *data, int token);
 char	*do_process_2(char **path, char *buf2, char *cmd, t_data *data);
+void	child_process_helper2(t_cmd *cmd, t_data *data, int *file);
 
 // ! ---------------------------------------------------------------------------
 // ?							Single_Pipe
