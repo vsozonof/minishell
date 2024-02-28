@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 09:27:48 by vsozonof          #+#    #+#             */
-/*   Updated: 2024/02/27 23:29:19 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/28 00:27:30 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	handle_signals(int signum)
 		free(ptr.post);
 	}
 	else if (signum == SIGQUIT)
-		(void)signum;
+		rl_on_new_line();
 }
 
 int	init_sig(t_prompt *prompt)

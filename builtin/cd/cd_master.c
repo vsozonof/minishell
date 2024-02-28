@@ -6,7 +6,7 @@
 /*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 12:02:25 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/23 13:05:13 by vsozonof         ###   ########.fr       */
+/*   Updated: 2024/02/28 00:49:27 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	execute_cd(char **param, t_data *data)
 	}
 	else
 		change_directory(data, path);
+	set_status(data, 0, NULL, NULL);
 }
 
 void	go_back_one_level(t_data *data)
