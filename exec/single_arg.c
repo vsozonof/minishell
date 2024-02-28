@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 16:09:07 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/28 02:35:03 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/28 03:47:47 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	*single_arg(t_data *data)
 		return (NULL);
 	}
 	exec_single(data, comd, data->exec, file);
+	fprintf(stderr, "apres enfant\n");
 	if (data->n_redirs > 0)
 		redir_here(data, file);
 	return (file);

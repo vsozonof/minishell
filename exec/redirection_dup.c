@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:15:17 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/28 02:35:38 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/28 03:47:01 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ int	other_type_redir(t_redir *nav, int file, t_data *data)
 
 int	redirection_dup1_in(int file)
 {
+	fprintf(stderr, "file = %d\n", file);
 	if (dup2(file, 0) < 0)
 	{
 		close(file);
