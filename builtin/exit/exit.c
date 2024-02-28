@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vsozonof <vsozonof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 17:52:12 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/25 12:07:46 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/28 01:13:26 by vsozonof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,29 +39,24 @@ long long int	ft_atoll_1(const char *str)
 	return (var * sign);
 }
 
-int	status_checker(char	*input, t_data *data)
+int	status_checker(char	*status, t_data *data)
 {
-	char		*status;
 	long int	i_status;
 	int			i;
 
 	i = -1;
-	status = export_extract_arg(input);
-	if (!status)
-		return (set_status(data, 12, "malloc error.", NULL), -1);
 	if (status[0] == '-' || status[0] == '+')
 		i++;
 	while (status[++i])
 		if (!ft_isdigit(status[i]))
-			return (free(status), set_status(data, 2,
+			return (set_status(data, 2,
 					"numeric argument required", "exit"), 2);
 	if (!ft_int_overflow_checker(status))
-		return (free(status), set_status(data, 2,
+		return (set_status(data, 2,
 				"numeric argument required", "exit"), 2);
 	i_status = ft_atoll_1(status);
 	if (i_status < 0 || i_status > 255)
 		i_status = (i_status % 256 + 256) % 256;
-	free(status);
 	return (i_status);
 }
 
