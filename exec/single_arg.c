@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 16:09:07 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/28 01:53:11 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/28 01:55:05 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,20 +93,20 @@ int	child_process_single(t_data *data, t_cmd *cmd, int *file, char *comd)
 	{
 		file = redirection_create(data->exec, data, file);
 		if (!file)
-			free_problem_single(data, file, cmd);
+			free_problem_single(data, file);
 	}
 	if (data->exec->cmd == NULL
 		|| ft_strlen(data->exec->cmd) == 0)
 	{
 		set_status(data, 0, "Command not found\n", cmd->cmd);
 		data->i_status = 127;
-		free_problem_single(data, file, NULL);
+		free_problem_single(data, file);
 	}
 	comd = ft_do_process(data->exec->env, data->exec->cmd, data);
 	if (!comd)
-		free_problem_single(data, file, cmd);
+		free_problem_single(data, file);
 	execve(comd, data->exec->param, data->exec->env);
-	free_problem_single(data, file, cmd);
+	free_problem_single(data, file);
 	free(comd);
 	exit(1);
 	return (-1);
