@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 13:42:38 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/28 00:54:58 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/28 01:19:11 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,18 +68,15 @@ void	close_all_open_redirs(int *file, t_cmd *cmd)
 
 	i = 0;
 	re = cmd->redirs;
+	fprintf(stderr, "je passe par close redir\n");
 	while (len_list(cmd->redirs) > i)
 	{
-		fprintf(stderr, "file %d\n", file[i]);
 		if (file[i] > -1)
 		{
-			fprintf(stderr, "je passe par la avec %d\n", re->type);
-			fprintf(stderr, "dans mon if file %d\n", file[i]);
-			fprintf(stderr, "file name %s\n", re->file);
 			close(file[i]);
+			if (re->type == 3)
+				unlink(re->file);
 		}
-		if (re->type == 3)
-			unlink(re->file);
 		re = re->next;
 		i++;
 	}

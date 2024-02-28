@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 08:15:17 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/28 00:58:31 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/28 01:32:00 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	*redirection_create(t_cmd *cmd, t_data *data, int *file_tab)
 		return (NULL);
 	while (nav)
 	{
-		file_tab[i] = create_file(nav, file);
+		file_tab[i] = create_file(nav, file, data);
 		if (file_tab[i] == -1 || nav->file == NULL)
 		{
 			write(2, nav->file, ft_strlen(nav->file));
@@ -50,7 +50,7 @@ int	*redirection_create(t_cmd *cmd, t_data *data, int *file_tab)
 	return (file_tab);
 }
 
-int	create_file(t_redir *nav, int file)
+int	create_file(t_redir *nav, int file, t_data *data)
 {
 	if (nav->type == 2)
 	{
@@ -70,17 +70,19 @@ int	create_file(t_redir *nav, int file)
 	}
 	else
 	{
-		file = other_type_redir(nav, file);
+		file = other_type_redir(nav, file, data);
 		if (file == -1)
 			return (-1);
 	}
 	return (file);
 }
 
-int	other_type_redir(t_redir *nav, int file)
+int	other_type_redir(t_redir *nav, int file, t_data *data)
 {
 	if (nav->type == 3)
 	{
+		file = data->here_doc_fd[data->index_here_doc];
+		data->index_here_doc++;
 		if (file == -1)
 			return (-1);
 		if (redirection_dup1_in(file) == -1)

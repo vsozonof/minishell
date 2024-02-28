@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:20:19 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/28 00:10:47 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/28 01:36:49 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ typedef struct s_parse
 	int				i;
 	int				n;
 	int				*here_doc_fd;
+	int				index_here_doc;
 	int				n_args;
 	int				*cmd_valid;
 	int				index_fd;
@@ -295,11 +296,12 @@ int		child_process_single(t_data *data, t_cmd *cmd, int *file, char *comd);
 // ! ---------------------------------------------------------------------------
 
 int		*redirection_create(t_cmd *cmd, t_data *data, int *file_tab);
-int		create_file(t_redir *nav, int file);
-int		other_type_redir(t_redir *nav, int file);
+int		create_file(t_redir *nav, int file, t_data *data);
+int		other_type_redir(t_redir *nav, int file, t_data *data);
 int		redirection_dup1_in(int file);
 int		redirection_dup1_out(int file);
 int		*creating_file(t_redir *nav, t_data *data, t_cmd *cmd);
+void	redir_here(t_data *data, int *file);
 
 // ! ---------------------------------------------------------------------------
 // ?							Free && utils Exec
@@ -320,6 +322,7 @@ long	len_cmd(t_cmd *cmd);
 void	free_problem_single(t_data *data, int *file, t_cmd *cmd);
 int		ft_create_fd(char *argv, int flag);
 int		**alloc_pipe(void);
+void	unlink_here_doc(t_data *data);
 
 // ! ---------------------------------------------------------------------------
 // ?							  Builtins

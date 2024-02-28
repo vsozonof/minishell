@@ -6,7 +6,7 @@
 /*   By: tpotilli <tpotilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 16:02:04 by tpotilli          #+#    #+#             */
-/*   Updated: 2024/02/27 23:21:48 by tpotilli         ###   ########.fr       */
+/*   Updated: 2024/02/28 01:32:18 by tpotilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	command_manager(t_data *data)
 {
 	int	*file;
 
+	data->index_here_doc = 0;
 	file = NULL;
 	data->i_status = 0;
 	if (data->n_cmds > 1)
